@@ -1,0 +1,406 @@
+
+/* teamDetail page */
+#team_Wrapper {
+    margin-top: 100px;
+}
+/* 목록으로 돌아가기 */
+.backList {
+    position:absolute;
+    left : 40px;
+    top: 130px;
+    font-size: 100px;
+    transform:rotate(180deg);
+    color:rgb(252, 200, 88);
+}
+.deleteTeamBtn {
+	position:absolute;
+	right:10px;
+	background-color:red;
+	border-radius: 5px;
+	color:white;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
+	width:100px;
+	text-align:center;
+}
+/* team소개 */
+.teamInfoBox {
+    width: 800px;
+    height:130px;
+    margin: auto;
+    line-height: 30px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    font-size: 15px;
+}
+.teamInfoBox table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+.teamInfoBox table td:first-child{
+    border-right: 1px rgb(219, 74, 17) solid;
+    width: 70px;
+}
+.teamInfoBox table td{
+    padding-left: 10px;
+    border-bottom: 1px rgb(6, 151, 6) dashed;
+}
+.reviese {
+    position: absolute;
+    font-size: 16px;
+    color:white;
+    right:30px;
+    top:102px;
+    border: none;
+    background-color:rgb(243, 216, 94);
+    border-radius: 50%;
+    height:30px;
+    width:30px;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
+}
+.teamInfoBox input[type="text"], select{
+    border: none;
+    background-color:rgb(215, 236, 215) ;
+}
+.teamInfoBox  input[type="submit"]{
+	color:black;
+    position: absolute;
+    right:30px;
+    top:103px;
+    border: none;
+    background-color:rgb(233, 181, 211);
+    border-radius: 50%;
+    height:30px;
+    width:30px;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
+}
+.back {
+	color:black;
+    position: absolute;
+    right:70px;
+    top:103px;
+    border: none;
+    background-color:rgb(200, 206, 236);
+    border-radius: 50%;
+    height:30px;
+    width:30px;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
+}
+/* 조장한마디 */
+.LeaderMenu{
+    text-align: center;
+    background-color: rgb(234, 214, 243);
+    margin: 20px 0;
+    height:60px;
+    line-height: 60px;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
+}
+.rBtn {
+    position: absolute;
+    top:16px;
+    left: 70%;
+    font-size: 16px;
+    color:white;
+    border: none;
+    cursor: pointer;
+    background-color:rgb(176, 120, 202);
+    border-radius: 50%;
+    height:30px;
+    width:30px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
+}
+.rBtn2 {
+    position: absolute;
+    color:white;
+    top:16px;
+    left: 70%;
+    border: none;
+    cursor: pointer;
+    background-color:rgb(176, 120, 202);
+    border-radius: 50%;
+    height:30px;
+    width:30px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
+}
+.reivseWrite input[type="text"] {
+	background-color: rgb(226, 192, 241);
+	border:none;
+	height: 30px;
+	width:300px;
+}
+/* 멤버정보 */
+#memberInfo{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 60px 0;
+}
+.member{
+    height:350px;
+    width:200px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
+    position:relative;
+    background-color: rgba(128, 128, 128, 0.815);
+}
+.king img{
+    width:50px;
+    height:50px;
+    position:absolute;
+    left: 38%;
+    top:10px;
+}
+.info:hover{
+    cursor: pointer;
+    border-bottom-right-radius: 80px 20px;
+}
+.tape {
+    position:absolute;
+    height: 60px;
+    width:35px;
+    top:-30px;
+    left:42%;
+    background-color: rgba(250, 215, 238, 0.623);
+}
+.photo {
+    height:200px;
+    background-color: white;
+}
+.photo img{
+    width: 200px;
+    height:200px;
+}
+.info {
+    background-color: #c0e2f0;
+    height:150px;
+    border-bottom-right-radius: 60px 5px;
+    transition: all 0.2s;
+    font-size: 13px;;
+}
+.info table tr:first-child {
+    height: 40px;
+    font-size: 16px;
+    font-weight: bolder;
+}
+.info table td{
+    height: 22px;
+    padding: 0 2px ;
+}
+.info table td:first-child{
+    width: 78px;
+}
+.kickOut{
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.479);
+    position:absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    height:30px;
+    width:30px;
+}
+/* 한줄게시판 */
+#tBoard {
+    background-image: url("https://spreadsheetpage.com/images/Notebook-Paper-US-Letter.png"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 -110px; 
+    margin-top: 30px;;
+    height: 400px;
+    width: 1000px;
+    margin: auto;
+    margin-top: 30px;
+    padding: 0 30px;
+    box-sizing: border-box;
+    font-size: 13px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
+}
+#tBoard table {
+    border-collapse: collapse;
+}
+#tBoard th {
+    height: 37px;
+}
+#tBoard tr{
+    border-collapse: collapse;
+}
+#tBoard td{
+    height: 29px;
+}
+#tBoard table td:first-child{
+    width: 130px;
+    text-align: center;
+}
+#tBoard table td:nth-child(2){
+    padding-left: 10px;;
+    text-align: center;
+}
+#Write_teamBoard{
+    margin: 20px 0;
+    margin-left:25%;
+    border:none;
+}
+.delBtn{
+	 border:none;
+	 border-radius: 50%;
+	 cursor:pointer;
+	 height: 20px;
+	 width:20px;
+	 background-color:rgb(252, 200, 88);
+}
+#Write_teamBoard input[type="text"]{
+    width:500px;
+    height:30px;
+}
+#Write_teamBoard input[type="submit"]{
+    border:none;
+    background-color: #69acc7;
+    height:30px;
+    width:50px;
+    border-radius: 5px;;
+    cursor: pointer;
+}
+.hide {
+    display: none;
+}
+
+/* 모든팀목록 */
+#allTeamWrapper {
+    margin-top: 120px;
+    text-align: center;
+}
+#allTeamWrapper h1{
+    margin: auto;
+    width:300px;
+    height:30px;
+    line-height: 30px;
+    font-size: 20px;
+}
+.allTeamTableWrap {
+    margin:20px auto;
+    width:600px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
+    min-height: 500px;
+    box-sizing: border-box;
+    background-color: #eeeeee;
+}
+#allTeamWrapper table {
+    border-collapse: collapse;
+    border-radius: 10px;
+    margin: auto;
+    font-size:14px;
+}
+#allTeamWrapper table th{
+    border-bottom: 2px solid black;
+}
+#allTeamWrapper table td{
+    border-bottom: 1px dashed black;
+    min-width:80px;
+}
+#allTeamWrapper table th:first-child,#allTeamWrapper td:first-child{
+    border-right: 1px solid black;
+}
+#allTeamWrapper table tr {
+    height: 30px;
+}
+#allTeamWrapper table tr:hover{
+    background-color: #f5f4f4;
+    cursor: pointer;
+}
+#allTeamWrapper table button{
+    background-color: #69acc7;
+    color:white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.479);
+}
+.newTeam{
+    background-image: url("https://ifh.cc/g/LTko7v.png");
+    background-size: 100px;
+    height: 80px;
+    width:200px;
+    margin: auto;
+    cursor: pointer;
+}
+
+/* 나의팀목록 */
+#MyteamWrapper {
+    margin-top: 120px;
+    text-align: center;
+}
+#MyteamWrapper h1{
+    font-size:20px;
+}
+.MyTeamTableWrap {
+    margin:20px auto;
+    width:300px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
+    min-height: 300px;
+    box-sizing: border-box;
+}
+
+.MyTeamTableWrap table {
+	margin:auto;
+	width:100%;
+	
+}
+.MyTeamTableWrap table td{
+	border-bottom: 1px black dashed;
+	
+}
+/*팀개설 css*/ 
+@media(min-width : 500px)
+{
+    .crewrap{width: 30%; margin: auto; margin-top: 250px;}
+}
+#creatteamtable th{
+    height: 100px;
+    font-size: 20px;
+}
+
+#creatteamtable td{
+    width: 200px;
+    margin-left: auto;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+.cre_inputs{
+    padding: 10px;
+    border: solid 1px #dadada;
+    background: #fff;
+    overflow: auto;
+}
+
+.cre_btn{
+    margin-top: 20px;
+    margin-left: 30px;
+    background-color: #69acc7;
+    border: none;
+    outline:none;
+    color:#fff;
+    font-size: 18px;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.cre_btn:hover { background-color: #078cc0;}
+
+.crewrap select {
+    width: 100px;
+    padding: 10px;
+    border: solid 1px #dadada;
+    border-radius: 0px;
+}
