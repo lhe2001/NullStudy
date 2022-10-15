@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        
+		.sbwrap{
+		    margin-top: 150px;
+		}
+
+        .searchTitle {
+            margin: 20px;
+            margin-left: 250px;
+        }
+		.select2 {
+	        width: 100px;
+            height: 100%;
+	        border: solid 1px #dadada;
+	        border-radius: 0px;
+		}
+
+		.searchW {
+		margin-top: 15px;
+		margin-left: 250px;
+		}
+
+        .searchLine {
+            width: 53%;
+            margin: auto;
+            margin-left: 250px;
+        }
+
+		.searchLine input {
+            width: 300px;
+            height: 30px;
+            border: none;
+            box-shadow: 0 8px 8px rgba(0, 0, 0, 0.486);
+            padding-left: 10px;
+            box-sizing: border-box;
+        }
+        .searchLine button {
+            height: 30px;
+            width:50px;
+            border: none;
+            cursor: pointer;
+            background-color: #69c7b5;
+            box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.486);
+        }
+
+		.searchTbWrap {
+			margin-top: 25px;
+		}
+        .searchTb {
+            margin: auto;
+            text-align: center;
+        }
+        .searchTr {
+            height: 30px;
+        }
+        .searchTb thead th {
+            border-bottom: 1px solid black;
+        }
+        .searchTh1 {
+            width: 70px;
+        }
+        .searchTh2 {
+            width: 500px;
+        }
+        .searchTh3 {
+            width: 100px;
+        }
+        .searchTb tbody td {
+            border-bottom: 1px solid rgb(141, 141, 141);
+        }
+        .searchTd {
+            overflow: hidden;
+        }

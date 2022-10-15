@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>footer</h1>
+<div id='wrapper'>
+<footer>© Copyright 2022 by Null team</footer>
+</div>
 </body>
 </html>
