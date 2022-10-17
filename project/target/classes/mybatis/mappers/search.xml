@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.search">
+
+	                 <!-- 게시판 서치 sql -->
+	<select id="boardAllSelectList" resultType="BoardDTO">
+
+			SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
+			FROM ALLMEMBER a, BOARD b
+			where a.USERKEY = b.USERKEY
+			<!-- 모든 게시글 조회 -->
+	</select>
+	
+	<select id="searchBoardSelectList" resultType="BoardDTO">
+
+			SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
+			FROM ALLMEMBER a, BOARD b
+			where a.USERKEY = b.USERKEY
+			and (lower(b_title) LIKE '%' || lower(?) || '%'
+			OR lower(nickName) LIKE '%' || lower(?) || '%'
+			OR lower(b_content) LIKE '%' || lower(?) || '%')
+			<!-- 게시글 제목, 이름, 내용 조회 -->
+	</select>
+	
+	<select id="b_titleSearchBoardSelectList" resultType="BoardDTO">
+
+			SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
+			FROM ALLMEMBER a, BOARD b
+			where a.USERKEY = b.USERKEY
+			and lower(b_title) LIKE '%' || lower(?) || '%'
+			<!-- 제목 조회 -->
+	</select>
+	
+	<select id="nickNameSearchBoardSelectList" resultType="BoardDTO">
+
+			SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
+			FROM ALLMEMBER a, BOARD b
+			where a.USERKEY = b.USERKEY
+			and (lower(nickName) LIKE '%' || lower(?) || '%'
+			<!-- 이름 조회 -->
+	</select>
+	
+	<select id="b_contentSearchBoardSelectList" resultType="BoardDTO">
+
+			SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
+			FROM ALLMEMBER a, BOARD b
+			where a.USERKEY = b.USERKEY
+			and (lower(b_content) LIKE '%' || lower(?) || '%'
+			<!-- 내용 조회 -->
+	</select>
+	
+	
+	                   <!-- 팀 서치 sql -->
+	<select id="searchTeamSelectList" resultType="BoardDTO">
+
+			SELECT a.nickName, t.T_NAME, T_create
+			FROM ALLMEMBER a, ALLTEAM t
+			where a.USERKEY = b.USERKEY
+			<!-- 모든 팀 조회 -->
+	</select>
+	
+	<select id="t_nameSearchTeamSelectList" resultType="BoardDTO">
+
+			SELECT a.nickName, t.T_NAME, T_create
+			FROM ALLMEMBER a, ALLTEAM t
+			where a.USERKEY = t.USERKEY
+			and lower(t_name) LIKE '%' || lower(?) || '%'
+			<!-- 팀 이름 조회 -->
+	</select>
+	
+	                <!-- 유저 서치 sql -->
+	<select id="searchUserSelectList" resultType="BoardDTO">
+
+			SELECT a.nickName, a.email, a.joinDate
+			FROM ALLMEMBER a
+			<!-- 모든 유저 조회 -->
+	</select>
+	
+	<select id="nickNameSearchUserSelectList" resultType="BoardDTO">
+
+			SELECT nickName, email, joinDate
+			query   += " FROM ALLMEMBER ";
+			query   += " where lower(nickName) LIKE '%' || lower(?) || '%' ";
+			<!-- 유저 이름 조회 -->
+	</select>
+	
+</mapper>

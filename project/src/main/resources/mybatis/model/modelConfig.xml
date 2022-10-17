@@ -6,6 +6,10 @@
 
 	<typeAliases>
 		<typeAlias type="com.spring.teampro.dto.EMPDTO" alias="empDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.dto.BoardDTO" alias="BoardDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.dto.TeamDTO" alias="TeamDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.dto.UserDTO" alias="UserDTO"></typeAlias>
 	</typeAliases>
+	
 
 </configuration>

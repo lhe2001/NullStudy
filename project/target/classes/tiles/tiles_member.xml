@@ -16,5 +16,24 @@
       <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
    </definition>
    
+   <definition name="main" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/searchBoard.jsp" />
+   </definition>
+   
+   <definition name="boardSearch" extends="baseLayout">
+      <put-attribute name="title" value="자유게시판" />
+      <put-attribute name="body" value="/WEB-INF/views/searchBoard.jsp" />
+   </definition>
+   
+   <definition name="teamSearch" extends="baseLayout">
+      <put-attribute name="title" value="팀 게시판" />
+      <put-attribute name="body" value="/WEB-INF/views/searchTeam.jsp" />
+   </definition>
+   
+   <definition name="userSearch" extends="baseLayout">
+      <put-attribute name="title" value="유저 게시판" />
+      <put-attribute name="body" value="/WEB-INF/views/searchUser.jsp" />
+   </definition>
 
 </tiles-definitions>
