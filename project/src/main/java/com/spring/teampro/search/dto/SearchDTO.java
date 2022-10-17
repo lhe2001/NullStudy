@@ -2,14 +2,11 @@ package com.spring.teampro.search.dto;
 
 import java.sql.Date;
 
-public class SearchDTO {
+public class BoardDTO {
 
 	// db allmember 테이블 컬럼
 	private int userKey;
 	private String nickName;
-	private String email;
-	private String intro;
-	private Date joinDate;
 	
 	// db board 테이블 컬럼
 	private int b_key;
@@ -24,10 +21,30 @@ public class SearchDTO {
 	
 	// db AllTeam 테이블 컬럼
 	private String t_name;
-	private Date t_create;
 	
-
 	
+	
+	// db teamBoard 테이블 컬럼 getter, setter
+	public String getTb_memo() {
+		return tb_memo;
+	}
+	public void setTb_memo(String tb_memo) {
+		this.tb_memo = tb_memo;
+	}
+	public Date getTb_memotime() {
+		return tb_memotime;
+	}
+	public void setTb_memotime(Date tb_memotime) {
+		this.tb_memotime = tb_memotime;
+	}
+	
+	// db AllTeam 테이블 컬럼 getter, setter
+	public String getT_name() {
+		return t_name;
+	}
+	public void setT_name(String t_name) {
+		this.t_name = t_name;
+	}
 	
 	// db allmember 테이블 컬럼 getter, setter
 	public int getUserKey() {
@@ -42,25 +59,7 @@ public class SearchDTO {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getIntro() {
-		return intro;
-	}
-	public void setIntro(String intro) {
-		this.intro = intro;
-	}
-	public Date getJoinDate() {
-		return joinDate;
-	}
-	public void setJoinDate(Date joinDate) {
-		this.joinDate = joinDate;
-	}
-	
+
 	// db board 테이블 컬럼 getter, setter
 	public int getB_key() {
 		return b_key;
@@ -91,34 +90,6 @@ public class SearchDTO {
 	}
 	public void setB_writedate(Date b_writedate) {
 		this.b_writedate = b_writedate;
-	}
-	
-	// db AllTeam 테이블 컬럼 getter, setter
-	public String getT_name() {
-		return t_name;
-	}
-	public void setT_name(String t_name) {
-		this.t_name = t_name;
-	}
-	public Date getT_create() {
-		return t_create;
-	}
-	public void setT_create(Date t_create) {
-		this.t_create = t_create;
-	}
-	
-	// db teamBoard 테이블 컬럼 getter, setter
-	public String getTb_memo() {
-		return tb_memo;
-	}
-	public void setTb_memo(String tb_memo) {
-		this.tb_memo = tb_memo;
-	}
-	public Date getTb_memotime() {
-		return tb_memotime;
-	}
-	public void setTb_memotime(Date tb_memotime) {
-		this.tb_memotime = tb_memotime;
 	}
 
 }
