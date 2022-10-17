@@ -12,6 +12,25 @@
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script>
+    $(function(){
+    	bind();
+    })
+    
+    function bind(){
+    	$("#login_btn").off("click").on("click", function(){
+    		location.href = '/project/moveToSignIn.do'
+    	})
+    	
+    	$("#signUp_btn").off("click").on("click", function(){
+    		location.href = '/project/moveToSignUp.do'
+    	})
+    	
+    }
+    
+    </script>
+    
 </head>
 <body>
 <div id="wrapper">
@@ -43,8 +62,8 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href = "/teampro/Signinup/signIn.jsp"><button type="button">로그인</button></a></li>
-                    <li><a href = "/teampro/Signinup/signUp.jsp"><button type="button">회원가입</button></a></li>
+                    <li><button id="login_btn" type="button">로그인</button></li>
+                    <li><button id="signUp_btn" type="button">회원가입</button></li>
                 </ul>
             </nav>
         </header>

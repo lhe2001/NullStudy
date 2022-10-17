@@ -90,7 +90,7 @@
                             </ul>
                         </div>
                     </li>
-                    <form action="/teampro/signout" method="post">
+                    <form action="/project/signOut.do" method="post">
                     <li><button class="logout" type="submit">로그아웃</button></li>
                     </form>
                 </ul>

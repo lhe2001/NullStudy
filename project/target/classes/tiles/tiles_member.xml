@@ -11,9 +11,32 @@
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
 
+	<!-- 최초 접속시 보이는 메인페이지 -->
    <definition name="main" extends="baseLayout">
       <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+   </definition>
+   
+   <!-- 로그인 후 보이는 메인페이지 -->
+   <definition name="main2" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+   </definition>
+   
+   <!-- 메인에서 로그인 버튼 누를면 로그인 페이지로  -->
+   <definition name="signIn" extends="baseLayout">
+      <put-attribute name="title" value="로그인페이지" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/signupin/signIn.jsp" />
+   </definition>
+   
+   <!-- 회원가입 페이지로  -->
+   <definition name="signUp" extends="baseLayout">
+      <put-attribute name="title" value="회원가입페이지" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/signupin/signUp.jsp" />
    </definition>
    
 

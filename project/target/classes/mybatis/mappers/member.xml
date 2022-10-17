@@ -5,62 +5,47 @@
 	
 <mapper namespace="mapper.member">
 
-	<select id="selectAllMemberList" resultType="empDTO">
-		select * from emp
+	<!-- signUpIn 관련 쿼리  -->
+	<select id="listMembers" resultType="signUpInDTO">
+		select * from allmember		
 	</select>
 	
-	<select id="selectByDeptNo" resultType="empDTO" parameterType="int">
-		select * from emp
-		where deptno = #{deptNo}
+	<select id="idCheck" resultType="int">
+		select count(*) 
+		from allmember 
+		where lower(id) = lower(#{id})
 	</select>
 	
-	<select id="selectBySal" resultType="empDTO" parameterType="java.util.HashMap">
-		SELECT * FROM emp
-		<where>
-			<if test="salMin !='' and salMin != null">
-				and sal >= ${salMin}
-			</if>
-			<if test="salMax !='' and salMax != null">
-		<![CDATA[
-				and sal <= ${salMax}
-		]]>
-			</if>
-		</where>
+	<select id="emailCheck" resultType="int">
+		select count(*) 
+		from allmember 
+		where lower(email) = lower(#{email})
 	</select>
 	
-	<select id="selectByName" resultType="empDTO" parameterType="String">
-		SELECT * FROM emp
-		WHERE lower(ename) like '%'||lower(#{name})||'%'
+	<insert id="addMember" parameterType="signUpInDTO">
+		insert into allmember( userkey, id, pw, name, sex, nickname, email, joindate )
+		values( seq_userkey.nextval, #{id}, #{pw}, #{name}, #{sex}, #{nickName}, #{email}, sysdate )
+	</insert>
+	
+	<select id="signIn" resultType="string" parameterType="string">
+		select pw 
+		from allmember 
+		where lower(id) = lower(#{id})
 	</select>
 	
-	<select id="searchBySelect" resultType="empDTO" parameterType="java.util.HashMap">
-		select * from emp
-		<where>
-			<if test="select == 'dept'">
-				<if test="selMin !='' and selMin != null">
-					and deptno >= ${selMin}
-				</if>
-				<if test="selMax !='' and selMax != null">
-				<![CDATA[ and deptno <= ${selMax}]]>
-				</if>
-			</if>
-			<if test="select == 'sal'">
-				<if test="selMin !='' and selMin != null">
-					and sal >= ${selMin}
-				</if>
-				<if test="selMax !='' and selMax != null">
-				<![CDATA[ and sal <= ${selMax}]]>
-				</if>
-			</if>
-		</where>
+	<select id="userInfo" resultType="signUpInDTO" parameterType="string">
+		select * 
+		from allmember 
+		where lower(id) = lower(#{id})
 	</select>
 	
-	<select id="checkList" resultType="empDTO" parameterType="java.util.ArrayList">
-		select * from emp
-		where empno in
-		<foreach item="empno" open="(" separator="," close=")" collection="list">
-		 	#{empno}
-		</foreach>
-	</select>
+	<update id="updateLastTime" parameterType="string">
+
+		update allmember 
+		set lasttime=sysdate
+		where lower(id) = lower(#{id})
+	
+	</update>
+	
 	
 </mapper>
