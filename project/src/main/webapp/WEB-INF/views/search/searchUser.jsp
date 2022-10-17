@@ -64,11 +64,11 @@
 			</thead>							
 			<tbody>						
 				<%
-				List<UserDTO> list = (List<UserDTO>)request.getAttribute("list2");
+				List<SearchDTO> list = (List<SearchDTO>)request.getAttribute("list2");
 				System.out.println("searchUser.jsp (게시글 List<UserVO> list) : "+ list);
 				int j = 1;
 				for (int i=0; i < list.size(); i++) {	
-					UserDTO vo = list.get(i);
+					SearchDTO vo = list.get(i);
 					%>
 					<tr class="searchTr">
 						<td><%= j %></td>

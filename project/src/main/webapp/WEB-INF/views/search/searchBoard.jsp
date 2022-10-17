@@ -99,12 +99,12 @@
 				</thead>							
 				<tbody>						
 					<%
-											List<BoardDTO> list = (List<BoardDTO>)request.getAttribute("list");
-														System.out.println("searchBoard.jsp (게시글 List<BoardVO> list) : "+ list);
-															int j = 1;
-															for (int i=0; i < list.size(); i++) {
-																BoardDTO vo = list.get(i);
-											%>
+					List<SearchDTO> list = (List<SearchDTO>)request.getAttribute("list");
+						System.out.println("searchBoard.jsp (게시글 List<BoardVO> list) : "+ list);
+						int j = 1;
+						for (int i=0; i < list.size(); i++) {
+						SearchDTO vo = list.get(i);
+					%>
 							<tr class="searchTr">
 								<td><%= j %></td>
 								<td class="searchTd"><a href="/teampro/board/viewArticle.do?b_articleNo=<%=vo.getB_articleNo() %>">
