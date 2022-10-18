@@ -22,5 +22,22 @@
 		WHERE m.USERKEY = a.USERKEY AND m.T_KEY = #{t_key}
 	</select>
 	
+	<update id="updateTeamInfo" parameterType="teamInfoDTO">
+		update AllTeam
+		set t_intro= #{t_intro} ,t_field=#{t_field}
+		where t_key= #{t_key}
+	</update>
+	
+	<update id="updateLMemo" parameterType="teamInfoDTO">
+		update AllTeam
+		set t_lmemo= #{t_lMemo}
+		where t_key= #{t_key}
+	</update>
+	
+	<delete id="removeMember" parameterType="int">
+		DELETE FROM teammember
+		WHERE tm_key= #{tm_key}
+	</delete>
+	
 	
 </mapper>

@@ -20,8 +20,31 @@ function reviseTeamInfo(){
         document.querySelector("#teamInfo").classList.remove("hide");
     })
     document.querySelector("#reviseTeam input[type='submit']").addEventListener("click",function(){
-        const dele = confirm('수정 하시겠습니까?');
-        console.log(dele);
+        const revise = confirm('수정 하시겠습니까?');
+        if(revise == true){
+        	let t_key = $(".t_key").val();
+        	let t_intro = $(".t_intro").val();
+        	let t_field = $(".t_field").val();
+        	
+        	let info = { 
+        			t_key : t_key,
+        			t_intro : t_intro,
+        			t_field : t_field 
+        	};
+        	
+        	$.ajax({
+			url: "/project/teamRest/updateTeamInfo.do",
+			type: "post",
+			contentType: "application/json",
+			data: JSON.stringify(info),
+			success: function(data){
+				location.reload();
+			},
+			error:function(){
+				alert("에러발생!!")
+			}
+			});
+        }
     })
    }
 
@@ -36,10 +59,58 @@ function leWrite(){
         document.querySelector(".leadersWrite").classList.remove("hide");
     })
     document.querySelector(".reivseWrite input[type='submit']").addEventListener("click",function(){
-        const dele = confirm('수정 하시겠습니까?')
-        console.log(dele);
+        const revise2 = confirm('수정 하시겠습니까?')
+        if(revise2 == true){
+        	let t_key = $(".t_key").val();
+        	let t_lMemo = $(".lMemo").val();
+        	
+        	let info = { 
+        			t_key : t_key,
+        			t_lMemo : t_lMemo 
+        	};
+        	
+        	$.ajax({
+			url: "/project/teamRest/updateTeamInfo.do",
+			type: "post",
+			contentType: "application/json",
+			data: JSON.stringify(info),
+			success: function(data){
+				location.reload();
+			},
+			error:function(){
+				alert("에러발생!!")
+			}
+			});
+        }
     })
 }
+
+//멤버탈퇴
+function kickMemberOut(tm_key){
+	 const revise3 = confirm('정말 강퇴 시키시겠습니까?')
+	 if(revise3 == true){
+        	console.log(tm_key);
+        	let info = { 
+        			tm_key : tm_key 
+        	};
+        	
+        	$.ajax({
+			url: "/project/teamRest/removeMember.do",
+			type: "post",
+			contentType: "application/json",
+			data: JSON.stringify(info),
+			success: function(data){
+				location.reload();
+			},
+			error:function(){
+				alert("에러발생!!")
+			}
+			});
+        }
+}
+
+
+
 //오늘의 요약 수정
 function dailyMemoRevise(){
     document.querySelector(".dailyRevBtn").addEventListener("click",function(){
