@@ -1,0 +1,78 @@
+@charset "UTF-8";
+#wrapp {
+	width : 100%;
+	height : 100%;
+	text-align: center;
+}
+
+#container {
+	margin-top : 150px;
+	display : inline-block;
+	width: 1030px;
+	height : 800px;
+	border : 1px solid #99A799;
+	border-radius : 2px;
+	background-color: #FEF5ED;
+}
+
+#article_content{
+width : 1000px; 
+height : 500px; 
+resize : none;
+border : none;
+outline : none;
+}
+#write_btn {
+}
+#select_list{
+border-radius: 4px;
+}
+#file_flex{
+display : flex;
+}
+.filebox label {
+  display: inline-block;
+  padding: .5em .75em;
+  color: #999;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #fdfdfd;
+  cursor: pointer;
+  border: 1px solid #ebebeb;
+  border-bottom-color: #e2e2e2;
+  border-radius: .25em;
+  float : left;
+  margin-top:2px;
+}
+.filebox input[type="file"] {  /* 파일 필드 숨기기 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
+
+.hidden {
+	display : none;
+ }
+ #pwd {
+ 	width : 100px;
+ 	height : 30px;
+ }
+ .pww {
+ 	line-height: 2.6;
+ }
+ #pw {
+ 	color : #1C6758;
+ }
+ #pwd {
+ 	margin-right : 10px;
+ 	color : #1C6758;
+ 	border : 1px solid #1C6758;
+ 	outline : none;
+ 	border-radius: 2px;
+ }

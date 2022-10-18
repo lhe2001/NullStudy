@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+#articleForm_title {
+	width: 800px;
+}
+.field {
+}
+#article_content {
+	width : 1000px;
+	height : 700px;
+}

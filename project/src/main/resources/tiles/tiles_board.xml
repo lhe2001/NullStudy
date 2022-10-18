@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+   <definition name="baseLayout"  template="/WEB-INF/views/common/layout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/common/postIt.jsp" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+
+	<!-- 게시판 리스트 -->
+   <definition name="listArticles" extends="baseLayout">
+      <put-attribute name="title" value="게시판 메인" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+       <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/board/listArticles.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+   
+   <!-- 글 작성 폼 -->
+   <definition name="articleForm" extends="baseLayout">
+      <put-attribute name="title" value="글 작성 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+        <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/board/articleForm.jsp" />
+  	  <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+   
+   <!-- 비밀번호 입력하는 폼 -->
+   <definition name="password" extends="baseLayout">
+      <put-attribute name="title" value="비밀번호 입력 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+        <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/board/password.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+   
+    <!-- 답글 작성 폼 -->
+   <definition name="replyForm" extends="baseLayout">
+      <put-attribute name="title" value="답글 작성 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+        <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/board/replyForm.jsp" />
+  	  <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+   
+    <!-- 글 상세목록 페이지 -->
+   <definition name="viewArticle" extends="baseLayout">
+      <put-attribute name="title" value="글 작성 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+        <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/board/viewArticle.jsp" />
+  	  <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+   
+
+</tiles-definitions>
