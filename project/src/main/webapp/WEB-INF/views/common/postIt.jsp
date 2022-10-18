@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
 	    <div id="postitBox">
 	        <button type="button" class="pink">My</button>
 	        <button type="button" class="yellow">To Do</button>
-	        <button type="button" class="blue">Team</button>
+	        <button type="button" class="blue teamListBtn">Team</button>
 	    </div>
 	    <div class="postit pink none">
 	        <div class="left"></div>
@@ -59,15 +60,19 @@
 	            <input type="text" id="todoText" placeholder="추가List">
 	        </div>
 	    </div>
-	    <div class="postit blue none">
-	        <div class="left"></div>
-	        <div id="TeamInfo">
-	            <h3>Team명: Null</h3>
-	            <div>-팀원: 6명</div>
-	            <div>-팀소개: 안녕하세요?</div>
-	            <div>-모라고 하지</div>
-	            <div>-몰넣지</div>
-	        </div>
+	   <div class="postit blue none">
+      	<div class="left"></div>
+           <div id="TeamInfoP">
+			 <table>
+			 	<thead>
+				 	<tr>
+				 		<th>현재 내가 속한 팀 목록</th>
+				 	</tr>
+				 </thead>
+				 <tbody>
+				</tbody>
+			 </table>
+         </div>
 	</aside>
 </body>
 </html>

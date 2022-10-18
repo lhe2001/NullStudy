@@ -18,10 +18,18 @@
       <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
    </definition>
    
-   <!-- 로그인 후 보이는 메인페이지 -->
+   <!-- 로그인 후 보이는 메인페이지(일반유저) -->
    <definition name="main2" extends="baseLayout">
       <put-attribute name="title" value="메인페이지" />
       <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+   </definition>
+   
+   <!-- 로그인 후 보이는 메인페이지(admin) -->
+   <definition name="main_admin" extends="baseLayout">
+      <put-attribute name="title" value="관리자메인페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout)_admin.jsp" />
+      <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
    </definition>
    
@@ -39,5 +47,12 @@
       <put-attribute name="body" value="/WEB-INF/views/signupin/signUp.jsp" />
    </definition>
    
+    <!-- 팀디테일 페이지  -->
+   <definition name="teamDetail" extends="baseLayout">
+      <put-attribute name="title" value="팀정보페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/teamPage/teamDetail.jsp" />
+   </definition>
 
 </tiles-definitions>

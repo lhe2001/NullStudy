@@ -9,8 +9,9 @@
   <head>
     <meta charset="UTF-8">
     <title><tiles:insertAttribute name="title" /></title>
-  <link rel="stylesheet" href="resources/css/simple.css" />
-  <script src="resources/css/main.js"></script>
+  <link rel="stylesheet" href="/project/resources/css/simple.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="/project/resources/css/main.js"></script>
   <style>
   	#body {
   		margin-top:100px;
