@@ -12,7 +12,20 @@
 		margin-top:100px;
 	}
 </style>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
+	$(function(){
+		bind();
+	})
+	
+	function bind(){
+		$("#idCheck_btn").off("click").on("click", function(){
+			let id = $(".s_inputs").val();
+			console.log(id);
+    		
+    	})
+	}
+
 	function characterCheck(obj){
 	var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
 	
@@ -71,7 +84,8 @@ Null study 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 �
             <section class="sign_wrap">
 	            <div>
 	            <p class="title">아이디</p>
-	            <input type="text" class="s_inputs" name="id" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></input><br>
+	            <input type="text" class="s_inputs" name="id" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></input>
+	            <button type=button id="idCheck_btn">ID 중복확인</button>
 	            </div>
 	            
 	            <div>
