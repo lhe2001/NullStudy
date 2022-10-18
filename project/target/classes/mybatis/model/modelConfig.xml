@@ -6,6 +6,8 @@
 
 	<typeAliases>
 		<typeAlias type="com.spring.teampro.signupin.dto.SignUpInDTO" alias="signUpInDTO"></typeAlias>
+		
+		<typeAlias type="com.spring.teampro.mystudy.dto.MemoDTO" alias="MemoDTO"></typeAlias>
 	</typeAliases>
 
 </configuration>

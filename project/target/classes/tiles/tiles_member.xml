@@ -39,5 +39,11 @@
       <put-attribute name="body" value="/WEB-INF/views/signupin/signUp.jsp" />
    </definition>
    
+   <!-- 마이스터디 페이지로  -->
+   <definition name="myStudy" extends="baseLayout">
+      <put-attribute name="title" value="마이스터디페이지" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/mystudy/myStudy.jsp" />
+   </definition>   
 
 </tiles-definitions>
