@@ -19,11 +19,83 @@
 	})
 	
 	function bind(){
+		
+		//아이디 중복 체크 
 		$("#idCheck_btn").off("click").on("click", function(){
-			let id = $(".s_inputs").val();
-			console.log(id);
-    		
+			
+			if ($('.idcheck').val() != '') {
+				
+				$.ajax({
+				
+					type: 'GET',
+					url: '/project/idcheck.do',
+					data: 'id=' + $('.idcheck').val(),
+					dataType: 'json',
+					
+					success:function(result){
+						if(result==1){
+							$('#result1').text('사용 가능한 아이디입니다.');
+						}else{
+							$('#result1').text('이미 사용중인 아이디입니다.');
+						}
+					},
+					
+					error: function(a, b, c) {
+		                console.log(a, b, c);
+					}	
+				})
+				
+			} else {
+		        alert('아이디를 입력하세요.');
+		        $('.idcheck').focus();				
+			}
     	})
+    	
+    	//이메일 중복체크 
+    	$("#emailCheck_btn").off("click").on("click", function(){
+			
+			if ($('.emailcheck').val() != '') {
+				
+				$.ajax({
+				
+					type: 'GET',
+					url: '/project/emailcheck.do',
+					data: 'email=' + $('.emailcheck').val(),
+					dataType: 'json',
+					
+					success:function(result){
+						if(result==1){
+							$('#result3').text('사용 가능한 이메일입니다.');
+						}else{
+							$('#result3').text('이미 사용중인 이메일입니다.');
+						}
+					},
+					
+					error: function(a, b, c) {
+		                console.log(a, b, c);
+					}	
+				})
+				
+			} else {
+		        alert('이메일을 입력하세요.');
+		        $('.emailcheck').focus();
+			}
+    	})
+    	
+    	//패스워드값 체크
+    	$(".repw").off("blur").on("blur", function(){
+    		let pw = $('.pw').val();
+    		let repw = $('.repw').val();
+    		if(pw != repw){
+    			alert('비밀번호와 비밀번호 확인값이 일치하지 않습니다. ')
+    			$('#result2').text('비밀번호를 확인해주세요.')
+    			$('.pw').focus();
+    		} else{
+    			$('#result2').text('비밀번호와 일치합니다.')
+    		}
+    	})
+    	
+    	
 	}
 
 	function characterCheck(obj){
@@ -84,18 +156,20 @@ Null study 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 �
             <section class="sign_wrap">
 	            <div>
 	            <p class="title">아이디</p>
-	            <input type="text" class="s_inputs" name="id" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></input>
+	            <input type="text" class="s_inputs idcheck" name="id" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></input>
 	            <button type=button id="idCheck_btn">ID 중복확인</button>
+	            <span id="result1"></span>
 	            </div>
 	            
 	            <div>
 	            <p class="title">비밀번호</p>
-	            <input type="password" class="s_inputs" name="pw" onkeyup="spaceCheck(this)" onkeydown="spaceCheck(this)" required></input>
+	            <input type="password" class="s_inputs pw" name="pw" onkeyup="spaceCheck(this)" onkeydown="spaceCheck(this)" required></input>
 	            </div>
 	            
 	            <div>
 	            <p class="title">비밀번호 재확인</p>
-	            <input type="password" class="s_inputs" name="re_pw" onkeyup="spaceCheck(this)" onkeydown="spaceCheck(this)" required></input>
+	            <input type="password" class="s_inputs repw" name="re_pw" onkeyup="spaceCheck(this)" onkeydown="spaceCheck(this)" required></input>
+	            <span id="result2"></span>
 	            </div>
 	            
 	            <div>
@@ -119,7 +193,9 @@ Null study 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 �
 	            
 	            <div>
 	            <p class="title">본인 확인 이메일</p>
-	            <input type="text" name="email" placeholder="" class="s_inputs" onkeyup="mailCheck(this)" onkeydown="mailCheck(this)" required></input>
+	            <input type="text" name="email" placeholder="" class="s_inputs emailcheck" onkeyup="mailCheck(this)" onkeydown="mailCheck(this)" required></input>
+	            <button type=button id="emailCheck_btn">이메일 중복확인</button>
+	            <span id="result3"></span>
 	            </div>
 	            
 	            <div class="btn_s_wrap">

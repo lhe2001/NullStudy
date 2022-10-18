@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.teampro.signupin.dto.SignUpInDTO;
 import com.spring.teampro.signupin.service.SignUpInService;
@@ -76,57 +77,58 @@ public class SignUpInController {
 							
 						} else {
 							//가입 실패시 다시 회원가입페이지로
-							out.print("<script>");
-							out.print("alert('가입실패, 회원가입페이지로 이동합니다.');");
-							out.print("history.back()");
-							out.print("</script>");
+							return "signUp";
 						}
 					}
 					
 				}else if(emailCheck==-1) {
 					//이메일 사용불가
-					out.print("<script>");
-					out.print("alert('중복된 이메일입니다.');");
-					out.print("history.back()");
-					out.print("</script>");
+					return "signUp";
 				}else {
 					//db오류
-					out.print("<script>");
-					out.print("alert('가입실패, 회원가입페이지로 이동합니다.');");
-					out.print("history.back()");
-					out.print("</script>");
+					return "signUp";
 				}
 				
 			}else if(pwCheck==-1){
 				//비번값 불일치
-				out.print("<script>");
-				out.print("alert('비밀번호, 비밀번호확인값 불일치, 회원가입페이지로 이동합니다.');");
-				out.print("history.back()");
-				out.print("</script>");
+				return "signUp";
 			}else {
 				//db오류
-				out.print("<script>");
-				out.print("alert('가입실패, 회원가입페이지로 이동합니다.');");
-				out.print("history.back()");
-				out.print("</script>");
+				return "signUp";
 			}
 			
 		}else if(idCheck==-1) {
 			//아이디 사용불가, 사용중이 아이디 있음
-			out.print("<script>");
-			out.print("alert('동일한 아이디 존재.');");
-			out.print("history.back()");
-			out.print("</script>");
+			return "signUp";
 		}else {
 			//db오류
-			out.print("<script>");
-			out.print("alert('가입실패, 회원가입페이지로 이동합니다.');");
-			out.print("history.back()");
-			out.print("</script>");
+			return "signUp";
 		}
-		return "fffff";
-		
+		return "signUp";
 	}
+	
+	
+	//회원가입폼에서 아이디 중복체크
+	@RequestMapping(value="/idcheck.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody public int idCheck(@RequestParam("id") String id) {
+		int result = 0;
+		SignUpInDTO dto = new SignUpInDTO();
+		dto.setId(id);
+		result = signUpInService.getIdCheck(dto);
+		System.out.println("idck" + result);
+		return result;
+	}
+	
+	//회원가입폼에서 이메일 중복체크
+	@RequestMapping(value="/emailcheck.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody public int emailCheck(@RequestParam("email") String email) {
+		int result = 0;
+		SignUpInDTO dto = new SignUpInDTO();
+		dto.setEmail(email);
+		result = signUpInService.getEmailCheck(dto);
+		return result;
+	}
+	
 	
 	@RequestMapping(value="/signIn.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String signIn(Model model,
@@ -138,14 +140,15 @@ public class SignUpInController {
 		
 		
 		if( result == 99) {
-			
-			
-			return "관리자 메인 페이지로";
+			// 관리자 로그인 성공 > 메인 admin으로 이동 
+			return "main_admin";
 		}else if(result ==1 ) {
 			//로그인 성공 > 메인2로 이동
 			signUpInService.updateLastTime(id);
 			HttpSession session = req.getSession();
 			session.setAttribute("userInfo", signUpInService.getUserInfo(id));
+			session.setAttribute("userKey", signUpInService.getUserInfo(id).getUserKey());
+			
 			return "main2";
 		}else {
 			//로그인 실패 >  로그인 페이지로 
