@@ -12,6 +12,10 @@
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> jessie_memo
 </head>
 <body>
 <div id="wrapper">
@@ -23,7 +27,7 @@
                         <div class="drop l1">
                             <ul>
                                  <li><a href="/teampro/teamCheck/teamList">My Team</a></li>
-                               <li><a href="/teampro/mypage">My Study</a></li>
+                               <li><a href="/project/mystudy/memolist">My Study</a></li>
                             </ul>
                         </div>
                     </li>

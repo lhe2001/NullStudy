@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.mystudy">
+<!-- 		테이블이름 칼럼 맞는지 확인하기!!! -->
+<!-- 	메모 입력하기 -->
+	<insert id="insertMemo" parameterType="memoDTO">
+		<![CDATA[
+		 insert into pre_memo(m_memo_key, userkey, m_memo_title, m_memo_desc, m_memo_date )
+		 values(seq_mymemo.nextval, #{userkey}, #{memo_title}, #{memo_desc}, sysdate)
+		]]>      
+	</insert>
+	
+<!-- 	메모 수정 전 조회 -->
+	<select id="selectMemoByIdx" resultType="memoDTO" parameterType="int">
+      <![CDATA[
+         select * from mymemo	
+         where m_memo_iky = #{memo_idx}	 	
+      ]]>
+	</select>
+		
+<!-- 	메모 수정하기 -->
+	<update id="updateMemo" parameterType="memoDTO">
+		<![CDATA[
+		 update mymemo
+		 set m_memo_title = #{memo_title}
+		 	,m_memo_desc = #{memo_desc}
+		 	where m_memo_key = #{memo_idx}
+		]]> 
+	</update>
+
+<!-- 	메모 삭제하기 -->
+	<delete id="deleteMemo" parameterType="int">
+		<![CDATA[
+		delete from mymemo
+		where m_memo_key = #{memo_key}
+		]]>
+	</delete>
+	
+	
+<!-- 메모 해당리스트 -->
+	<select id="Paging_list" resultType="memoDTO" parameterType="memoDTO">
+      <![CDATA[
+		 SELECT * from(
+			 select rownum rnum, tmp.* from ( 
+			 select * from mymemo
+			 where userkey = #{userkey} 
+			 order by m_memo_date desc) tmp
+		)
+		WHERE #{startIdx} <= rnum AND rnum <= #{endIdx}
+		order by m_memo_date desc
+      ]]>
+	</select>
+	
+<!-- 메모 전체 목록 수-->
+	<select id="Paging_allCnt" resultType="int">
+      <![CDATA[
+		select count(*) 
+		from mymemo
+		where userkey = #{userkey}
+      ]]>
+	</select>
+
+
+
+	
+	
+	
+	
+</mapper>
