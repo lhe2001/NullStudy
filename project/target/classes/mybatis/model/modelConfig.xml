@@ -4,8 +4,20 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+	<!-- jdbcTypeForNull 처리셋팅 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
 	<typeAliases>
 		<typeAlias type="com.spring.teampro.signupin.dto.SignUpInDTO" alias="signUpInDTO"></typeAlias>
+		<!-- board DTO 별칭 -->
+		<typeAlias type="com.spring.teampro.board.dto.BoardDTO" alias="boardDTO"></typeAlias>
 	</typeAliases>
+	
+	<!-- paging DTO 별칭 -->
+<!-- 	<typeAliases> -->
+<!-- 		<typeAlias type="com.spring.propro.emp.dto.EmpDTO" alias="empDTO"></typeAlias> -->
+<!-- 	</typeAliases> -->
 
 </configuration>

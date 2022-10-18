@@ -33,6 +33,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<!-- 복사해서 쓸 필터 -->
 	<filter>
       <filter-name>encodingFilter</filter-name>
       <filter-class>org.springframework.web.filter.CharacterEncodingFilter

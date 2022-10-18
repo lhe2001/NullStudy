@@ -173,11 +173,23 @@
             <version>${org.springframework-version}</version>
         </dependency>
         
-        
+       <!-- Json (vo타입으로 return) -->
         <dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.13.4</version>
+		</dependency>
+		
+		<!-- file Upload -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.0.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.2.2</version>
 		</dependency>
 		
 	</dependencies>
