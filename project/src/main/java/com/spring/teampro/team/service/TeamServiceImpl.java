@@ -1,5 +1,7 @@
 package com.spring.teampro.team.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.teampro.team.dao.TeamDAO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
+import com.spring.teampro.team.dto.TeamMemberDTO;
 
 @Service
 public class TeamServiceImpl implements TeamService {
@@ -32,6 +35,19 @@ public class TeamServiceImpl implements TeamService {
 		return dao.getTeamInfo(t_key);
 	}
 
-	
-	
+	@Override
+	public List getTeamMemberInfo(int t_key) {
+		
+		List list = dao.getTeamMemberInfo(t_key);
+		
+		for(int i=0; i<list.size(); i++) {
+			TeamMemberDTO memberDTO = (TeamMemberDTO) list.get(i);
+			Date lastTime = memberDTO.getLastTime();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd hh:mm a");
+			String time = format.format(lastTime);
+			memberDTO.setLastTime2(time);
+		}
+		return list;
+	}
+
 }

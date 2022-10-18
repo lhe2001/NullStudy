@@ -30,4 +30,13 @@ public class TeamDAOImpl implements TeamDAO {
 		return sqlSession.selectOne("mapper.team.teamInfo",t_key);
 	}
 	
+	@Override
+	public List getTeamMemberInfo(int t_key) {
+		
+		return sqlSession.selectList("mapper.team.teamMemberInfo",t_key);
+	}
+	
+	
+	
+	
 }

@@ -33,12 +33,14 @@ public class TeamController {
 			@RequestParam("t_key")int t_key
 			) {
 	
-	//1. 팀정보들,,,
-//		2. 조장말
+		logger.info("t_key"+t_key);
+		//1. 팀정보들,,,
+		//2. 조장말
+		logger.info("getTeamInfo" + service.getTeamInfo(t_key));
 		model.addAttribute("teamInfo",service.getTeamInfo(t_key));
-//		3.팀멤버 정보들
-//		4.오늘의 요약
-//		5.
+		//3.팀멤버 정보들
+		model.addAttribute("MemberInfo",service.getTeamMemberInfo(t_key));
+		//4.오늘의 요약
 
 	return "teamDetail";
 	}

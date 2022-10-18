@@ -10,5 +10,7 @@ public interface TeamService {
 
 	TeamInfoDTO getTeamInfo(int t_key);
 
+	List getTeamMemberInfo(int t_key);
+
 
 }

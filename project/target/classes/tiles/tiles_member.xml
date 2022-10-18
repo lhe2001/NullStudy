@@ -54,6 +54,5 @@
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/teamPage/teamDetail.jsp" />
    </definition>
-   
 
 </tiles-definitions>

@@ -16,5 +16,11 @@
 		WHERE a.USERKEY = a2.USERKEY and t_key = #{t_key}
 	</select>
 	
+	<select id="teamMemberInfo" resultType="teamMemberDTO" parameterType="int">
+		SELECT m.T_KEY, m.TM_KEY , m.TM_JOINDATE ,m.USERKEY ,a.NICKNAME ,a.LASTTIME ,a.INTRO  
+		FROM teammember m, allmember a
+		WHERE m.USERKEY = a.USERKEY AND m.T_KEY = #{t_key}
+	</select>
+	
 	
 </mapper>

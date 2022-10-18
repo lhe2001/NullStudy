@@ -1,91 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/project/resources/css/team.css" rel="stylesheet">
 </head>
-   <script>
-    window.addEventListener("load", teamInfoOnload);
-   //window.onload = function(){
-	   function teamInfoOnload(){
-    	console.log(111)
-       reviseTeamInfo();
-        leWrite();
-        dailyMemoRevise();
-	   }
-    
-  //팀정보 수정
-    function reviseTeamInfo(){
-        
-    	let button = document.querySelectorAll(".reviseTeamInfo")
-    	
-    	for(let i=0; i<button.length; i++){
-		  button[i].addEventListener("click",function(){
-	    	console.log("클릭")
-        	let teamInfo = document.querySelector("#teamInfo");
-        	
-        	if(teamInfo.classList.contains("hide") == true ){
-        		console.log("true 작동")
-        		document.querySelector("#teamInfo").classList.remove("hide");
-	            document.querySelector("#reviseTeam").classList.add("hide");
-        	} else{
-            document.querySelector("#teamInfo").classList.add("hide");
-            document.querySelector("#reviseTeam").classList.remove("hide");
-        	}
-        })
-   	}
-   }
-    //조장한마디 수정
-    function leWrite(){
-        document.querySelector(".reviseW").addEventListener("click",function(){
-            document.querySelector(".reivseWrite").classList.remove("hide");
-            document.querySelector(".leadersWrite").classList.add("hide");
-        })
-    }
-    //오늘의 요약 수정
-    function dailyMemoRevise(){
-        document.querySelector(".dailyRevBtn").addEventListener("click",function(){
-            document.querySelector(".TeamDailyMemo").classList.add("hide");
-            document.querySelector(".TeamDailyRevise").classList.remove("hide");
-        })
-        document.querySelector(".returnBtn").addEventListener("click",function(){
-            document.querySelector(".TeamDailyMemo").classList.remove("hide");
-            document.querySelector(".TeamDailyRevise").classList.add("hide");
-        })
-    }
-
-</script>
+<script src="/project/resources/css/Team.js" ></script>
 </head>
 <body>
 	<div id="team_Wrapper">
-	    <div id="Wrapper">
+	    <div id="fstWrapper">
             <div id="teamInfo" class="teamInfoBox ">
 		    <a class="deleteTeamBtn"  href='/teampro/teamcd/delTeam'>현재팀 삭제</a>
                 <table>
                     <tr>
                         <td>팀 이름</td>
-                        <td>${teamInfo.teamName}</td>
+                        <td>${teamInfo.t_name}</td>
                     </tr>
                     <tr>
                         <td>인사말</td>
-                        <td>${teamInfo.teamIntro}</td>
+                        <td>${teamInfo.t_intro}</td>
                     </tr>
                     <tr>
                         <td>분야</td>
                         <td> 
                         <c:choose>
-                            <c:when test="${teamInfo.teamField eq 1 }" >
+                            <c:when test="${teamInfo.t_field eq 1 }" >
                             코딩
                             </c:when>
-                            <c:when test="${teamInfo.teamField eq 2 }" >
+                            <c:when test="${teamInfo.t_field eq 2 }" >
                             자격증
                             </c:when>
-                            <c:when test="${teamInfo.teamField eq 3 }" >
+                            <c:when test="${teamInfo.t_field eq 3 }" >
                             토익
                             </c:when>
-                            <c:when test="${teamInfo.teamField eq 4 }" >
+                            <c:when test="${teamInfo.t_field eq 4 }" >
                             기타
                             </c:when>
                         </c:choose>
@@ -93,17 +45,17 @@
                     </tr>
                     <tr>
                         <td>팀장</td>
-                        <td>${teamInfo.leaderNick }</td>
+                        <td>${teamInfo.nickName }</td>
                     </tr>
                 </table>
-                <button type="button" class="reviseTeamInfo reviese" ><i class="fa-solid fa-pencil"></i></button>
+                <button type="button" class="reviseTeamInfo revise" ><i class="fa-solid fa-pencil"></i></button>
             </div>
             <div id="reviseTeam" class="hide teamInfoBox ">
             <form method="post" action="teamInfo/reviseTeamInfo" >
 	            <table>
 	                <tr>
 	                    <td>팀 이름</td>
-	                    <td>${teamInfo.teamName}</td>
+	                    <td>${teamInfo.t_name}</td>
 	                </tr>
 	                <tr>
 	                    <td>인사말</td>
@@ -122,30 +74,49 @@
 	                </tr>
 	                <tr>
 	                    <td>팀장</td>
-	                    <td>${teamInfo.leaderNick }</td>
+	                    <td>${teamInfo.nickName }</td>
 	                </tr>
 	            </table>
                 <input type="submit" value="수정">
                 <button type="button" class=" reviseTeamInfo back" >취소</button>
             </form>
         </div>
+        <div id="dDay">
+            <table>
+                <tr>
+                    <td style="text-decoration:underline;">D-DAY</td>
+                </tr>
+                <tr>
+                    <td style="font-size:40px; color:#ff580b;">-280</td>
+                </tr>
+            </table>
+        </div>
+        <div id="teamMenu">
+            <ul>
+                <li>팀 게시판</li>
+                <li>일정등록</li>
+                <li>D-Day 수정</li>
+                <li>투표하기</li>
+                <li>챌린지 수정</li>
+                <li>탈퇴하기</li>
+            </ul>
+        </div>
+    </div>
         <div class="LeaderMenu leadersWrite ">
-           <div> ${teamInfo.leaderNick }님의 공지사항: ${teamInfo.teamMemo }djfkdjfljdlkfjkldjfkldjlkfjkldjfkljdklfjkldjfkljdklfjklfglfkjgkfjlkgjklfgklfjglkjfklflgkjflkjglkfjklg</div>
-            <button type="button" class="reviseW rBtn"><i class="fa-regular fa-pen-to-square"></i></button>
+           <div> ${teamInfo.nickName }님의 공지사항: ${teamInfo.t_lMemo }</div>
+            <button type="button" class="reviseW rBtn"><i class="fa-solid fa-pencil"></i></button>
         </div>
         <div class="LeaderMenu reivseWrite hide">
             <form method="post" action="teamInfo/leaderMemo">
-                ${teamInfo.leaderNick }님의 공지사항: <input type="text" name="leWrite" required><br>
+                ${teamInfo.nickName }님의 공지사항: <input type="text" name="leWrite" required><br>
                 <input type="submit" class="rBtn2" value="수정">
+                <input type="button" class="leBack" value="취소">
             </form>
         </div>
         <div id="memberWrapper">
             <div id="memberInfo">
-            <!-- <c:forEach var="member" items="${memberList}" varStatus="loop"> -->
+          <c:forEach var="member" items="${MemberInfo}" varStatus="loop">
             <div class="member">
-                <!-- <c:if test="${member.userKey eq teamInfo.teamLeader }" > -->
-                    <div class="king"><img src="https://ifh.cc/g/6bBq87.png"></div>
-                <!-- </c:if> -->
                     <div class="photo">
                         <img src="https://ifh.cc/g/GCpQKq.png">
                     </div>
@@ -155,121 +126,15 @@
                             <td style="max-width:90px; min-width:90px;"><strong>${member.nickname }</strong></td>
                             <td style="min-width:300px; max-width:300px;">${member.intro }</td>
                             <td style="min-width:90px; max-width:90px;">${PercentList.get(loop.index)}%</td>
-                            <td style="min-width:132px; max-width:132px;">${member.lastTime }</td>
+                            <td style="min-width:132px; max-width:132px;">${member.lastTime2 }</td>
                         </tr>
                     </table>
-                    <!-- <c:if test="${member.userKey ne userInfo.userKey }" > -->
-                        <!-- <button  class="kickOut" type="button" onclick="location.href='/teampro/teamInfo/delMember?tmkey=${member.tm_key}'">
-                            <i class="fa-solid fa-arrow-right-from-bracket"></i></button> -->
-                            <!-- </c:if> -->
+                     	<button  class="kickOut" type="button" onclick="location.href='/teampro/teamInfo/delMember?tmkey=${member.tm_key}'">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                         </button> 
                     </div>
                 </div>
-                <div class="member">
-                    <!-- <c:if test="${member.userKey eq teamInfo.teamLeader }" > -->
-                <!-- </c:if> -->
-                    <div class="photo">
-                        <img src="https://ifh.cc/g/GCpQKq.png">
-                        </div>
-                    <div class="info">
-                        <table>
-                        <tr>
-                            <td style="max-width:90px; min-width:90px;"><strong>혜으니</strong></td>
-                            <td style="min-width:300px; max-width:300px;">반갑~~~오늘도화이팅 가보자고!!!ㅎㅇ로어롸오러와러ㅗ</td>
-                            <td style="min-width:90px; max-width:90px;">30%</td>
-                            <td style="min-width:132px; max-width:132px;">2022-10-10 3:00pm</td>
-                        </tr>
-                    </table>
-                    <!-- <c:if test="${member.userKey ne userInfo.userKey }" > -->
-                    <!-- <button  class="kickOut" type="button" onclick="location.href='/teampro/teamInfo/delMember?tmkey=${member.tm_key}'">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i></button> -->
-                    <!-- </c:if> -->
-                    </div>
-                </div>
-                <div class="member">
-                    <!-- <c:if test="${member.userKey eq teamInfo.teamLeader }" > -->
-                <!-- </c:if> -->
-                    <div class="photo">
-                        <img src="https://ifh.cc/g/GCpQKq.png">
-                        </div>
-                    <div class="info">
-                        <table>
-                        <tr>
-                            <td style="max-width:90px; min-width:90px;"><strong>혜으니</strong></td>
-                            <td style="min-width:300px; max-width:300px;">반갑~~~오늘도화이팅 가보자고!!!ㅎㅇ로어롸오러와러ㅗ</td>
-                            <td style="min-width:90px; max-width:90px;">30%</td>
-                            <td style="min-width:132px; max-width:132px;">2022-10-10 3:00pm</td>
-                        </tr>
-                    </table>
-                    <!-- <c:if test="${member.userKey ne userInfo.userKey }" > -->
-                    <!-- <button  class="kickOut" type="button" onclick="location.href='/teampro/teamInfo/delMember?tmkey=${member.tm_key}'">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i></button> -->
-                    <!-- </c:if> -->
-                    </div>
-                </div>
-                <div class="member">
-                    <!-- <c:if test="${member.userKey eq teamInfo.teamLeader }" > -->
-                <!-- </c:if> -->
-                    <div class="photo">
-                        <img src="https://ifh.cc/g/GCpQKq.png">
-                        </div>
-                    <div class="info">
-                        <table>
-                        <tr>
-                            <td style="max-width:90px; min-width:90px;"><strong>혜으니</strong></td>
-                            <td style="min-width:300px; max-width:300px;">반갑~~~오늘도화이팅 가보자고!!!ㅎㅇ로어롸오러와러ㅗ</td>
-                            <td style="min-width:90px; max-width:90px;">30%</td>
-                            <td style="min-width:132px; max-width:132px;">2022-10-10 3:00pm</td>
-                        </tr>
-                    </table>
-                    <!-- <c:if test="${member.userKey ne userInfo.userKey }" > -->
-                    <!-- <button  class="kickOut" type="button" onclick="location.href='/teampro/teamInfo/delMember?tmkey=${member.tm_key}'">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i></button> -->
-                    <!-- </c:if> -->
-                    </div>
-                </div>
-                <div class="member">
-                    <!-- <c:if test="${member.userKey eq teamInfo.teamLeader }" > -->
-                <!-- </c:if> -->
-                    <div class="photo">
-                        <img src="https://ifh.cc/g/GCpQKq.png">
-                        </div>
-                    <div class="info">
-                        <table>
-                        <tr>
-                            <td style="max-width:90px; min-width:90px;"><strong>혜으니</strong></td>
-                            <td style="min-width:300px; max-width:300px;">반갑~~~오늘도화이팅 가보자고!!!ㅎㅇ로어롸오러와러ㅗ</td>
-                            <td style="min-width:90px; max-width:90px;">30%</td>
-                            <td style="min-width:132px; max-width:132px;">2022-10-10 3:00pm</td>
-                        </tr>
-                    </table>
-                    <!-- <c:if test="${member.userKey ne userInfo.userKey }" > -->
-                    <!-- <button  class="kickOut" type="button" onclick="location.href='/teampro/teamInfo/delMember?tmkey=${member.tm_key}'">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i></button> -->
-                    <!-- </c:if> -->
-                    </div>
-                </div>
-                <div class="member">
-                    <!-- <c:if test="${member.userKey eq teamInfo.teamLeader }" > -->
-                <!-- </c:if> -->
-                    <div class="photo">
-                        <img src="https://ifh.cc/g/GCpQKq.png">
-                        </div>
-                    <div class="info">
-                        <table>
-                        <tr>
-                            <td style="max-width:90px; min-width:90px;"><strong>혜으니</strong></td>
-                            <td style="min-width:300px; max-width:300px;">반갑~~~오늘도화이팅 가보자고!!!ㅎㅇ로어롸오러와러ㅗ</td>
-                            <td style="min-width:90px; max-width:90px;">30%</td>
-                            <td style="min-width:132px; max-width:132px;">2022-10-10 3:00pm</td>
-                        </tr>
-                    </table>
-                    <!-- <c:if test="${member.userKey ne userInfo.userKey }" > -->
-                    <!-- <button  class="kickOut" type="button" onclick="location.href='/teampro/teamInfo/delMember?tmkey=${member.tm_key}'">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i></button> -->
-                    <!-- </c:if> -->
-                    </div>
-                </div>
-            <!-- </c:forEach> -->
+              </c:forEach>
             </div>
             <div id="memberDetail">
                 <div class="photo"> <img src="https://ifh.cc/g/GCpQKq.png"><br>
@@ -277,6 +142,7 @@
                 </div>
                 <div class="challenge">
                     <table>
+                        <caption style="font-size:15px; text-decoration:underline">매일 물 한잔</caption>
                         <tr>
                             <td class="confirm"></td>
                             <td class="confirm"></td>
@@ -287,9 +153,9 @@
                             <td class="confirm"></td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="confirm"></td>
+                            <td class="confirm"></td>
+                            <td class="confirm"></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -315,12 +181,13 @@
                             <td>오늘의 요약!</td>
                         </tr>
                         <tr>
-                            <td style="font-size:13px;">오fffffffffffffffffffffffffffffffgggggggggggggggggggggggggfffff늘은 좀 힘드네..대충하자 내일부터는 다시 열심히!</td>
+                            <td style="font-size:13px;height:85px;max-height:85px;">ure. Sapiente iure non nulla autem, ipsa ut inventore minima pariatur labore.</td>
                         </tr>
                         <tr>
                             <td><input class="dailyRevBtn" type="button" value="수정하기"></td>
                         </tr>
                     </table>
+                    <form>
                     <table class="TeamDailyRevise hide">
                         <tr>
                             <td>오늘의 요약!</td>
@@ -332,45 +199,44 @@
                             <td><input type="button" class="returnBtn" value="취소"><input type="submit"></td>
                         </tr>
                     </table>
+                    </form>
                 </div>
             </div>
         </div>
-        <div id="teamBoard_Wrapper">
-       		<div id="tBoard">
-            	<table>
-                	<thead>
-                    	<tr>
-	                        <th>작성자</th>
-	                        <th>한마디</th>
-	                        <th>작성시간</th>
-                    	</tr>
-                	</thead>
-                	<tbody>
-                	<c:forEach var="boardList" items="${boardList}" varStatus="loop">
-               		   <tr>
-	                       	<td>${boardList.nickName}</td>
-	                       	<!-- <c:if test="${boardList.userKey == userInfo.userKey }" > -->
-	                       	<td>${boardList.tb_memo}<button class='delBtn' type="button" onclick="location.href='/teampro/teamInfo/delBoard?tbkey=${boardList.tb_key}'">
-	                       	<i class="fa-regular fa-trash-can"></i></button>
-	                       	</td>
-	                       	<!-- </c:if> -->
-                       		<!-- <c:if test="${boardList.userKey != userInfo.userKey }" > -->
-	                       	<!-- <td>${boardList.tb_memo}</td> -->
-	                       	<!-- </c:if> -->
-	                       	<td>${boardList.tb_memotime}</td>
-                       </tr>
-                    </c:forEach>
-               		</tbody>
-            	</table>
-        	</div>
-        	<div id="Write_teamBoard">
-            <form method="post" action="teamInfo/addBoard">
-                <input type="text" name="boardWrite">
-                <input type="submit" value="글쓰기">
-            </form>
+        <div id="teamSchedule">
+            <div class="tCalendar">달력</div>
+            <div class="tTimeLine">일정</div>
+            <div class="tVote">
+                <div class="vote1">투표1</div>
+                <div class="vote2">투표2</div>
+            </div>
+            <div id="tSmallBoard">
+                <table class="overflow" border="1">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2</td>
+                            <td class="overflow">음 너무 졸린데? 엽떡먹고 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus, alias laudantium! Voluptate pariatur facere vitae adipisci modi odit fugiat sapiente porro maxime, soluta odio quisquam, ad tempora unde ab corporis? </td>
+                            <td>Annie</td>
+                            <td>2022.10.14 11:49AM</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td class="overflow">음 너무 졸린데? 엽떡먹고 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus, alias laudantium! Voluptate pariatur facere vitae adipisci modi odit fugiat sapiente porro maxime, soluta odio quisquam, ad tempora unde ab corporis? </td>
+                            <td>Annie</td>
+                            <td>2022.10.14 11:49AM</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-       	</div>
-   	</div>
    	</div>
 </body>
 </html>

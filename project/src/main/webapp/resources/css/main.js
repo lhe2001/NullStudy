@@ -94,7 +94,7 @@ function bluePostIt(){
 				}else {
 					for(let i=0; i<data.length; i++){
 					html += "<tr>";
-					html += "	<td><span> ❤ </span><a href=''>"+data[i].t_name+"</a></td>";
+					html += "	<td><span> ❤ </span><a href='/project/team/teamDetail.do?t_key="+data[i].t_key+"'>"+data[i].t_name+"</a></td>";
 					html += "<tr>";
 					}
 				}

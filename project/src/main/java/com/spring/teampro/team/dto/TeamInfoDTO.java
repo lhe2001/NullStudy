@@ -11,9 +11,8 @@ public class TeamInfoDTO {
 	private int t_number;
 	private String t_lMemo;
 	private Date tcreate;
-
 	private int userKey;
-	private int nickname;
+	private String nickName;
 	
 	public int getT_key() {
 		return t_key;
@@ -63,11 +62,11 @@ public class TeamInfoDTO {
 	public void setTcreate(Date tcreate) {
 		this.tcreate = tcreate;
 	}
-	public int getNickname() {
-		return nickname;
+	public String getNickName() {
+		return nickName;
 	}
-	public void setNickname(int nickname) {
-		this.nickname = nickname;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	
 	
