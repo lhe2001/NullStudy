@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <title><tiles:insertAttribute name="title" /></title>
   <link rel="stylesheet" href="resources/css/simple.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="resources/css/main.js"></script>
   <style>
   	#body {
