@@ -146,6 +146,7 @@ public class SignUpInController {
 			signUpInService.updateLastTime(id);
 			HttpSession session = req.getSession();
 			session.setAttribute("userInfo", signUpInService.getUserInfo(id));
+			session.setAttribute("userKey", signUpInService.getUserInfo(id).getUserKey());
 			return "main2";
 		}else {
 			//로그인 실패 >  로그인 페이지로 

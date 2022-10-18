@@ -6,7 +6,7 @@ import com.spring.teampro.mystudy.dto.MemoDTO;
 
 public interface MemoService {
 	
-	List<MemoDTO> selectPagingList(int userkey);
+	List<MemoDTO> selectPagingList(MemoDTO memoDTO);
 	
 	int selectlistCount(int userkey);
 	

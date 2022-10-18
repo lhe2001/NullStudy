@@ -6,7 +6,7 @@ import com.spring.teampro.mystudy.dto.MemoDTO;
 
 public interface MemoDAO {
 	
-	public List<MemoDTO> selectPagingList(int userkey);
+	public List<MemoDTO> selectPagingList(MemoDTO memoDTO);
 	
 	public int selectlistCount(int userkey);
 //	

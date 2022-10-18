@@ -20,9 +20,9 @@ public class MemoServiceImpl implements MemoService {
 	MemoDAO memoDAO;
 
 	@Override
-	public List<MemoDTO> selectPagingList(int userkey) {
-		logger.info("MemoServiceImpl >>  selectPagingList실행, userkey"+userkey);
-		return memoDAO.selectPagingList(userkey);
+	public List<MemoDTO> selectPagingList(MemoDTO memoDTO) {
+		logger.info("MemoServiceImpl >>  selectPagingList실행"+memoDTO);
+		return memoDAO.selectPagingList(memoDTO);
 	}
 
 	@Override

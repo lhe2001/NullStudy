@@ -2,36 +2,47 @@ package com.spring.teampro.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.spring.teampro.mystudy.dao.MemoDAOImpl;
 import com.spring.teampro.mystudy.dto.MemoDTO;
+import com.spring.teampro.mystudy.service.MemoService;
 
-
+@Controller
 public class MystudyController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MystudyController.class);
-
+	
+	@Autowired
+	MemoService memoService;
+	
 	//메모 페이징으로
 	@RequestMapping(value="/mystudy/memolist", method= {RequestMethod.GET, RequestMethod.POST} )
-	public String memolist(Model model, 
+	public String memolist(
+			Model model, 
+			HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute MemoDTO memoDTO
 			) {
-		System.out.println("memolist 실행");
+		logger.info("memolist 실행");
+		HttpSession session = request.getSession();
 		
-		memoDTO.setUserkey(userkey);
-		System.out.println(userkey);
+		int userkey = (int)session.getAttribute("userKey");
+		logger.info("userkey"+userkey);
 		
 		int viewPage = memoDTO.getViewPage();
 		int countPerPage = memoDTO.getCountPerPage();
 		
-		int total = memoService.getMemoTotal(memoDTO);
+		int total = memoService.selectlistCount(userkey);
 		int totalPage = (int) Math.ceil( (double)total/ countPerPage );
 		
 		int startIdx = ( (viewPage - 1) * countPerPage ) + 1;
@@ -39,15 +50,22 @@ public class MystudyController {
 		
 		memoDTO.setStartIdx(startIdx);
 		memoDTO.setEndIdx(endIdx);
+		memoDTO.setUserkey(userkey);
 		
-		List list = memoService.getPagingList(memoDTO);
+		logger.info("페이징용>>"+startIdx+","+endIdx);
 		
+		logger.info(">>"+memoDTO.getUserkey());
+		
+		List<MemoDTO> list = memoService.selectPagingList(memoDTO);		
+		logger.info("리스트 사이즈: "+list.size());
+		
+		model.addAttribute("userkey", userkey);
 		model.addAttribute("viewPage", viewPage);
 		model.addAttribute("countPerPage", countPerPage);
 		
 		model.addAttribute("total", total);
 		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("mlist",list);
+		model.addAttribute("resultList",list);
 		
 		return "myStudy";
 	}

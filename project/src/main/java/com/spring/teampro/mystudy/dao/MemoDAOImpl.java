@@ -19,9 +19,11 @@ public class MemoDAOImpl implements MemoDAO {
 	SqlSession sqlSession;
 
 	@Override
-	public List<MemoDTO> selectPagingList(int userkey) {
-		logger.info("MemoDAOImpl >>  selectPagingList실행, userkey"+userkey);
-		return sqlSession.selectList("mapper.mystudy.Paging_list", userkey);
+	public List<MemoDTO> selectPagingList(MemoDTO memoDTO) {
+		logger.info("MemoDAOImpl >>  selectPagingList실행: ");
+		List<MemoDTO> list = sqlSession.selectList("mapper.mystudy.Paging_list", memoDTO);
+		logger.info("MemoDAOImpl 리스트 사이즈>> " + list.size());
+		return list;
 	}
 
 	@Override

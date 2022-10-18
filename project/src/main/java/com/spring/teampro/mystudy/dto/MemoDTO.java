@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class MemoDTO {
 	private int userkey;
-	private int memo_idx;	
-	private String memo_title;
-	private String memo_desc;
-	private Date memo_date;
+	private int m_memo_key;	
+	private String m_memo_title;
+	private String m_memo_desc;
+	private Date m_memo_date;
 	
 	private int viewPage = 1;
 	public int getViewPage() {
@@ -48,28 +48,29 @@ public class MemoDTO {
 	public void setUserkey(int userkey) {
 		this.userkey = userkey;
 	}
-	public int getMemo_idx() {
-		return memo_idx;
+	public int getM_memo_key() {
+		return m_memo_key;
 	}
-	public void setMemo_idx(int memo_idx) {
-		this.memo_idx = memo_idx;
+	public void setM_memo_key(int m_memo_key) {
+		this.m_memo_key = m_memo_key;
 	}
-	public String getMemo_title() {
-		return memo_title;
+	public String getM_memo_title() {
+		return m_memo_title;
 	}
-	public void setMemo_title(String memo_title) {
-		this.memo_title = memo_title;
+	public void setM_memo_title(String m_memo_title) {
+		this.m_memo_title = m_memo_title;
 	}
-	public String getMemo_desc() {
-		return memo_desc;
+	public String getM_memo_desc() {
+		return m_memo_desc;
 	}
-	public void setMemo_desc(String memo_desc) {
-		this.memo_desc = memo_desc;
+	public void setM_memo_desc(String m_memo_desc) {
+		this.m_memo_desc = m_memo_desc;
 	}
-	public Date getMemo_date() {
-		return memo_date;
+	public Date getM_memo_date() {
+		return m_memo_date;
 	}
-	public void setMemo_date(Date memo_date) {
-		this.memo_date = memo_date;
+	public void setM_memo_date(Date m_memo_date) {
+		this.m_memo_date = m_memo_date;
 	}
+	
 }

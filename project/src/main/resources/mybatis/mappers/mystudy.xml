@@ -4,38 +4,38 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="mapper.mystudy">
-		
+<!-- 		테이블이름 칼럼 맞는지 확인하기!!! -->
 <!-- 	메모 입력하기 -->
 	<insert id="insertMemo" parameterType="memoDTO">
 		<![CDATA[
-		 insert into pre_memo(userkey, memo_idx, memo_title, memo_desc, memo_date )
-		 values(#{userkey}, seq_memo.nextval, #{memo_title}, #{memo_desc}, sysdate)
+		 insert into pre_memo(m_memo_key, userkey, m_memo_title, m_memo_desc, m_memo_date )
+		 values(seq_mymemo.nextval, #{userkey}, #{memo_title}, #{memo_desc}, sysdate)
 		]]>      
 	</insert>
 	
 <!-- 	메모 수정 전 조회 -->
 	<select id="selectMemoByIdx" resultType="memoDTO" parameterType="int">
       <![CDATA[
-         select * from pre_memo	
-         where memo_idx = #{memo_idx}	 	
+         select * from mymemo	
+         where m_memo_iky = #{memo_idx}	 	
       ]]>
 	</select>
 		
 <!-- 	메모 수정하기 -->
 	<update id="updateMemo" parameterType="memoDTO">
 		<![CDATA[
-		 update pre_memo
-		 set memo_title = #{memo_title}
-		 	,memo_desc = #{memo_desc}
-		 	where memo_idx = #{memo_idx}
+		 update mymemo
+		 set m_memo_title = #{memo_title}
+		 	,m_memo_desc = #{memo_desc}
+		 	where m_memo_key = #{memo_idx}
 		]]> 
 	</update>
 
 <!-- 	메모 삭제하기 -->
 	<delete id="deleteMemo" parameterType="int">
 		<![CDATA[
-		delete from pre_memo
-		where memo_idx = #{memo_idx}
+		delete from mymemo
+		where m_memo_key = #{memo_key}
 		]]>
 	</delete>
 	
@@ -44,13 +44,13 @@
 	<select id="Paging_list" resultType="memoDTO" parameterType="memoDTO">
       <![CDATA[
 		 SELECT * from(
-		 select rownum rnum, tmp.* from ( 
-		 select * from pre_memo
-		 where userkey = #{userkey} 
-		 order by memo_date desc) tmp
+			 select rownum rnum, tmp.* from ( 
+			 select * from mymemo
+			 where userkey = #{userkey} 
+			 order by m_memo_date desc) tmp
 		)
 		WHERE #{startIdx} <= rnum AND rnum <= #{endIdx}
-		order by memo_date desc
+		order by m_memo_date desc
       ]]>
 	</select>
 	
@@ -58,7 +58,7 @@
 	<select id="Paging_allCnt" resultType="int">
       <![CDATA[
 		select count(*) 
-		from pre_memo
+		from mymemo
 		where userkey = #{userkey}
       ]]>
 	</select>

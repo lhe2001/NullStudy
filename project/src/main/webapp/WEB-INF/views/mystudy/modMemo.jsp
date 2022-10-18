@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="${path}/resources/css/all.css" rel="stylesheet"/> 
+	<link href="${path}/resources/css/allMystudy.css" rel="stylesheet"/> 
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
 </head>
 <body>

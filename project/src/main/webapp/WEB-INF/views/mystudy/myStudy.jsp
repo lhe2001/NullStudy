@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="/resources/css/allMystudy.css" rel="stylesheet"/> 
+	<link href="/project/resources/css/allMystudy.css" rel="stylesheet"/> 
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -101,19 +101,19 @@
             <div class="micon"><i class="fa-solid fa-plus"></i></div>
             <p>Add new note <i class="fa-regular fa-note-sticky"></i></p>
         </li>
-        <c:forEach var="mlist" items="${mlist }">
+        <c:forEach var="mDTO" items="${resultList }">
         <li class="note">
             <div class="details">
-                <p>${mlist.memo_title }</p>
-                <span>${mlist.memo_desc }</span>
+                <p>${mDTO.m_memo_title }</p>
+                <span>${mDTO.m_memo_desc }</span>
             </div>
             <div class="bottom-content">
-                <span><fmt:formatDate value="${mlist.memo_date }" pattern="yyyy-MM-dd" /></span>
+                <span><fmt:formatDate value="${mDTO.m_memo_date }" pattern="yyyy-MM-dd" /></span>
                 <div class="settings">
                     <i class="fa-solid fa-ellipsis"></i>
                     <ul class="memomenu">
-                        <a href="${pageContext.request.contextPath}/my/selectMemoByIdx?idx=${mlist.memo_idx }"><li class="memo_edit" data-idx="${mlist.memo_idx }"><i class="fa-solid fa-pencil"></i>Edit</li></a>
-                        <a href="${pageContext.request.contextPath}/my/deleteMemo?idx=${mlist.memo_idx }"><li class="memo_del" data-idx="${mlist.memo_idx }"><i class="fa-regular fa-trash-can"></i>Delete</li></a>
+                        <a href="${pageContext.request.contextPath}/my/selectMemoByIdx?idx=${mDTO.m_memo_key }"><li class="memo_edit" data-idx="${mDTO.m_memo_key }"><i class="fa-solid fa-pencil"></i>Edit</li></a>
+                        <a href="${pageContext.request.contextPath}/my/deleteMemo?idx=${mDTO.m_memo_key }"><li class="memo_del" data-idx="${mDTO.m_memo_key }"><i class="fa-regular fa-trash-can"></i>Delete</li></a>
                     </ul>
                 </div>
             </div>
@@ -122,23 +122,22 @@
     </div>
     
     <div id="memopagebar">
-<%--    	total : ${total } <br> --%>
-        
+   	total : ${total } <br>
 	 <c:if test="${startIdx != 1}">
-		<a href="/preteam/my/listpaging?viewPage=${viewPage - 1}&countPerPage=${countPerPage}&userkey=10" style=" font-weight: bold;" > << </a> &nbsp;
+		<a href="/project/mystudy/memolist?viewPage=${viewPage - 1}&countPerPage=${countPerPage}&userkey=${userkey}" style=" font-weight: bold;" > << </a> &nbsp;
 	 </c:if>
 
      <c:forEach var="i" begin="1" end="${totalPage }">
      <c:if test="${viewPage eq i }">
-     	<a href="/preteam/my/listpaging?viewPage=${i }&countPerPage=${countPerPage}&userkey=10" style="color:#606187; font-weight: bold;"> ${i } </a> &nbsp;     
+     	<a href="/project/mystudy/memolist?viewPage=${i }&countPerPage=${countPerPage}&userkey=${userkey}" style="color:#606187; font-weight: bold;"> ${i } </a> &nbsp;     
      </c:if>
      <c:if test="${viewPage ne i }">
-     	<a href="/preteam/my/listpaging?viewPage=${i }&countPerPage=${countPerPage}&userkey=10"> ${i } </a> &nbsp;     
+     	<a href="/project/mystudy/memolist?viewPage=${i }&countPerPage=${countPerPage}&userkey=${userkey}"> ${i } </a> &nbsp;     
      </c:if>
      </c:forEach>
      
      <c:if test="${endIdx != totalPage }">
-		<a href="/preteam/my/listpaging?viewPage=${viewPage + 1}&countPerPage=${countPerPage}&userkey=10" style=" font-weight: bold;" > >> </a> &nbsp;
+		<a href="/project/mystudy/memolist?viewPage=${viewPage + 1}&countPerPage=${countPerPage}" style=" font-weight: bold;" > >> </a> &nbsp;
 	 </c:if>
 
 
@@ -147,7 +146,7 @@
 	 
 </div>
 
-	<script src="/resources/js/cal.js"></script>
-	<script src="/resources/js/memo.js"></script>
+	<script src="/project/resources/js/cal.js"></script>
+	<script src="/project/resources/js/memo.js"></script>
 </body>
 </html>

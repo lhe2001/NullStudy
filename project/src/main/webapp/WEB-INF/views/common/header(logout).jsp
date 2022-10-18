@@ -25,7 +25,7 @@
                         <div class="drop l1">
                             <ul>
                                  <li><a href="/teampro/teamCheck/teamList">My Team</a></li>
-                               <li><a href="/teampro/mypage">My Study</a></li>
+                               <li><a href="/project/mystudy/memolist">My Study</a></li>
                             </ul>
                         </div>
                     </li>
