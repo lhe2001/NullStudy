@@ -6,6 +6,8 @@
 
 	<typeAliases>
 		<typeAlias type="com.spring.teampro.signupin.dto.SignUpInDTO" alias="signUpInDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.signupin.dto.AdminDTO" alias="adminDTO"></typeAlias>
 	</typeAliases>
+
 
 </configuration>
