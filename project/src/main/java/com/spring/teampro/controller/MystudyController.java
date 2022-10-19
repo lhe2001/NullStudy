@@ -1,5 +1,8 @@
 package com.spring.teampro.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +17,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.teampro.mystudy.dto.MemoDTO;
+import com.spring.teampro.mystudy.dto.ScheduleDTO;
 import com.spring.teampro.mystudy.service.MemoService;
+import com.spring.teampro.mystudy.service.ScheduleService;
 
 @Controller
 public class MystudyController {
@@ -26,7 +32,10 @@ public class MystudyController {
 	@Autowired
 	MemoService memoService;
 	
-	//메모 페이징으로
+	@Autowired
+	ScheduleService scheduleService;
+	
+	//메모 리스트 보여주기
 	@RequestMapping(value="/mystudy/memolist", method= {RequestMethod.GET, RequestMethod.POST} )
 	public String memolist(
 			Model model, 
@@ -34,11 +43,13 @@ public class MystudyController {
 			@ModelAttribute MemoDTO memoDTO
 			) {
 		logger.info("memolist 실행");
+		
+		//유저키 세션으로 잡아오기
 		HttpSession session = request.getSession();
-		
 		int userkey = (int)session.getAttribute("userKey");
-		logger.info("userkey"+userkey);
+		logger.info(">> memolist--userkey"+userkey);
 		
+		//페이징 구현 위한 처리
 		int viewPage = memoDTO.getViewPage();
 		int countPerPage = memoDTO.getCountPerPage();
 		
@@ -48,13 +59,13 @@ public class MystudyController {
 		int startIdx = ( (viewPage - 1) * countPerPage ) + 1;
 		int endIdx =  viewPage * countPerPage;
 		
+		//dto에 넣기
 		memoDTO.setStartIdx(startIdx);
 		memoDTO.setEndIdx(endIdx);
 		memoDTO.setUserkey(userkey);
 		
-		logger.info("페이징용>>"+startIdx+","+endIdx);
-		
-		logger.info(">>"+memoDTO.getUserkey());
+//		logger.info("페이징용>>"+startIdx+","+endIdx);		
+//		logger.info(">>"+memoDTO.getUserkey());
 		
 		List<MemoDTO> list = memoService.selectPagingList(memoDTO);		
 		logger.info("리스트 사이즈: "+list.size());
@@ -69,83 +80,130 @@ public class MystudyController {
 		
 		return "myStudy";
 	}
-//	
-//	
-//	//메모 추가하기
-//	@RequestMapping(value="/my/insertMemo", method= {RequestMethod.GET, RequestMethod.POST} )
-//	public String insertMemo(Model model, 
-//			@ModelAttribute MemoDTO memDTO
-//			) {
-//		System.out.println("insertMemo 실행");
-//
-//		int result = memoService.getAddmemo(memDTO);
-//		
-//		if(result == 1) {			
-//			int userkey = 10;			
-//			System.out.println(userkey);
-//			
-//			List list = memoService.getMemoList(userkey);
-//			model.addAttribute("mlist",list);
-//			return "./mystudy/cal";
-//		}else {
-//			return "./test";			
-//		}
-//		
-//	}
-//	//400에러는 안들어간게 있어서 들어오는 것
-//	//메모 수정 전 값 보여주기
-//	@RequestMapping(value="/my/selectMemoByIdx", method= {RequestMethod.GET, RequestMethod.POST} )
-//	public String selectMemoByIdx(Model model, 
-//			@RequestParam(value="idx") int idx
-//			) {
-//		System.out.println("selectMemoByIdx 실행");
-//		MemoDTO memDTO = memoService.getMemoOne(idx);
-//		model.addAttribute("oneDTO",memDTO);
-//		
-//		return "./mystudy/modMemo";
-//	}
-//	
-//	//메모 수정(update)하기
-//	@RequestMapping(value="/my/updateMemo", method= {RequestMethod.GET, RequestMethod.POST} )
-//	public String updateMemo(Model model, 
-//			@ModelAttribute MemoDTO memDTO
-//			) {
-//		System.out.println("updateMemo 실행");
-//
-//		int result = memoService.getModmemo(memDTO);
-//		
-//		if(result == 1) {			
-//			int userkey = 10;			
-//			System.out.println(userkey);
-//			
-//			List list = memoService.getMemoList(userkey);
-//			model.addAttribute("mlist",list);
-//			return "./mystudy/cal";
-//		}else {
-//			return "./test";			
-//		}
-//		
-//	}
-//	
-//	//메모 삭제
-//	@RequestMapping(value="/my/deleteMemo", method= {RequestMethod.GET, RequestMethod.POST} )
-//	public String deleteMemo(Model model, 
-//			@RequestParam(value="idx") int idx
-//			) {
-//		System.out.println("deleteMemo 실행");
-//		int result = memoService.getDelmemo(idx);
-//		
-//		if(result == 1) {			
-//			int userkey = 10;			
-//			System.out.println(userkey);
-//			
-//			List list = memoService.getMemoList(userkey);
-//			model.addAttribute("mlist",list);
-//			return "./mystudy/cal";
-//		}else {
-//			return "./test";			
-//		}
-//	}
+	
+	//메모 작성하기
+	@RequestMapping(value="/mystudy/insertMemo", method= {RequestMethod.GET, RequestMethod.POST} )
+	public String insertMemo(
+			Model model,
+			HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute MemoDTO memoDTO
+			) {
+		
+		logger.info("insertMemo 실행");
+		
+		//유저키 가져와서 세팅
+		
+		HttpSession session = request.getSession();		
+		int userkey = (int)session.getAttribute("userKey");
+		logger.info(">>insertMemo--userkey"+userkey);
+		memoDTO.setUserkey(userkey);
+		
+		int result = memoService.insertNewMemo(memoDTO);
+		
+		if(result == 1) {
+			return "redirect:/mystudy/memolist";
+		} else {
+			return "myStudy";
+		}
+	}
+	
+	//메모 삭제하기
+	@RequestMapping(value="/mystudy/deleteMemo", method= {RequestMethod.GET, RequestMethod.POST} )
+	public String deleteMemo(
+			Model model,
+			HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value="m_memo_key") int m_memo_key
+			) {
+		logger.info("deleteMemo 실행");
+		
+		int result = memoService.deleteMemo(m_memo_key);
+		
+		if(result == 1) {
+			return "redirect:/mystudy/memolist";
+		} else {
+			return "myStudy";
+		}
+	}
+	
+	//메모 수정 전 해당dto 불러오기
+	@RequestMapping(value="/mystudy/selectOneMemo", method= {RequestMethod.GET, RequestMethod.POST} )
+	public String selectOneMemo(
+			Model model, 
+			HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value="m_memo_key") int m_memo_key
+			) {
+			
+		logger.info("selectOneMemo 실행");	
+		MemoDTO memDTO = memoService.selectOneMemo(m_memo_key);
+		model.addAttribute("oneDTO", memDTO);
+		
+		return "modMemo";
+	}
+	
+	//메모 수정(update)하기
+	@RequestMapping(value="/mystudy/updateMemo", method= {RequestMethod.GET, RequestMethod.POST} )
+	public String updateMemo(
+			Model model,
+			HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute MemoDTO memoDTO
+			) {
+		
+		logger.info("updateMemo 실행");
+		
+		//유저키 가져와서 세팅
+		HttpSession session = request.getSession();		
+		int userkey = (int)session.getAttribute("userKey");
+		logger.info(">>updateMemo--userkey"+userkey);
+		memoDTO.setUserkey(userkey);
+		
+		int result = memoService.updateMemo(memoDTO);
+		
+		logger.info(">>update한 result: "+result);
+		
+		if(result == 1) {			
+			return "redirect:/mystudy/memolist";
+		}else {
+			return "myStudy";			
+		}
+		
+	}
+	
+	//일정 작성하기
+	@RequestMapping(value="/mystudy/insertSchedule", method= {RequestMethod.GET, RequestMethod.POST} )
+	public String addSchedule(
+			Model model,
+			HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value="m_schedule_date") String m_schedule_date,
+			@ModelAttribute ScheduleDTO scheduleDTO
+			) {
+		
+		//날짜 string to date
+		try {
+			SimpleDateFormat smd = new SimpleDateFormat("yyyy-MM-dd");
+			Date changeDate = smd.parse(m_schedule_date);
+			
+			scheduleDTO.setM_schedule_date(changeDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logger.info("addSchedule 실행");
+		
+		//유저키 가져와서 세팅
+		HttpSession session = request.getSession();		
+		int userkey = (int)session.getAttribute("userKey");
+		logger.info(">>addSchedule--userkey"+userkey);
+		scheduleDTO.setUserkey(userkey);
+		
+		int result = scheduleService.addNewSchedule(scheduleDTO);
+		
+		if(result == 1) {
+			return "redirect:/mystudy/memolist";
+		} else {
+			return "myStudy";
+		}
+	}
 	
 	
 }
