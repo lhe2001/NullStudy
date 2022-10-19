@@ -14,7 +14,7 @@
       
         /* 헤더부분
         1) 헤더 네비 */
-        header {
+        .mainHeader{
             box-sizing: border-box;
             position:fixed;
             width:100%;

@@ -20,49 +20,39 @@ public class MemoDAOImpl implements MemoDAO {
 
 	@Override
 	public List<MemoDTO> selectPagingList(MemoDTO memoDTO) {
-		logger.info("MemoDAOImpl >>  selectPagingList실행: ");
+		logger.info("MemoDAOImpl >>  selectPagingList실행");
 		List<MemoDTO> list = sqlSession.selectList("mapper.mystudy.Paging_list", memoDTO);
-		logger.info("MemoDAOImpl 리스트 사이즈>> " + list.size());
 		return list;
 	}
 
 	@Override
 	public int selectlistCount(int userkey) {
-		logger.info("MemoDAOImpl >>  selectlistCount실행, userkey"+userkey);
+		logger.info("MemoDAOImpl >>  selectlistCount실행");
 		return sqlSession.selectOne("mapper.mystudy.Paging_allCnt", userkey);
 	}
+
+	@Override
+	public int insertNewMemo(MemoDTO memoDTO) {
+		logger.info("MemoDAOImpl >>  insertNewMemo실행");
+		return sqlSession.insert("mapper.mystudy.insertMemo", memoDTO);
+	}
+
+	@Override
+	public int deleteMemo(int m_memo_key) {
+		logger.info("MemoDAOImpl >>  deleteMemo실행");
+		return sqlSession.delete("mapper.mystudy.deleteMemo", m_memo_key);
+	}
+
+	@Override
+	public MemoDTO selectOneMemo(int m_memo_key) {
+		logger.info("MemoDAOImpl >>  selectOneMemo실행");
+		return sqlSession.selectOne("mapper.mystudy.selectOneMemo", m_memo_key);
+	}
+
+	@Override
+	public int updateMemo(MemoDTO memoDTO) {
+		logger.info("MemoDAOImpl >>  updateMemo실행");
+		return sqlSession.update("mapper.mystudy.updateMemo", memoDTO);
+	}
 	
-
-//
-//	@Override
-//	public int memo_add(MemoDTO memoDTO) {
-//		
-//		System.out.println("MemoDAOImpl >> memo_add 실행");
-//		
-//		return sqlSession.insert("mapper.mystudy.insertMemo", memoDTO);
-//	}
-//
-//	@Override
-//	public MemoDTO memo_beforeUpdate(int midx) {
-//		System.out.println("MemoDAOImpl >> memo_beforeUpdate 실행");
-//
-//		return sqlSession.selectOne("mapper.mystudy.selectMemoByIdx", midx);
-//	}
-//
-//	@Override
-//	public int memo_update(MemoDTO memoDTO) {
-//		System.out.println("MemoDAOImpl >> memo_update 실행");
-//		
-//		return sqlSession.update("mapper.mystudy.updateMemo", memoDTO);
-//	}
-//
-//	@Override
-//	public int memo_delete(int mdix) {
-//		System.out.println("MemoDAOImpl >> memo_delete 실행");
-//
-//		return sqlSession.delete("mapper.mystudy.deleteMemo", mdix);
-//	}
-
-
-
 }

@@ -21,56 +21,38 @@ public class MemoServiceImpl implements MemoService {
 
 	@Override
 	public List<MemoDTO> selectPagingList(MemoDTO memoDTO) {
-		logger.info("MemoServiceImpl >>  selectPagingList실행"+memoDTO);
+		logger.info("MemoServiceImpl >>  selectPagingList실행");
 		return memoDAO.selectPagingList(memoDTO);
 	}
 
 	@Override
 	public int selectlistCount(int userkey) {
-		logger.info("MemoServiceImpl >>  selectlistCount실행, userkey"+userkey);
+		logger.info("MemoServiceImpl >>  selectlistCount실행");
 		return memoDAO.selectlistCount(userkey);
 	}
-	
-//	@Override
-//	public int getAddmemo(MemoDTO memoDTO) {
-//		System.out.println("MemoServiceImpl >> getAddmemo 실행");
-//		
-//		return memoDAO.memo_add(memoDTO);
-//	}
-//
-//	@Override
-//	public MemoDTO getMemoOne(int idx) {
-//		System.out.println("MemoServiceImpl >> getMemoOne 실행");
-//
-//		return memoDAO.memo_beforeUpdate(idx);
-//	}
-//
-//	@Override
-//	public int getModmemo(MemoDTO memoDTO) {
-//		System.out.println("MemoServiceImpl >> getModmemo 실행");
-//
-//		return memoDAO.memo_update(memoDTO);
-//	}
-//
-//	@Override
-//	public int getDelmemo(int idx) {
-//		System.out.println("MemoServiceImpl >> getDelmemo 실행");
-//		
-//		return memoDAO.memo_delete(idx);
-//	}
-//
-//	@Override
-//	public int getMemoTotal(MemoDTO memoDTO) {
-//		System.out.println("MemoServiceImpl >> getDelmemo 실행");
-//		
-//		return memoDAO.listCount(memoDTO);
-//	}
-//
-//	@Override
-//	public List getPagingList(MemoDTO memoDTO) {
-//		System.out.println("MemoServiceImpl >> getPagingList 실행");
-//		
-//		return memoDAO.memoPaging_view(memoDTO);
-//	}
 
+	@Override
+	public int insertNewMemo(MemoDTO memoDTO) {
+		logger.info("MemoServiceImpl >>  insertNewMemo실행");
+		return memoDAO.insertNewMemo(memoDTO);
+	}
+
+	@Override
+	public int deleteMemo(int m_memo_key) {
+		logger.info("MemoServiceImpl >>  deleteMemo실행");
+		return memoDAO.deleteMemo(m_memo_key);
+	}
+
+	@Override
+	public MemoDTO selectOneMemo(int m_memo_key) {
+		logger.info("MemoServiceImpl >>  selectOneMemo실행");
+		return memoDAO.selectOneMemo(m_memo_key);
+	}
+
+	@Override
+	public int updateMemo(MemoDTO memoDTO) {
+		logger.info("MemoServiceImpl >>  updateMemo실행");
+		return memoDAO.updateMemo(memoDTO);
+	}
+	
 }
