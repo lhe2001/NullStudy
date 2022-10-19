@@ -21,5 +21,7 @@ public interface TeamService {
 
 	List getAllTeamList();
 
+	boolean alreadyMyTeam(int userkey, int t_key);
+
 
 }

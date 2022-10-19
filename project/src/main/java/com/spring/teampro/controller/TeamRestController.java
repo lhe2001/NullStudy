@@ -1,6 +1,8 @@
 package com.spring.teampro.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,8 +33,7 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 	public List myTeamList(HttpServletRequest request, HttpServletResponse response
 			) {
 		HttpSession session = request.getSession();
-		SignUpInDTO userInfo = (SignUpInDTO)session.getAttribute("userInfo");
-		int userkey = userInfo.getUserKey();
+		int userkey  = (Integer) session.getAttribute("userKey");
 		
 		logger.info("userkey"+userkey);
 		
@@ -64,6 +65,29 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		result = service.removeMember(tm_key);
 		
 		return result;
+	}
+	
+	@RequestMapping(value="/teamRest/memberList.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public Map memberList(@RequestBody TeamMemberDTO dto,
+			HttpServletRequest request, HttpServletResponse response
+			) {
+		Map map = new HashMap();
+		int t_key = dto.getT_key();
+		System.out.println("t_key>>>>>>>>"+t_key);
+		
+		List list = service.getTeamMemberInfo(t_key);
+		TeamInfoDTO tdto = service.getTeamInfo(t_key);
+		
+		HttpSession session = request.getSession();
+		int userkey  = (Integer) session.getAttribute("userKey");
+		logger.info("userKey<<<<<<<<<"+userkey);
+		boolean result = service.alreadyMyTeam(userkey, t_key);
+				
+		map.put("memberList", list);
+		map.put("teamInfo", tdto);
+		map.put("isMyTeam", result);
+		
+		return map;
 	}
 
 	

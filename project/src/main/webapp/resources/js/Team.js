@@ -2,7 +2,7 @@ window.addEventListener("load", teamInfoOnload);
 //window.onload = function(){
    function teamInfoOnload(){
     console.log(111)
-   reviseTeamInfo();
+   	reviseTeamInfo();
     leWrite();
     dailyMemoRevise();
    }
@@ -127,21 +127,5 @@ function dailyMemoRevise(){
     })
 }
 
-//>>>>>>>>>>>>>>>>모든팀 목록>>>>>>>>>>>>>>>//
-function teamPreview(){
-     // 로그인 버튼을 누르면 모달창 뜨기
-     $(".memberBtn").off("click").on("click",function(){
-        $("#modal").css({'display':'flex'});
-     })
-     //모달창 안의 x 버튼 누르면 모달창 꺼지기
-     $("#modal button").off("click").on("click",function(){
-         $("#modal").css({'display':'none'});
-        });
-    //모달창에서 바깥 영역을 클릭하면 모달창이 꺼지기.
-    $("#modal").off("click").on("click",function(e){
-        let target = e.target;
-        if(target.classList.contains("modal")){
-            $("#modal button").trigger("click");
-        }
-    });
-}
+
+

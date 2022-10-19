@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link href="/project/resources/css/team.css" rel="stylesheet">
 </head>
-<script src="/project/resources/css/Team.js" ></script>
+<script src="/project/resources/js/Team.js" ></script>
 </head>
 <body>
 	<div id="team_Wrapper">
@@ -28,22 +28,7 @@
                     </tr>
                     <tr>
                         <td>분야</td>
-                        <td> 
-                        <c:choose>
-                            <c:when test="${teamInfo.t_field eq 1 }" >
-                            코딩
-                            </c:when>
-                            <c:when test="${teamInfo.t_field eq 2 }" >
-                            자격증
-                            </c:when>
-                            <c:when test="${teamInfo.t_field eq 3 }" >
-                            토익
-                            </c:when>
-                            <c:when test="${teamInfo.t_field eq 4 }" >
-                            기타
-                            </c:when>
-                        </c:choose>
-                        </td>
+                        <td>${teamInfo.t_field2 }</td>
                     </tr>
                     </tbody>
                     <tr>

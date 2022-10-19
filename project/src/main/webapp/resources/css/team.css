@@ -431,13 +431,17 @@
     background-color: #eeeeee;
 }
 .allTeamTableWrap table {
-   
     border-collapse: collapse;
     border-radius: 10px;
     margin: auto;
     font-size:14px;
     max-width:600px;
     width:600px;
+    max-height:430px;
+    border: 1px solid red;
+}
+.allTeamTableWrap #page {
+    margin-top: 20px;
 }
 .allTeamTableWrap table div{
     height:20px;
@@ -450,6 +454,7 @@
 }
 .allTeamTableWrap table td{
     border-bottom: 1px dashed black;
+    height: 30px;
 }
 .allTeamTableWrap table th:first-child,.allTeamTableWrap td:first-child{
     border-right: 1px solid black;
@@ -527,7 +532,6 @@
     cursor: pointer;
 }
 #modalBox input {
-    margin-top: 15px;
     border:none;
 }
 #modalBox input:hover {
@@ -554,6 +558,11 @@
 #memberPreview table img {
     width:20px;
     height:20px;
+}
+#modalMsg div {
+	font-size: 14px;
+	color:red;
+	margin:0;
 }
 
 /* 나의팀목록 */
