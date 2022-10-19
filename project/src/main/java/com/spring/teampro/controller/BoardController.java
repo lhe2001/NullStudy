@@ -232,7 +232,7 @@ public class BoardController{
 				out.print("/board/listArticles.do'; ");
 				out.print(" </script> ");
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}
 		

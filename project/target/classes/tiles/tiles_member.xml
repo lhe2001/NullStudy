@@ -47,7 +47,6 @@
       <put-attribute name="body" value="/WEB-INF/views/signupin/signUp.jsp" />
    </definition>
    
-<<<<<<< HEAD
     <!-- 팀디테일 페이지  -->
    <definition name="teamDetail" extends="baseLayout">
       <put-attribute name="title" value="팀정보페이지" />
@@ -55,13 +54,11 @@
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/teamPage/teamDetail.jsp" />
    </definition>
-=======
    <!-- 마이스터디 페이지로  -->
    <definition name="myStudy" extends="baseLayout">
       <put-attribute name="title" value="마이스터디페이지" />
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/mystudy/myStudy.jsp" />
    </definition>   
->>>>>>> jessie_memo
 
 </tiles-definitions>
