@@ -45,4 +45,16 @@
 		WHERE a.USERKEY = a2.USERKEY
 	</select>
 	
+	<insert id="memberRequest" parameterType="memberRequestDTO">
+		insert into memberrequest
+		(tr_key,UserKey,tr_result,t_key)
+		values(tr_key_seq.nextval,#{userKey},'M',#{t_key})
+	</insert>
+	
+	<select id="anyAlarm" resultType="int" parameterType="int">
+		SELECT count(*) FROM memberrequest
+		WHERE t_key=#{t_key} AND tr_result='M'
+	</select>
+
+	
 </mapper>

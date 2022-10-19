@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.teampro.signupin.dto.SignUpInDTO;
+import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
 import com.spring.teampro.team.service.TeamService;
@@ -73,14 +73,12 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 			) {
 		Map map = new HashMap();
 		int t_key = dto.getT_key();
-		System.out.println("t_key>>>>>>>>"+t_key);
 		
 		List list = service.getTeamMemberInfo(t_key);
 		TeamInfoDTO tdto = service.getTeamInfo(t_key);
 		
 		HttpSession session = request.getSession();
 		int userkey  = (Integer) session.getAttribute("userKey");
-		logger.info("userKey<<<<<<<<<"+userkey);
 		boolean result = service.alreadyMyTeam(userkey, t_key);
 				
 		map.put("memberList", list);
@@ -90,7 +88,17 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		return map;
 	}
 
-	
+	@RequestMapping(value="/teamRest/memberRequest.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int memberRequest(@RequestBody MemberRequestDTO dto,
+			HttpServletRequest request, HttpServletResponse response
+			) {
+		HttpSession session = request.getSession();
+		int userkey  = (Integer) session.getAttribute("userKey");
+		dto.setUserKey(userkey);
+		
+		return service.requestMember(dto);
+		
+	}
 	
 	
 	

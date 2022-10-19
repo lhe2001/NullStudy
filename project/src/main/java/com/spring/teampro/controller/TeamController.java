@@ -42,6 +42,8 @@ public class TeamController {
 		//3.팀멤버 정보들
 		model.addAttribute("MemberInfo",service.getTeamMemberInfo(t_key));
 		//4.오늘의 요약
+		//5.팀원알람
+		model.addAttribute("anyAlarm",service.anyAlarm(t_key));
 
 	return "teamDetail";
 	}

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
 
@@ -56,6 +57,19 @@ public class TeamDAOImpl implements TeamDAO {
 	public List allTeamList() {
 		return sqlSession.selectList("mapper.team.allTeamList");
 	}
+
+	@Override
+	public int memberRequest(MemberRequestDTO dto) {
+		return sqlSession.insert("mapper.team.memberRequest",dto);
+	}
+
+	@Override
+	public int anyAlarm(int t_key) {
+		logger.info("t_key>>>>>>>>>>>>>>>>>>>>>>"+t_key);
+		int result = sqlSession.selectOne("mapper.team.anyAlarm",t_key);
+		return result;
+	}
+
 	
 	
 	

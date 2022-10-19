@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.teampro.team.dao.TeamDAO;
+import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.MyTeamListDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
@@ -133,6 +134,16 @@ public class TeamServiceImpl implements TeamService {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public int requestMember(MemberRequestDTO dto) {
+		return dao.memberRequest(dto);
+	}
+
+	@Override
+	public int anyAlarm(int t_key) {
+		return dao.anyAlarm(t_key);
 	}
 
 

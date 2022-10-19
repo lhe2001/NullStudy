@@ -2,6 +2,7 @@ package com.spring.teampro.team.service;
 
 import java.util.List;
 
+import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
 
@@ -22,6 +23,10 @@ public interface TeamService {
 	List getAllTeamList();
 
 	boolean alreadyMyTeam(int userkey, int t_key);
+
+	int requestMember(MemberRequestDTO dto);
+
+	int anyAlarm(int t_key);
 
 
 }

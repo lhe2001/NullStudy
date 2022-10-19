@@ -56,8 +56,8 @@ function teamPreview(t_key){
 	        	$(".joinBtn").attr("onClick","location.href='/project/team/teamDetail.do?t_key="+t_key+"'");
 	        	$("#modalMsg div").prepend("이미 가입된 팀입니다");
 	        }else {
-	        	$(".joinBtn").attr("value","가입하기");	
-	        	$(".joinBtn").attr("onClick","아니");
+	        	$(".joinBtn").attr("value","가입요청");	
+	        	$(".joinBtn").attr("onClick","requestJoin("+t_key+")");
 	        }
 		},
 		error:function(){
@@ -78,6 +78,44 @@ function teamPreview(t_key){
     });
 }
 
+//>>>>>>>>>>>>>>>>모달창 에서 가입요청>>>>>>>>>>>>>>>//
+function requestJoin(t_key){
+	
+	let info = { 
+    			t_key : t_key 
+    	};
+    	
+    	$.ajax({
+			url: "/project/teamRest/memberRequest.do",
+			type: "post",
+			contentType: "application/json",
+			data: JSON.stringify(info),
+			success: function(data){
+				console.log(data)
+				if(data >= 1){
+				console.log('성공!')
+				alert('가입요청이 전송되었습니다');
+				}
+			},
+			error:function(){
+				alert("에러발생!!")
+			}
+		});
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
 
 
 
