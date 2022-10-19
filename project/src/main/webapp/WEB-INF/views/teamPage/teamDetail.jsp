@@ -84,6 +84,7 @@
                 <li>D-Day 수정</li>
                 <li>투표하기</li>
                 <li>챌린지 수정</li>
+                <li id="newMemberAlert" onClick="newMemberRequest()">팀원 신청</li>
                 <li>탈퇴하기</li>
             </ul>
         </div>
