@@ -11,6 +11,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.spring.teampro.signupin.dto.SignUpInDTO" alias="signUpInDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.signupin.dto.AdminDTO" alias="adminDTO"></typeAlias>
 <!-- <<<<<<< HEAD -->
 		<typeAlias type="com.spring.teampro.team.dto.MyTeamListDTO" alias="myTeamListDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.team.dto.TeamInfoDTO" alias="teamInfoDTO"></typeAlias>
