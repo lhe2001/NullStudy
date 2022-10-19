@@ -39,5 +39,10 @@
 		WHERE tm_key= #{tm_key}
 	</delete>
 	
+	<select id="allTeamList" resultType="teamInfoDTO" >
+		SELECT a.T_KEY ,a.T_NAME ,a.T_INTRO ,a.T_FIELD ,a.T_NUMBER  ,a2.NICKNAME   
+		FROM ALLTEAM a ,allmember a2
+		WHERE a.USERKEY = a2.USERKEY
+	</select>
 	
 </mapper>

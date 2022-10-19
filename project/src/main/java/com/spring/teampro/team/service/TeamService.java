@@ -19,5 +19,7 @@ public interface TeamService {
 
 	int removeMember(int tm_key);
 
+	List getAllTeamList();
+
 
 }

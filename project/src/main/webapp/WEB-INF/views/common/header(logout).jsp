@@ -22,7 +22,7 @@
                     <li class="navtap">My Study <i class="fa-solid fa-book-open"></i>
                         <div class="drop l1">
                             <ul>
-                                 <li><a href="/teampro/teamCheck/teamList">My Team</a></li>
+                                 <li><a href="">아직 없음</a></li>
                                <li><a href="/teampro/mypage">My Study</a></li>
                             </ul>
                         </div>
@@ -38,7 +38,7 @@
                     <li class="navtap">Team<i class="fa-solid fa-heart"></i>
                         <div class="drop l3">
                             <ul>
-                                  <li><a href="/teampro/teamPage/AllTeamList.jsp">All Team</a></li>
+                                  <li><a href="/project/team/allTeamList.do">All Team</a></li>
                                 <li></li>
                             </ul>
                         </div>

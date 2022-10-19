@@ -51,6 +51,11 @@ public class TeamDAOImpl implements TeamDAO {
 	public int removeMember(int tm_key) {
 		return sqlSession.delete("mapper.team.removeMember",tm_key);
 	}
+
+	@Override
+	public List allTeamList() {
+		return sqlSession.selectList("mapper.team.allTeamList");
+	}
 	
 	
 	

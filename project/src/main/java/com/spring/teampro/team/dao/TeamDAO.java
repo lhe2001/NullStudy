@@ -19,4 +19,6 @@ public interface TeamDAO {
 
 	int removeMember(int tm_key);
 
+	List allTeamList();
+
 }

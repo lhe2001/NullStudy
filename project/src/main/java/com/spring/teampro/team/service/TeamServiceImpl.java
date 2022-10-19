@@ -65,5 +65,10 @@ public class TeamServiceImpl implements TeamService {
 		return dao.removeMember(tm_key);
 	}
 
+	@Override
+	public List getAllTeamList() {
+		return dao.allTeamList();
+	}
+
 
 }
