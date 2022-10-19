@@ -2,11 +2,11 @@ package com.spring.teampro.signupin.dao;
 
 import java.util.List;
 
+import com.spring.teampro.signupin.dto.AdminDTO;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
 
 public interface SignUpInDAO {
 
-	public List<SignUpInDTO> listMembers();
 	
 	public int idCheck(SignUpInDTO dto);
 	
@@ -22,11 +22,27 @@ public interface SignUpInDAO {
 	
 	public void lastTime(String id);
 	
-	public List<SignUpInDTO> searchMember(String Keyword);
-	
 	public void delMember(String id);
 	
 	public void modMember(SignUpInDTO dto);
 	
 	public SignUpInDTO modUserInfo(SignUpInDTO udto);
+	
+	public List<SignUpInDTO> listMembers();
+	
+	public List<SignUpInDTO> listById(String keyword);
+	
+	public List<SignUpInDTO> listByName(String keyword);
+	
+	public List<SignUpInDTO> listByBoth(String keyword);
+	
+	public List<AdminDTO> listTeams();
+
+	public List<AdminDTO> listByTname(String keyword);
+	
+	public List<AdminDTO> listByTleader(String keyword);
+	
+	public List<AdminDTO> listByTinfo(String keyword);
+	
+	
 }

@@ -32,7 +32,9 @@
 		
 		<!-- search DTO 별칭 -->
 		<typeAlias type="com.spring.teampro.search.dto.SearchDTO" alias="searchDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.signupin.dto.AdminDTO" alias="adminDTO"></typeAlias>
 	</typeAliases>
 	
+
 
 </configuration>

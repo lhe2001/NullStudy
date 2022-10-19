@@ -91,5 +91,11 @@ public class SignUpInDTO {
 	public void setPhoto(int photo) {
 		this.photo = photo;
 	}
+	@Override
+	public String toString() {
+		return "SignUpInDTO [userKey=" + userKey + ", id=" + id + ", pw=" + pw + ", rePw=" + rePw + ", name=" + name
+				+ ", sex=" + sex + ", nickName=" + nickName + ", email=" + email + ", joinDate=" + joinDate + ", intro="
+				+ intro + ", lastTime=" + lastTime + ", photo=" + photo + "]";
+	}
 
 }

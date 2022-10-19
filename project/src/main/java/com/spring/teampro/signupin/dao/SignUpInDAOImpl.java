@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.teampro.signupin.dto.AdminDTO;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
 
 @Repository
@@ -13,13 +14,6 @@ public class SignUpInDAOImpl implements SignUpInDAO {
 
 	@Autowired
 	SqlSession sqlSession;
-	
-	@Override
-	//모든 회원의 정보(DTO)를 list에 담아주는 메소드 
-	public List<SignUpInDTO> listMembers() {
-		List list = sqlSession.selectList("mapper.member.listMembers");
-		return list;
-	}
 
 	@Override
 	// 회원가입시 아이디 중복 체크하는 메소드 
@@ -112,23 +106,66 @@ public class SignUpInDAOImpl implements SignUpInDAO {
 	}
 
 	//-------------------관리자용 메소드------------------- 
+	@Override
+	//모든 회원의 정보(DTO)를 list에 담아주는 메소드 
+	public List<SignUpInDTO> listMembers() {
+		List list = sqlSession.selectList("mapper.member.listMembers");
+		return list;
+	}
 	
 	@Override
-	public List<SignUpInDTO> searchMember(String Keyword) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SignUpInDTO> listById(String keyword) {
+		System.out.println("listById실행 키워드: "+keyword);
+		List list = sqlSession.selectList("mapper.member.listById", keyword);
+		return list;
+	}
+	
+	@Override
+	public List<SignUpInDTO> listByName(String keyword) {
+		System.out.println("listByName실행 키워드: "+keyword);
+		List list = sqlSession.selectList("mapper.member.listByName", keyword);
+		return list;
+	}
+	
+	@Override
+	public List<SignUpInDTO> listByBoth(String keyword) {
+		System.out.println("listByBoth실행 키워드: "+keyword);
+		List list = sqlSession.selectList("mapper.member.listByBoth", keyword);
+		return list;
+	}
+	
+	@Override
+	public List<AdminDTO> listTeams() {
+		List list = sqlSession.selectList("mapper.member.listTeams");
+		return list;
+	}
+	
+	@Override
+	public List<AdminDTO> listByTname(String keyword) {
+		List list = sqlSession.selectList("mapper.member.listByTname", keyword);
+		return list;
+	}
+	
+	@Override
+	public List<AdminDTO> listByTleader(String keyword) {
+		List list = sqlSession.selectList("mapper.member.listByTleader", keyword);
+		return list;
+	}
+	
+	@Override
+	public List<AdminDTO> listByTinfo(String keyword) {
+		List list = sqlSession.selectList("mapper.member.listByTinfo", keyword);
+		return list;
 	}
 
 	@Override
 	public void delMember(String id) {
-		// TODO Auto-generated method stub
-
+		sqlSession.delete("mapper.member.delMember", id);
 	}
 
 	@Override
-	public void modMember(SignUpInDTO dto) {
-		// TODO Auto-generated method stub
-
+	public void modMember(SignUpInDTO dto) {		
+		sqlSession.update("mapper.member.modMember", dto);
 	}
 
 	@Override
@@ -136,5 +173,4 @@ public class SignUpInDAOImpl implements SignUpInDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

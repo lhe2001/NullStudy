@@ -13,9 +13,12 @@
     <link href="/teampro/Front/simple.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
         window.onload = function(){
             header();
+            pagemove();
+            select();
         }
 
         function header(){
@@ -58,6 +61,18 @@
                 })
             }
         }
+        
+        function pagemove(){
+        	$("#memberview").off("click").on("click", function(){
+        		location.href = '/project/memberList.do'
+        	})
+        	
+        	$("#studyview").off("click").on("click", function(){
+        		location.href = '/project/studyList.do'
+        	})
+        	
+        }
+        
 </script>
 </head>
 <body>
@@ -69,8 +84,8 @@
                     <li class="navtap">관리메뉴<i class="fa-solid fa-book-open"></i>
                         <div class="drop l1">
                             <ul>
-                               <li><a href="/teampro/teamCheck/teamList">회원관리</a></li>
-                               <li><a href="/teampro/mypage">스터디관리</a></li>
+                               <li id="memberview">회원관리</li>
+                               <li id="studyview">스터디관리</li>
                             </ul>
                         </div>
                     </li>
