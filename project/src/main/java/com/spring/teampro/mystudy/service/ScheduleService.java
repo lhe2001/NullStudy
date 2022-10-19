@@ -8,5 +8,5 @@ public interface ScheduleService {
 	
 	int addNewSchedule(ScheduleDTO scheduleDTO);
 	
-	List<ScheduleDTO> getAllScheduleList(int userkey);
+	List<ScheduleDTO> getMonthList(ScheduleDTO scheduleDTO);
 }

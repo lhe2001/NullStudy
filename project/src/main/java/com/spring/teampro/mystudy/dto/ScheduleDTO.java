@@ -10,6 +10,8 @@ public class ScheduleDTO {
 	private String m_schedule_desc;
 	private Date m_schedule_date;
 	
+
+	
 	public int getM_schedule_key() {
 		return m_schedule_key;
 	}

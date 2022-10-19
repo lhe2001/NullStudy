@@ -72,11 +72,11 @@
 	</insert>
 
 <!-- 일정 조회하기 -->
-	<select id="selectAllScheduleList" resultType="scheduleDTO" parameterType="scheduleDTO">
+	<select id="selectMonthList" resultType="scheduleDTO" parameterType="scheduleDTO">
       <![CDATA[
          select *
          from myschedule
-         where userkey = #{userkey} 	 	
+         where userkey = #{userkey} and to_char(m_schedule_date, 'yyyy-MM')	= #{m_schedule_date} 	
       ]]>
 	</select>
 

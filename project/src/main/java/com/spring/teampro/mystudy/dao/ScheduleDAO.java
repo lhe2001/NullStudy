@@ -8,5 +8,5 @@ public interface ScheduleDAO {
 	
 	public int insertSchedule(ScheduleDTO scheduleDTO);
 	
-	public List<ScheduleDTO> selectAllSchedule(int userkey);
+	public List<ScheduleDTO> selectMonthSchedule(ScheduleDTO scheduleDTO);
 }

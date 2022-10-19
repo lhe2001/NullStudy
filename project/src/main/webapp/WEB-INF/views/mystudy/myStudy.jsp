@@ -157,7 +157,7 @@
 	<script src="/project/resources/js/cal.js"></script>
 	<script src="/project/resources/js/memo.js"></script>
 	<script type="text/javascript">
-			
+			console.log()
 	</script>
 </body>
 </html>

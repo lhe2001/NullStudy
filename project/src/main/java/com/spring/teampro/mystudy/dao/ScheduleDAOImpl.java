@@ -30,10 +30,10 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 	}
 
 	@Override
-	public List<ScheduleDTO> selectAllSchedule(int userkey) {
-		logger.info("ScheduleDAOImpl >>  selectAllSchedule 실행");
+	public List<ScheduleDTO> selectMonthSchedule(ScheduleDTO scheduleDTO) {
+		logger.info("ScheduleDAOImpl >>  selectMonthSchedule 실행");
 		
-		List list = sqlSession.selectList("mapper.mystudy.selectAllScheduleList", userkey);
+		List list = sqlSession.selectList("mapper.mystudy.selectAllScheduleList", scheduleDTO);
 		logger.info("리스트 사이즈: "+list.size());
 		return list;
 	}

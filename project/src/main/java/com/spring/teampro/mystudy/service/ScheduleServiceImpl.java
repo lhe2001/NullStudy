@@ -25,9 +25,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 
 	@Override
-	public List<ScheduleDTO> getAllScheduleList(int userkey) {
+	public List<ScheduleDTO> getMonthList(ScheduleDTO scheduleDTO) {
 		logger.info("ScheduleServiceImpl >>  getAllScheduleList 실행");
-		return scheduleDAO.selectAllSchedule(userkey);
+		return scheduleDAO.selectMonthSchedule(scheduleDTO);
 	}
 
 }
