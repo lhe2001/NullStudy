@@ -1,6 +1,7 @@
 package com.spring.teampro.board.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.PageDTO;
 
 
 @Repository("boardDAO")
@@ -19,9 +21,11 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	// selectAllArticles() 메소드 만들자!!! return 타입은 List <전체 목록 조회>
 	@Override
-	public List<BoardDTO> selectAllArticles() {
-
-		List<BoardDTO> list = sqlSession.selectList("mapper.board.selectAllArticles");
+	public List<BoardDTO> selectAllArticles(int pageNum, int amount) {
+		Map map = new HashMap();
+		map.put("pageNum",pageNum);
+		map.put("amount",amount);
+		List<BoardDTO> list = sqlSession.selectList("mapper.board.selectAllArticles",map);
 		
 		return list;
 	}
@@ -112,5 +116,23 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void view(BoardDTO dto) {
 		sqlSession.update("mapper.board.view", dto);
+	}
+	
+	// 페이징 메소드
+	@Override
+	public List<PageDTO> paging(int pageNum, int amount) {
+		System.out.println("dao pageNum = " + pageNum );
+		System.out.println("dao amount = " + amount );
+		Map map = new HashMap();
+		map.put("pageNum",pageNum);
+		map.put("amount",amount);
+		List<PageDTO> list = sqlSession.selectList("mapper.board.paging",map);
+		return list;
+	}
+	// 총 페이지수 가져오는 메소드
+	@Override
+	public int totalCount() {
+		int count = sqlSession.selectOne("mapper.board.totalCount");
+		return count;
 	}
 }

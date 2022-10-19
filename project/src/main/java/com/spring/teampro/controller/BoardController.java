@@ -1,5 +1,7 @@
 package com.spring.teampro.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -22,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.spring.teampro.board.dao.BoardDAO;
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.PageDTO;
 import com.spring.teampro.board.service.BoardService;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
 @Controller("boardController")
@@ -31,14 +35,50 @@ public class BoardController{
 	private BoardService boardService;
 	
 	@Autowired
+	private BoardDAO boardDAO;
+	
+	@Autowired
 	HttpSession session;
 	
 	private static String image = "C:\\image_file";
+	
+	
 	// 전체 리스트 조회
 	@RequestMapping(value = "/board/listArticles.do", method = RequestMethod.GET)
 	public String listArticles(HttpServletRequest request, Model model) {
 		System.out.println("전체 리스트 조회");
-		List<BoardDTO> articlesList = boardService.getListArticles();
+		// 페이징
+		
+		// 페이징 초기값
+		// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
+		// 첫 페이지 경우
+		int pageNum = 1;
+		int amount = 10;
+		
+//		 페이지번호를 클릭하는 경우
+		if(request.getParameter("pageNum") != null && request.getParameter("amount") != null) {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			amount = Integer.parseInt(request.getParameter("amount"));
+		}
+		
+		System.out.println("pageNum = " + pageNum);
+		System.out.println("amount = " + amount);
+		int totalCount = boardService.getPage();
+		System.out.println("totalCount = " + totalCount);
+		PageDTO pageDTO = new PageDTO(pageNum, amount, totalCount);
+		System.out.println("pageDTO = " + pageDTO);
+//		List<PageDTO> pageList = boardService.getPaging(pageNum, amount);
+//		System.out.println("pageList.size() = " + pageList.size());
+		
+//		int currentPage =  Integer.parseInt(request.getParameter("pageNum"));
+//		int start = (currentPage-1)*
+		
+//		model.addAttribute("ArticleList",pageList);
+		
+		List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);
+		System.out.println("articlesList.size() = " + articlesList.size());
+		
+		
 		session=request.getSession();
 		SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 		for (int i = 0; i < articlesList.size(); i++) {
@@ -62,6 +102,7 @@ public class BoardController{
 		}
 		model.addAttribute("articlesList",articlesList);
 		model.addAttribute("userInfo",userInfo);
+		model.addAttribute("pageDTO",pageDTO);
 		return "listArticles";
 	}
 	
@@ -429,6 +470,8 @@ public class BoardController{
 			}
 			return "listArticles";
 		}
+		
+		// 페이징
 		
 		
 		

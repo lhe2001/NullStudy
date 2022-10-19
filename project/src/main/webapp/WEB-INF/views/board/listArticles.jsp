@@ -71,10 +71,22 @@
 
 	<%-- <th>레벨</th>--%>
 	<%-- <th>게시판 키</th>--%>
+	
 	<div id = "wrapp">
 	<div id = "container">
 	<h1 style ="text-align : left; margin-left : 20px; margin-top : 20px; color : #1C6758">자유게시판</h1>
 	<h5 style ="text-align : left; margin-left : 20px;"> 자유롭게 글을 작성해 주세요!!</h5>
+	
+	<div id = "page_select">
+		<select onchange="change(this)" class="form-select btn-outline-info" 
+		style = "border-radius : 4px; margin-top : 7px; float: right; margin-right : 20px; " aria-label="Default select example">
+			<option value="10" ${pageDTO.amount eq 10 ? 'selected' : '' }>10개씩 보기</option>
+			<option value="20" ${pageDTO.amount eq 20 ? 'selected' : '' }>20개씩 보기</option>
+			<option value="50" ${pageDTO.amount eq 50 ? 'selected' : '' }>50개씩 보기</option>
+			<option value="100" ${pageDTO.amount eq 100 ? 'selected' : '' }>100개씩 보기</option>
+		</select>
+	</div>
+	
 	<div id = "article_flex">
 	<form id="frmSelect" name="frmSelectName" method = "post"> 
 		<select id="select" name="list_sel" class="form-select btn-outline-info" 
@@ -160,13 +172,29 @@
 						<td>${article.b_view}</td>
 						<%-- <td>${article.userkey}</td> --%>
 					</tr>
+					
+        
 				</c:forEach>
 			</c:when>
 		</c:choose>
 	</table>
 </div>
 </div>
-
+	<!--이전버튼 활성화 여부 -->
+		 <c:if test="${pageDTO.prev }">
+         	<span><a href="${contextPath }/board/listArticles.do?pageNum=${pageDTO.startPage - 1 }&amount=${pageDTO.amount}">이전</a></span>
+		</c:if>
+		<%-- 페이지번호 처리 --%>
+   		<c:forEach var="num" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">
+    		<a href="${contextPath }/board/listArticles.do?pageNum=${num }&amount=${pageDTO.amount}">${num }</a></span>
+   		</c:forEach>
+   		<!-- 다음버튼 활성화 여부 -->
+             <c:if test="${pageDTO.next }">
+            <span><a href="${contextPath }/board/listArticles.do?pageNum=${pageDTO.endPage + 1 }&amount=${pageDTO.amount}">다음</a></span>
+            </c:if>
+		
+		\${pageDTO.startPage } ----> ${pageDTO.startPage }
+		\${pageDTO.endPage } -----> ${pageDTO.endPage }
 <div id = "search">
 <%-- 글쓰기 영역 --%>
 	<form method="get" action="${contextPath }/board/articleForm.do"

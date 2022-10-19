@@ -16,12 +16,8 @@
 		<typeAlias type="com.spring.teampro.team.dto.TeamMemberDTO" alias="teamMemberDTO"></typeAlias>
 		<!-- board DTO 별칭 -->
 		<typeAlias type="com.spring.teampro.board.dto.BoardDTO" alias="boardDTO"></typeAlias>
+		<!-- paging DTO 별칭 -->
+		<typeAlias type="com.spring.teampro.board.dto.PageDTO" alias="pageDTO"></typeAlias>
 	</typeAliases>
-	
-	
-	<!-- paging DTO 별칭 -->
-<!-- 	<typeAliases> -->
-<!-- 		<typeAlias type="com.spring.propro.emp.dto.EmpDTO" alias="empDTO"></typeAlias> -->
-<!-- 	</typeAliases> -->
 
 </configuration>
