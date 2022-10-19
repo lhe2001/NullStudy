@@ -130,7 +130,6 @@ function dailyMemoRevise(){
 
 //뉴 멤버요청
 function newMemberRequest(){
-	window.open('memberRequest.jsp','pop','width=400,height=500,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+	window.open('/project/team/newRequest.do','pop','location=no,width=500,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
-
 

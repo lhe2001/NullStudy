@@ -636,3 +636,20 @@
     border: solid 1px #dadada;
     border-radius: 0px;
 }
+
+/* 멤버신청 */ 
+
+.newRequest{
+    text-align: center;
+    font-size: 13px;
+    height:30px;
+    line-height: 30px;
+    border-bottom: 1px dashed black;
+}
+.newRequest button{
+    border: none;
+    background-color: #B1D6CF;
+    cursor: pointer;
+    border-radius: 5px;
+}
+

@@ -11,10 +11,7 @@
     <title><tiles:insertAttribute name="title" /></title>
   <link rel="stylesheet" href="/project/resources/css/simple.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<<<<<<< HEAD
   <script src="/project/resources/js/main.js"></script>
-=======
->>>>>>> master
   <style>
   	#body {
   		margin-top:100px;

@@ -58,5 +58,14 @@ public class TeamController {
 	return "allTeamList";
 	}
 	
+	//팀원 신청 페이지로 이동.
+		@RequestMapping(value="/team/newRequest.do", method= {RequestMethod.GET, RequestMethod.POST})
+		public String newRequest(
+				Model model
+				) {
+			
+		return "teamPage/memberRequest";
+		}
+	
 	
 }
