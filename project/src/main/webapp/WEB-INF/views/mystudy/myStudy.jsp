@@ -50,7 +50,7 @@
                 <div class="m_body">
                     <div class="info"> *하루에 최대 4개의 스케줄만 등록할 수 있습니다.</div>
                     <div class="modal_label">날짜</div>
-                    <input type="date" name="m_schedule_date" class="input_box">
+                    <input type="date" name="date" class="input_box">
                     <div class="modal_label">일정제목</div>
                     <input type="text" name="m_schedule_title" class="input_box" >
                     <div class="modal_label">세부내용</div>
@@ -156,6 +156,8 @@
 
 	<script src="/project/resources/js/cal.js"></script>
 	<script src="/project/resources/js/memo.js"></script>
-	<script type="text/javascript"></script>
+	<script type="text/javascript">
+			
+	</script>
 </body>
 </html>

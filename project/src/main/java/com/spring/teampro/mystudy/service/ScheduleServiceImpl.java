@@ -1,5 +1,7 @@
 package com.spring.teampro.mystudy.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public int addNewSchedule(ScheduleDTO scheduleDTO) {
 		logger.info("ScheduleServiceImpl >>  addNewSchedule 실행");
 		return scheduleDAO.insertSchedule(scheduleDTO);
+	}
+
+	@Override
+	public List<ScheduleDTO> getAllScheduleList(int userkey) {
+		logger.info("ScheduleServiceImpl >>  getAllScheduleList 실행");
+		return scheduleDAO.selectAllSchedule(userkey);
 	}
 
 }

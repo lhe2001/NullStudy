@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.teampro.mystudy.dto.MemoDTO;
 import com.spring.teampro.mystudy.dto.ScheduleDTO;
@@ -46,7 +47,7 @@ public class MystudyController {
 		
 		//유저키 세션으로 잡아오기
 		HttpSession session = request.getSession();
-		int userkey = (int)session.getAttribute("userKey");
+		int userkey = (Integer)session.getAttribute("userKey");
 		logger.info(">> memolist--userkey"+userkey);
 		
 		//페이징 구현 위한 처리
@@ -94,7 +95,7 @@ public class MystudyController {
 		//유저키 가져와서 세팅
 		
 		HttpSession session = request.getSession();		
-		int userkey = (int)session.getAttribute("userKey");
+		int userkey = (Integer)session.getAttribute("userKey");
 		logger.info(">>insertMemo--userkey"+userkey);
 		memoDTO.setUserkey(userkey);
 		
@@ -152,7 +153,7 @@ public class MystudyController {
 		
 		//유저키 가져와서 세팅
 		HttpSession session = request.getSession();		
-		int userkey = (int)session.getAttribute("userKey");
+		int userkey = (Integer)session.getAttribute("userKey");
 		logger.info(">>updateMemo--userkey"+userkey);
 		memoDTO.setUserkey(userkey);
 		
@@ -168,12 +169,13 @@ public class MystudyController {
 		
 	}
 	
+	
 	//일정 작성하기
 	@RequestMapping(value="/mystudy/insertSchedule", method= {RequestMethod.GET, RequestMethod.POST} )
 	public String addSchedule(
 			Model model,
 			HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value="m_schedule_date") String m_schedule_date,
+			@RequestParam(value="date") String m_schedule_date,
 			@ModelAttribute ScheduleDTO scheduleDTO
 			) {
 		
@@ -192,7 +194,7 @@ public class MystudyController {
 		
 		//유저키 가져와서 세팅
 		HttpSession session = request.getSession();		
-		int userkey = (int)session.getAttribute("userKey");
+		int userkey = (Integer)session.getAttribute("userKey");
 		logger.info(">>addSchedule--userkey"+userkey);
 		scheduleDTO.setUserkey(userkey);
 		
@@ -205,5 +207,48 @@ public class MystudyController {
 		}
 	}
 	
+	//일정 삭제하기
+	//일정 상세보기
+	//일정 수정하기
+	
+	//일정 조회하기(유저키로 전체리스트)
+//	@RequestMapping(value="/mystudy", method= {RequestMethod.GET, RequestMethod.POST} )
+	@ResponseBody public List<ScheduleDTO> allScheduleList(
+//			Model model, 
+			HttpServletRequest request, HttpServletResponse response
+			) {
+		
+		//유저키 가져와서 세팅
+		HttpSession session = request.getSession();		
+		int userkey = (Integer)session.getAttribute("userKey");
+		
+		List list = scheduleService.getAllScheduleList(userkey);
+		logger.info("컨트롤러 리스트사이즈: ", list.size());
+		
+		return list; 
+	}
+	
+//	allScheduleList(request, response);
+	
+//	public void JsonSchedule(HttpServletRequest request) {
+//		
+//		HttpSession session = request.getSession();		
+//		int userkey = (Integer)session.getAttribute("userKey");
+//		
+//		List result = scheduleService.getAllScheduleList(userkey);
+//		
+//		JSONArray ones = new JSONArray();
+//		
+//		for(ArrayList c : result) {
+//			//json 객체 생성
+//			JSONObject oneO = new JSONObject ();
+//
+//			oneO.put("title",c.get("title"));
+//			oneO.put("value",c.get("value"));
+//			
+//		    //만들어진 하나의 json 객체 담기
+//		    chart_ones.add(chart_oneO);
+//		}
+//	}
 	
 }

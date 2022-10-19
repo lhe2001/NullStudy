@@ -71,6 +71,14 @@
 		]]>      
 	</insert>
 
+<!-- 일정 조회하기 -->
+	<select id="selectAllScheduleList" resultType="scheduleDTO" parameterType="scheduleDTO">
+      <![CDATA[
+         select *
+         from myschedule
+         where userkey = #{userkey} 	 	
+      ]]>
+	</select>
 
 	
 	
