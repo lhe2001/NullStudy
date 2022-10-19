@@ -86,10 +86,5 @@ public class BoardServiceImpl implements BoardService{
 	public int getPwd(int b_articleNo) {
 		return boardDAO.getPw(b_articleNo);
 	}
-	
-	// 조회수 추가 메소드
-	public void getView(BoardDTO dto) {
-		boardDAO.view(dto);
-	}
 
 }

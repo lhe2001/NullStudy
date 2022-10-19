@@ -144,25 +144,25 @@
 			</div><hr><br>
 			<div id = "btn_list">
 				<input type="button" id="list_btn"  class="btn btn-outline-light" value="목록으로" style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
-					<c:choose>
-						<c:when test="${userInfo.userKey == view.userkey }">
-<!-- 						로그인 -->
+<%-- 					<c:choose> --%>
+<%-- 						로그인 --%>
+<%-- 						<c:when test="${userInfo.userKey == view.userkey }"> --%>
 						<input type="button" id="edit_btn" value="수정하기" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
 						<input type="button" id="del_btn" value="삭제하기" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;"> 
 						<input type="button" id="rePly_btn" value="답글쓰기" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
-						</c:when>
-						<c:when test ="${empty userInfo.userKey }">
-<!-- 						비로그인 -->
-						<input type="button" id="edit_btn" value="수정하기" class = "hidden btn btn-outline-light" >
-						<input type="button" id="del_btn" value="삭제하기" class = "hidden btn btn-outline-light"> 
-						<input type="button" id="rePly_btn" value="답글쓰기" class = "hidden btn btn-outline-light">
-						</c:when>
-						<c:when test ="${not empty userInfo.userKey }">
-						<input type="button" id="edit_btn" value="수정하기" class="hidden btn btn-outline-light" style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
-						<input type="button" id="del_btn" value="삭제하기" class="hidden btn btn-outline-light" style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;"> 
-						<input type="button" id="rePly_btn" class="btn btn-outline-light" value="답글쓰기"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
-						</c:when>
-					</c:choose>
+<%-- 						</c:when> --%>
+						<%--비로그인 --%>
+<%-- 						<c:when test ="${empty userInfo.userKey }"> --%>
+<!-- 						<input type="button" id="edit_btn" value="수정하기" class = "hidden btn btn-outline-light" > -->
+<!-- 						<input type="button" id="del_btn" value="삭제하기" class = "hidden btn btn-outline-light">  -->
+<!-- 						<input type="button" id="rePly_btn" value="답글쓰기" class = "hidden btn btn-outline-light"> -->
+<%-- 						</c:when> --%>
+<%-- 						<c:when test ="${not empty userInfo.userKey }"> --%>
+<!-- 						<input type="button" id="edit_btn" value="수정하기" class="hidden btn btn-outline-light" style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;"> -->
+<!-- 						<input type="button" id="del_btn" value="삭제하기" class="hidden btn btn-outline-light" style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">  -->
+<!-- 						<input type="button" id="rePly_btn" class="btn btn-outline-light" value="답글쓰기"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;"> -->
+<%-- 						</c:when> --%>
+<%-- 					</c:choose> --%>
 			<input type="button" id="real_edit_btn" value="수정" class="btn btn-outline-danger">
 		</div>
 	</form>

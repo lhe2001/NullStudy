@@ -1,31 +1,32 @@
 
-/* 팀삭제버튼 */
-.deleteTeamBtn {
-    position:absolute;
-    right:10px;
-    background-color:red;
-    border-radius: 5px;
-    color:white;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
-    width:100px;
-    text-align:center;
-}
 /* teamDetail page */
 #team_Wrapper {
     margin-top: 100px;
-    border: 1px solid red;
-    max-width: 1520px;
-    margin: auto;
 }
-#fstWrapper{
-    border: 1px solid black;
-    display:flex;
+/* 목록으로 돌아가기 */
+.backList {
+    position:absolute;
+    left : 40px;
+    top: 130px;
+    font-size: 100px;
+    transform:rotate(180deg);
+    color:rgb(252, 200, 88);
+}
+.deleteTeamBtn {
+	position:absolute;
+	right:10px;
+	background-color:red;
+	border-radius: 5px;
+	color:white;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
+	width:100px;
+	text-align:center;
 }
 /* team소개 */
 .teamInfoBox {
     width: 800px;
     height:130px;
-    margin:  20px 50px;
+    margin: auto;
     line-height: 30px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
     padding: 10px;
@@ -45,23 +46,20 @@
 .teamInfoBox table td{
     padding-left: 10px;
     border-bottom: 1px rgb(6, 151, 6) dashed;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
-.revise {
+.reviese {
     position: absolute;
-    font-size: 25px;
-    font-weight: bold;
-    color:rgb(245, 164, 57);
-    right:50px;
-    top:111px;
+    font-size: 16px;
+    color:white;
+    right:30px;
+    top:102px;
     border: none;
-    background-color: transparent;
+    background-color:rgb(243, 216, 94);
     border-radius: 50%;
     height:30px;
     width:30px;
     cursor: pointer;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
 }
 .teamInfoBox input[type="text"], select{
     border: none;
@@ -70,109 +68,67 @@
 .teamInfoBox  input[type="submit"]{
 	color:black;
     position: absolute;
-    right:10px;
-    top:110px;
+    right:30px;
+    top:103px;
     border: none;
+    background-color:rgb(233, 181, 211);
+    border-radius: 50%;
     height:30px;
-    width:50px;
+    width:30px;
     cursor: pointer;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
 }
 .back {
 	color:black;
     position: absolute;
     right:70px;
-    top:110px;
+    top:103px;
     border: none;
+    background-color:rgb(200, 206, 236);
+    border-radius: 50%;
     height:30px;
-    width:50px;
+    width:30px;
     cursor: pointer;
-}
-/* D-Day */
-#dDay{
-    height:130px;
-    width:100px;
-    margin:  20px 10px;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 20px;
-    text-align: center;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
-}
-#dDay table{
-    height:130px;
-    width:100px;
-}
-#teamMenu{
-   height:130px;
-   width:300px;
-   margin:  20px 50px;
-   padding: 10px;
-   border-radius: 5px;
-   font-size: 14px;
-   background-color: #FFEECC;
-}
-#teamMenu ul{
-    list-style: none;
-    padding:0;
-    margin: 0;
-    text-align: center;
-}
-#teamMenu ul li{
-    border-bottom:1px solid black;
-    cursor: pointer;
-}
-#teamMenu ul li:hover{
-    background-color: #FFEEBB;
-    font-weight: 900;
 }
 /* 조장한마디 */
 .LeaderMenu{
     text-align: center;
-    background-color: #CCBBFF;
+    background-color: rgb(234, 214, 243);
     margin: 20px 0;
     height:60px;
+    line-height: 60px;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     position: relative;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
-    padding: 18px 0;
-    box-sizing: border-box;
-    color: #412498;
-}
-.LeaderMenu div{
-    height:20px;
-    max-width: 1000px;
-    margin:auto ;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 .rBtn {
     position: absolute;
     top:16px;
-    left:85%;
-    font-size: 25px;
-    color: #412498;
+    left: 70%;
+    font-size: 16px;
+    color:white;
     border: none;
     cursor: pointer;
-    background-color : #CCBBFF;
+    background-color:rgb(176, 120, 202);
     border-radius: 50%;
     height:30px;
     width:30px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
 }
-.rBtn2, .leBack {
+.rBtn2 {
     position: absolute;
-    color:#412498;
-    top:20px;
+    color:white;
+    top:16px;
     left: 70%;
     border: none;
     cursor: pointer;
-    background-color:#CCAADD;
+    background-color:rgb(176, 120, 202);
+    border-radius: 50%;
     height:30px;
-    width:50px;
-}
-.leBack{
-    left: 74%;
+    width:30px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
 }
 .reivseWrite input[type="text"] {
 	background-color: rgb(226, 192, 241);
@@ -180,225 +136,142 @@
 	height: 30px;
 	width:300px;
 }
-#memberWrapper{
-    display:flex;
-}
 /* 멤버정보 */
 #memberInfo{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    margin: 30px 0;
-    width: 51%;
-    margin-left: 20px;;
-    height: 200px;
-    white-space: nowrap;
-    overflow: auto;
-    max-height: 200px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 60px 0;
 }
 .member{
-    min-height:30px;
-    width:750px;
+    height:350px;
+    width:200px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
     position:relative;
-    display: flex;
-    text-align: center;
-    margin: 5px 0;
-    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.815);
 }
-
 .king img{
-    width:20px;
-    height:20px;
+    width:50px;
+    height:50px;
     position:absolute;
-    left: 1%;
-    top: -5px;
+    left: 38%;
+    top:10px;
 }
-.member .photo {
-    margin-right: 10px;
-    width: 30px;
-    height:30px;
+.info:hover{
+    cursor: pointer;
+    border-bottom-right-radius: 80px 20px;
 }
-.member .photo img{
-    width: 30px;
-    height:30px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.323);
+.tape {
+    position:absolute;
+    height: 60px;
+    width:35px;
+    top:-30px;
+    left:42%;
+    background-color: rgba(250, 215, 238, 0.623);
+}
+.photo {
+    height:200px;
+    background-color: white;
+}
+.photo img{
+    width: 200px;
+    height:200px;
 }
 .info {
-    min-height:30px;
-    font-size: 13px;
-    border-radius: 10px;
-    background-color: #CCEEFF;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.479);
+    background-color: #c0e2f0;
+    height:150px;
+    border-bottom-right-radius: 60px 5px;
+    transition: all 0.2s;
+    font-size: 13px;;
 }
-.info table{
-    height: 30px;
-    min-width:700px;
-    max-width:700px;
+.info table tr:first-child {
+    height: 40px;
+    font-size: 16px;
+    font-weight: bolder;
 }
 .info table td{
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    height: 22px;
+    padding: 0 2px ;
 }
-
-.leaderInfo table{
-    background-color: #CCDDFF;
-    border-radius: 10px;;
+.info table td:first-child{
+    width: 78px;
 }
-/* 멤버 클릭 시 뜨는 화면 */
-#memberDetail{
-    height: 200px;
-    width:44%;
-    margin:30px 20px;
-    background-color: #CCCCFF;
-    color:#412498;
-    border-radius: 10px;;
-    padding: 20px;
+.kickOut{
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.479);
+    position:absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    height:30px;
+    width:30px;
+}
+/* 한줄게시판 */
+#tBoard {
+    background-image: url("https://spreadsheetpage.com/images/Notebook-Paper-US-Letter.png"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 -110px; 
+    margin-top: 30px;;
+    height: 400px;
+    width: 1000px;
+    margin: auto;
+    margin-top: 30px;
+    padding: 0 30px;
     box-sizing: border-box;
-    display:flex;
+    font-size: 13px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
 }
-#memberDetail .photo{
-    width:120px;
-    height:120px;
-    float: left;
-    margin-right: 10px;
+#tBoard table {
+    border-collapse: collapse;
 }
-#memberDetail .photo img {
-    width:120px;
-    height:120px;
+#tBoard th {
+    height: 37px;
 }
-#memberDetail .photo div {
-    width:120px;
-    text-align: center;
-    margin-top: 10px;
+#tBoard tr{
+    border-collapse: collapse;
 }
-.challenge table {
-    width:100%;
-    height:100px;
+#tBoard td{
+    height: 29px;
 }
-.challenge table td{
-    border:1px solid #4124989f;
-    border-radius: 10px;
-    height:30px;
-    text-align: center;
-    cursor: pointer;
-}
-.challenge table td input[type="button"]{
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    color:#412498;
-    height:30px;
-}
-.challenge table .confirm {
-    background-color: #41249870;
-}
-.challenge{
-    width:300px;
-}
-#TeamDaily {
-    max-width:31%;
-    max-height: 90%;
+#tBoard table td:first-child{
+    width: 130px;
     text-align: center;
 }
-#TeamDaily textarea{
-    height:55px;
-    resize: none;
-    width:120px;
+#tBoard table td:nth-child(2){
+    padding-left: 10px;;
+    text-align: center;
+}
+#Write_teamBoard{
+    margin: 20px 0;
+    margin-left:25%;
     border:none;
-    background-color: #41249870;
-    color:white;
 }
-#TeamDaily table{
-    height: 165px;
+.delBtn{
+	 border:none;
+	 border-radius: 50%;
+	 cursor:pointer;
+	 height: 20px;
+	 width:20px;
+	 background-color:rgb(252, 200, 88);
 }
-#TeamDaily table td{
-    border:1px solid #4124989f;
-    border-radius: 10px;
-    max-height:30px;
-    min-width:125px;
-    max-width:125px;
-    overflow:hidden;
-    text-overflow: ellipsis;
+#Write_teamBoard input[type="text"]{
+    width:500px;
+    height:30px;
 }
-.TeamDailyMemo input[type="button"]{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color:#412498;
-    width:100px;
-}
-.TeamDailyRevise input {
-    cursor: pointer;
-    margin:0 10px;
+#Write_teamBoard input[type="submit"]{
     border:none;
-    border-radius: 10px;;
-    background-color: #CCAAFF;
-    color:#412498;
-    
+    background-color: #69acc7;
+    height:30px;
+    width:50px;
+    border-radius: 5px;;
+    cursor: pointer;
 }
 .hide {
     display: none;
 }
-
-/* teamSchedule */
-#teamSchedule{
-    border: 1px solid black;
-    display:flex;
-    height:350px;
-    gap:30px;
-}
-.tCalendar {
-    min-width:350px;
-    width:350px;
-    /* background-color: #FFFFCC; */
-    border: 1px solid black;
-   
-}
-.tTimeLine{
-    border: 1px solid black;
-    width:200px;
-    /* background-color: #FFEECC; */
-}
-.tVote{
-    border: 1px solid black;
-    width:200px;
-}
-.vote1{
-    height:50%;
-    border: 1px solid black;
-    /* background-color: #FFDDCC; */
-}
-.vote2{
-    border: 1px solid yellow;
-    height:50%;
-    /* background-color: #FFCCCC; */
-}
-#tSmallBoard{
-    border: 1px solid black;
-    width:45%;
-    max-width:45%;
-    /* background-color: #FFBBCC; */
-    font-size: 12px;
-}
-#tSmallBoard table{
-    width:100%;
-}
-#tSmallBoard table th:nth-child(2){
-    width:250px;
-    max-width: 250px;
-}
-.overflow {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-#tSmallBoard table td:nth-child(2){
-    width:250px;
-    max-width: 250px;
-}
-
 
 /* 모든팀목록 */
 #allTeamWrapper {

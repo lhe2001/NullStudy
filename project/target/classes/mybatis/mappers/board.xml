@@ -40,7 +40,7 @@
 		</insert>
 <!-- 	글 상세 목록 view -->
 		<select id="selectViewArticle" resultType="boardDTO" parameterType="int">
-			select b.b_articleNo, b.b_parentNo, b.b_title, b.b_content, b.b_writeDate ,b.b_view, b.b_field, b.userkey, b.b_imageFile , a.nickName 
+			select b.b_articleNo, b.b_parentNo, b.b_title, b.b_content, b.b_writeDate , b.b_field, b.userkey, b.b_imageFile , a.nickName 
 				from Board b,
 			 	ALLMEMBER a 
 				where b.userkey = a.userkey
@@ -121,13 +121,4 @@
 <!-- 			 </if> -->
 <!-- 			 </where> -->
 			</select>
-		<!-- 조회수 view -->
-			<update id="view"  parameterType="boardDTO">
-				update Board set
-				b_view = #{b_view}
-				where b_articleNo = #{b_articleNo}
-			</update>
-		<!-- update Board set view(select view+1 from board
-			where b_articleNo = #{b_articleNo})
-			where b_articleNo = #{b_articleNo} -->
 </mapper>

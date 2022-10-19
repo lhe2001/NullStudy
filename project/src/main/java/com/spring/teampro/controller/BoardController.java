@@ -34,13 +34,14 @@ public class BoardController{
 	HttpSession session;
 	
 	private static String image = "C:\\image_file";
+	
 	// 전체 리스트 조회
 	@RequestMapping(value = "/board/listArticles.do", method = RequestMethod.GET)
 	public String listArticles(HttpServletRequest request, Model model) {
 		System.out.println("전체 리스트 조회");
 		List<BoardDTO> articlesList = boardService.getListArticles();
-		session=request.getSession();
-		SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+		model.addAttribute("articlesList",articlesList);
+		
 		for (int i = 0; i < articlesList.size(); i++) {
 			BoardDTO dto = articlesList.get(i);
 			switch (dto.getB_field()) {
@@ -60,8 +61,6 @@ public class BoardController{
 				break;
 			}
 		}
-		model.addAttribute("articlesList",articlesList);
-		model.addAttribute("userInfo",userInfo);
 		return "listArticles";
 	}
 	
@@ -98,11 +97,11 @@ public class BoardController{
 			System.out.println("b_imageFile = " + b_imageFile);
 			session=multipartRequest.getSession();
 			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-//			model.addAttribute("userKey", userInfo.getUserKey());
+			model.addAttribute("userKey", userInfo.getUserKey());
 			System.out.println("userInfo.getUserKey() = " + userInfo.getUserKey());
 			map.put("b_parentNo" , 0);
 			map.put("b_imageFile", b_imageFile);
-			map.put("userKey", userInfo.getUserKey()); //임시로 넣어놓은 유저키
+			map.put("userKey", 10003); //임시로 넣어놓은 유저키
 			
 			try {
 				int b_articleNo = boardService.getAddArticle(map);
@@ -116,7 +115,6 @@ public class BoardController{
 					
 					FileUtils.moveFileToDirectory(srcFile, destDir, true);
 				}
-				model.addAttribute("userInfo",userInfo);
 				
 				// 새글 등록했을 때 alert 창 호출
 				PrintWriter out = response.getWriter();
@@ -138,18 +136,10 @@ public class BoardController{
 		public String viewArticle(HttpServletRequest request, HttpServletResponse response,
 				@RequestParam("b_articleNo") int b_articleNo,
 				Model model) {
-//			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-//			model.addAttribute("userInfo",userInfo);
 			System.out.println("상세보기로 이동");
 			System.out.println("b_articleNo : " + b_articleNo);
 			BoardDTO dto = new BoardDTO();
 			dto = boardService.getViewArticle(b_articleNo);
-			int view = (dto.getB_view() + 1);
-			dto.setB_articleNo(b_articleNo);
-			dto.setB_view(view);
-			System.out.println("dto.getB_view = " + dto.getB_view());
-			// 조회수 업데이트
-			boardService.getView(dto);
 			model.addAttribute("view",dto);
 			return "viewArticle";
 		}
@@ -178,12 +168,12 @@ public class BoardController{
 				}
 				String b_imageFile = upload(multipartRequest);
 				System.out.println("b_imageFile = " + b_imageFile);
-				session=multipartRequest.getSession();
-				SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+//				session=mulipartRequest.getSession();
+//				SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 //				model.addAttribute("userKey", userInfo.getUserKey());
 				map.put("b_parentNo" , 0);
 				map.put("b_imageFile", b_imageFile);
-				map.put("userKey", userInfo.getUserKey()); 
+				map.put("userKey", 10003); //임시로 넣어놓은 유저키
 				
 				String b_articleNo = (String) map.get("b_articleNo");
 				
@@ -203,7 +193,7 @@ public class BoardController{
 						File oldFile = new File(image + "\\" + b_articleNo + "\\" + originalFileName);
 						oldFile.delete();
 					}
-					model.addAttribute("userInfo",userInfo);
+					
 					// 새글 등록했을 때 alert 창 호출
 					PrintWriter out = response.getWriter();
 					out.print("<script>");
@@ -222,14 +212,12 @@ public class BoardController{
 		@RequestMapping(value = "/board/deleteArticle.do", method = RequestMethod.GET)
 		public void deleteArticle(HttpServletRequest request , HttpServletResponse response
 				, Model model) {
-			System.out.println("게시글 삭제하기");
-			session=request.getSession();
-			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+			 System.out.println("게시글 삭제하기");
 			// 스크립트 한글설정
 			response.setContentType("text/html; charset=utf-8");
 			int b_articleNo = Integer.parseInt(request.getParameter("b_articleNo"));
 			System.out.println("deleteArticle의 b_articleNo : " + b_articleNo);
-			model.addAttribute("userInfo",userInfo);
+		
 			try {
 				boardService.getDeleteArticle(b_articleNo);
 				// 자바 폴더 생성
@@ -256,8 +244,7 @@ public class BoardController{
 			int b_field = Integer.parseInt(request.getParameter("b_field"));
 			model.addAttribute("b_articleNo" , b_articleNo);
 			model.addAttribute("b_field" , b_field);
-			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-			model.addAttribute("userInfo", userInfo);
+			
 			return "replyForm";
 		}
 		
@@ -278,24 +265,24 @@ public class BoardController{
 				System.out.print(name + " : " + multipartRequest.getParameter(name) + "     ");
 			}
 			
-			if(multipartRequest.getParameter("b_field").equals("30")) {
-				int b_articlePwd = Integer.parseInt(multipartRequest.getParameter("b_articlePwd"));
-				if (b_articlePwd != -1) {
-					map.put("b_articlePwd", b_articlePwd);
-				}
-			}
+//			if(multipartRequest.getParameter("b_field").equals("30")) {
+//				int b_articlePwd = Integer.parseInt(multipartRequest.getParameter("b_articlePwd"));
+//				if (b_articlePwd != -1) {
+//					map.put("b_articlePwd", b_articlePwd);
+//				}
+//			}
 			int b_field = Integer.parseInt(multipartRequest.getParameter("b_field"));
 			System.out.println("addReply의 b_field  = " + b_field);
 			String b_imageFile = upload(multipartRequest);
 			System.out.println("b_imageFile = " + b_imageFile);
 			int b_articleNo = Integer.parseInt( multipartRequest.getParameter("b_parentNo"));
 			System.out.println("addReply 의 b_articleNo " + b_articleNo);
-			session=multipartRequest.getSession();
-			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+//			session=multipartRequest.getSession();
+//			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 //			model.addAttribute("userKey", userInfo.getUserKey());
 			map.put("b_parentNo" , b_articleNo);
 			map.put("b_imageFile", b_imageFile);
-			map.put("userKey", userInfo.getUserKey()); 
+			map.put("userKey", 10003); //임시로 넣어놓은 유저키
 			
 			try {
 				b_articleNo = boardService.getAddReply(map);
@@ -333,9 +320,6 @@ public class BoardController{
 					@RequestParam("search_bar")String search_bar,
 					Model model) {
 			System.out.println("셀렉트 박스 서치 기능 작동");
-			session=request.getSession();
-			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-			model.addAttribute("userInfo",userInfo);
 			// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체
 			System.out.println("field = " + field);
 			System.out.println("search_bar = " + search_bar);
@@ -355,8 +339,6 @@ public class BoardController{
 		public String selectField(HttpServletRequest request, Model model,
 				@RequestParam("list_sel")int list_sel) {
 			System.out.println("말머리 선택 완료");
-			session=request.getSession();
-			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 			BoardDTO dto = new BoardDTO();
 			dto.setList_sel(list_sel);
 			dto.setB_field(list_sel);
@@ -391,25 +373,20 @@ public class BoardController{
 						break;
 					}
 					model.addAttribute("articlesList",list);
-					model.addAttribute("userInfo",userInfo);
 				}
 				return "listArticles";
 		}
 		
 		//비밀글 클릭->비밀번호 조회하러 가기
 		@RequestMapping(value ="/board/password.do", method = {RequestMethod.POST , RequestMethod.GET})
-		public String password(HttpServletRequest request
-				,@RequestParam("b_articleNo") int b_articleNo
+		public String password(@RequestParam("b_articleNo") int b_articleNo
 				, Model model) {
 			System.out.println("비밀글 조회하러 가기");
 			System.out.println("b_articleNo = " + b_articleNo);
-			session=request.getSession();
-			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 			BoardDTO dto = new BoardDTO();
 			dto.setB_articleNo(b_articleNo);
 			dto = boardService.getViewSecret(b_articleNo);
 			model.addAttribute("view",dto);
-			model.addAttribute("userInfo",userInfo);
 			return "password";
 		}
 		//비밀글 비밀번호 입력해서 조회
@@ -429,7 +406,6 @@ public class BoardController{
 			}
 			return "listArticles";
 		}
-		
 		
 		
 		//파일 이름 가져오는 메소드

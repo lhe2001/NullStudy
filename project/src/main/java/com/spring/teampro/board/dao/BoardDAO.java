@@ -38,7 +38,4 @@ public interface BoardDAO {
 	
 	// 비밀번호 찾는 메소드
 	public int getPw(int b_articleNo);
-	
-	// 조회수 추가 메소드
-	public void view(BoardDTO dto);
 }

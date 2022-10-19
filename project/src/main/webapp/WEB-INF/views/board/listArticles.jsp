@@ -100,7 +100,7 @@
 			<th>작성자</th>
 			<th>제목</th>
 			<th>작성일</th>
-			<th>조회수</th>
+			<%--<th>조회수(임시)</th> --%>
 			<%--<th>유저 키</th> --%>
 			<%--(join으로 nick가져올거임)  --%>
 		</tr>
@@ -157,7 +157,7 @@
 							</c:choose>
 						</td>
 						<td>${article.b_writeDate}</td>
-						<td>${article.b_view}</td>
+						<%--<td>${article.b_view}</td> --%>
 						<%-- <td>${article.userkey}</td> --%>
 					</tr>
 				</c:forEach>
@@ -171,14 +171,14 @@
 <%-- 글쓰기 영역 --%>
 	<form method="get" action="${contextPath }/board/articleForm.do"
 		name="frmName" id="frmId">
-		<c:choose>
-			<c:when test="${empty userInfo.userKey }">
-				<input type="text" name="search_bar" id = "search_bar" data-id ="hidden" class = "form-control"  /> 
-				<input type="button" id="search_btn" class="btn btn-primary "  name="search" value=검색하기 data-id ="hidden" /> 
-				<input type="submit" value=글쓰러가기  class="btn btn-primary" id = "write_btn" data-id ="hidden" />
-			</c:when>
+<%-- 		<c:choose> --%>
+<%-- 			<c:when test="${empty userInfo.userKey }"> --%>
+<!-- 				<input type="text" name="search_bar" id = "search_bar" data-id ="hidden" class = "form-control"  />  -->
+<!-- 				<input type="button" id="search_btn" class="btn btn-primary "  name="search" value=검색하기 data-id ="hidden" />  -->
+<!-- 				<input type="submit" value=글쓰러가기  class="btn btn-primary" id = "write_btn" data-id ="hidden" /> -->
+<%-- 			</c:when> --%>
 				
-		<c:when test="${!empty userInfo.userKey }">
+<%-- 		<c:when test="${!empty userInfo.userKey }"> --%>
 		<div class ="div_wrap">
 			<div id = "field_contain" class = "div_wrap2">
 				<select name="field" class = "btn-outline-info" style = "border-radius : 4px;  height : 34px; ">
@@ -192,8 +192,8 @@
 			</div>
 		</div>
 			<input type="submit" value=글쓰러가기  class="btn btn-outline-light" id = "write_btn" style = "border : 1px solid #99A799; color : #99A799;">
-		</c:when>
-		</c:choose>	
+<%-- 		</c:when> --%>
+<%-- 		</c:choose>	 --%>
 	</form>
 </div>	
 <%-- <jsp:include page="/fix/footer.jsp"/> --%>
