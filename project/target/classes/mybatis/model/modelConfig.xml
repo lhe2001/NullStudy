@@ -11,9 +11,9 @@
 	
 	<typeAliases>
 		<typeAlias type="com.spring.teampro.signupin.dto.SignUpInDTO" alias="signUpInDTO"></typeAlias>
-		<typeAlias type="com.spring.teampro.team.dto.MyTeamListDTO" alias="myTeamListDTO"></typeAlias>
-		<typeAlias type="com.spring.teampro.team.dto.TeamInfoDTO" alias="teamInfoDTO"></typeAlias>
-		<typeAlias type="com.spring.teampro.team.dto.TeamMemberDTO" alias="teamMemberDTO"></typeAlias>
+<!-- 		<typeAlias type="com.spring.teampro.team.dto.MyTeamListDTO" alias="myTeamListDTO"></typeAlias> -->
+<!-- 		<typeAlias type="com.spring.teampro.team.dto.TeamInfoDTO" alias="teamInfoDTO"></typeAlias> -->
+<!-- 		<typeAlias type="com.spring.teampro.team.dto.TeamMemberDTO" alias="teamMemberDTO"></typeAlias> -->
 		<!-- board DTO 별칭 -->
 		<typeAlias type="com.spring.teampro.board.dto.BoardDTO" alias="boardDTO"></typeAlias>
 	</typeAliases>
