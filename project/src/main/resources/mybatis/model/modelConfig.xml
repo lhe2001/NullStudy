@@ -11,11 +11,11 @@
 	
 	<typeAliases>
 		<typeAlias type="com.spring.teampro.signupin.dto.SignUpInDTO" alias="signUpInDTO"></typeAlias>
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD -->
 		<typeAlias type="com.spring.teampro.team.dto.MyTeamListDTO" alias="myTeamListDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.team.dto.TeamInfoDTO" alias="teamInfoDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.team.dto.TeamMemberDTO" alias="teamMemberDTO"></typeAlias>
-=======
+<!-- ======= -->
 
 		<typeAlias type="com.spring.teampro.team.dto.MyTeamListDTO" alias="myTeamListDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.team.dto.TeamInfoDTO" alias="teamInfoDTO"></typeAlias>
@@ -25,10 +25,13 @@
 		<typeAlias type="com.spring.teampro.mystudy.dto.MemoDTO" alias="memoDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.mystudy.dto.ScheduleDTO" alias="scheduleDTO"></typeAlias>
 	
->>>>>>> jessie_memo
+<!-- >>>>>>> jessie_memo -->
 		<!-- board DTO 별칭 -->
 		<typeAlias type="com.spring.teampro.board.dto.BoardDTO" alias="boardDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.mystudy.dto.MemoDTO" alias="memoDTO"></typeAlias>
+		
+		<!-- search DTO 별칭 -->
+		<typeAlias type="com.spring.teampro.search.dto.SearchDTO" alias="searchDTO"></typeAlias>
 	</typeAliases>
 	
 
