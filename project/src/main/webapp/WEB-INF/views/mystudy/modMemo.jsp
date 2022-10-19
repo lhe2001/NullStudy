@@ -3,14 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-<c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="${path}/resources/css/allMystudy.css" rel="stylesheet"/> 
+	<link href="/project/resources/css/allMystudy.css" rel="stylesheet"/> 
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -21,22 +20,21 @@
                     <p>Modify Note</p>
                     <p id="mod_clsicon" onclick="history.back();">cancel</p>
                 </header>
-                <form method="get" action="${pageContext.request.contextPath}/my/updateMemo">
+                <form method="get" action="${pageContext.request.contextPath}/mystudy/updateMemo">
                     <div class="row title">
                         <label>Title</label>
-                        <input type="text" name="memo_title" value="${oneDTO.memo_title }">
+                        <input type="text" name="m_memo_title" value="${oneDTO.m_memo_title }">
                     </div>
                     <div class="row description">
                         <label>Description</label>
-                        <textarea name="memo_desc">${oneDTO.memo_desc }</textarea>
+                        <textarea name="m_memo_desc">${oneDTO.m_memo_desc }</textarea>
                     </div>
-                    memo_idx<input type="text" name="memo_idx" >
+                    <input type="hidden" name="m_memo_key" value="${oneDTO.m_memo_key }" />
                     <button class="Modmemo_Btn">Modify Note</button>                    
                 </form>
             </div>
         </div>
     </div>
 
-	<script src="${path}/resources/js/memo.js"></script>
 </body>
 </html>

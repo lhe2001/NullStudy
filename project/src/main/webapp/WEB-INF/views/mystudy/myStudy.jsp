@@ -4,9 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
   
-<c:set var="path" value="${pageContext.request.contextPath}"/>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +40,7 @@
         </div>
 
         <!-- 등록폼 모달 -->
-        <form method="post" action="${pageContext.request.contextPath}/my/insertSchedule">
+        <form method="get" action="${pageContext.request.contextPath}/mystudy/insertSchedule">
         <div class="modal" id="modal">
             <div class="modal_body">
                 <div class="m_head">
@@ -53,14 +50,11 @@
                 <div class="m_body">
                     <div class="info"> *하루에 최대 4개의 스케줄만 등록할 수 있습니다.</div>
                     <div class="modal_label">날짜</div>
-                    <input type="date" name="schedule_date" class="input_box">
-                    <div class="modal_label">일정</div>
-                    <input type="text" name="schedule_desc" class="input_box" >
-                    유저키<input type="text" name="userkey">
-<!--                     <div class="modal_label2"> -->
-<!--                         <span>디데이로 등록</span> -->
-<!--                         <input type="checkbox" name="schedule_dday"> -->
-<!--                     </div> -->
+                    <input type="date" name="m_schedule_date" class="input_box">
+                    <div class="modal_label">일정제목</div>
+                    <input type="text" name="m_schedule_title" class="input_box" >
+                    <div class="modal_label">세부내용</div>
+                    <input type="text" name="m_schedule_desc" class="input_box" >
                 </div>
                 <div class="m_footer">
                     <div class="modal_btn cancle" id="close_btn">CANCLE</div>
@@ -80,16 +74,15 @@
                     <p>Add a new Note</p>
                     <i class="fa-solid fa-xmark" id="clsicon"></i>
                 </header>
-                <form method="get" action="${pageContext.request.contextPath}/my/insertMemo">
+                <form method="get" action="${pageContext.request.contextPath}/mystudy/insertMemo">
                     <div class="row title">
                         <label>Title</label>
-                        <input type="text" name="memo_title">
+                        <input type="text" name="m_memo_title">
                     </div>
                     <div class="row description">
                         <label>Description</label>
-                        <textarea name="memo_desc"></textarea>
+                        <textarea name="m_memo_desc"></textarea>
                     </div>
-                    userkey<input type="text" name="userkey">
                     <button>Add Note</button>                    
                 </form>
             </div>
@@ -112,8 +105,8 @@
                 <div class="settings">
                     <i class="fa-solid fa-ellipsis"></i>
                     <ul class="memomenu">
-                        <a href="${pageContext.request.contextPath}/my/selectMemoByIdx?idx=${mDTO.m_memo_key }"><li class="memo_edit" data-idx="${mDTO.m_memo_key }"><i class="fa-solid fa-pencil"></i>Edit</li></a>
-                        <a href="${pageContext.request.contextPath}/my/deleteMemo?idx=${mDTO.m_memo_key }"><li class="memo_del" data-idx="${mDTO.m_memo_key }"><i class="fa-regular fa-trash-can"></i>Delete</li></a>
+                        <a href="${pageContext.request.contextPath}/mystudy/selectOneMemo?m_memo_key=${mDTO.m_memo_key }"><li class="memo_edit"><i class="fa-solid fa-pencil"></i>Edit</li></a>
+                        <a href="${pageContext.request.contextPath}/mystudy/deleteMemo?m_memo_key=${mDTO.m_memo_key }"><li class="memo_del"><i class="fa-regular fa-trash-can"></i>Delete</li></a>
                     </ul>
                 </div>
             </div>
@@ -123,9 +116,18 @@
     
     <div id="memopagebar">
    	total : ${total } <br>
-	 <c:if test="${startIdx != 1}">
-		<a href="/project/mystudy/memolist?viewPage=${viewPage - 1}&countPerPage=${countPerPage}&userkey=${userkey}" style=" font-weight: bold;" > << </a> &nbsp;
-	 </c:if>
+   	
+<%--    		<c:if test="${startIdx != 1}"> --%>
+<%-- 			<a href="/project/mystudy/memolist?viewPage=${viewPage - 1}&countPerPage=${countPerPage}&userkey=${userkey}" style=" font-weight: bold;" > << </a> &nbsp; --%>
+<%-- 		</c:if> --%>
+   	
+   	<c:choose>
+   		 <c:when test="${ viewPage == 1}"> <<  &nbsp; </c:when>
+		 <c:when test="${ viewPage != 1}">
+			<a href="/project/mystudy/memolist?viewPage=${viewPage - 1}&countPerPage=${countPerPage}&userkey=${userkey}" style=" font-weight: bold;" > << </a> &nbsp;
+		 </c:when>
+   	</c:choose>
+   	
 
      <c:forEach var="i" begin="1" end="${totalPage }">
      <c:if test="${viewPage eq i }">
@@ -136,9 +138,15 @@
      </c:if>
      </c:forEach>
      
-     <c:if test="${endIdx != totalPage }">
+     <c:choose>
+     <c:when test="${viewPage eq totalPage }"> >>  &nbsp; </c:when>
+     <c:when test="${viewPage != totalPage }">
 		<a href="/project/mystudy/memolist?viewPage=${viewPage + 1}&countPerPage=${countPerPage}" style=" font-weight: bold;" > >> </a> &nbsp;
-	 </c:if>
+	 </c:when>
+     </c:choose>
+<%--      <c:if test="${endIdx != totalPage }"> --%>
+<%-- 		<a href="/project/mystudy/memolist?viewPage=${viewPage + 1}&countPerPage=${countPerPage}" style=" font-weight: bold;" > >> </a> &nbsp; --%>
+<%-- 	 </c:if> --%>
 
 
     </div>
@@ -148,5 +156,6 @@
 
 	<script src="/project/resources/js/cal.js"></script>
 	<script src="/project/resources/js/memo.js"></script>
+	<script type="text/javascript"></script>
 </body>
 </html>

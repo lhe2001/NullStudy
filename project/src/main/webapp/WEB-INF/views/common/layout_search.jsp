@@ -9,12 +9,9 @@
   <head>
     <meta charset="UTF-8">
     <title><tiles:insertAttribute name="title" /></title>
-  <link rel="stylesheet" href="/project/resources/css/simple.css" />
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<<<<<<< HEAD
-  <script src="/project/resources/js/main.js"></script>
-=======
->>>>>>> master
+  <link rel="stylesheet" href="resources/css/simple.css" />
+  <link rel="stylesheet" href="resources/css/searchBoard.css" />
+  <script src="resources/css/main.js"></script>
   <style>
   	#body {
   		margin-top:100px;
@@ -23,7 +20,6 @@
   </head>
     <body>
          <tiles:insertAttribute name="header"/>
-          <tiles:insertAttribute name="side"/> 
           <div id="body">
           <tiles:insertAttribute name="body"/>
           </div>

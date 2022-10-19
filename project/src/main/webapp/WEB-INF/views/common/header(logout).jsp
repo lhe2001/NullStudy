@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="wrapper">
-        <header>
+        <header class="mainHeader">
             <nav>
                 <div class="logo" onclick="location.href='/teampro/Main2.jsp'"></div>
                 <ul class="navtap_items">

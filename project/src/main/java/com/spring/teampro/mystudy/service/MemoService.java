@@ -10,11 +10,12 @@ public interface MemoService {
 	
 	int selectlistCount(int userkey);
 	
-//	int getAddmemo(MemoDTO memoDTO);
-//	
-//	MemoDTO getMemoOne(int idx);
-//	
-//	int getModmemo(MemoDTO memoDTO);
-//	
-//	int getDelmemo(int idx);
+	int insertNewMemo(MemoDTO memoDTO);
+	
+	int deleteMemo(int m_memo_key);
+	
+	MemoDTO selectOneMemo(int m_memo_key);
+	
+	int updateMemo(MemoDTO memoDTO);
+	
 }

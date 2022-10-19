@@ -9,12 +9,12 @@ public interface MemoDAO {
 	public List<MemoDTO> selectPagingList(MemoDTO memoDTO);
 	
 	public int selectlistCount(int userkey);
-//	
-//	public int memo_add(MemoDTO memoDTO);
-//	
-//	public MemoDTO memo_beforeUpdate(int midx);
-//	
-//	public int memo_update(MemoDTO memoDTO);
-//	
-//	public int memo_delete(int mdix);
+	
+	public int insertNewMemo(MemoDTO memoDTO);
+	
+	public int deleteMemo(int m_memo_key);
+	
+	public MemoDTO selectOneMemo(int m_memo_key);
+	
+	public int updateMemo(MemoDTO memoDTO);
 }
