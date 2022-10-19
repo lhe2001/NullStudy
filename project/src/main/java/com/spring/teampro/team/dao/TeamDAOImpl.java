@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.teampro.team.dto.TeamInfoDTO;
+import com.spring.teampro.team.dto.TeamMemberDTO;
 
 @Repository
 public class TeamDAOImpl implements TeamDAO {
@@ -34,6 +35,26 @@ public class TeamDAOImpl implements TeamDAO {
 	public List getTeamMemberInfo(int t_key) {
 		
 		return sqlSession.selectList("mapper.team.teamMemberInfo",t_key);
+	}
+
+	@Override
+	public int updateTeamInfo(TeamInfoDTO dto) {
+		return sqlSession.update("mapper.team.updateTeamInfo",dto);
+	}
+
+	@Override
+	public int updateLMemo(TeamInfoDTO dto) {
+		return sqlSession.update("mapper.team.updateLMemo",dto);
+	}
+
+	@Override
+	public int removeMember(int tm_key) {
+		return sqlSession.delete("mapper.team.removeMember",tm_key);
+	}
+
+	@Override
+	public List allTeamList() {
+		return sqlSession.selectList("mapper.team.allTeamList");
 	}
 	
 	

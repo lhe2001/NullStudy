@@ -50,4 +50,25 @@ public class TeamServiceImpl implements TeamService {
 		return list;
 	}
 
+	@Override
+	public int updateTeamInfo(TeamInfoDTO dto) {
+		return dao.updateTeamInfo(dto);
+	}
+
+	@Override
+	public int updateLMemo(TeamInfoDTO dto) {
+		return dao.updateLMemo(dto);
+	}
+
+	@Override
+	public int removeMember(int tm_key){
+		return dao.removeMember(tm_key);
+	}
+
+	@Override
+	public List getAllTeamList() {
+		return dao.allTeamList();
+	}
+
+
 }

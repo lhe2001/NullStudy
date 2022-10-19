@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.teampro.signupin.dto.SignUpInDTO;
+import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.service.TeamService;
 
 @Controller
@@ -45,6 +46,17 @@ public class TeamController {
 	return "teamDetail";
 	}
 	
+	//allTeamList.jsp로 가기
+	@RequestMapping(value="/team/allTeamList.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String getAllTeamList(
+			Model model
+			) {
+		
+		List list = service.getAllTeamList();
+		model.addAttribute("allTeamList", list);
+
+	return "allTeamList";
+	}
 	
 	
 }

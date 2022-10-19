@@ -15,11 +15,13 @@
 	    <div id="fstWrapper">
             <div id="teamInfo" class="teamInfoBox ">
 		    <a class="deleteTeamBtn"  href='/teampro/teamcd/delTeam'>현재팀 삭제</a>
+		    <input type="hidden" class="t_key" value="${teamInfo.t_key }">
                 <table>
                     <tr>
                         <td>팀 이름</td>
                         <td>${teamInfo.t_name}</td>
                     </tr>
+                    <tbody>
                     <tr>
                         <td>인사말</td>
                         <td>${teamInfo.t_intro}</td>
@@ -43,6 +45,7 @@
                         </c:choose>
                         </td>
                     </tr>
+                    </tbody>
                     <tr>
                         <td>팀장</td>
                         <td>${teamInfo.nickName }</td>
@@ -51,7 +54,6 @@
                 <button type="button" class="reviseTeamInfo revise" ><i class="fa-solid fa-pencil"></i></button>
             </div>
             <div id="reviseTeam" class="hide teamInfoBox ">
-            <form method="post" action="teamInfo/reviseTeamInfo" >
 	            <table>
 	                <tr>
 	                    <td>팀 이름</td>
@@ -59,12 +61,12 @@
 	                </tr>
 	                <tr>
 	                    <td>인사말</td>
-	                    <td><input type="text" name="teamHi" required></td>
+	                    <td><input type="text" class="t_intro" required></td>
 	                </tr>
 	                <tr>
 	                    <td>분야</td>
 	                    <td> 
-		                    <select name="field">
+		                    <select class="t_field">
 			                	<option value="1">코딩</option>
 			                	<option value="2">자격증</option>
 			                	<option value="3">토익</option>
@@ -79,7 +81,6 @@
 	            </table>
                 <input type="submit" value="수정">
                 <button type="button" class=" reviseTeamInfo back" >취소</button>
-            </form>
         </div>
         <div id="dDay">
             <table>
@@ -107,31 +108,39 @@
             <button type="button" class="reviseW rBtn"><i class="fa-solid fa-pencil"></i></button>
         </div>
         <div class="LeaderMenu reivseWrite hide">
-            <form method="post" action="teamInfo/leaderMemo">
-                ${teamInfo.nickName }님의 공지사항: <input type="text" name="leWrite" required><br>
+                ${teamInfo.nickName }님의 공지사항: <input type="text" class="lMemo" required><br>
                 <input type="submit" class="rBtn2" value="수정">
                 <input type="button" class="leBack" value="취소">
-            </form>
         </div>
         <div id="memberWrapper">
             <div id="memberInfo">
           <c:forEach var="member" items="${MemberInfo}" varStatus="loop">
             <div class="member">
+              <c:if test="${member.userKey eq teamInfo.userKey }" >
+                    <div class="king"><img src="https://ifh.cc/g/6bBq87.png"></div>
+                </c:if>
                     <div class="photo">
                         <img src="https://ifh.cc/g/GCpQKq.png">
                     </div>
                     <div class="info leaderInfo">
                         <table>
                         <tr>
-                            <td style="max-width:90px; min-width:90px;"><strong>${member.nickname }</strong></td>
-                            <td style="min-width:300px; max-width:300px;">${member.intro }</td>
-                            <td style="min-width:90px; max-width:90px;">${PercentList.get(loop.index)}%</td>
-                            <td style="min-width:132px; max-width:132px;">${member.lastTime2 }</td>
+                            <td style="max-width:90px; min-width:90px;">
+                            	<strong>${member.nickname }</strong>
+                            	<input type="hidden" class="tm_key" value="${member.tm_key }">
+                            </td>
+                            <td style="min-width:200px; max-width:200px;">${member.intro }</td>
+                            <td style="min-width:50px; max-width:50px;">${PercentList.get(loop.index)}%</td>
+                            <td style="min-width:100px; max-width:100px;">${member.lastTime2 }</td>
+                            <td style="min-width:20px;">
+                            <c:if test="${member.userKey ne teamInfo.userKey }" >
+                                <button  class="kickOut" type="button" onclick="kickMemberOut(${member.tm_key})">
+                                 <i class="fa-solid fa-user-slash"></i>
+                                </button>
+                            </c:if>
+                            </td>
                         </tr>
                     </table>
-                     	<button  class="kickOut" type="button" onclick="location.href='/teampro/teamInfo/delMember?tmkey=${member.tm_key}'">
-                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                         </button> 
                     </div>
                 </div>
               </c:forEach>
