@@ -1,8 +1,10 @@
 
+
 window.onload = function(){
 	console.log("> > > 2 >", window.onload)
     header();
     postit();
+    bluePostIt();
 }
 
 function header(){
@@ -45,7 +47,6 @@ function header(){
     }
 }
 
-
 // aside click 이벤트
 function postit(){
     let postButtonList = document.querySelectorAll("#postitBox button")
@@ -67,10 +68,48 @@ function postit(){
                 postList[i].classList.add("none");
                 shadow.classList.add("none");
             }
-            
         })
     }
-
 }
 
+function bluePostIt(){
+
+	$(".teamListBtn").off("click").on("click",function(){
+	
+		$.ajax({
+			url: "/project/teamRest/myTeamList.do",
+			type: "get",
+			contentType: "application/json",
+			success: function(data){
+				console.log("list :", data);
+				
+				$("#TeamInfoP table tbody").empty();
+				
+				let html = "";
+				
+				if(data.length == 0){
+					html += "<tr>";
+					html += "	<td>팀이 없습니다</td>";
+					html += "<tr>";
+				}else {
+					for(let i=0; i<data.length; i++){
+					html += "<tr>";
+					html += "	<td><span> ❤ </span><a href='/project/team/teamDetail.do?t_key="+data[i].t_key+"'>"+data[i].t_name+"</a></td>";
+					html += "<tr>";
+					}
+				}
+				$("#TeamInfoP table tbody").append(html);
+			},
+			error:function(){
+				alert("에러발생!!")
+			}
+		});
+		
+				
+	
+	
+	
+	
+	})
+}
 
