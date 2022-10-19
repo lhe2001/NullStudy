@@ -12,14 +12,11 @@
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
-<<<<<<< HEAD
-=======
 
->>>>>>> jessie_memo
 </head>
 <body>
 <div id="wrapper">
-        <header>
+        <header class="mainHeader">
             <nav>
                 <div class="logo" onclick="location.href='/teampro/Main2.jsp'"></div>
                 <ul class="navtap_items">
