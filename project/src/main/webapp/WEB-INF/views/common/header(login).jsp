@@ -17,6 +17,10 @@
     $(function(){
     	bind();
     	idcheck();
+    	<%-- 게시판 --%>
+    	search();
+    	select();
+		link();
     })
     
     function bind(){

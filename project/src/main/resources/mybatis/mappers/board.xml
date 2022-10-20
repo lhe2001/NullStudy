@@ -79,28 +79,64 @@
 			</delete>	
 					
 		<!-- 서치 -->
-			<select id="searchAllArticle" resultType="boardDTO" parameterType="boardDTO">
-			select * from board b
-			, allmember a
-			<where>
-				and b.userkey = a.userkey
-				<choose>
-					<when test="search_field == 1">
-						and lower(b_title) like lower('%'||#{search_bar }||'%') 
-					</when>
-					<when test="search_field == 2">
-						and lower(b_content) like lower('%'||#{search_bar }||'%')
-					</when>
-					<when test="search_field == 3">
-						and lower(nickName) like lower('%'||#{search_bar }||'%')
-					</when>
-					<otherwise>
-						and (lower(b_title) like lower('%'||#{search_bar }||'%') 
-						or lower(b_content) like lower('%'||#{search_bar }||'%')
-						or lower(nickName) like lower('%'||#{search_bar }||'%'))
-					</otherwise>
-				</choose>
-			</where>
+<!-- 			<select id="searchAllArticle" resultType="boardDTO" parameterType="boardDTO"> -->
+<!-- 			select * from board b -->
+<!-- 			, allmember a -->
+<!-- 			<where> -->
+<!-- 				and b.userkey = a.userkey -->
+<!-- 				<choose> -->
+<!-- 					<when test="search_field == 1"> -->
+<!-- 						and lower(b_title) like lower('%'||#{search_bar }||'%')  -->
+<!-- 					</when> -->
+<!-- 					<when test="search_field == 2"> -->
+<!-- 						and lower(b_content) like lower('%'||#{search_bar }||'%') -->
+<!-- 					</when> -->
+<!-- 					<when test="search_field == 3"> -->
+<!-- 						and lower(nickName) like lower('%'||#{search_bar }||'%') -->
+<!-- 					</when> -->
+<!-- 					<otherwise> -->
+<!-- 						and (lower(b_title) like lower('%'||#{search_bar }||'%')  -->
+<!-- 						or lower(b_content) like lower('%'||#{search_bar }||'%') -->
+<!-- 						or lower(nickName) like lower('%'||#{search_bar }||'%')) -->
+<!-- 					</otherwise> -->
+<!-- 				</choose> -->
+<!-- 			</where> -->
+<!-- 			</select> -->
+			
+			<!-- 서치 ajax-->
+			<select id="searchAllArticle" resultType="boardDTO" parameterType="java.util.HashMap">
+				select * from(
+					select rownum as rnum, tmp.* from(
+						select level, b.B_key, b.B_ArticleNo, b.B_parentNo, b.B_title , b.B_content, 
+						 b.B_field, b.B_writeDate, b.B_view, b.UserKey, a.nickName 
+						 from Board b 
+						 , ALLMEMBER a 
+						 <where>
+						 and b.userkey = a.userkey
+							<choose>
+								<when test="search_field == 1">
+									and lower(b.b_title) like lower('%'||#{search_bar }||'%') 
+								</when>
+								<when test="search_field == 2">
+									and lower(b.b_content) like lower('%'||#{search_bar }||'%')
+								</when>
+								<when test="search_field == 3">
+									and lower(a.nickName) like lower('%'||#{search_bar }||'%')
+								</when>
+								<otherwise>
+									and (lower(b.b_title) like lower('%'||#{search_bar }||'%') 
+									or lower(b.b_content) like lower('%'||#{search_bar }||'%')
+									or lower(a.nickName) like lower('%'||#{search_bar }||'%'))
+								</otherwise>
+							</choose>
+						</where> 
+						 Start with b.B_parentNo = 0 
+						 connect by prior b.B_ArticleNo = b.B_parentNo 
+						 order siblings by b.B_ArticleNo desc, b.b_writedate desc
+					) tmp
+					)
+				where (#{pageNum}-1) * #{amount } <![CDATA[<]]> rnum 
+				and rnum <![CDATA[<=]]> #{pageNum } * ${amount }
 			</select>
 		
 		<!-- 말머리 선택 조회 -->

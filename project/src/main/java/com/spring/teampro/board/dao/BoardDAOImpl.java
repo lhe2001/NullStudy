@@ -80,12 +80,30 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	// 서치하는 메소드
-	@Override
-	public List<BoardDTO> searchAllArticle(BoardDTO dto) {
-		List<BoardDTO> list = new ArrayList<BoardDTO>();
-		list = sqlSession.selectList("mapper.board.searchAllArticle",dto);
-		return list;
-	}
+//	@Override
+//	public List<BoardDTO> searchAllArticle(BoardDTO dto) {
+//		List<BoardDTO> list = new ArrayList<BoardDTO>();
+//		list = sqlSession.selectList("mapper.board.searchAllArticle",dto);
+//		return list;
+//	}
+	
+	// 서치하는 메소드 (ajax)
+		@Override
+		public List<BoardDTO> searchAllArticle(BoardDTO dto,int pageNum, int amount) {
+			List<BoardDTO> list = new ArrayList<BoardDTO>();
+			System.out.println("dto.getSearch_bar() = " + dto.getSearch_bar());
+			System.out.println("dto.getSearch_field() = " + dto.getSearch_field());
+			System.out.println("dao pageNum = " + pageNum );
+			System.out.println("dao amount = " + amount );
+			Map map = new HashMap();
+			map.put("search_field",dto.getSearch_field());
+			map.put("search_bar",dto.getSearch_bar());
+			map.put("pageNum",pageNum);
+			map.put("amount",amount);
+			list = sqlSession.selectList("mapper.board.searchAllArticle", map);
+			System.out.println();
+			return list;
+		}
 
 	// 말머리에서 선택했을때 리스트 출력시킬 메소드
 	@Override

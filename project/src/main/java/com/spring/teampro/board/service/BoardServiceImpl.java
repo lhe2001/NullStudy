@@ -62,11 +62,21 @@ public class BoardServiceImpl implements BoardService{
 
 
 	// 게시글 전체로 검색하는 메소드
-	@Override
-	public List<BoardDTO> getAllSearch(BoardDTO dto) {
-		List<BoardDTO> list = boardDAO.searchAllArticle(dto);
-		return list;
-	}
+//	@Override
+//	public List<BoardDTO> getAllSearch(BoardDTO dto) {
+//		List<BoardDTO> list = boardDAO.searchAllArticle(dto);
+//		return list;
+//	}
+	
+	// 게시글 전체로 검색하는 메소드(ajax)
+		@Override
+		public List<BoardDTO> getAllSearch(BoardDTO dto,int pageNum, int amount) {
+			System.out.println("service dtofield : " + dto.getB_field());
+			System.out.println("service search_bar : " + dto.getSearch_bar());
+			List<BoardDTO> list = boardDAO.searchAllArticle(dto, pageNum, amount);
+			System.out.println("service list = " + list.size());
+			return list;
+		}
 
 	// 말머리로 리스트를 보여줄 메소드
 	@Override

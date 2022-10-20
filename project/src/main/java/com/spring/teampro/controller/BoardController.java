@@ -15,12 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.ibatis.type.DateOnlyTypeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -67,13 +70,6 @@ public class BoardController{
 		System.out.println("totalCount = " + totalCount);
 		PageDTO pageDTO = new PageDTO(pageNum, amount, totalCount);
 		System.out.println("pageDTO = " + pageDTO);
-//		List<PageDTO> pageList = boardService.getPaging(pageNum, amount);
-//		System.out.println("pageList.size() = " + pageList.size());
-		
-//		int currentPage =  Integer.parseInt(request.getParameter("pageNum"));
-//		int start = (currentPage-1)*
-		
-//		model.addAttribute("ArticleList",pageList);
 		
 		List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);
 		System.out.println("articlesList.size() = " + articlesList.size());
@@ -366,29 +362,88 @@ public class BoardController{
 			System.out.println("답글쓰기 완료");
 		}
 		
-		// 셀렉트 박스 서치
-		@RequestMapping(value = "/board/searchArticle.do" , method = RequestMethod.POST)
-		public String searchArticle(HttpServletRequest request, HttpServletResponse response,
-					@RequestParam("field")int field,
-					@RequestParam("search_bar")String search_bar,
-					Model model) {
-			System.out.println("셀렉트 박스 서치 기능 작동");
-			session=request.getSession();
-			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-			model.addAttribute("userInfo",userInfo);
-			// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체
-			System.out.println("field = " + field);
-			System.out.println("search_bar = " + search_bar);
-			if(field == 1 || field == 2 || field == 3 || field == 4) {
-				BoardDTO dto = new BoardDTO();
-				dto.setSearch_bar(search_bar);
-				dto.setSearch_field(field);
-				List<BoardDTO> searchList = boardService.getAllSearch(dto);
-				model.addAttribute("articlesList" , searchList);
-			}
-			System.out.println("셀렉트 박스 서치 완료");
-			return "listArticles";
-		}
+//		// 셀렉트 박스 서치
+//		@RequestMapping(value = "/board/searchArticle.do" , method = RequestMethod.POST)
+//		public String searchArticle(HttpServletRequest request, HttpServletResponse response,
+//					@RequestParam("field")int field,
+//					@RequestParam("search_bar")String search_bar,
+//					@RequestBody BoardDTO boardDTO,
+//					Model model) {
+//			System.out.println("셀렉트 박스 서치 기능 작동");
+//			session=request.getSession();
+//			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+//			model.addAttribute("userInfo",userInfo);
+//			// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체
+//			System.out.println("field = " + field);
+//			System.out.println("search_bar = " + search_bar);
+//			if(field == 1 || field == 2 || field == 3 || field == 4) {
+//				BoardDTO dto = new BoardDTO();
+//				dto.setSearch_bar(search_bar);
+//				dto.setSearch_field(field);
+//				List<BoardDTO> searchList = boardService.getAllSearch(dto);
+//				model.addAttribute("articlesList" , searchList);
+//			}
+//			System.out.println("셀렉트 박스 서치 완료");
+//			return "listArticles";
+//		}
+		
+		// 셀렉트 박스 서치 아작스
+				@RequestMapping(value = "/board/searchArticle.do" , method = RequestMethod.POST)
+				public @ResponseBody Map searchArticle(HttpServletRequest request, HttpServletResponse response,
+//							@RequestParam("field")int field,
+//							@RequestParam("search_bar")String search_bar,
+							@RequestBody BoardDTO boardDTO,
+							Model model) {
+					System.out.println("셀렉트 박스 서치 아작스 기능 작동");
+					
+					// 페이징
+					
+					// 페이징 초기값
+					// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
+					// 첫 페이지 경우
+					int pageNum = 1;
+					int amount = 10;
+					
+//					 페이지번호를 클릭하는 경우
+					if(request.getParameter("pageNum") != null && request.getParameter("amount") != null) {
+						pageNum = Integer.parseInt(request.getParameter("pageNum"));
+						amount = Integer.parseInt(request.getParameter("amount"));
+					}
+					
+					System.out.println("pageNum = " + pageNum);
+					System.out.println("amount = " + amount);
+					int totalCount = boardService.getPage();
+					System.out.println("totalCount = " + totalCount);
+					session=request.getSession();
+					SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+					model.addAttribute("userInfo",userInfo);
+					
+//					String search_bar = request.getParameter("search_bar");
+//					int field = Integer.parseInt(request.getParameter("field"));
+					
+					System.out.println("boardDTO.getB_field() = " + boardDTO.getB_field());
+					int field = boardDTO.getB_field();
+					System.out.println("boardDTO.getSearch_bar() = " + boardDTO.getSearch_bar());
+					String search_bar =  boardDTO.getSearch_bar();
+					// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체
+					System.out.println("field = " + field);
+					System.out.println("search_bar = " + search_bar);
+					List<BoardDTO> searchList = null;
+					PageDTO pdto = null;
+					if(field == 1 || field == 2 || field == 3 || field == 4) {
+//						BoardDTO dto = new BoardDTO();
+						pdto = new PageDTO(pageNum, amount, totalCount);
+						boardDTO.setSearch_bar(search_bar);
+						boardDTO.setSearch_field(field);
+						searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
+						System.out.println("searchList.size() : " + searchList.size());
+					}
+					Map map = new HashMap();
+					map.put("searchList", searchList);
+					map.put("pdto",pdto);
+					System.out.println("셀렉트 박스 서치 완료");
+					return map;
+				}
 		
 		//말머리에서 가져오는 리스트 목록
 		@RequestMapping(value = "/board/selectField.do", method = RequestMethod.POST)

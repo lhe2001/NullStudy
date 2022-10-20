@@ -29,7 +29,10 @@ public interface BoardDAO {
 	public List<Integer> selectRemovedArticle(int b_articleNo);
 	
 	// 서치하는 메소드
-	public List<BoardDTO> searchAllArticle(BoardDTO dto);
+//	public List<BoardDTO> searchAllArticle(BoardDTO dto);
+	
+	// 서치하는 메소드(ajax)
+	public List<BoardDTO> searchAllArticle(BoardDTO dto,int pageNum, int amount);
 	
 	// 말머리에서 선택했을때 리스트 출력시킬 메소드
 	public List<BoardDTO> wiewAllArticle(BoardDTO dto);

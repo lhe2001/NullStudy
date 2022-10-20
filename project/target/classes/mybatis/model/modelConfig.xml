@@ -11,7 +11,6 @@
 	
 	<typeAliases>
 		<typeAlias type="com.spring.teampro.signupin.dto.SignUpInDTO" alias="signUpInDTO"></typeAlias>
-<<<<<<< HEAD
 		<typeAlias type="com.spring.teampro.team.dto.MyTeamListDTO" alias="myTeamListDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.team.dto.TeamInfoDTO" alias="teamInfoDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.team.dto.TeamMemberDTO" alias="teamMemberDTO"></typeAlias>
@@ -19,9 +18,8 @@
 		<typeAlias type="com.spring.teampro.board.dto.BoardDTO" alias="boardDTO"></typeAlias>
 		<!-- paging DTO 별칭 -->
 		<typeAlias type="com.spring.teampro.board.dto.PageDTO" alias="pageDTO"></typeAlias>
+		
 		<typeAlias type="com.spring.teampro.mystudy.dto.MemoDTO" alias="memoDTO"></typeAlias>
-	</typeAliases>
-=======
 		<typeAlias type="com.spring.teampro.signupin.dto.AdminDTO" alias="adminDTO"></typeAlias>
 <!-- <<<<<<< HEAD -->
 		<typeAlias type="com.spring.teampro.team.dto.MyTeamListDTO" alias="myTeamListDTO"></typeAlias>
@@ -48,5 +46,4 @@
 	</typeAliases>
 	
 
->>>>>>> master
 </configuration>

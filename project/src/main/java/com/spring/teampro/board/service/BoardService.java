@@ -28,7 +28,10 @@ public interface BoardService {
 		public int getAddReply(Map map);
 
 		// 게시글 전체로 검색하는 메소드
-		public List<BoardDTO> getAllSearch(BoardDTO dto);
+//		public List<BoardDTO> getAllSearch(BoardDTO dto);
+		
+		// 게시글 전체로 검색하는 메소드(ajax)
+		public List<BoardDTO> getAllSearch(BoardDTO dto,int pageNum, int amount);
 
 		// 말머리로 리스트를 보여줄 메소드
 		public List<BoardDTO> getSelectViewArticle(BoardDTO dto);
