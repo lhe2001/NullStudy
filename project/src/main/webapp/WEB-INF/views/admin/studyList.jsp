@@ -7,7 +7,9 @@
 <link rel="stylesheet" href="resources/css/admin(study).css" />
  
  <script>
-
+ window.onload = function(){
+     select();
+}
         function select(){
             $(".searchbox").off("change").on("change",function(){
                 let selected = $(".searchbox").val();

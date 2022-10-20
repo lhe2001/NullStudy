@@ -14,54 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script type="text/javascript">
-        window.onload = function(){
-            header();
-            select();
-        }
 
-        function header(){
-            let navList = document.querySelectorAll(".navtap")
-            for(let i=0; i<navList.length; i++){
-                
-                navList[i].addEventListener("click",function(e){
-                    event.stopPropagation()
-                    
-                    let drop =  navList[i].querySelector(".drop");
-                    
-                    //이미 block일땐, 한번 더 클릭 시 없애기
-                    if(drop.style.display == "block"){
-                        drop.style.display = "none";
-                    } else {
-                        // 기본적으로 none으로 바꾸기.
-                        for(let j=0; j<navList.length;j++){
-                            drop.style.height = "0px"
-                            navList[j].querySelector(".drop").style.display = "none";
-                            let li = drop.querySelectorAll("li")
-                            for(let t=0; t<li.length;t++){
-                                li[t].style.opacity = "0";
-                            }
-//                             li[i].style.opacity = "0";
-                        }
-                        // 클릭 시, block으로 바꾸기.
-                        drop.style.display = "block";
-                        // height 1~200까지 변하기
-                        for(let j=0; j<=100;j++){
-                            setTimeout(function(){
-                                let height = j
-                                drop.style.height = height + "px";
-                                let li = drop.querySelectorAll("li")
-                                for(let t=0; t<li.length;t++){
-                                    li[t].style.opacity = "1";
-                                }
-                            },0);
-                        }
-                    }
-                })
-            }
-        }
-        
-</script>
+<!-- window.onload = function(){
+            header();
+} -->
 </head>
 <body>
 <div id="wrapper">
