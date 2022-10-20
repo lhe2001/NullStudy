@@ -49,7 +49,12 @@
 		SELECT count(*) FROM memberrequest
 		WHERE t_key=#{t_key} AND userkey= #{userKey} AND tr_result ='M'
 	</select>
-
+	
+	<select id="addNewTeam_teamkey" resultType="int" parameterType="teamInfoDTO">
+		select t_key from allteam
+		where t_name= #{t_name}
+	</select>
+	
 <!-- UPDATE -->
 	
 	<update id="updateTeamInfo" parameterType="teamInfoDTO">
@@ -94,6 +99,18 @@
 		insert into teammember
 		(tm_key,t_key,tm_joindate,userkey)
 		values(tm_key_seq.nextval,#{t_key},sysdate,#{userKey})
+	</insert>
+	
+	<insert id="addNewTeam_team" parameterType="teamInfoDTO">
+		insert into AllTeam
+		(t_key,t_name,t_intro,t_field,t_number,t_lmemo,userkey)
+		values(t_key_seq.nextval,#{t_name},#{t_intro},#{t_field},1,'수정해주세요',#{userKey})
+	</insert>
+	
+	<insert id="addNewTeam_member" parameterType="teamInfoDTO">
+		insert into TEAMMEMBER
+		(tm_key,t_key,userkey)
+		values(tm_key_seq.nextval,#{t_key},#{userKey})
 	</insert>
 	
 <!-- DELETE -->
