@@ -1,5 +1,6 @@
 package com.spring.teampro.team.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.spring.teampro.team.dto.MemberRequestDTO;
@@ -39,6 +40,10 @@ public interface TeamService {
 	int rejectMember(MemberRequestDTO dto);
 
 	int addNewTeam(TeamInfoDTO dto);
+
+	String getTDay(int t_key);
+
+	int updateDday(TeamInfoDTO dto);
 
 
 

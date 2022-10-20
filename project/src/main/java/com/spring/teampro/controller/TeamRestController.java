@@ -43,6 +43,8 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		return list;
 	}
 	
+	//>>>>>>>>>>>>>>>>teamDetail 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+	
 	//팀정보 Update
 	@RequestMapping(value="/teamRest/updateTeamInfo.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public int updateTeamInfo(@RequestBody TeamInfoDTO dto
@@ -89,7 +91,28 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		
 		return map;
 	}
-
+	
+	//디데이 수정하기
+	@RequestMapping(value="/teamRest/updatedDay.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int updatedDay(@RequestBody TeamInfoDTO dto
+			) {
+		return service.updateDday(dto);
+	}
+	
+	//가입 수락 하기
+	@RequestMapping(value="/teamRest/acceptMember.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int acceptMember(@RequestBody MemberRequestDTO dto
+			) {
+		return service.acceptMember(dto);
+	}
+	//가입 거절 하기
+	@RequestMapping(value="/teamRest/rejectMember.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int rejectMember(@RequestBody MemberRequestDTO dto
+			) {
+		return service.rejectMember(dto);
+	}
+	
+	//>>>>>>>>>>>>>>>>allTeam 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	//가입요청 보내기 
 	@RequestMapping(value="/teamRest/memberRequest.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public int memberRequest(@RequestBody MemberRequestDTO dto,
@@ -106,19 +129,5 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 			return service.requestMember(dto);
 		}
 	}
-	
-	//가입 수락 하기
-	@RequestMapping(value="/teamRest/acceptMember.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public int acceptMember(@RequestBody MemberRequestDTO dto
-			) {
-		return service.acceptMember(dto);
-	}
-	//가입 거절 하기
-	@RequestMapping(value="/teamRest/rejectMember.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public int rejectMember(@RequestBody MemberRequestDTO dto
-			) {
-		return service.rejectMember(dto);
-	}
-	
 	
 }

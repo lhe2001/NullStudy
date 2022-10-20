@@ -14,12 +14,10 @@
 /* teamDetail page */
 #team_Wrapper {
     margin-top: 100px;
-    border: 1px solid red;
     max-width: 1520px;
     margin: auto;
 }
 #fstWrapper{
-    border: 1px solid black;
     display:flex;
 }
 /* team소개 */
@@ -102,6 +100,36 @@
 #dDay table{
     height:130px;
     width:100px;
+}
+.popDday{
+    text-align: center;
+    height:280px;
+    box-sizing: border-box;
+    position: relative;
+    padding: 20px 0;
+    background-color: #FFEEBB;
+    color:#554c33;
+}
+.popDday div {
+    margin:10px 0; 
+}
+.popDday input[type="date"]{
+    width:80%;
+    text-align: center;
+    border: 1px solid #ffdd77;
+    background-color: #ffdd77;
+    height:23px;
+}
+.popDday input[type="button"]{
+    border:none;
+    cursor: pointer;
+    position: absolute;
+    bottom:20px;
+    left:31%;
+    border-radius: 5px;
+    background-color: #ffd92e;
+    width:100px;
+    height:23px;
 }
 #teamMenu{
    height:130px;

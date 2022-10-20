@@ -5,6 +5,7 @@ window.addEventListener("load", teamInfoOnload);
    	reviseTeamInfo();
     leWrite();
     dailyMemoRevise();
+    dDay();
    }
 
 //팀정보 수정
@@ -129,7 +130,7 @@ function dailyMemoRevise(){
 }
 
 
-//뉴 멤버요청
+//팀원 신청
 function newMemberRequest(t_key){
 	window.open('/project/team/newRequest.do?t_key='+t_key,'pop','location=no,width=500,height=300,top=100,left=100,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
@@ -153,5 +154,20 @@ function leaveTeam(t_key){
     	location.href='/project/team/leaveTeam.do?t_key='+t_key;
     }
 }
+
+//디데이
+function dDay(){
+   let now = new Date();
+   let then = new Date('2023-01-01');
+   let gap = then.getTime() - now.getTime();
+   gap = Math.floor(gap / (1000 * 60 * 60 * 24)) * -1;
+   $("#dDay .dDate").text(gap);
+}
+
+//디데이 수정
+function reviseDday(t_key){
+	window.open('/project/team/reviseDday.do?t_key='+t_key,'pop','location=no,width=300,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+}
+
 
 

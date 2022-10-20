@@ -1,5 +1,6 @@
 package com.spring.teampro.team.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -65,6 +66,15 @@ public class TeamDAOImpl implements TeamDAO {
 	public int alreadyRequest(MemberRequestDTO dto) {
 		return sqlSession.selectOne("mapper.team.alreadyRequest",dto);
 	}
+	
+	//디데이 가져오기
+	@Override
+	public String getTDay(int t_key) {
+		return sqlSession.selectOne("mapper.team.getTDay",t_key);
+	}
+	
+	
+	
 	//>>>>>>>>>>>>>>>UPDATE 수정하기>>>>>>>>>>>>>>
 	//팀정보 업데이트 하기
 	@Override
@@ -103,7 +113,13 @@ public class TeamDAOImpl implements TeamDAO {
 	public int rejectMember(MemberRequestDTO dto) {
 		return sqlSession.update("mapper.team.rejectMember",dto);
 	}
-		
+	
+	//디데이 수정하기
+	@Override
+	public int updateDday(TeamInfoDTO dto) {
+		return sqlSession.update("mapper.team.updateDday",dto);
+	}
+	
 	//>>>>>>>>>>>>>>>DELETE 삭제하기>>>>>>>>>>>>>>
 	//멤버 강퇴하기 
 	@Override
@@ -140,6 +156,8 @@ public class TeamDAOImpl implements TeamDAO {
 		
 		return sqlSession.insert("mapper.team.addNewTeam_member",dto);
 	}
+
+	
 
 	
 

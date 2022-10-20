@@ -193,5 +193,18 @@ public class TeamServiceImpl implements TeamService {
 		return dao.addNewTeam(dto);
 	}
 
+	//디데이 가져오기
+	@Override
+	public String getTDay(int t_key) {
+		return dao.getTDay(t_key);
+	}
+	//디데이 수정하기
+	@Override
+	public int updateDday(TeamInfoDTO dto) {
+		logger.info("updateDday>>>>>>>>>>"+dto.getT_day());
+		logger.info("updateDday>>>>>>>>>>"+dao.updateDday(dto));
+		return dao.updateDday(dto);
+	}
+
 
 }
