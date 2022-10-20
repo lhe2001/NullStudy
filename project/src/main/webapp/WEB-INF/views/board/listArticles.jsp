@@ -172,31 +172,28 @@
 						<td>${article.b_view}</td>
 						<%-- <td>${article.userkey}</td> --%>
 					</tr>
-					
-        
 				</c:forEach>
 			</c:when>
 		</c:choose>
 	</table>
+				<div id="paging"> 
+				<!--이전버튼 활성화 여부 -->
+				
+				 <c:if test="${pageDTO.prev }">
+		         	<span><a href="${contextPath }/board/listArticles.do?pageNum=${pageDTO.pageNum - 1 }&amount=${pageDTO.amount}" class="btn" >이전</a></span>
+				</c:if>
+				<%-- 페이지번호 처리 --%>
+		   		<c:forEach var="num" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">
+		    		<a href="${contextPath }/board/listArticles.do?pageNum=${num }&amount=${pageDTO.amount}" class="btn">${num }</a>
+		   		</c:forEach>
+		   		<!-- 다음버튼 활성화 여부 -->
+		             <c:if test="${pageDTO.next }">
+		            <span><a href="${contextPath }/board/listArticles.do?pageNum=${pageDTO.endPage + 1 }&amount=${pageDTO.amount}" class="btn">다음</a></span>
+		            </c:if>
+       			</div>
 </div>
 </div>
 
-<h1> 페이징 </h1>
-총 게시글 수 : ${pageDTO.totalCount } <br>
-현재 페이지 : ${pageDTO.pageNum }<br>
-페이지에 출력할 페이지수: ${pageDTO.amount }<br>
-	<!--이전버튼 활성화 여부 -->
-		 <c:if test="${pageDTO.prev }">
-         	<span><a href="${contextPath }/board/listArticles.do?pageNum=${pageDTO.pageNum - 1 }&amount=${pageDTO.amount}">이전</a></span>
-		</c:if>
-		<%-- 페이지번호 처리 --%>
-   		<c:forEach var="num" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">
-    		<span><a href="${contextPath }/board/listArticles.do?pageNum=${num }&amount=${pageDTO.amount}">${num }</a></span>
-   		</c:forEach>
-   		<!-- 다음버튼 활성화 여부 -->
-             <c:if test="${pageDTO.next }">
-            <span><a href="${contextPath }/board/listArticles.do?pageNum=${pageDTO.endPage + 1 }&amount=${pageDTO.amount}">다음</a></span>
-            </c:if>
 		
 <div id = "search">
 <%-- 글쓰기 영역 --%>

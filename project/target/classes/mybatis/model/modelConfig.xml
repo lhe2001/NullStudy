@@ -18,6 +18,6 @@
 		<typeAlias type="com.spring.teampro.board.dto.BoardDTO" alias="boardDTO"></typeAlias>
 		<!-- paging DTO 별칭 -->
 		<typeAlias type="com.spring.teampro.board.dto.PageDTO" alias="pageDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.mystudy.dto.MemoDTO" alias="memoDTO"></typeAlias>
 	</typeAliases>
-
 </configuration>
