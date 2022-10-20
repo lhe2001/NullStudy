@@ -13,9 +13,15 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<<<<<<< HEAD
     <script>
     $(function(){
     	bind();
+    	idcheck();
+    	<%-- 게시판 --%>
+    	search();
+    	select();
+		link();
     })
     
     function bind(){
@@ -30,11 +36,14 @@
     }
     
     </script>
+=======
+
+>>>>>>> master
     
 </head>
 <body>
 <div id="wrapper">
-        <header>
+        <header class="mainHeader">
             <nav>
                 <div class="logo" href="#home"></div>
                 <ul class="navtap_items">
@@ -62,8 +71,8 @@
                             </ul>
                         </div>
                     </li>
-                    <li><button id="login_btn" type="button">로그인</button></li>
-                    <li><button id="signUp_btn" type="button">회원가입</button></li>
+                    <li><a href="/project/moveToSignIn.do"><button id="login_btn" type="button">로그인</button></a></li>
+                    <li><a href="/project/moveToSignUp.do"><button id="signUp_btn" type="button">회원가입</button></a></li>
                 </ul>
             </nav>
         </header>

@@ -6,9 +6,6 @@
 <mapper namespace="mapper.member">
 
 	<!-- signUpIn 관련 쿼리  -->
-	<select id="listMembers" resultType="signUpInDTO">
-		select * from allmember		
-	</select>
 	
 	<select id="idCheck" resultType="int">
 		select count(*) 
@@ -38,7 +35,7 @@
 		from allmember 
 		where lower(id) = lower(#{id})
 	</select>
-	
+		
 	<update id="updateLastTime" parameterType="string">
 
 		update allmember 
@@ -46,6 +43,80 @@
 		where lower(id) = lower(#{id})
 	
 	</update>
+	
+	<!-- 관리자 검색 관련 쿼리 -->
+	<select id="listMembers" resultType="signUpInDTO">
+		select * from allmember		
+	</select>
+	
+	<select id="listById" resultType="signUpInDTO" parameterType="string">
+		select * from allmember
+		where lower(id) like '%' || lower(#{keyword}) || '%'
+	</select>
+	
+	<select id="listByName" resultType="signUpInDTO" parameterType="string">
+		select * from allmember
+		where lower(name) like '%' || lower(#{keyword}) || '%'
+	
+	</select>
+	
+	<select id="listByBoth" resultType="signUpInDTO" parameterType="string">
+		select * from allmember
+		where lower(name) like '%' || lower(#{keyword}) || '%'
+		or (lower(id) like '%' || lower(#{keyword}) || '%')
+		or (lower(nickname) like '%' || lower(#{keyword}) || '%')
+	</select>
+	
+	<select id="listTeams" resultType="adminDTO">
+		SELECT * FROM(
+		SELECT allteam.t_key, allteam.t_name, allteam.userkey, allteam.t_intro, allmember.name, allmember.id
+		FROM allteam, allmember
+		WHERE allteam.userkey = allmember.userkey
+		ORDER BY t_name
+		)teaminfo
+	</select>
+	
+	<select id="listByTname" resultType="adminDTO" parameterType="string">
+		SELECT * FROM(
+		SELECT allteam.t_key, allteam.t_name, allteam.userkey, allteam.t_intro, allmember.name, allmember.id
+		FROM allteam, allmember
+		WHERE allteam.userkey = allmember.userkey
+		ORDER BY t_name
+		)teaminfo
+		WHERE lower(teaminfo.t_name) LIKE '%'|| lower(#{keyword}) ||'%'
+	</select>
+	
+	<select id="listByTleader" resultType="adminDTO" parameterType="string">
+		SELECT * FROM(
+		SELECT allteam.t_key, allteam.t_name, allteam.userkey, allteam.t_intro, allmember.name, allmember.id
+		FROM allteam, allmember
+		WHERE allteam.userkey = allmember.userkey
+		ORDER BY t_name
+		)teaminfo
+		WHERE lower(teaminfo.name) LIKE '%'|| lower(#{keyword}) ||'%'
+		OR lower(teaminfo.id) LIKE '%'|| lower(#{keyword}) ||'%'	
+	</select>
+	
+	<select id="listByTinfo" resultType="adminDTO" parameterType="string">
+		SELECT * FROM(
+		SELECT allteam.t_key, allteam.t_name, allteam.userkey, allteam.t_intro, allmember.name, allmember.id
+		FROM allteam, allmember
+		WHERE allteam.userkey = allmember.userkey
+		ORDER BY t_name
+		)teaminfo
+		WHERE lower(teaminfo.t_intro) LIKE '%'|| lower(#{keyword}) ||'%'	
+	</select>
+	
+	<update id="modMember" parameterType="signUpInDTO">
+		UPDATE allmember 
+		SET pw=#{pw}, nickname=#{nickName}, sex=#{sex}, email=#{email}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delMember" parameterType="string">
+		delete from allmember
+		where lower(id) = lower(#{id})
+	</delete>
 	
 	
 </mapper>

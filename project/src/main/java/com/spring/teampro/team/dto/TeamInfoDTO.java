@@ -8,6 +8,7 @@ public class TeamInfoDTO {
 	private String t_name;
 	private String t_intro;
 	private int t_field;
+	private String t_field2;
 	private int t_number;
 	private String t_lMemo;
 	private Date tcreate;
@@ -67,6 +68,12 @@ public class TeamInfoDTO {
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	public String getT_field2() {
+		return t_field2;
+	}
+	public void setT_field2(String t_field2) {
+		this.t_field2 = t_field2;
 	}
 	
 	

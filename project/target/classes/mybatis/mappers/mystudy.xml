@@ -5,42 +5,8 @@
 	
 <mapper namespace="mapper.mystudy">
 <!-- 		테이블이름 칼럼 맞는지 확인하기!!! -->
-<!-- 	메모 입력하기 -->
-	<insert id="insertMemo" parameterType="memoDTO">
-		<![CDATA[
-		 insert into pre_memo(m_memo_key, userkey, m_memo_title, m_memo_desc, m_memo_date )
-		 values(seq_mymemo.nextval, #{userkey}, #{memo_title}, #{memo_desc}, sysdate)
-		]]>      
-	</insert>
-	
-<!-- 	메모 수정 전 조회 -->
-	<select id="selectMemoByIdx" resultType="memoDTO" parameterType="int">
-      <![CDATA[
-         select * from mymemo	
-         where m_memo_iky = #{memo_idx}	 	
-      ]]>
-	</select>
-		
-<!-- 	메모 수정하기 -->
-	<update id="updateMemo" parameterType="memoDTO">
-		<![CDATA[
-		 update mymemo
-		 set m_memo_title = #{memo_title}
-		 	,m_memo_desc = #{memo_desc}
-		 	where m_memo_key = #{memo_idx}
-		]]> 
-	</update>
 
-<!-- 	메모 삭제하기 -->
-	<delete id="deleteMemo" parameterType="int">
-		<![CDATA[
-		delete from mymemo
-		where m_memo_key = #{memo_key}
-		]]>
-	</delete>
-	
-	
-<!-- 메모 해당리스트 -->
+<!-- 메모리스트 -->
 	<select id="Paging_list" resultType="memoDTO" parameterType="memoDTO">
       <![CDATA[
 		 SELECT * from(
@@ -62,7 +28,48 @@
 		where userkey = #{userkey}
       ]]>
 	</select>
+	
+<!-- 	메모 작성하기 -->
+	<insert id="insertMemo" parameterType="memoDTO">
+		<![CDATA[
+		 insert into mymemo(m_memo_key, userkey, m_memo_title, m_memo_desc, m_memo_date )
+		 values(seq_mymemo.nextval, #{userkey}, #{m_memo_title}, #{m_memo_desc}, sysdate)
+		]]>      
+	</insert>
+	
+<!-- 	메모 수정 전 해당dto조회 -->
+	<select id="selectOneMemo" resultType="memoDTO" parameterType="int">
+      <![CDATA[
+         select * from mymemo	
+         where m_memo_key = #{m_memo_key}	 	
+      ]]>
+	</select>
+		
+<!-- 	메모 수정하기 -->
+	<update id="updateMemo" parameterType="memoDTO">
+		<![CDATA[
+		 update mymemo
+		 set m_memo_title = #{m_memo_title}
+		 	,m_memo_desc = #{m_memo_desc}
+		 	where m_memo_key = #{m_memo_key}
+		]]> 
+	</update>
 
+<!-- 	메모 삭제하기 -->
+	<delete id="deleteMemo" parameterType="int">
+		<![CDATA[
+		delete from mymemo
+		where m_memo_key = #{m_memo_key}
+		]]>
+	</delete>
+	
+<!-- 일정 추가하기 -->
+	<insert id="insertSchedule" parameterType="scheduleDTO">
+		<![CDATA[
+		 insert into myschedule(m_schedule_key, userkey, m_schedule_title, m_schedule_desc, m_schedule_date )
+		 values(seq_myschedule.nextval, #{userkey}, #{m_schedule_title}, #{m_schedule_desc}, #{m_schedule_date})
+		]]>      
+	</insert>
 
 
 	

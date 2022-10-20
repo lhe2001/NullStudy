@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.PageDTO;
 
 
 public interface BoardService {
-	// 게시글 전체를 조회할 수 있는 메소드 호출
-		public List<BoardDTO> getListArticles();
+		
+		// 게시글 전체를 조회할 수 있는 메소드 호출
+		public List<BoardDTO> getListArticles(int pageNum, int amount);
 
 		// 게시글을 추가 할 수 있는 메소드 호출
 		public int getAddArticle(Map map) throws Exception;
@@ -26,7 +28,10 @@ public interface BoardService {
 		public int getAddReply(Map map);
 
 		// 게시글 전체로 검색하는 메소드
-		public List<BoardDTO> getAllSearch(BoardDTO dto);
+//		public List<BoardDTO> getAllSearch(BoardDTO dto);
+		
+		// 게시글 전체로 검색하는 메소드(ajax)
+		public List<BoardDTO> getAllSearch(BoardDTO dto,int pageNum, int amount);
 
 		// 말머리로 리스트를 보여줄 메소드
 		public List<BoardDTO> getSelectViewArticle(BoardDTO dto);
@@ -36,4 +41,13 @@ public interface BoardService {
 		
 		// 비밀번호를 가져오자
 		public int getPwd(int b_articleNo);
+		
+		// 조회수 추가 메소드
+		public void getView(BoardDTO dto);
+		
+		// 페이징 메소드
+		public List<PageDTO> getPaging(int pageNum, int amount);
+		
+		// 총 페이지 수 가져오는 메소드
+		public int getPage();
 }

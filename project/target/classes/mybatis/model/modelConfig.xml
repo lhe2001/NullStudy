@@ -16,6 +16,7 @@
 		<typeAlias type="com.spring.teampro.team.dto.TeamMemberDTO" alias="teamMemberDTO"></typeAlias>
 		<!-- board DTO 별칭 -->
 		<typeAlias type="com.spring.teampro.board.dto.BoardDTO" alias="boardDTO"></typeAlias>
+<<<<<<< HEAD
 		<typeAlias type="com.spring.teampro.mystudy.dto.MemoDTO" alias="memoDTO"></typeAlias>
 	</typeAliases>
 	
@@ -24,5 +25,36 @@
 <!-- 	<typeAliases> -->
 <!-- 		<typeAlias type="com.spring.propro.emp.dto.EmpDTO" alias="empDTO"></typeAlias> -->
 <!-- 	</typeAliases> -->
+=======
+		<!-- paging DTO 별칭 -->
+		<typeAlias type="com.spring.teampro.board.dto.PageDTO" alias="pageDTO"></typeAlias>
+		
+		<typeAlias type="com.spring.teampro.mystudy.dto.MemoDTO" alias="memoDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.signupin.dto.AdminDTO" alias="adminDTO"></typeAlias>
+<!-- <<<<<<< HEAD -->
+		<typeAlias type="com.spring.teampro.team.dto.MyTeamListDTO" alias="myTeamListDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.team.dto.TeamInfoDTO" alias="teamInfoDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.team.dto.TeamMemberDTO" alias="teamMemberDTO"></typeAlias>
+<!-- ======= -->
+
+		<typeAlias type="com.spring.teampro.team.dto.MyTeamListDTO" alias="myTeamListDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.team.dto.TeamInfoDTO" alias="teamInfoDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.team.dto.TeamMemberDTO" alias="teamMemberDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.team.dto.MemberRequestDTO" alias="memberRequestDTO"></typeAlias>
+		
+		<!-- memo DTO 별칭 -->
+		<typeAlias type="com.spring.teampro.mystudy.dto.MemoDTO" alias="memoDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.mystudy.dto.ScheduleDTO" alias="scheduleDTO"></typeAlias>
+	
+<!-- >>>>>>> jessie_memo -->
+		<!-- board DTO 별칭 -->
+		<typeAlias type="com.spring.teampro.board.dto.BoardDTO" alias="boardDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.mystudy.dto.MemoDTO" alias="memoDTO"></typeAlias>
+		
+		<!-- search DTO 별칭 -->
+		<typeAlias type="com.spring.teampro.search.dto.SearchDTO" alias="searchDTO"></typeAlias>
+	</typeAliases>
+	
+>>>>>>> master
 
 </configuration>

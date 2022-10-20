@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.search">
+
+	                 
+	<select id="boardAllList" resultType="searchDTO" parameterType="String">
+
+			SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
+			FROM ALLMEMBER a, BOARD b
+			where a.USERKEY = b.USERKEY
+			
+	</select>
+	                 
+	<select id="searchBoardSelectList" resultType="searchDTO" parameterType="String">
+
+			SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
+			FROM ALLMEMBER a, BOARD b
+			where a.USERKEY = b.USERKEY
+			and (lower(b_title) LIKE '%' || lower(#{_parameter}) || '%'
+			OR lower(nickName) LIKE '%' || lower(#{_parameter}) || '%'
+			OR lower(b_content) LIKE '%' || lower(#{_parameter}) || '%')
+			
+	</select>
+	
+	<select id="b_titleSearchBoardSelectList" resultType="searchDTO" parameterType="String">
+
+			SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
+			FROM ALLMEMBER a, BOARD b
+			where a.USERKEY = b.USERKEY
+			and lower(b_title) LIKE '%' || lower(#{_parameter}) || '%'
+	</select>
+	
+	<select id="nickNameSearchBoardSelectList" resultType="searchDTO" parameterType="String">
+
+			SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
+			FROM ALLMEMBER a, BOARD b
+			where a.USERKEY = b.USERKEY
+			and lower(nickName) LIKE '%' || lower(#{_parameter}) || '%'
+			
+	</select>
+	
+	<select id="b_contentSearchBoardSelectList" resultType="searchDTO" parameterType="String">
+
+			SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
+			FROM ALLMEMBER a, BOARD b
+			where a.USERKEY = b.USERKEY
+			and lower(b_content) LIKE '%' || lower(#{_parameter}) || '%'
+			
+	</select>
+	
+	
+	                   
+	<select id="teamAllList" resultType="searchDTO" parameterType="String">
+
+			SELECT a.nickName, t.T_NAME, T_create
+			FROM ALLMEMBER a, ALLTEAM t
+			where a.USERKEY = t.USERKEY
+			
+	</select>
+	                   
+	<select id="t_nameSearchTeamSelectList" resultType="searchDTO" parameterType="String">
+
+			SELECT a.nickName, t.T_NAME, T_create
+			FROM ALLMEMBER a, ALLTEAM t
+			where a.USERKEY = t.USERKEY
+			and lower(t_name) LIKE '%' || lower(#{_parameter}) || '%'
+			
+	</select>
+	
+	                
+	<select id="userAllList" resultType="searchDTO" parameterType="String">
+
+			SELECT nickName, email, joinDate
+			FROM ALLMEMBER
+			
+	</select>
+	                
+	<select id="nickNameSearchUserSelectList" resultType="searchDTO" parameterType="String">
+
+			SELECT nickName, email, joinDate, userkey
+			FROM ALLMEMBER
+			where lower(nickName) LIKE '%' || lower(#{_parameter}) || '%'
+			
+	</select>
+	
+</mapper>
