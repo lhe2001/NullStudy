@@ -1,6 +1,8 @@
  package com.spring.teampro.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.teampro.signupin.dto.AdminDTO;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
 import com.spring.teampro.signupin.service.SignUpInService;
 
@@ -161,6 +164,127 @@ public class SignUpInController {
 	public String signOut(HttpServletRequest req) {
 		req.getSession().invalidate();
 		return "main";
+	}
+	
+	
+	//관리자관련
+	
+	//<회원관련 조회>
+	//회원조회 페이지로 이동하면서 전체회원 조회
+	@RequestMapping(value="/memberList.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String memberList(Model model) {
+		List<SignUpInDTO> list = signUpInService.getMemberList();
+		model.addAttribute("list",list);
+		return "memberList";
+	}
+	
+	//이름으로 회원 조회
+	@RequestMapping(value="/searchByName.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String searchNameList(Model model,
+			@RequestParam("name") String keyword) {
+		List<SignUpInDTO> list = signUpInService.getListByName(keyword);
+		model.addAttribute("list",list);
+		return "memberList";
+	}
+	
+	//아이디로 회원 조회
+	@RequestMapping(value="/searchById.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String searchIdList(Model model,
+			@RequestParam("id") String keyword) {
+		List<SignUpInDTO> list = signUpInService.getListById(keyword);
+		model.addAttribute("list",list);
+		return "memberList";
+	}
+	
+	//이름+아이디로 회원 조회
+	@RequestMapping(value="/searchByBoth.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String searchBothList(Model model,
+			@RequestParam("both") String keyword) {
+		List<SignUpInDTO> list = signUpInService.getListByBoth(keyword);
+		model.addAttribute("list",list);
+		return "memberList";
+	}
+	
+	//<스터디 관련 조회>
+	
+	//<회원관련 조회>
+	//회원조회 페이지로 이동하면서 전체회원 조회
+	@RequestMapping(value="/studyList.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String studyList(Model model) {
+		List<AdminDTO> list = signUpInService.getStudyList();
+		model.addAttribute("list",list);
+		return "studyList";
+	}
+	
+	//팀명으로 조회
+	@RequestMapping(value="/searchByTeamName.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String searchByTname(Model model,
+			@RequestParam("teamName") String keyword) {
+		List<AdminDTO> list = signUpInService.getListByTname(keyword);
+		model.addAttribute("list",list);
+		return "studyList";
+		
+	}
+	
+	//팀장으로 조회
+	@RequestMapping(value="/searchByTeamLeader.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String searchByTleader(Model model,
+			@RequestParam("teamLeader") String keyword) {
+		List<AdminDTO> list = signUpInService.getListByTleader(keyword);
+		model.addAttribute("list",list);
+		return "studyList";
+	}
+	
+	//팀정보로 조회
+	@RequestMapping(value="/searchByTeamInfo.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String searchByTinfo(Model model,
+			@RequestParam("teamInfo") String keyword) {
+		List<AdminDTO> list = signUpInService.getListByTinfo(keyword);
+		model.addAttribute("list",list);
+		return "studyList";
+	}
+	
+	//<회원정보 수정>
+	// 수정 클릭시 수정폼으로 넘어가도록
+	@RequestMapping(value="/modForm.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String modMember(Model model,
+			@RequestParam("id") String id) {
+		SignUpInDTO dto = signUpInService.getUserInfo(id);
+		model.addAttribute("modUser", dto);
+		
+		return "modForm";
+	}
+	
+	// 수정진행
+	@RequestMapping(value="/modMember.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String modMember(Model model,
+			@RequestParam("id") String id,
+			@RequestParam("pw") String pw, 
+			@RequestParam("nickName") String nickName,
+			@RequestParam("sex") String sex,
+			@RequestParam("email") String email) {
+				
+		SignUpInDTO dto = new SignUpInDTO();
+		dto.setId(id);
+		dto.setPw(pw);
+		dto.setNickName(nickName);
+		dto.setSex(sex);
+		dto.setEmail(email);
+		
+		signUpInService.doModMember(dto);
+		model.addAttribute("list", signUpInService.getMemberList());
+		return "memberList";
+	}
+	
+	//회원삭제 
+	@RequestMapping(value="/delMember.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String delMember(Model model,
+			@RequestParam("id") String id) {
+
+		signUpInService.doDelMember(id);
+
+		model.addAttribute("list", signUpInService.getMemberList());
+		return "memberList";
 	}
 	
 }

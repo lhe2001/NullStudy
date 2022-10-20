@@ -14,7 +14,7 @@
       
         /* 헤더부분
         1) 헤더 네비 */
-        header {
+        .mainHeader{
             box-sizing: border-box;
             position:fixed;
             width:100%;
@@ -113,7 +113,7 @@
         }
         #adimg {
             height:600px;
-            background-image: url("https://ifh.cc/g/SNgG3Q.jpg");
+            background-image: url("https://i.postimg.cc/yYd7nsTK/main-Image.jpg");
             background-repeat: no-repeat;
             background-attachment: fixed;
             text-align: center;

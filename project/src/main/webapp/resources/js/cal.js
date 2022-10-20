@@ -51,7 +51,7 @@ const renderCalendar = () => {
                       ? 'this'
                       : 'other';
 
-    dates[i] = `<div class="date"><span class="${condition}">${date}</span></div>`;
+    dates[i] = `<div class="date"><span class="${condition}">${date}</span><div id="${condition}.${date}"></div></div>`;
   })
 
   // Dates 그리기
@@ -87,7 +87,7 @@ const prevMonth = () => {
     renderCalendar();
   }
 
-//오늘
+//오늘바로가기
 const goToday = () => {
     date = new Date();
     renderCalendar();

@@ -16,6 +16,7 @@
     <script>
     $(function(){
     	bind();
+    	idcheck();
     })
     
     function bind(){
@@ -34,7 +35,7 @@
 </head>
 <body>
 <div id="wrapper">
-        <header>
+        <header class="mainHeader">
             <nav>
                 <div class="logo" href="#home"></div>
                 <ul class="navtap_items">

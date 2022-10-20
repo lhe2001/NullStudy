@@ -36,7 +36,7 @@ public class MystudyController {
 		logger.info("memolist 실행");
 		HttpSession session = request.getSession();
 		
-		int userkey = (int)session.getAttribute("userKey");
+		int userkey = (Integer) session.getAttribute("userKey");
 		logger.info("userkey"+userkey);
 		
 		int viewPage = memoDTO.getViewPage();

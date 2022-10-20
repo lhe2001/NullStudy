@@ -1,24 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <style>
 	.signUpForm{
 		margin-top:100px;
 	}
+	.hide{
+		display:none;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-	$(function(){
-		bind();
-	})
 	
-	function bind(){
+	function signUpCheck(){
 		
 		//아이디 중복 체크 
 		$("#idCheck_btn").off("click").on("click", function(){
@@ -35,8 +29,19 @@
 					success:function(result){
 						if(result==1){
 							$('#result1').text('사용 가능한 아이디입니다.');
+							console.log( $('#result1').text() )
+							console.log( $('#result3').text() )
+							
+							if( $('#result1').text() == "사용 가능한 아이디입니다." && $('#result3').text() == "사용 가능한 이메일입니다." ){
+								$('.btn_s_wrap').removeClass('hide')
+							}else{
+								$('.btn_s_wrap').addClass('hide')
+							}
+							
 						}else{
 							$('#result1').text('이미 사용중인 아이디입니다.');
+							$('.btn_s_wrap').addClass('hide')
+
 						}
 					},
 					
@@ -66,8 +71,20 @@
 					success:function(result){
 						if(result==1){
 							$('#result3').text('사용 가능한 이메일입니다.');
+							
+							console.log( $('#result1').text() )
+							console.log( $('#result3').text() )
+							
+							if( $('#result1').text() == "사용 가능한 아이디입니다." && $('#result3').text() == "사용 가능한 이메일입니다." ){
+								$('.btn_s_wrap').removeClass('hide')
+							} else{
+								$('.btn_s_wrap').addClass('hide')
+							}
+							
 						}else{
 							$('#result3').text('이미 사용중인 이메일입니다.');
+							$('.btn_s_wrap').addClass('hide')
+
 						}
 					},
 					
@@ -95,8 +112,8 @@
     		}
     	})
     	
-    	
 	}
+	
 
 	function characterCheck(obj){
 	var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
@@ -198,10 +215,10 @@ Null study 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 �
 	            <span id="result3"></span>
 	            </div>
 	            
-	            <div class="btn_s_wrap">
+	            <div class="btn_s_wrap hide">
 	            <input type="submit" value="가입하기" class="sign_btn"></input>
 	            </div>
-	            
+	            <div>아이디, 이메일 중복 확인 후 가입버튼이 나타납니다.</div>
             </section>
             </form>
 	</div>
