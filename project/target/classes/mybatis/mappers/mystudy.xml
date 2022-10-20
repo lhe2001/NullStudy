@@ -62,15 +62,70 @@
 		where m_memo_key = #{m_memo_key}
 		]]>
 	</delete>
-	
-<!-- 일정 추가하기 -->
-	<insert id="insertSchedule" parameterType="scheduleDTO">
-		<![CDATA[
-		 insert into myschedule(m_schedule_key, userkey, m_schedule_title, m_schedule_desc, m_schedule_date )
-		 values(seq_myschedule.nextval, #{userkey}, #{m_schedule_title}, #{m_schedule_desc}, #{m_schedule_date})
-		]]>      
-	</insert>
 
+	<insert id="insertCal" parameterType="scheduleDTO">
+		insert into myschedule(userkey, m_schedule_key, m_schedule_title, m_schedule_desc, m_schedule_date, m_schedule_write)
+		values (#{userkey}, seq_schedule.nextval, #{m_schedule_title}, #{m_schedule_desc}, #{m_schedule_date}, sysdate)
+	</insert>
+	
+	<select id="calBoardList" parameterType="scheduleDTO" resultType="scheduleDTO">
+		select * from myschedule
+		where userkey=#{userkey} and m_schedule_date = #{m_schedule_date}
+		order by m_schedule_date
+	</select>
+	
+	<select id="calDetail"  parameterType="int" resultType="scheduleDTO">
+		select * from myschedule
+		where m_schedule_key=#{m_schedule_key}
+	</select>
+	
+	<update id="calUpdate" parameterType="scheduleDTO">
+		update myschedule 
+		set
+			m_schedule_title=#{m_schedule_title}, m_schedule_desc=#{m_schedule_desc}, 
+			m_schedule_date=#{m_schedule_date}
+		where m_schedule_key=#{m_schedule_key}
+	</update>
+	
+	<delete id="calMuldel" parameterType="Map">
+		delete from myschedule where m_schedule_key in
+		<foreach collection="m_schedule_keys" item="m_schedule_key" open="(" close=")" separator=",">
+			#{m_schedule_key}
+		</foreach>
+	</delete>
+	
+	<select id="calCount" parameterType="scheduleDTO" resultType="int">
+		select count(*) from myschedule
+		where userkey=#{userkey} and m_schedule_date = #{m_schedule_date}
+	</select>
+	
+	<select id="calViewList" parameterType="scheduleDTO" resultType="scheduleDTO">
+		SELECT
+			rn,
+			userkey,
+			m_schedule_key,
+			m_schedule_title,
+			m_schedule_desc,
+			m_schedule_date,
+			m_schedule_write
+		FROM
+			(
+			SELECT
+				ROW_NUMBER()  OVER(PARTITION BY substr(m_schedule_date, 1, 10) ORDER BY m_schedule_date) AS rn ,
+				userkey,
+				m_schedule_key,
+				m_schedule_title,
+				m_schedule_desc,
+				m_schedule_date,
+				m_schedule_write
+			FROM
+				myschedule
+			WHERE
+				userkey = #{userkey}
+				AND substr(m_schedule_date, 1, 7) = substr( #{m_schedule_date}, 1, 7) ) 
+		WHERE
+			rn BETWEEN 1 AND 3
+	</select>
 
 	
 	
