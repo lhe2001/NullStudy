@@ -87,6 +87,12 @@ public class TeamDAOImpl implements TeamDAO {
 	public int removeMember(int tm_key) {
 		return sqlSession.delete("mapper.team.removeMember",tm_key);
 	}
+	//팀삭제
+	@Override
+	public int deleteTeam(int t_key) {
+		sqlSession.delete("mapper.team.deleteTeam_member",t_key);
+		return sqlSession.delete("mapper.team.deleteTeam_team",t_key);
+	}
 
 	//>>>>>>>>>>>>>>>INSERT 추가하기>>>>>>>>>>>>>>
 	//가입요청 업데이트
@@ -95,7 +101,6 @@ public class TeamDAOImpl implements TeamDAO {
 		return sqlSession.insert("mapper.team.memberRequest",dto);
 	}
 
-	
 
 	
 

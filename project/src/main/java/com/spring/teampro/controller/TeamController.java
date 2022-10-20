@@ -21,6 +21,8 @@ public class TeamController {
 	@Autowired
 	TeamService service;
 	
+	//>>>>>>>>>>>>>>>>teamDATAIL 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+	
 	@RequestMapping(value="/team/teamDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String teamDetail(
 			Model model,
@@ -40,6 +42,18 @@ public class TeamController {
 
 	return "teamDetail";
 	}
+	
+	//팀삭제
+	@RequestMapping(value="/team/delTeam.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String deleteTeam(@RequestParam("t_key") int t_key,
+			Model model
+			) {
+		service.deleteTeam(t_key);
+		
+		return "redirect:/team/allTeamList.do";
+	}
+	
+	//>>>>>>>>>>>>>>>>allTeamList 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	
 	//allTeamList.jsp로 가기
 	@RequestMapping(value="/team/allTeamList.do", method= {RequestMethod.GET, RequestMethod.POST})
