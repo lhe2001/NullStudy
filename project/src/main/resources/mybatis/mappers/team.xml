@@ -44,6 +44,11 @@
 		SELECT count(*) FROM TEAMMEMBER
 		WHERE t_key = #{t_key}
 	</select>
+	
+	<select id="alreadyRequest" resultType="int" parameterType="memberRequestDTO">
+		SELECT count(*) FROM memberrequest
+		WHERE t_key=#{t_key} AND userkey= #{userKey} AND tr_result ='M'
+	</select>
 
 <!-- UPDATE -->
 	
@@ -68,6 +73,12 @@
 	<update id="accpetMember" parameterType="memberRequestDTO">
 		UPDATE MEMBERREQUEST 
 		SET TR_RESULT = 'Y'
+		WHERE userKey = #{userKey} AND t_key = #{t_key}
+	</update>
+	
+	<update id="rejectMember" parameterType="memberRequestDTO">
+		UPDATE MEMBERREQUEST 
+		SET TR_RESULT = 'N'
 		WHERE userKey = #{userKey} AND t_key = #{t_key}
 	</update>
 	

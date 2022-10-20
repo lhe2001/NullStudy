@@ -79,6 +79,7 @@ function teamPreview(t_key){
 }
 
 //>>>>>>>>>>>>>>>>모달창 에서 가입요청>>>>>>>>>>>>>>>//
+
 function requestJoin(t_key){
 	
 	let info = { 
@@ -93,8 +94,10 @@ function requestJoin(t_key){
 			success: function(data){
 				console.log(data)
 				if(data >= 1){
-				console.log('성공!')
-				alert('가입요청이 전송되었습니다');
+					console.log('성공!')
+					alert('가입요청이 전송되었습니다');
+				}else {
+					alert('이미 전송된 요청입니다. 기다려주세요');
 				}
 			},
 			error:function(){
@@ -102,7 +105,6 @@ function requestJoin(t_key){
 			}
 		});
 
-	
 	
 	
 	

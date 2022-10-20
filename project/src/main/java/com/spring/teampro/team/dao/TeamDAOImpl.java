@@ -60,6 +60,11 @@ public class TeamDAOImpl implements TeamDAO {
 		return sqlSession.selectList("mapper.team.getRequestList",t_key);
 	}
 
+	//이미 해당팀에 가입요청을 했는가?(중복체크)
+	@Override
+	public int alreadyRequest(MemberRequestDTO dto) {
+		return sqlSession.selectOne("mapper.team.alreadyRequest",dto);
+	}
 	//>>>>>>>>>>>>>>>UPDATE 수정하기>>>>>>>>>>>>>>
 	//팀정보 업데이트 하기
 	@Override
@@ -81,6 +86,8 @@ public class TeamDAOImpl implements TeamDAO {
 	//조장한마디 업데이트 하기
 	@Override
 	public int updateLMemo(TeamInfoDTO dto) {
+		int result = sqlSession.update("mapper.team.updateLMemo",dto);
+		logger.info("result>>>>>>>>>>>>>"+result+dto.getT_key());
 		return sqlSession.update("mapper.team.updateLMemo",dto);
 	}
 
@@ -91,6 +98,12 @@ public class TeamDAOImpl implements TeamDAO {
 		return sqlSession.insert("mapper.team.addTeamMember",dto);
 	}
 	
+	//가입요청을 거절하기
+	@Override
+	public int rejectMember(MemberRequestDTO dto) {
+		return sqlSession.update("mapper.team.rejectMember",dto);
+	}
+		
 	//>>>>>>>>>>>>>>>DELETE 삭제하기>>>>>>>>>>>>>>
 	//멤버 강퇴하기 
 	@Override
@@ -114,6 +127,8 @@ public class TeamDAOImpl implements TeamDAO {
 	public int memberRequest(MemberRequestDTO dto) {
 		return sqlSession.insert("mapper.team.memberRequest",dto);
 	}
+
+	
 
 
 	
