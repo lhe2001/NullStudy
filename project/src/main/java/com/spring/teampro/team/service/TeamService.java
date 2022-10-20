@@ -28,5 +28,9 @@ public interface TeamService {
 
 	int anyAlarm(int t_key);
 
+	List getRequestList(int t_key);
+
+	int acceptMember(MemberRequestDTO dto);
+
 
 }

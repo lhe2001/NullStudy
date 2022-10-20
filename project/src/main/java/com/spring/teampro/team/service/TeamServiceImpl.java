@@ -136,14 +136,28 @@ public class TeamServiceImpl implements TeamService {
 		return list;
 	}
 
+	//가입요청하기
 	@Override
 	public int requestMember(MemberRequestDTO dto) {
 		return dao.memberRequest(dto);
 	}
 
+	//가입요청이 있는가?
 	@Override
 	public int anyAlarm(int t_key) {
 		return dao.anyAlarm(t_key);
+	}
+
+	//있다면 가입요청 메세지 리스트 가져오기
+	@Override
+	public List getRequestList(int t_key) {
+		return dao.getRequestList(t_key);
+	}
+
+	//멤버 수락하기
+	@Override
+	public int acceptMember(MemberRequestDTO dto) {
+		return dao.acceptMember(dto);
 	}
 
 

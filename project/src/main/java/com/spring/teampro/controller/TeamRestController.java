@@ -100,6 +100,15 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		
 	}
 	
+	@RequestMapping(value="/teamRest/acceptMember.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int acceptMember(@RequestBody MemberRequestDTO dto
+			) {
+		
+		return service.acceptMember(dto);
+		
+	}
+	
+	
 	
 	
 }

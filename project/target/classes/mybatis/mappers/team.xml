@@ -4,7 +4,9 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="mapper.team">
-	
+
+<!-- SELECT -->
+
 	<select id="myTeamList" resultType="myTeamListDTO" parameterType="int">
 		SELECT a.T_KEY,a.T_NAME,a.T_FIELD , t.USERKEY  FROM TEAMMEMBER t , ALLTEAM a
 		WHERE t.T_KEY = a.T_KEY AND t.userkey= #{userkey}
@@ -22,6 +24,24 @@
 		WHERE m.USERKEY = a.USERKEY AND m.T_KEY = #{t_key}
 	</select>
 	
+	<select id="allTeamList" resultType="teamInfoDTO" >
+		SELECT a.T_KEY ,a.T_NAME ,a.T_INTRO ,a.T_FIELD ,a.T_NUMBER  ,a2.NICKNAME   
+		FROM ALLTEAM a ,allmember a2
+		WHERE a.USERKEY = a2.USERKEY
+	</select>
+	
+	<select id="anyAlarm" resultType="int" parameterType="int">
+		SELECT count(*) FROM memberrequest
+		WHERE t_key=#{t_key} AND tr_result='M'
+	</select>
+	
+	<select id="getRequestList" resultType="memberRequestDTO" parameterType="int">
+		SELECT m.TR_KEY,m.USERKEY ,m.T_KEY ,a.NICKNAME FROM memberRequest m , ALLMEMBER a 
+		WHERE m.userkey = a.userkey AND tr_result ='M' AND t_key = #{t_key}
+	</select>
+
+<!-- UPDATE -->
+	
 	<update id="updateTeamInfo" parameterType="teamInfoDTO">
 		update AllTeam
 		set t_intro= #{t_intro} ,t_field=#{t_field}
@@ -33,28 +53,34 @@
 		set t_lmemo= #{t_lMemo}
 		where t_key= #{t_key}
 	</update>
+
+	<update id="accpetMember" parameterType="memberRequestDTO">
+		UPDATE MEMBERREQUEST 
+		SET TR_RESULT = 'Y'
+		WHERE userKey = #{userKey} AND t_key = #{t_key}
+	</update>
 	
-	<delete id="removeMember" parameterType="int">
-		DELETE FROM teammember
-		WHERE tm_key= #{tm_key}
-	</delete>
-	
-	<select id="allTeamList" resultType="teamInfoDTO" >
-		SELECT a.T_KEY ,a.T_NAME ,a.T_INTRO ,a.T_FIELD ,a.T_NUMBER  ,a2.NICKNAME   
-		FROM ALLTEAM a ,allmember a2
-		WHERE a.USERKEY = a2.USERKEY
-	</select>
-	
+<!-- INSERT -->
+
 	<insert id="memberRequest" parameterType="memberRequestDTO">
 		insert into memberrequest
 		(tr_key,UserKey,tr_result,t_key)
 		values(tr_key_seq.nextval,#{userKey},'M',#{t_key})
 	</insert>
 	
-	<select id="anyAlarm" resultType="int" parameterType="int">
-		SELECT count(*) FROM memberrequest
-		WHERE t_key=#{t_key} AND tr_result='M'
-	</select>
-
+	<insert id="addTeamMember" parameterType="memberRequestDTO">
+		insert into teammember
+		(tm_key,t_key,tm_joindate,userkey)
+		values(tm_key_seq.nextval,#{t_key},sysdate,#{userKey})
+	</insert>
+	
+<!-- DELETE -->
+	
+	<delete id="removeMember" parameterType="int">
+		DELETE FROM teammember
+		WHERE tm_key= #{tm_key}
+	</delete>
+	
+	
 	
 </mapper>
