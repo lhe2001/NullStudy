@@ -86,7 +86,7 @@ function leWrite(){
     })
 }
 
-//멤버탈퇴
+//멤버강퇴
 function kickMemberOut(tm_key){
 	 const revise3 = confirm('정말 강퇴 시키시겠습니까?')
 	 let t_key = $(".t_key").val();
@@ -145,4 +145,13 @@ function delTeam(){
 		frmDel.submit();
 	}
 }
+
+//팀 탈퇴하기
+function leaveTeam(t_key){
+	const leave = confirm('정말 탈퇴하시겠습니까?');
+	if(leave == true){
+    	location.href='/project/team/leaveTeam.do?t_key='+t_key;
+    }
+}
+
 
