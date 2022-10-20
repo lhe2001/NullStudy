@@ -2,6 +2,7 @@ package com.spring.teampro.team.dao;
 
 import java.util.List;
 
+import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
 
@@ -17,8 +18,26 @@ public interface TeamDAO {
 
 	int updateLMemo(TeamInfoDTO dto);
 
-	int removeMember(int tm_key);
+	int removeMember(TeamMemberDTO dto);
 
 	List allTeamList();
+
+	int memberRequest(MemberRequestDTO dto);
+
+	int anyAlarm(int t_key);
+
+	List getRequestList(int t_key);
+
+	int acceptMember(MemberRequestDTO dto);
+
+	int deleteTeam(int t_key);
+
+	int updateMemberCount(int t_key);
+
+	int alreadyRequest(MemberRequestDTO dto);
+
+	int rejectMember(MemberRequestDTO dto);
+
+
 
 }

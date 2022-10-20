@@ -125,6 +125,20 @@
     background-color: #FFEEBB;
     font-weight: 900;
 }
+#newMemberAlert{
+	position:relative;
+}
+#alarm{
+	position:absolute;
+	height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size: 8px;
+    top: 1.5px;
+    left: 190px;
+}
 /* 조장한마디 */
 .LeaderMenu{
     text-align: center;
@@ -438,7 +452,6 @@
     max-width:600px;
     width:600px;
     max-height:430px;
-    border: 1px solid red;
 }
 .allTeamTableWrap #page {
     margin-top: 20px;
@@ -466,7 +479,7 @@
     background-color: #f5f4f4;
 }
 .allTeamTableWrap table button{
-    background-color: #69acc7;
+    background-color: #69c7b5;
     color:white;
     cursor: pointer;
     border: none;

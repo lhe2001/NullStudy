@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.teampro.signupin.dto.SignUpInDTO;
+import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
 import com.spring.teampro.team.service.TeamService;
@@ -46,25 +46,23 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 	public int updateTeamInfo(@RequestBody TeamInfoDTO dto
 			) {
 		int result = -1;
+		logger.info("updateTeamInfo>>>>>>>>>>>>>>>>>>>>");
 		String lMemo = dto.getT_lMemo();
+		logger.info("lMemo>>>>>>>>>>>>>>>>>>>>"+lMemo);
+		logger.info("t_key>>>>>>>>>>>>>>>>>>>>"+dto.getT_key());
 		if(lMemo == null) {
 			result = service.updateTeamInfo(dto);
 		}else {
 			result = service.updateLMemo(dto);
 		}
-		
+		logger.info("result>>>>>>>>>>>>>>>>>>>>"+result);
 		return result;
 	}
 	
 	@RequestMapping(value="/teamRest/removeMember.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public int updateTeamInfo(@RequestBody TeamMemberDTO dto
+	public int removeMember(@RequestBody TeamMemberDTO dto
 			) {
-		int result = -1;
-		int tm_key = dto.getTm_key();
-		
-		result = service.removeMember(tm_key);
-		
-		return result;
+		return service.removeMember(dto);
 	}
 	
 	@RequestMapping(value="/teamRest/memberList.do", method= {RequestMethod.GET, RequestMethod.POST})
@@ -73,14 +71,12 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 			) {
 		Map map = new HashMap();
 		int t_key = dto.getT_key();
-		System.out.println("t_key>>>>>>>>"+t_key);
 		
 		List list = service.getTeamMemberInfo(t_key);
 		TeamInfoDTO tdto = service.getTeamInfo(t_key);
 		
 		HttpSession session = request.getSession();
 		int userkey  = (Integer) session.getAttribute("userKey");
-		logger.info("userKey<<<<<<<<<"+userkey);
 		boolean result = service.alreadyMyTeam(userkey, t_key);
 				
 		map.put("memberList", list);
@@ -90,8 +86,35 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		return map;
 	}
 
+	//가입요청 보내기 
+	@RequestMapping(value="/teamRest/memberRequest.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int memberRequest(@RequestBody MemberRequestDTO dto,
+			HttpServletRequest request, HttpServletResponse response
+			) {
+		HttpSession session = request.getSession();
+		int userkey  = (Integer) session.getAttribute("userKey");
+		dto.setUserKey(userkey);
+		
+		boolean result = service.alreadyRequest(dto);
+		if(result) {
+			return -1;
+		}else {
+			return service.requestMember(dto);
+		}
+	}
 	
-	
+	//가입 수락 하기
+	@RequestMapping(value="/teamRest/acceptMember.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int acceptMember(@RequestBody MemberRequestDTO dto
+			) {
+		return service.acceptMember(dto);
+	}
+	//가입 거절 하기
+	@RequestMapping(value="/teamRest/rejectMember.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int rejectMember(@RequestBody MemberRequestDTO dto
+			) {
+		return service.rejectMember(dto);
+	}
 	
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.teampro.team.dao.TeamDAO;
+import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.MyTeamListDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
@@ -22,6 +23,7 @@ public class TeamServiceImpl implements TeamService {
 	@Autowired
 	TeamDAO dao;
 	
+	//>>>>>>>>>>>>>>>>팀 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	//나의 팀 리스트
 	@Override
 	public List getMyTeamList(int userkey) {
@@ -72,40 +74,18 @@ public class TeamServiceImpl implements TeamService {
 		return dto;
 	}
 
-	//팀 멤버 정보 가져오기
-	@Override
-	public List getTeamMemberInfo(int t_key) {
-		
-		List list = dao.getTeamMemberInfo(t_key);
-		
-		for(int i=0; i<list.size(); i++) {
-			TeamMemberDTO memberDTO = (TeamMemberDTO) list.get(i);
-			Date lastTime = memberDTO.getLastTime();
-			SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd hh:mm a");
-			String time = format.format(lastTime);
-			memberDTO.setLastTime2(time);
-		}
-		return list;
-	}
-
 	//팀정보 업데이트 하기
 	@Override
 	public int updateTeamInfo(TeamInfoDTO dto) {
 		return dao.updateTeamInfo(dto);
 	}
-
+		
 	//조장한마디 업데이트 하기 
 	@Override
 	public int updateLMemo(TeamInfoDTO dto) {
 		return dao.updateLMemo(dto);
 	}
-
-	//멤버 강퇴
-	@Override
-	public int removeMember(int tm_key){
-		return dao.removeMember(tm_key);
-	}
-
+	
 	//전체 팀리스트 가져오기
 	@Override
 	public List getAllTeamList() {
@@ -133,6 +113,79 @@ public class TeamServiceImpl implements TeamService {
 		}
 		
 		return list;
+	}
+
+	//팀삭제
+	@Override
+	public int deleteTeam(int t_key) {
+		return dao.deleteTeam(t_key);
+	}
+	
+	//>>>>>>>>>>>>>>>>팀멤버 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+	//팀 멤버 정보 가져오기
+	@Override
+	public List getTeamMemberInfo(int t_key) {
+		
+		List list = dao.getTeamMemberInfo(t_key);
+		
+		for(int i=0; i<list.size(); i++) {
+			TeamMemberDTO memberDTO = (TeamMemberDTO) list.get(i);
+			Date lastTime = memberDTO.getLastTime();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd hh:mm a");
+			String time = format.format(lastTime);
+			memberDTO.setLastTime2(time);
+		}
+		return list;
+	}
+
+	//멤버 강퇴
+	@Override
+	public int removeMember(TeamMemberDTO dto){
+		return dao.removeMember(dto);
+	}
+
+	//>>>>>>>>>>>>>>>>팀가입요청 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+	//가입요청하기
+	@Override
+	public int requestMember(MemberRequestDTO dto) {
+		return dao.memberRequest(dto);
+	}
+
+	//이미 가입요청했는가?
+	@Override
+	public boolean alreadyRequest(MemberRequestDTO dto) {
+		boolean result = false;
+		int count = dao.alreadyRequest(dto);
+		if(count > 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	//가입요청이 있는가?
+	@Override
+	public int anyAlarm(int t_key) {
+		return dao.anyAlarm(t_key);
+	}
+
+	//있다면 가입요청 메세지 리스트 가져오기
+	@Override
+	public List getRequestList(int t_key) {
+		return dao.getRequestList(t_key);
+	}
+
+	//멤버 수락하기
+	@Override
+	public int acceptMember(MemberRequestDTO dto) {
+		dao.acceptMember(dto);
+		int t_key = dto.getT_key();
+		return dao.updateMemberCount(t_key);
+	}
+
+	//멤버 거절하기
+	@Override
+	public int rejectMember(MemberRequestDTO dto) {
+		return dao.rejectMember(dto);
 	}
 
 

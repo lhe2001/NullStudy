@@ -14,8 +14,10 @@
 	<div id="team_Wrapper">
 	    <div id="fstWrapper">
             <div id="teamInfo" class="teamInfoBox ">
-		    <a class="deleteTeamBtn"  href='/teampro/teamcd/delTeam'>현재팀 삭제</a>
-		    <input type="hidden" class="t_key" value="${teamInfo.t_key }">
+            <form name="frmDel">
+		    <div class="deleteTeamBtn" onClick="delTeam()">현재팀 삭제</div>
+		    <input type="hidden" name="t_key" class="t_key" value="${teamInfo.t_key }">
+		    </form>
                 <table>
                     <tr>
                         <td>팀 이름</td>
@@ -84,7 +86,14 @@
                 <li>D-Day 수정</li>
                 <li>투표하기</li>
                 <li>챌린지 수정</li>
-                <li id="newMemberAlert" onClick="newMemberRequest()">팀원 신청</li>
+                <c:if test="${anyAlarm == 0 }">
+                <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})">팀원 신청
+                </c:if>
+                <c:if test="${anyAlarm > 0 }">
+                <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})" style="color:red; font-weight:bold">팀원 신청
+                	<div id="alarm">${anyAlarm }</div>
+                </c:if>
+                </li>
                 <li>탈퇴하기</li>
             </ul>
         </div>
@@ -95,7 +104,7 @@
         </div>
         <div class="LeaderMenu reivseWrite hide">
                 ${teamInfo.nickName }님의 공지사항: <input type="text" class="lMemo" required><br>
-                <input type="submit" class="rBtn2" value="수정">
+                <input type="button" class="rBtn2" value="수정">
                 <input type="button" class="leBack" value="취소">
         </div>
         <div id="memberWrapper">
