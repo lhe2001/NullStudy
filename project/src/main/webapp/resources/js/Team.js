@@ -129,7 +129,7 @@ function dailyMemoRevise(){
 
 
 //뉴 멤버요청
-function newMemberRequest(){
-	window.open('/project/team/newRequest.do','pop','location=no,width=500,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+function newMemberRequest(t_key){
+	window.open('/project/team/newRequest.do?t_key='+t_key,'pop','location=no,width=500,height=300,top=100,left=100,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
 

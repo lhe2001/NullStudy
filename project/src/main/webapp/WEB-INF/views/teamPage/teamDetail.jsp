@@ -85,10 +85,10 @@
                 <li>투표하기</li>
                 <li>챌린지 수정</li>
                 <c:if test="${anyAlarm == 0 }">
-                <li id="newMemberAlert" onClick="newMemberRequest()">팀원 신청
+                <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})">팀원 신청
                 </c:if>
                 <c:if test="${anyAlarm > 0 }">
-                <li id="newMemberAlert" onClick="newMemberRequest()" style="color:red; font-weight:bold">팀원 신청
+                <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})" style="color:red; font-weight:bold">팀원 신청
                 	<div id="alarm">${anyAlarm }</div>
                 </c:if>
                 </li>
