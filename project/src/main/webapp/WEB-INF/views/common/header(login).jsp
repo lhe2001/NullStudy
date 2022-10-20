@@ -16,7 +16,7 @@
     <script>
     $(function(){
     	bind();
-    	idcheck();
+    	signUpCheck();
     })
     
     function bind(){
