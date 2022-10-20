@@ -140,8 +140,8 @@ public class TeamServiceImpl implements TeamService {
 
 	//멤버 강퇴
 	@Override
-	public int removeMember(int tm_key){
-		return dao.removeMember(tm_key);
+	public int removeMember(TeamMemberDTO dto){
+		return dao.removeMember(dto);
 	}
 
 	//>>>>>>>>>>>>>>>>팀가입요청 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
@@ -166,7 +166,9 @@ public class TeamServiceImpl implements TeamService {
 	//멤버 수락하기
 	@Override
 	public int acceptMember(MemberRequestDTO dto) {
-		return dao.acceptMember(dto);
+		dao.acceptMember(dto);
+		int t_key = dto.getT_key();
+		return dao.updateMemberCount(t_key);
 	}
 
 

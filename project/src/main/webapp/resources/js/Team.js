@@ -88,10 +88,12 @@ function leWrite(){
 //멤버탈퇴
 function kickMemberOut(tm_key){
 	 const revise3 = confirm('정말 강퇴 시키시겠습니까?')
+	 let t_key = $(".t_keyCL").val();
 	 if(revise3 == true){
         	console.log(tm_key);
         	let info = { 
-        			tm_key : tm_key 
+        			tm_key : tm_key,
+        			t_key : t_key
         	};
         	
         	$.ajax({

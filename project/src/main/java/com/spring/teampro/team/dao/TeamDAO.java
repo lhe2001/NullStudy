@@ -18,7 +18,7 @@ public interface TeamDAO {
 
 	int updateLMemo(TeamInfoDTO dto);
 
-	int removeMember(int tm_key);
+	int removeMember(TeamMemberDTO dto);
 
 	List allTeamList();
 
@@ -31,6 +31,9 @@ public interface TeamDAO {
 	int acceptMember(MemberRequestDTO dto);
 
 	int deleteTeam(int t_key);
+
+	int updateMemberCount(int t_key);
+
 
 
 }
