@@ -34,6 +34,10 @@ public interface TeamDAO {
 
 	int updateMemberCount(int t_key);
 
+	int alreadyRequest(MemberRequestDTO dto);
+
+	int rejectMember(MemberRequestDTO dto);
+
 
 
 }

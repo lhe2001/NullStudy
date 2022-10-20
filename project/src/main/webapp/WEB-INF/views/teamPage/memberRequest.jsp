@@ -37,8 +37,32 @@
 		});
     }
  }
- function requestReject(){
+ function requestReject(userKey,t_key){
 	const rej = confirm('거절하시겠습니까?');
+	if(rej == true){
+    	let info = { 
+    			userKey : userKey,
+    			t_key : t_key,
+    	};
+    	
+    	$.ajax({
+		url: "/project/teamRest/rejectMember.do?",
+		type: "post",
+		contentType: "application/json",
+		data: JSON.stringify(info),
+		success: function(data){
+			if(data > 0 ){
+				alert('거절되었습니다.');
+			}
+			
+			location.reload();
+			opener.location.reload();
+		},
+		error:function(){
+			alert("에러발생!!")
+		}
+		});
+    }
  }
 </script>
 <body>

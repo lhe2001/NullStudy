@@ -34,6 +34,10 @@ public interface TeamService {
 
 	int deleteTeam(int t_key);
 
+	boolean alreadyRequest(MemberRequestDTO dto);
+
+	int rejectMember(MemberRequestDTO dto);
+
 
 
 }

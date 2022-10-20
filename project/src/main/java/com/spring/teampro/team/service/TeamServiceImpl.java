@@ -151,6 +151,17 @@ public class TeamServiceImpl implements TeamService {
 		return dao.memberRequest(dto);
 	}
 
+	//이미 가입요청했는가?
+	@Override
+	public boolean alreadyRequest(MemberRequestDTO dto) {
+		boolean result = false;
+		int count = dao.alreadyRequest(dto);
+		if(count > 0) {
+			result = true;
+		}
+		return result;
+	}
+	
 	//가입요청이 있는가?
 	@Override
 	public int anyAlarm(int t_key) {
@@ -171,6 +182,11 @@ public class TeamServiceImpl implements TeamService {
 		return dao.updateMemberCount(t_key);
 	}
 
+	//멤버 거절하기
+	@Override
+	public int rejectMember(MemberRequestDTO dto) {
+		return dao.rejectMember(dto);
+	}
 
 
 }

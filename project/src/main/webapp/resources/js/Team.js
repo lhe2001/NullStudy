@@ -58,8 +58,9 @@ function leWrite(){
         document.querySelector(".reivseWrite").classList.add("hide");
         document.querySelector(".leadersWrite").classList.remove("hide");
     })
-    document.querySelector(".reivseWrite input[type='submit']").addEventListener("click",function(){
-        const revise2 = confirm('수정 하시겠습니까?')
+    document.querySelector(".reivseWrite .rBtn2").addEventListener("click",function(event){
+        event.preventDefault();
+        const revise2 = confirm('수정 하시겠습니까???')
         if(revise2 == true){
         	let t_key = $(".t_key").val();
         	let t_lMemo = $(".lMemo").val();
@@ -88,7 +89,7 @@ function leWrite(){
 //멤버탈퇴
 function kickMemberOut(tm_key){
 	 const revise3 = confirm('정말 강퇴 시키시겠습니까?')
-	 let t_key = $(".t_keyCL").val();
+	 let t_key = $(".t_key").val();
 	 if(revise3 == true){
         	console.log(tm_key);
         	let info = { 
@@ -110,8 +111,6 @@ function kickMemberOut(tm_key){
 			});
         }
 }
-
-
 
 //오늘의 요약 수정
 function dailyMemoRevise(){

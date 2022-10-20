@@ -16,7 +16,7 @@
             <div id="teamInfo" class="teamInfoBox ">
             <form name="frmDel">
 		    <div class="deleteTeamBtn" onClick="delTeam()">현재팀 삭제</div>
-		    <input type="hidden" name="t_key" class="t_keyCL" value="${teamInfo.t_key }">
+		    <input type="hidden" name="t_key" class="t_key" value="${teamInfo.t_key }">
 		    </form>
                 <table>
                     <tr>
@@ -104,7 +104,7 @@
         </div>
         <div class="LeaderMenu reivseWrite hide">
                 ${teamInfo.nickName }님의 공지사항: <input type="text" class="lMemo" required><br>
-                <input type="submit" class="rBtn2" value="수정">
+                <input type="button" class="rBtn2" value="수정">
                 <input type="button" class="leBack" value="취소">
         </div>
         <div id="memberWrapper">
