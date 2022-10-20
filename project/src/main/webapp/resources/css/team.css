@@ -9,6 +9,7 @@
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
     width:100px;
     text-align:center;
+    cursor:pointer;
 }
 /* teamDetail page */
 #team_Wrapper {

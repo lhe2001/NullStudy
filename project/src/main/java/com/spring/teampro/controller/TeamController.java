@@ -11,10 +11,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
 import com.spring.teampro.team.service.TeamService;
 
@@ -97,7 +99,29 @@ public class TeamController {
 		List list = service.getRequestList(t_key);
 		model.addAttribute("requestList", list);
 		
-	return "teamPage/memberRequest";
+		return "teamPage/memberRequest";
+	}
+	
+	//>>>>>>>>>>>>>>>>team개설 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+	
+	//createTeam.jsp로 가기
+	@RequestMapping(value="/team/createForm.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String createForm(
+			Model model
+			) {
+		return "createTeam";
+	}
+	
+	//팀생성하기!
+	@RequestMapping(value="/team/newTeam.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String newTeam(@ModelAttribute("teamInfo") TeamInfoDTO dto,
+			Model model
+			) {
+		logger.info("팀생성하기!>>>>>>>>>"+dto.getT_name());
+		
+		service.addNewTeam(dto);
+		
+		return "redirect:/team/allTeamList.do";
 	}
 	
 	

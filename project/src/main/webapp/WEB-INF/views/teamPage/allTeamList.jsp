@@ -61,7 +61,7 @@
         <a href="">4</a>
     </div>
 	</div>
-	<div class="newTeam" onclick="location.href='CreateTeam.jsp'">
+	<div class="newTeam" onclick="location.href='/project/team/createForm.do'">
         새로운팀 개설하러 가기<br>
     </div>
 </div>

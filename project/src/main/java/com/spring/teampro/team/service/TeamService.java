@@ -38,6 +38,8 @@ public interface TeamService {
 
 	int rejectMember(MemberRequestDTO dto);
 
+	int addNewTeam(TeamInfoDTO dto);
+
 
 
 }

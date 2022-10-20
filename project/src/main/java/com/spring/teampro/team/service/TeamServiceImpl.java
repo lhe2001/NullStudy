@@ -188,5 +188,10 @@ public class TeamServiceImpl implements TeamService {
 		return dao.rejectMember(dto);
 	}
 
+	@Override
+	public int addNewTeam(TeamInfoDTO dto) {
+		return dao.addNewTeam(dto);
+	}
+
 
 }

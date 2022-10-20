@@ -131,6 +131,16 @@ public class TeamDAOImpl implements TeamDAO {
 		return sqlSession.insert("mapper.team.memberRequest",dto);
 	}
 
+	//새팀 생성하고 member넣기
+	@Override
+	public int addNewTeam(TeamInfoDTO dto) {
+		sqlSession.insert("mapper.team.addNewTeam_team",dto);
+		int t_key = sqlSession.selectOne("mapper.team.addNewTeam_teamkey",dto);
+		dto.setT_key(t_key);
+		
+		return sqlSession.insert("mapper.team.addNewTeam_member",dto);
+	}
+
 	
 
 

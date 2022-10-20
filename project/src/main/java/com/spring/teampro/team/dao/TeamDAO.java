@@ -38,6 +38,8 @@ public interface TeamDAO {
 
 	int rejectMember(MemberRequestDTO dto);
 
+	int addNewTeam(TeamInfoDTO dto);
+
 
 
 }
