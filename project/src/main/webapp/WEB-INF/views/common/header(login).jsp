@@ -16,6 +16,7 @@
     <script>
     $(function(){
     	bind();
+    	idcheck();
     })
     
     function bind(){
