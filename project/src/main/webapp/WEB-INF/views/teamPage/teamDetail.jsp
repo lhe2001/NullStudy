@@ -75,7 +75,7 @@
                     <td style="text-decoration:underline;">D-DAY</td>
                 </tr>
                 <tr>
-                    <td style="font-size:40px; color:#ff580b;">-280</td>
+                    <td class="dDate" style="font-size:40px; color:#ff580b;"></td>
                 </tr>
             </table>
         </div>
@@ -83,7 +83,7 @@
             <ul>
                 <li>팀 게시판</li>
                 <li>일정등록</li>
-                <li>D-Day 수정</li>
+                <li id="newMemberAlert" onClick="reviseDday(${teamInfo.t_key})">D-Day 수정</li>
                 <li>투표하기</li>
                 <li>챌린지 수정</li>
                 <c:if test="${anyAlarm == 0 }">

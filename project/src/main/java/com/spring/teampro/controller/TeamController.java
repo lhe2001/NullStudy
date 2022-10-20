@@ -1,5 +1,6 @@
 package com.spring.teampro.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,7 +92,7 @@ public class TeamController {
 	return "allTeamList";
 	}
 	
-	//팀원 신청 페이지로 이동.
+	//팀원 신청 팝업 이동.
 	@RequestMapping(value="/team/newRequest.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String newRequest(@RequestParam("t_key") int t_key,
 			Model model
@@ -100,6 +101,19 @@ public class TeamController {
 		model.addAttribute("requestList", list);
 		
 		return "teamPage/memberRequest";
+	}
+	
+	//디데이 수정 팝업 이동.
+	@RequestMapping(value="/team/reviseDday.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String reviseDday(@RequestParam("t_key") int t_key,
+			Model model
+			) {
+		
+		String dDay = service.getTDay(t_key);
+		model.addAttribute("dDay", dDay);
+		model.addAttribute("t_key", t_key);
+		
+		return "teamPage/dDayForm";
 	}
 	
 	//>>>>>>>>>>>>>>>>team개설 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
