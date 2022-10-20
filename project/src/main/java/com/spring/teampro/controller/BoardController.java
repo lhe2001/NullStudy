@@ -78,7 +78,6 @@ public class BoardController{
 		List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);
 		System.out.println("articlesList.size() = " + articlesList.size());
 		
-		
 		session=request.getSession();
 		SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 		for (int i = 0; i < articlesList.size(); i++) {
