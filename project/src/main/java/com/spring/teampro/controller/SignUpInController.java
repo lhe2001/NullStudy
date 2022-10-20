@@ -272,7 +272,7 @@ public class SignUpInController {
 		dto.setEmail(email);
 		
 		signUpInService.doModMember(dto);
-		model.addAttribute("list", signUpInService.getMemberList());
+		model.addAttribute("list", signUpInService.getListById(id));
 		return "memberList";
 	}
 	
