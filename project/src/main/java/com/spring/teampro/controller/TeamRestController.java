@@ -57,14 +57,9 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 	}
 	
 	@RequestMapping(value="/teamRest/removeMember.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public int updateTeamInfo(@RequestBody TeamMemberDTO dto
+	public int removeMember(@RequestBody TeamMemberDTO dto
 			) {
-		int result = -1;
-		int tm_key = dto.getTm_key();
-		
-		result = service.removeMember(tm_key);
-		
-		return result;
+		return service.removeMember(dto);
 	}
 	
 	@RequestMapping(value="/teamRest/memberList.do", method= {RequestMethod.GET, RequestMethod.POST})

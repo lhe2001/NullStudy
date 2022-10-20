@@ -66,6 +66,17 @@ public class TeamDAOImpl implements TeamDAO {
 	public int updateTeamInfo(TeamInfoDTO dto) {
 		return sqlSession.update("mapper.team.updateTeamInfo",dto);
 	}
+	
+	//팀멤버수 업데이트 하기
+	@Override
+	public int updateMemberCount(int t_key) {
+		int count = sqlSession.selectOne("mapper.team.getMemberCount",t_key);
+		TeamInfoDTO dto = new TeamInfoDTO();
+		logger.info("count>>>>>>>>>>>>>>>>>>>>:"+count);
+		dto.setT_key(t_key);
+		dto.setT_number(count);
+		return sqlSession.update("mapper.team.updateMemberCount",dto);
+	}
 
 	//조장한마디 업데이트 하기
 	@Override
@@ -76,7 +87,6 @@ public class TeamDAOImpl implements TeamDAO {
 	//가입요청을 수락하기
 	@Override
 	public int acceptMember(MemberRequestDTO dto) {
-		
 		sqlSession.update("mapper.team.accpetMember",dto);
 		return sqlSession.insert("mapper.team.addTeamMember",dto);
 	}
@@ -84,12 +94,16 @@ public class TeamDAOImpl implements TeamDAO {
 	//>>>>>>>>>>>>>>>DELETE 삭제하기>>>>>>>>>>>>>>
 	//멤버 강퇴하기 
 	@Override
-	public int removeMember(int tm_key) {
-		return sqlSession.delete("mapper.team.removeMember",tm_key);
+	public int removeMember(TeamMemberDTO dto) {
+		sqlSession.delete("mapper.team.removeMember",dto);
+		int t_key = dto.getT_key();
+		logger.info("t_key>>>>>>>>>"+t_key);
+		return this.updateMemberCount(t_key);
 	}
 	//팀삭제
 	@Override
 	public int deleteTeam(int t_key) {
+		sqlSession.delete("mapper.team.deleteTeam_request",t_key);
 		sqlSession.delete("mapper.team.deleteTeam_member",t_key);
 		return sqlSession.delete("mapper.team.deleteTeam_team",t_key);
 	}

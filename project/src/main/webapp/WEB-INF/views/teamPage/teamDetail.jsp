@@ -16,7 +16,7 @@
             <div id="teamInfo" class="teamInfoBox ">
             <form name="frmDel">
 		    <div class="deleteTeamBtn" onClick="delTeam()">현재팀 삭제</div>
-		    <input type="hidden" name="t_key" class="t_key" value="${teamInfo.t_key }">
+		    <input type="hidden" name="t_key" class="t_keyCL" value="${teamInfo.t_key }">
 		    </form>
                 <table>
                     <tr>
