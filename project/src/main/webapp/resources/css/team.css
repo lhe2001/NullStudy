@@ -452,7 +452,6 @@
     max-width:600px;
     width:600px;
     max-height:430px;
-    border: 1px solid red;
 }
 .allTeamTableWrap #page {
     margin-top: 20px;
@@ -480,7 +479,7 @@
     background-color: #f5f4f4;
 }
 .allTeamTableWrap table button{
-    background-color: #69acc7;
+    background-color: #69c7b5;
     color:white;
     cursor: pointer;
     border: none;

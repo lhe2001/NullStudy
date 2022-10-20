@@ -104,7 +104,7 @@
         </div>
         <div class="LeaderMenu reivseWrite hide">
                 ${teamInfo.nickName }님의 공지사항: <input type="text" class="lMemo" required><br>
-                <input type="submit" class="rBtn2" value="수정">
+                <input type="button" class="rBtn2" value="수정">
                 <input type="button" class="leBack" value="취소">
         </div>
         <div id="memberWrapper">

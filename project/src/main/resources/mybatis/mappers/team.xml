@@ -39,6 +39,16 @@
 		SELECT m.TR_KEY,m.USERKEY ,m.T_KEY ,a.NICKNAME FROM memberRequest m , ALLMEMBER a 
 		WHERE m.userkey = a.userkey AND tr_result ='M' AND t_key = #{t_key}
 	</select>
+	
+	<select id="getMemberCount" resultType="int" parameterType="int">
+		SELECT count(*) FROM TEAMMEMBER
+		WHERE t_key = #{t_key}
+	</select>
+	
+	<select id="alreadyRequest" resultType="int" parameterType="memberRequestDTO">
+		SELECT count(*) FROM memberrequest
+		WHERE t_key=#{t_key} AND userkey= #{userKey} AND tr_result ='M'
+	</select>
 
 <!-- UPDATE -->
 	
@@ -46,6 +56,12 @@
 		update AllTeam
 		set t_intro= #{t_intro} ,t_field=#{t_field}
 		where t_key= #{t_key}
+	</update>
+	
+	<update id="updateMemberCount" parameterType="teamInfoDTO">
+		update allteam
+		set t_number = #{t_number}
+		where t_key = #{t_key}
 	</update>
 	
 	<update id="updateLMemo" parameterType="teamInfoDTO">
@@ -57,6 +73,12 @@
 	<update id="accpetMember" parameterType="memberRequestDTO">
 		UPDATE MEMBERREQUEST 
 		SET TR_RESULT = 'Y'
+		WHERE userKey = #{userKey} AND t_key = #{t_key}
+	</update>
+	
+	<update id="rejectMember" parameterType="memberRequestDTO">
+		UPDATE MEMBERREQUEST 
+		SET TR_RESULT = 'N'
 		WHERE userKey = #{userKey} AND t_key = #{t_key}
 	</update>
 	
@@ -76,9 +98,14 @@
 	
 <!-- DELETE -->
 	
-	<delete id="removeMember" parameterType="int">
+	<delete id="removeMember" parameterType="teamMemberDTO">
 		DELETE FROM teammember
 		WHERE tm_key= #{tm_key}
+	</delete>
+	
+	<delete id="deleteTeam_request" parameterType="int">
+		DELETE FROM memberRequest
+		WHERE t_key= #{t_key}
 	</delete>
 	
 	<delete id="deleteTeam_member" parameterType="int">
@@ -86,7 +113,7 @@
 		WHERE t_key= #{t_key}
 	</delete>
 	
-		<delete id="deleteTeam_team" parameterType="int">
+	<delete id="deleteTeam_team" parameterType="int">
 		DELETE FROM allTeam
 		WHERE t_key= #{t_key}
 	</delete>

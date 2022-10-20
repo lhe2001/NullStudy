@@ -115,21 +115,18 @@ public class SignUpInDAOImpl implements SignUpInDAO {
 	
 	@Override
 	public List<SignUpInDTO> listById(String keyword) {
-		System.out.println("listById실행 키워드: "+keyword);
 		List list = sqlSession.selectList("mapper.member.listById", keyword);
 		return list;
 	}
 	
 	@Override
 	public List<SignUpInDTO> listByName(String keyword) {
-		System.out.println("listByName실행 키워드: "+keyword);
 		List list = sqlSession.selectList("mapper.member.listByName", keyword);
 		return list;
 	}
 	
 	@Override
 	public List<SignUpInDTO> listByBoth(String keyword) {
-		System.out.println("listByBoth실행 키워드: "+keyword);
 		List list = sqlSession.selectList("mapper.member.listByBoth", keyword);
 		return list;
 	}
