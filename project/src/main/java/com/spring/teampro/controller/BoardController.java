@@ -205,12 +205,12 @@ public class BoardController{
 					String value = multipartRequest.getParameter(name);
 					map.put(name, value);
 					System.out.print(name + " : " + multipartRequest.getParameter(name) + "     ");
-//					if(mulipartRequest.getParameter("b_field").equals("30")) {
-//						int b_articlePwd = Integer.parseInt(mulipartRequest.getParameter("b_articlePwd"));
-//							if (b_articlePwd != -1) {
-//									map.put("b_articlePwd", b_articlePwd);
-//							}
-//					}
+					if(multipartRequest.getParameter("b_field").equals("30")) {
+						int b_articlePwd = Integer.parseInt(multipartRequest.getParameter("b_articlePwd"));
+							if (b_articlePwd != -1) {
+									map.put("b_articlePwd", b_articlePwd);
+							}
+					}
 				}
 				String b_imageFile = upload(multipartRequest);
 				System.out.println("b_imageFile = " + b_imageFile);
@@ -425,11 +425,11 @@ public class BoardController{
 					int field = boardDTO.getB_field();
 					System.out.println("boardDTO.getSearch_bar() = " + boardDTO.getSearch_bar());
 					String search_bar =  boardDTO.getSearch_bar();
-					// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체
 					System.out.println("field = " + field);
 					System.out.println("search_bar = " + search_bar);
 					List<BoardDTO> searchList = null;
 					PageDTO pdto = null;
+					// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
 					if(field == 1 || field == 2 || field == 3 || field == 4) {
 //						BoardDTO dto = new BoardDTO();
 						pdto = new PageDTO(pageNum, amount, totalCount);

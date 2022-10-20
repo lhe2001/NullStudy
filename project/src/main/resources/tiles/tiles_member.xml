@@ -54,10 +54,8 @@
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/teamPage/teamDetail.jsp" />
    </definition>
-<<<<<<< HEAD
-=======
 <!-- <<<<<<< .merge_file_a04088 -->
->>>>>>> master
+
    <!-- 마이스터디 페이지로  -->
 <!-- ======= -->
 
@@ -68,8 +66,6 @@
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/mystudy/myStudy.jsp" />
    </definition>   
-<<<<<<< HEAD
-=======
 <!-- <<<<<<< .merge_file_a04088 -->
 <!-- ======= -->
    
@@ -80,6 +76,5 @@
       <put-attribute name="body" value="/WEB-INF/views/mystudy/modMemo.jsp" />
    </definition> 
 <!-- >>>>>>> .merge_file_a13196 -->
->>>>>>> master
 
 </tiles-definitions>
