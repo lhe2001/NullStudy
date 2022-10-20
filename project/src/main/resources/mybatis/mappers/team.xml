@@ -100,7 +100,15 @@
 	
 	<delete id="removeMember" parameterType="teamMemberDTO">
 		DELETE FROM teammember
-		WHERE tm_key= #{tm_key}
+		<where>
+		<if test="tm_key != 0 ">
+		and tm_key= #{tm_key}
+		</if>
+		<if test="userKey !=0 ">
+		and userKey= #{userKey}
+		</if>
+		and t_key = #{t_key}
+		</where>
 	</delete>
 	
 	<delete id="deleteTeam_request" parameterType="int">

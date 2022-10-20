@@ -29,6 +29,7 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 	@Autowired
 	TeamService service;
 
+	//나의팀List
 	@RequestMapping(value="/teamRest/myTeamList.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public List myTeamList(HttpServletRequest request, HttpServletResponse response
 			) {
@@ -42,6 +43,7 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		return list;
 	}
 	
+	//팀정보 Update
 	@RequestMapping(value="/teamRest/updateTeamInfo.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public int updateTeamInfo(@RequestBody TeamInfoDTO dto
 			) {
@@ -59,12 +61,14 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		return result;
 	}
 	
+	//멤버강퇴
 	@RequestMapping(value="/teamRest/removeMember.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public int removeMember(@RequestBody TeamMemberDTO dto
 			) {
 		return service.removeMember(dto);
 	}
 	
+	//멤버리스트 가져오기
 	@RequestMapping(value="/teamRest/memberList.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public Map memberList(@RequestBody TeamMemberDTO dto,
 			HttpServletRequest request, HttpServletResponse response

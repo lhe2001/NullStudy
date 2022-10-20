@@ -108,9 +108,12 @@ public class TeamDAOImpl implements TeamDAO {
 	//멤버 강퇴하기 
 	@Override
 	public int removeMember(TeamMemberDTO dto) {
-		sqlSession.delete("mapper.team.removeMember",dto);
+		int remove = sqlSession.delete("mapper.team.removeMember",dto);
 		int t_key = dto.getT_key();
 		logger.info("t_key>>>>>>>>>"+t_key);
+		logger.info("tm_key>>>>>>>>>"+dto.getTm_key());
+		logger.info("userkey>>>>>>>>>"+dto.getuserKey());
+		logger.info("removeMember>>>>>>>>>"+remove);
 		return this.updateMemberCount(t_key);
 	}
 	//팀삭제

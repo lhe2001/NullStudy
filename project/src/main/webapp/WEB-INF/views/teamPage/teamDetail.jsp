@@ -94,7 +94,7 @@
                 	<div id="alarm">${anyAlarm }</div>
                 </c:if>
                 </li>
-                <li>탈퇴하기</li>
+                <li onClick="leaveTeam(${teamInfo.t_key})">탈퇴하기</li>
             </ul>
         </div>
     </div>
