@@ -13,24 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-    <script>
-    $(function(){
-    	bind();
-    	idcheck();
-    })
-    
-    function bind(){
-    	$("#login_btn").off("click").on("click", function(){
-    		location.href = '/project/moveToSignIn.do'
-    	})
-    	
-    	$("#signUp_btn").off("click").on("click", function(){
-    		location.href = '/project/moveToSignUp.do'
-    	})
-    	
-    }
-    
-    </script>
+
     
 </head>
 <body>
@@ -63,8 +46,8 @@
                             </ul>
                         </div>
                     </li>
-                    <li><button id="login_btn" type="button">로그인</button></li>
-                    <li><button id="signUp_btn" type="button">회원가입</button></li>
+                    <li><a href="/project/moveToSignIn.do"><button id="login_btn" type="button">로그인</button></a></li>
+                    <li><a href="/project/moveToSignUp.do"><button id="signUp_btn" type="button">회원가입</button></a></li>
                 </ul>
             </nav>
         </header>
