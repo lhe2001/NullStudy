@@ -18,6 +18,9 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
+	$(function(){
+		signUpCheck();
+	})
 	
 	function signUpCheck(){
 		

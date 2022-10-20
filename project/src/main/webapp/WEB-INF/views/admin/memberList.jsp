@@ -8,7 +8,6 @@
     
  <script>
 
-
         function select(){
             $(".searchbox").off("change").on("change",function(){
                 let selected = $(".searchbox").val();

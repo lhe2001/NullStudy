@@ -17,7 +17,6 @@
 <script type="text/javascript">
         window.onload = function(){
             header();
-            pagemove();
             select();
         }
 
@@ -62,17 +61,6 @@
             }
         }
         
-        function pagemove(){
-        	$("#memberview").off("click").on("click", function(){
-        		location.href = '/project/memberList.do'
-        	})
-        	
-        	$("#studyview").off("click").on("click", function(){
-        		location.href = '/project/studyList.do'
-        	})
-        	
-        }
-        
 </script>
 </head>
 <body>
@@ -84,8 +72,8 @@
                     <li class="navtap">관리메뉴<i class="fa-solid fa-book-open"></i>
                         <div class="drop l1">
                             <ul>
-                               <li id="memberview">회원관리</li>
-                               <li id="studyview">스터디관리</li>
+                               <li id="memberview"><a href="/project/memberList.do">회원관리</a></li>
+                               <li id="studyview"><a href="/project/studyList.do">스터디관리</a></li>
                             </ul>
                         </div>
                     </li>
