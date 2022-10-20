@@ -30,5 +30,7 @@ public interface TeamDAO {
 
 	int acceptMember(MemberRequestDTO dto);
 
+	int deleteTeam(int t_key);
+
 
 }

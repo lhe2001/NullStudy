@@ -32,5 +32,7 @@ public interface TeamService {
 
 	int acceptMember(MemberRequestDTO dto);
 
+	int deleteTeam(int t_key);
+
 
 }

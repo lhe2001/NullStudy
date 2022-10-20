@@ -81,6 +81,15 @@
 		WHERE tm_key= #{tm_key}
 	</delete>
 	
+	<delete id="deleteTeam_member" parameterType="int">
+		DELETE FROM TEAMMEMBER
+		WHERE t_key= #{t_key}
+	</delete>
+	
+		<delete id="deleteTeam_team" parameterType="int">
+		DELETE FROM allTeam
+		WHERE t_key= #{t_key}
+	</delete>
 	
 	
 </mapper>

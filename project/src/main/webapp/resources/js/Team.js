@@ -133,3 +133,15 @@ function newMemberRequest(t_key){
 	window.open('/project/team/newRequest.do?t_key='+t_key,'pop','location=no,width=500,height=300,top=100,left=100,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
 
+//팀삭제
+function delTeam(){
+	const del = confirm('정말 이 팀을 삭제하시겠습니까?');
+	
+	if(del == true){
+		let frmDel = document.frmDel;
+		frmDel.method="post";
+		frmDel.action="/project/team/delTeam.do";
+		frmDel.submit();
+	}
+}
+

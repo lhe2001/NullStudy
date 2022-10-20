@@ -23,6 +23,7 @@ public class TeamServiceImpl implements TeamService {
 	@Autowired
 	TeamDAO dao;
 	
+	//>>>>>>>>>>>>>>>>팀 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	//나의 팀 리스트
 	@Override
 	public List getMyTeamList(int userkey) {
@@ -73,40 +74,18 @@ public class TeamServiceImpl implements TeamService {
 		return dto;
 	}
 
-	//팀 멤버 정보 가져오기
-	@Override
-	public List getTeamMemberInfo(int t_key) {
-		
-		List list = dao.getTeamMemberInfo(t_key);
-		
-		for(int i=0; i<list.size(); i++) {
-			TeamMemberDTO memberDTO = (TeamMemberDTO) list.get(i);
-			Date lastTime = memberDTO.getLastTime();
-			SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd hh:mm a");
-			String time = format.format(lastTime);
-			memberDTO.setLastTime2(time);
-		}
-		return list;
-	}
-
 	//팀정보 업데이트 하기
 	@Override
 	public int updateTeamInfo(TeamInfoDTO dto) {
 		return dao.updateTeamInfo(dto);
 	}
-
+		
 	//조장한마디 업데이트 하기 
 	@Override
 	public int updateLMemo(TeamInfoDTO dto) {
 		return dao.updateLMemo(dto);
 	}
-
-	//멤버 강퇴
-	@Override
-	public int removeMember(int tm_key){
-		return dao.removeMember(tm_key);
-	}
-
+	
 	//전체 팀리스트 가져오기
 	@Override
 	public List getAllTeamList() {
@@ -136,6 +115,36 @@ public class TeamServiceImpl implements TeamService {
 		return list;
 	}
 
+	//팀삭제
+	@Override
+	public int deleteTeam(int t_key) {
+		return dao.deleteTeam(t_key);
+	}
+	
+	//>>>>>>>>>>>>>>>>팀멤버 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+	//팀 멤버 정보 가져오기
+	@Override
+	public List getTeamMemberInfo(int t_key) {
+		
+		List list = dao.getTeamMemberInfo(t_key);
+		
+		for(int i=0; i<list.size(); i++) {
+			TeamMemberDTO memberDTO = (TeamMemberDTO) list.get(i);
+			Date lastTime = memberDTO.getLastTime();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd hh:mm a");
+			String time = format.format(lastTime);
+			memberDTO.setLastTime2(time);
+		}
+		return list;
+	}
+
+	//멤버 강퇴
+	@Override
+	public int removeMember(int tm_key){
+		return dao.removeMember(tm_key);
+	}
+
+	//>>>>>>>>>>>>>>>>팀가입요청 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	//가입요청하기
 	@Override
 	public int requestMember(MemberRequestDTO dto) {
@@ -159,6 +168,7 @@ public class TeamServiceImpl implements TeamService {
 	public int acceptMember(MemberRequestDTO dto) {
 		return dao.acceptMember(dto);
 	}
+
 
 
 }

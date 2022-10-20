@@ -14,8 +14,10 @@
 	<div id="team_Wrapper">
 	    <div id="fstWrapper">
             <div id="teamInfo" class="teamInfoBox ">
-		    <a class="deleteTeamBtn"  href='/teampro/teamcd/delTeam'>현재팀 삭제</a>
-		    <input type="hidden" class="t_key" value="${teamInfo.t_key }">
+            <form name="frmDel">
+		    <div class="deleteTeamBtn" onClick="delTeam()">현재팀 삭제</div>
+		    <input type="hidden" name="t_key" class="t_key" value="${teamInfo.t_key }">
+		    </form>
                 <table>
                     <tr>
                         <td>팀 이름</td>
