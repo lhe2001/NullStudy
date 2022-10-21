@@ -38,11 +38,11 @@
 			</tr>
 			<tr>
 				<td>
-					<button type="button" 
+					<button class="Detailbtn" type="button" 
 							onclick="location.href='updateForm.do?m_schedule_key=${sdto.m_schedule_key }'">수정</button>
-					<button type="button" onclick="location.href='calMuldel.do?seq=${sdto.m_schedule_key }'">삭제</button>
-					<button type="button" onclick="location.href='calBoardList.do'">목록</button>
-					<button type="button" onclick="location.href='calendar.do?year=${sessionScope.ymd.year }&month=${sessionScope.ymd.month}'">달력</button>
+					<button  class="Detailbtn" type="button" onclick="location.href='calMuldel.do?seq=${sdto.m_schedule_key }'">삭제</button>
+					<button  class="Detailbtn" type="button" onclick="location.href='calBoardList.do'">목록</button>
+					<button  class="Detailbtn" type="button" onclick="location.href='calendar.do?year=${sessionScope.ymd.year }&month=${sessionScope.ymd.month}'">달력</button>
 				</td>
 			<tr>		
 		</table>

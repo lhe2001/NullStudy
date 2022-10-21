@@ -9,7 +9,6 @@
     #allList{
         margin: auto;
         max-width: 1000px;
-        min-width: 1000px;
         hegiht: 500px;
     }
 
@@ -89,7 +88,6 @@
         outline: none;
         background-color: #EE6983;
         color: white;
-        
     }
     
     #ListDelbtn:hover{
@@ -129,8 +127,8 @@
 		max-width: 1530px;
 	}
 	#calDeContent{
-		max-width: 1000px;
-		min-width: 1000px;
+		padding-top: 30px;
+		max-width:  1530px;
 	}
 	#tbdetail{
 		margin: auto;
@@ -141,17 +139,126 @@
 	}
 	
 	#tbdetail th{
-	padding: 10px 0;
+		padding: 10px 0;
 	}
 	
 	#tbdetail th > p {
-/* 		background-color: #FFC4C4; */
 		width: 50%;
 		margin-left: 130px;
 		overflow: auto;
-		background: linear-gradient(to bottom left, #FFE6F7, #FFC4C4);
+		background: linear-gradient(#FFE6F7, #FFC4C4);
+		color: #353866;
 	}
 	
 	#tbdetail td{
 		padding: 20px 0;
+		overflow: auto;
+		color: #353866;
 	}
+	
+	
+	 .Detailbtn{
+        width: 50px;
+        height: 30px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 14px;
+        font-weight: bolder;
+        margin-left: 15px;
+        border: none;
+        outline: none;
+        background-color: #FFABE1; 
+        color: white;
+    }
+    
+    .Detailbtn:hover{
+    	background-color: #EE6983;
+    }
+	
+/* 	일정입력,수정폼 */
+	.calinupWrap{
+		max-width: 1530px;
+	}
+	
+	.calinupContent{
+		padding-top: 30px;
+		max-width: 1530px;
+	}
+	
+	.calinupTB{
+		margin:auto;
+		max-width: 500px;
+		min-width: 500px;
+		background-color: #FFE6F7;
+		padding: 20px 0;
+		text-align: center;
+	}
+	
+	.calinupTB td{
+		padding-bottom: 10px;
+	}
+	
+	.calinupTB th{
+		padding: 10px 0;
+	}
+	
+	.ctform{
+		width: 360px;
+		height: 40px;
+		border: none;
+		outline: none;
+		text-align: center;
+	}
+	.cttextarea{
+		border: none; 
+		background-color: white;
+		overflow: auto;
+	}
+	.cselect{
+	  width: 100px;
+	  height: 35px;
+	  padding: 5px 30px 5px 10px;
+	  border-radius: 4px;
+	  outline: 0 none;
+	}
+	
+	 .insertpagebtn{
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 14px;
+        font-weight: bolder;
+        margin-top: 20px;
+        margin-right: 15px;
+        border: none;
+        outline: none;
+        background-color: #FFABE1; 
+        color: white;
+    }
+    
+    .insertpagebtn:hover{
+    	background-color: #EE6983;
+    }
+    
+     .calupBtn{
+     	width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 14px;
+        font-weight: bolder;
+        margin-top: 20px;
+        margin-left: 15px;
+        border: none;
+        outline: none;
+        background-color: #FFABE1; 
+        color: white;
+     }
+     
+     .calupBtn:hover{
+    	background-color: #EE6983;
+     }

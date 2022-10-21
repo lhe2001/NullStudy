@@ -12,28 +12,31 @@
 <link href="/project/resources/css/calList.css" rel="stylesheet">
 </head>
 <body>
+<div class="calinupWrap">
+<div class="calinupContent">
 <form action="calUpdate.do" method="post">
 <input type="hidden" name="m_schedule_key" value="${sdto.m_schedule_key }"/>
-<table border="1">
+<input type="hidden" name="userkey" value="${sdto.m_schedule_key }" />
+<table class="calinupTB">
 	<tr>
-		<td colspan="2"><input type="hidden" name="userkey" value="${sdto.m_schedule_key }" /></td>
+		<th><p>일정요일</p></th>
 	</tr>
 	<tr>
-		<th>일정요일</th>
+		
 		<td>
-			<select name="year" >
+			<select name="year" class="cselect">
 				<c:set var="year" value="${fn:substring(sdto.m_schedule_date,0,4)}" />	
 				<c:forEach var="i" begin="${year-5}" end="${year+5}" step="1">
 					<option ${year == i?"selected":"" } value="${i}">${i}</option>
 				</c:forEach>
 			</select>년
-			<select name="month" >
+			<select name="month" class="cselect">
 				<c:set var="month" value="${fn:substring(sdto.m_schedule_date,5,7)}" />	
 				<c:forEach var="i" begin="1" end="12" step="1">
 					<option ${month == i?"selected":"" } value="${i}">${i}</option>
 				</c:forEach>
 			</select>월
-			<select name="date" >
+			<select name="date" class="cselect">
 				<c:set var="date" value="${fn:substring(sdto.m_schedule_date,8,10)}" />	
 				<c:forEach var="i" begin="1" end="31" step="1">
 					<option ${date == i?"selected":"" } value="${i}">${i}</option>
@@ -42,22 +45,28 @@
 		</td>
 	</tr>
 	<tr>
-		<th>제목</th>
-		<td><input type="text" name="m_schedule_title" value="${sdto.m_schedule_title }"/></td>
+		<th><p>제목</p></th>
 	</tr>
 	<tr>
-		<th>내용</th>
-		<td><textarea name="m_schedule_desc" rows="10" cols="60">${sdto.m_schedule_desc }</textarea></td>
+		<td><input type="text" name="m_schedule_title" value="${sdto.m_schedule_title }" class="ctform"/></td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			<button type="button" onclick="history.back()">목록(취소)</button>
-			<button>수정</button>
-			<button type="button" onclick="location.href='calBoardList.do'">목록가기</button>
-			<button type="button" onclick="location.href='calendar.do?year=${sessionScope.ymd.year }&month=${sessionScope.ymd.month}'">달력</button>
+		<th><p>내용</p></th>
+	</tr>
+	<tr>
+		<td><textarea name="m_schedule_desc" rows="10" cols="60" class="cttextarea">${sdto.m_schedule_desc }</textarea></td>
+	</tr>
+	<tr>
+		<td>
+			<button type="button" onclick="history.back()" class="calupBtn">취소</button>
+			<button type="button" onclick="location.href='calBoardList.do'"  class="calupBtn">목록</button>
+			<button type="button" onclick="location.href='calendar.do?year=${sessionScope.ymd.year }&month=${sessionScope.ymd.month}'"  class="calupBtn">달력</button>
+			<button class="calupBtn">수정</button>
 		</td>	
 	</tr>
 </table>
 </form>
+</div>
+</div>
 </body>
 </html>
