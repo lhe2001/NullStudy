@@ -14,7 +14,7 @@
   <script src="/project/resources/js/main.js"></script>
   <style>
   body {
-  	margin-top:100px;
+  	margin-top:80px;
   }
   </style>
   </head>

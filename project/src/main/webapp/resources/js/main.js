@@ -5,6 +5,7 @@ window.onload = function(){
     header();
     postit();
     bluePostIt();
+    searchSelect();
 }
 
 function header(){
@@ -104,12 +105,22 @@ function bluePostIt(){
 				alert("에러발생!!")
 			}
 		});
-		
-				
-	
-	
-	
-	
-	})
+	});
+}
+
+function searchSelect(){
+    $("#selectValue").off("change").on("change",function(){
+        let selected = $("#selectValue").val();
+        console.log(selected)
+
+        if(selected == "boardSearch" || selected == "userSearch" || selected == "teamSearch"){
+
+            $(".searchNoInput").addClass("hide");
+            $(".searchInput").removeClass("hide");  
+            $(".submitButton").removeClass("hide");  
+
+        }
+
+    })
 }
 
