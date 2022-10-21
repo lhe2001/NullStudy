@@ -5,38 +5,48 @@
 <head>
 <meta charset="UTF-8">
 <title>일정 상세보기</title>
+<script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
+<link href="/project/resources/css/calList.css" rel="stylesheet">
 </head>
 <body>
-<table border="1">
-	<tr>
-		<th>userkey</th>
-		<td>${sdto.userkey }</td>
-	</tr>
-	<tr>
-		<th>제목</th>
-		<td>${sdto.m_schedule_title }</td>
-	</tr>
-	<tr>
-		<th>내용</th>
-		<td>${sdto.m_schedule_desc }</td>
-	</tr>
-	<tr>
-		<th>일정요일</th>
-		<td>${sdto.m_schedule_date }</td>
-	</tr>
-	<tr>
-		<th>작성일</th>
-		<td>${sdto.m_schedule_write }</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<button type="button" 
-					onclick="location.href='updateForm.do?m_schedule_key=${sdto.m_schedule_key }'">수정폼가기</button>
-			<button type="button" onclick="location.href='calBoardList.do'">목록가기</button>
-			<button type="button" onclick="location.href='calendar.do?year=${sessionScope.ymd.year }&month=${sessionScope.ymd.month}'">달력</button>
-			<button type="button" onclick="location.href='calMuldel.do?seq=${sdto.m_schedule_key }'">삭제</button>
-		</td>	
-	</tr> 
-</table>
+<div id="calDetailWrap">
+	<div id="calDeContent">
+		<table id="tbdetail">
+			<tr class="detr">
+				<th><p>일정요일</p></th>
+			</tr>
+			<tr class="detr">
+				<td>${sdto.m_schedule_date }</td>
+			</tr>
+			<tr class="detr">
+				<th><p>제목</p></th>
+			</tr>
+			<tr class="detr">
+				<td>${sdto.m_schedule_title }</td>
+			</tr>
+			<tr class="detr">
+				<th><p>내용</p></th>
+			</tr> 
+			<tr class="detr">
+				<td>${sdto.m_schedule_desc }</td>
+			</tr> 
+			<tr class="detr">
+				<th><p>작성일</p></th>
+			</tr> 
+			<tr class="detr">
+				<td>${sdto.m_schedule_write }</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="button" 
+							onclick="location.href='updateForm.do?m_schedule_key=${sdto.m_schedule_key }'">수정</button>
+					<button type="button" onclick="location.href='calMuldel.do?seq=${sdto.m_schedule_key }'">삭제</button>
+					<button type="button" onclick="location.href='calBoardList.do'">목록</button>
+					<button type="button" onclick="location.href='calendar.do?year=${sessionScope.ymd.year }&month=${sessionScope.ymd.month}'">달력</button>
+				</td>
+			<tr>		
+		</table>
+	</div>
+</div>
 </body>
 </html>

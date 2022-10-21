@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>수정폼</title>
+<script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
+<link href="/project/resources/css/calList.css" rel="stylesheet">
 </head>
 <body>
 <form action="calUpdate.do" method="post">

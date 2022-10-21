@@ -12,6 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <title>일정추가</title>
+<script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
+<link href="/project/resources/css/calList.css" rel="stylesheet">
 <%
 	String pyear = request.getParameter("year");
 	int year = Integer.parseInt(pyear);
