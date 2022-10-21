@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <link rel="stylesheet" href="resources/css/admin(modForm).css" />
+
 <div class="wrap">
 	<div class="tbWrap">
 		<br><br><br>

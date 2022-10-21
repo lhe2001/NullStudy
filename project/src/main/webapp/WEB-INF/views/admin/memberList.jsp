@@ -7,9 +7,12 @@
 <link rel="stylesheet" href="resources/css/admin(member).css" />
     
  <script>
- window.onload = function(){
-     select();
-}
+ window.addEventListener("load", memberListOnload);
+
+  function memberListOnload(){
+	  select();
+  }
+ 
  
         function select(){
             $(".searchbox").off("change").on("change",function(){
@@ -112,7 +115,8 @@
     		<td>${memberList.intro }</td>
     		<td>${memberList.lastTime }</td>
     		<td><a href='/project/modForm.do?id=${memberList.id}'>수정</a></td>
-    		<td><a href='/project/delMember.do?id=${memberList.id}'>삭제</a></td>
+    		<td><a href='/project/delMember.do?id=${memberList.id}' onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a></td>
+    		
     		</tr>
     	</c:forEach>
     	</tbody>
