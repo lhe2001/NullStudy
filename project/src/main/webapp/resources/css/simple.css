@@ -122,6 +122,9 @@
             position: relative;
             top: 45%;
         }
+        .hide{
+		    display: none;
+		}
         
         #selectValue {
            width: 100px;
@@ -502,8 +505,4 @@
             font-size: 18px;
             outline:none;
             cursor: pointer;
-        }
-        
-        #result1{
-        	color: red;
         }

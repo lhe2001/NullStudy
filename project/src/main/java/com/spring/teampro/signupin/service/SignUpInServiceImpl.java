@@ -101,7 +101,6 @@ public class SignUpInServiceImpl implements SignUpInService {
 	
 	@Override
 	public void doDelMember(String id) {
-		System.out.println("서비스 doModMember 실행 ");
 		signUpInDAO.delMember(id);
 	}
 

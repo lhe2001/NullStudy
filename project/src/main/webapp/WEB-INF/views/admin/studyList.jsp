@@ -7,9 +7,11 @@
 <link rel="stylesheet" href="resources/css/admin(study).css" />
  
  <script>
- window.onload = function(){
-     select();
-}
+ window.addEventListener("load", memberListOnload);
+
+ function memberListOnload(){
+	  select();
+ }
         function select(){
             $(".searchbox").off("change").on("change",function(){
                 let selected = $(".searchbox").val();

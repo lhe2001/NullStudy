@@ -45,7 +45,7 @@
 <div id="wrapper">
         <header class="mainHeader">
             <nav>
-                <div class="logo" href="#home"></div>
+                <div class="logo" href="#home" onclick="location.href='/project/'"></div>
                 <ul class="navtap_items">
                     <li class="navtap">My Study <i class="fa-solid fa-book-open"></i>
                         <div class="drop l1">

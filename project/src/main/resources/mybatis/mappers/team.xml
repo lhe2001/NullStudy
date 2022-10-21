@@ -8,8 +8,9 @@
 <!-- SELECT -->
 
 	<select id="myTeamList" resultType="myTeamListDTO" parameterType="int">
-		SELECT a.T_KEY,a.T_NAME,a.T_FIELD , t.USERKEY  FROM TEAMMEMBER t , ALLTEAM a
+		SELECT a.t_number, a.T_KEY,a.T_NAME,a.T_FIELD , t.USERKEY,to_char(t.TM_JOINDATE,'YYYY-MM-DD')AS TM_JOINDATE  FROM TEAMMEMBER t , ALLTEAM a
 		WHERE t.T_KEY = a.T_KEY AND t.userkey= #{userkey}
+		order by t.TM_JOINDATE
 	</select>
 	
 	<select id="teamInfo" resultType="teamInfoDTO" parameterType="int">
@@ -28,6 +29,7 @@
 		SELECT a.T_KEY ,a.T_NAME ,a.T_INTRO ,a.T_FIELD ,a.T_NUMBER  ,a2.NICKNAME   
 		FROM ALLTEAM a ,allmember a2
 		WHERE a.USERKEY = a2.USERKEY
+		order by t_create desc
 	</select>
 	
 	<select id="anyAlarm" resultType="int" parameterType="int">
@@ -49,7 +51,33 @@
 		SELECT count(*) FROM memberrequest
 		WHERE t_key=#{t_key} AND userkey= #{userKey} AND tr_result ='M'
 	</select>
-
+	
+	<select id="addNewTeam_teamkey" resultType="int" parameterType="teamInfoDTO">
+		select t_key from allteam
+		where t_name= #{t_name}
+	</select>
+	
+	<select id="getTDay" resultType="String" parameterType="int">
+		select to_char(t_day, 'YYYY-MM-DD')AS t_day from allteam
+		where t_key = #{t_key}
+	</select>
+	
+	<select id="existTeamName" resultType="int" parameterType="String">
+		SELECT count(*) FROM ALLteam
+		WHERE t_name = #{t_name}
+	</select>
+	
+	<select id="getMyRequest_wait" resultType="memberRequestDTO" parameterType="int">
+		SELECT m.tr_key,m.userkey,m.T_KEY,a.T_NAME ,a.T_FIELD  FROM memberRequest m, ALLTEAM a 
+		WHERE TR_RESULT ='M' AND m.T_KEY = a.T_KEY and m.userkey=#{userKey}
+	</select>
+	
+	<select id="getMyRequest_reject" resultType="memberRequestDTO" parameterType="int">
+		SELECT m.tr_key,m.userkey,m.T_KEY,a.T_NAME ,a.T_FIELD  FROM memberRequest m, ALLTEAM a 
+		WHERE TR_RESULT ='N' AND m.T_KEY = a.T_KEY and m.userkey=#{userKey}
+	</select>
+	
+	
 <!-- UPDATE -->
 	
 	<update id="updateTeamInfo" parameterType="teamInfoDTO">
@@ -82,6 +110,12 @@
 		WHERE userKey = #{userKey} AND t_key = #{t_key}
 	</update>
 	
+	<update id="updateDday" parameterType="TeamInfoDTO">
+		update allteam
+		set t_day= #{t_day}
+		where t_key= #{t_key}
+	</update>
+	
 <!-- INSERT -->
 
 	<insert id="memberRequest" parameterType="memberRequestDTO">
@@ -96,11 +130,31 @@
 		values(tm_key_seq.nextval,#{t_key},sysdate,#{userKey})
 	</insert>
 	
+	<insert id="addNewTeam_team" parameterType="teamInfoDTO">
+		insert into AllTeam
+		(t_key,t_name,t_intro,t_field,t_number,t_lmemo,userkey)
+		values(t_key_seq.nextval,#{t_name},#{t_intro},#{t_field},1,'수정해주세요',#{userKey})
+	</insert>
+	
+	<insert id="addNewTeam_member" parameterType="teamInfoDTO">
+		insert into TEAMMEMBER
+		(tm_key,t_key,userkey)
+		values(tm_key_seq.nextval,#{t_key},#{userKey})
+	</insert>
+	
 <!-- DELETE -->
 	
 	<delete id="removeMember" parameterType="teamMemberDTO">
 		DELETE FROM teammember
-		WHERE tm_key= #{tm_key}
+		<where>
+		<if test="tm_key != 0 ">
+		and tm_key= #{tm_key}
+		</if>
+		<if test="userKey !=0 ">
+		and userKey= #{userKey}
+		</if>
+		and t_key = #{t_key}
+		</where>
 	</delete>
 	
 	<delete id="deleteTeam_request" parameterType="int">
@@ -118,5 +172,9 @@
 		WHERE t_key= #{t_key}
 	</delete>
 	
+	<delete id="deleteRequest" parameterType="memberRequestDTO">
+		DELETE FROM memberRequest
+		WHERE tr_key= #{tr_key}
+	</delete>
 	
 </mapper>

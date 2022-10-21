@@ -3,6 +3,7 @@ package com.spring.teampro.team.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +27,29 @@ public class TeamServiceImpl implements TeamService {
 	//>>>>>>>>>>>>>>>>팀 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	//나의 팀 리스트
 	@Override
-	public List getMyTeamList(int userkey) {
-		return  dao.getMyTeamList(userkey);
+	public List<MyTeamListDTO> getMyTeamList(int userkey) {
+		List<MyTeamListDTO> list =  dao.getMyTeamList(userkey);
 		
+		for(int i=0; i<list.size();i++) {
+			MyTeamListDTO dto =list.get(i);
+			int t_filed = dto.getT_field();
+			
+			switch(t_filed) {
+			case 1:
+				dto.setT_field2("코딩");
+				break;
+			case 2:
+				dto.setT_field2("자격증");
+				break;
+			case 3:
+				dto.setT_field2("토익");
+				break;
+			case 4:
+				dto.setT_field2("기타");
+				break;
+			}
+		}
+		return list;
 	}
 	
 	//내가 속한 팀인가요?
@@ -120,6 +141,16 @@ public class TeamServiceImpl implements TeamService {
 	public int deleteTeam(int t_key) {
 		return dao.deleteTeam(t_key);
 	}
+	//디데이 가져오기
+	@Override
+	public String getTDay(int t_key) {
+		return dao.getTDay(t_key);
+	}
+	//디데이 수정하기
+	@Override
+	public int updateDday(TeamInfoDTO dto) {
+		return dao.updateDday(dto);
+	}
 	
 	//>>>>>>>>>>>>>>>>팀멤버 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	//팀 멤버 정보 가져오기
@@ -142,6 +173,23 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public int removeMember(TeamMemberDTO dto){
 		return dao.removeMember(dto);
+	}
+	
+	//팀개설
+	@Override
+	public int addNewTeam(TeamInfoDTO dto) {
+		return dao.addNewTeam(dto);
+	}
+	
+	//팀이름 중복체크
+	@Override
+	public boolean existTeamName(String t_name) {
+		boolean result = false;
+		int count = dao.existTeamName(t_name);
+		if(count > 0) {
+			result = true;
+		}
+		return result;
 	}
 
 	//>>>>>>>>>>>>>>>>팀가입요청 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
@@ -181,12 +229,79 @@ public class TeamServiceImpl implements TeamService {
 		int t_key = dto.getT_key();
 		return dao.updateMemberCount(t_key);
 	}
-
 	//멤버 거절하기
 	@Override
 	public int rejectMember(MemberRequestDTO dto) {
 		return dao.rejectMember(dto);
 	}
+	//나의 요청 현황
+	@Override
+	public Map getMyRequest(int userkey) {
+		
+		Map map = dao.getMyRequest(userkey);
+		
+		List waitingList = (List) map.get("waitingList");
+		for(int i=0; i<waitingList.size();i++) {
+			MemberRequestDTO dto = (MemberRequestDTO) waitingList.get(i);
+			int t_filed = dto.getT_field();
+			switch(t_filed) {
+			case 1:
+				dto.setT_field2("코딩");
+				break;
+			case 2:
+				dto.setT_field2("자격증");
+				break;
+			case 3:
+				dto.setT_field2("토익");
+				break;
+			case 4:
+				dto.setT_field2("기타");
+				break;
+			}
+		}
+		List rejectList = (List) map.get("rejectList");
+		for(int i=0; i<rejectList.size();i++) {
+			MemberRequestDTO dto = (MemberRequestDTO) rejectList.get(i);
+			int t_filed = dto.getT_field();
+			switch(t_filed) {
+			case 1:
+				dto.setT_field2("코딩");
+				break;
+			case 2:
+				dto.setT_field2("자격증");
+				break;
+			case 3:
+				dto.setT_field2("토익");
+				break;
+			case 4:
+				dto.setT_field2("기타");
+				break;
+			}
+		}
+		
+		return map;
+	}
+	//가입요청 취소하기 & //거절된 요청 삭제하기
+	@Override
+	public int cancleRequest(MemberRequestDTO dto) {
+		return dao.cancleRequest(dto);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
 
 }

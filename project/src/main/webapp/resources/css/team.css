@@ -9,16 +9,15 @@
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
     width:100px;
     text-align:center;
+    cursor:pointer;
 }
 /* teamDetail page */
 #team_Wrapper {
     margin-top: 100px;
-    border: 1px solid red;
     max-width: 1520px;
     margin: auto;
 }
 #fstWrapper{
-    border: 1px solid black;
     display:flex;
 }
 /* team소개 */
@@ -101,6 +100,36 @@
 #dDay table{
     height:130px;
     width:100px;
+}
+.popDday{
+    text-align: center;
+    height:280px;
+    box-sizing: border-box;
+    position: relative;
+    padding: 20px 0;
+    background-color: #FFEEBB;
+    color:#554c33;
+}
+.popDday div {
+    margin:10px 0; 
+}
+.popDday input[type="date"]{
+    width:80%;
+    text-align: center;
+    border: 1px solid #ffdd77;
+    background-color: #ffdd77;
+    height:23px;
+}
+.popDday input[type="button"]{
+    border:none;
+    cursor: pointer;
+    position: absolute;
+    bottom:20px;
+    left:38%;
+    border-radius: 5px;
+    background-color: #ffd92e;
+    width:100px;
+    height:23px;
 }
 #teamMenu{
    height:130px;
@@ -579,6 +608,7 @@
 }
 
 /* 나의팀목록 */
+
 #MyteamWrapper {
     margin-top: 120px;
     text-align: center;
@@ -588,21 +618,94 @@
 }
 .MyTeamTableWrap {
     margin:20px auto;
-    width:300px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
+    width:807px;
+    border: 1px solid rgb(216, 216, 216);
     min-height: 300px;
+    max-height:300px;
     box-sizing: border-box;
+    overflow: auto;
+}
+#MyteamWrapper ::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+#MyteamWrapper ::-webkit-scrollbar-track{
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+#MyteamWrapper  ::-webkit-scrollbar-thumb {
+    background-color: #d9dcee;
+    border-radius: 5px;
+}
+/* 나의팀 목록 테이블*/
+.myteamList {
+	margin:auto;
+	width:800px;
+    overflow: auto;
+    font-size: 14px;
+    border-collapse: collapse;
+}
+.myteamList td{
+  padding:5px 0;
+}
+.myteamList thead tr:first-child{
+    background-color: #CCDDEE;
+}
+.myteamList thead tr:nth-child(2){
+    background-color: #ccddee42;
+}
+.myteamList tbody tr:hover{
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+/* 가입요청 상태 테이블*/
+#requestStatus{
+    margin:30px auto;
+    width:807px;
+    border: 1px solid rgb(216, 216, 216);
+    min-height: 200px;
+    max-height:200px;
+    box-sizing: border-box;
+    overflow: auto;
+    display:flex;
+}
+#requestStatus button {
+    border:none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #d9dcee;
+    color:navy;
+}
+#waiting{
+    margin-left:auto;
+    width:400px;
+    font-size: 14px;
+    border-collapse: collapse;
+    height:0;
+}
+#requestStatus table td{
+    padding:5px 0;
+}
+#waiting thead tr:first-child{
+    background-color: #bcd6d1;
+}
+#waiting thead tr:nth-child(2){
+    background-color: #bcd6d160;
+}
+#reject{
+    margin-right: auto;
+    width:400px;
+    font-size: 14px;
+    border-collapse: collapse;
+    height:0;
+}
+#reject thead tr:first-child{
+    background-color: #FFCCCC;
+}
+#reject thead tr:nth-child(2){
+    background-color: #ffcccc44;
 }
 
-.MyTeamTableWrap table {
-	margin:auto;
-	width:100%;
-	
-}
-.MyTeamTableWrap table td{
-	border-bottom: 1px black dashed;
-	
-}
 /*팀개설 css*/ 
 @media(min-width : 500px)
 {
@@ -612,13 +715,21 @@
     height: 100px;
     font-size: 20px;
 }
-
+#creatteamtable{
+	margin:auto;
+}
 #creatteamtable td{
-    width: 200px;
-    margin-left: auto;
     font-size: 16px;
     font-weight: 700;
-    text-align: center;
+    text-align:left;
+   	padding:20px;
+}
+#creatteamtable td:first-child{
+	text-align: center;
+	width:150px;
+}
+#creatteamtable td:first-child{
+	text-align: center;
 }
 .cre_inputs{
     padding: 10px;
@@ -626,7 +737,16 @@
     background: #fff;
     overflow: auto;
 }
-
+#t_nameCheck{
+    background-color: #69acc7;
+    border: none;
+    color:#fff;
+    cursor: pointer;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top:10px;
+}
 .cre_btn{
     margin-top: 20px;
     margin-left: 30px;
@@ -641,8 +761,11 @@
     border-radius: 5px;
 }
 
-.cre_btn:hover { background-color: #078cc0;}
-
+.cre_btn:hover, #t_nameCheck:hover { background-color: #078cc0;}
+.cre_btn:disabled, #t_nameCheck:disabled {
+	background-color:rgb(206, 206, 206);
+	cursor:not-allowed;
+}
 .crewrap select {
     width: 100px;
     padding: 10px;

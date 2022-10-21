@@ -1,5 +1,7 @@
 package com.spring.teampro.mystudy.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,38 @@ public class ScheduleServiceImpl implements ScheduleService {
 	ScheduleDAO scheduleDAO;
 	
 	@Override
-	public int addNewSchedule(ScheduleDTO scheduleDTO) {
-		logger.info("ScheduleServiceImpl >>  addNewSchedule 실행");
-		return scheduleDAO.insertSchedule(scheduleDTO);
+	public boolean insertCal(ScheduleDTO dto) {
+		return scheduleDAO.insertCal(dto);
+	}
+
+	@Override
+	public List<ScheduleDTO> calBoardList(ScheduleDTO dto) {
+		return scheduleDAO.calBoardList(dto);
+	}
+
+	@Override
+	public ScheduleDTO calDetail(int schedule_key) {
+		return scheduleDAO.calDetail(schedule_key);
+	}
+
+	@Override
+	public boolean calUpdate(ScheduleDTO dto) {
+		return scheduleDAO.calUpdate(dto);
+	}
+
+	@Override
+	public boolean calMuldel(String[] schedule_key) {
+		return scheduleDAO.calMuldel(schedule_key);
+	}
+
+	@Override
+	public int calCount(ScheduleDTO dto) {
+		return scheduleDAO.calCount(dto);
+	}
+	
+	@Override
+	public List<ScheduleDTO> calViewList(ScheduleDTO dto){
+		return scheduleDAO.calViewList(dto);
 	}
 
 }

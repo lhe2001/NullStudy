@@ -8,6 +8,9 @@ public class MemberRequestDTO {
 	private String intro;
 	private String tr_result;
 	private int t_key;
+	private String t_name;
+	private int t_field;
+	private String t_field2;
 	
 	public int getTr_key() {
 		return tr_key;
@@ -44,6 +47,24 @@ public class MemberRequestDTO {
 	}
 	public void setT_key(int t_key) {
 		this.t_key = t_key;
+	}
+	public String getT_name() {
+		return t_name;
+	}
+	public void setT_name(String t_name) {
+		this.t_name = t_name;
+	}
+	public int getT_field() {
+		return t_field;
+	}
+	public void setT_field(int t_field) {
+		this.t_field = t_field;
+	}
+	public String getT_field2() {
+		return t_field2;
+	}
+	public void setT_field2(String t_field2) {
+		this.t_field2 = t_field2;
 	}
 	
 	

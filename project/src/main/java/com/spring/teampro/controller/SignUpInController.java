@@ -40,7 +40,7 @@ public class SignUpInController {
 	
 	//회원가입 메소드 
 	@RequestMapping(value="/signUp.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public String signUp(
+	public String signUp(Model model,
 			@RequestParam("id") String id,
 			@RequestParam("pw") String pw,
 			@RequestParam("re_pw") String rePw,
@@ -65,49 +65,56 @@ public class SignUpInController {
 		int emailCheck = signUpInService.getEmailCheck(dto);
 		int pwCheck = signUpInService.getPwCheck(dto);
 		
-		System.out.println("idcheck 결과" + idCheck);
-		System.out.println("emailcheck 결과" + emailCheck);
-		System.out.println("pwcheck 결과" + pwCheck);
-		
 		if(idCheck==1) {
 			if(pwCheck==1) {
 				if(emailCheck==1) {
 					if(!(dto.getSex().equals("none"))) {
 						int resultAdd=signUpInService.doAddMember(dto);
 						if(resultAdd==1) {
-							//가입성공 메세지 송출 > 로그인페이지로 이동 
+							//가입성공 메세지 송출 > 로그인페이지로 이동
+							model.addAttribute("result", "가입성공");
 							return "signIn";
 							
 						} else {
 							//가입 실패시 다시 회원가입페이지로
+							model.addAttribute("result", "가입실패");
 							return "signUp";
 						}
+					}else {
+						model.addAttribute("result", "가입실패");
+						return "signUp";
 					}
 					
 				}else if(emailCheck==-1) {
 					//이메일 사용불가
+					model.addAttribute("result", "가입실패");
 					return "signUp";
 				}else {
 					//db오류
+					model.addAttribute("result", "가입실패");
 					return "signUp";
 				}
 				
 			}else if(pwCheck==-1){
 				//비번값 불일치
+				model.addAttribute("result", "가입실패");
 				return "signUp";
 			}else {
 				//db오류
+				model.addAttribute("result", "가입실패");
 				return "signUp";
 			}
 			
 		}else if(idCheck==-1) {
 			//아이디 사용불가, 사용중이 아이디 있음
+			model.addAttribute("result", "가입실패");
 			return "signUp";
 		}else {
 			//db오류
+			model.addAttribute("result", "가입실패");
 			return "signUp";
 		}
-		return "signUp";
+
 	}
 	
 	
@@ -118,7 +125,6 @@ public class SignUpInController {
 		SignUpInDTO dto = new SignUpInDTO();
 		dto.setId(id);
 		result = signUpInService.getIdCheck(dto);
-		System.out.println("idck" + result);
 		return result;
 	}
 	
@@ -144,6 +150,10 @@ public class SignUpInController {
 		
 		if( result == 99) {
 			// 관리자 로그인 성공 > 메인 admin으로 이동 
+			signUpInService.updateLastTime(id);
+			HttpSession session = req.getSession();
+			session.setAttribute("userInfo", signUpInService.getUserInfo(id));
+			session.setAttribute("userKey", signUpInService.getUserInfo(id).getUserKey());
 			return "main_admin";
 		}else if(result ==1 ) {
 			//로그인 성공 > 메인2로 이동
@@ -158,6 +168,30 @@ public class SignUpInController {
 			return "signIn";
 		}
 	}
+	
+	//로고 클릭시 메인으로 이동하는함수
+	@RequestMapping(value="/moveToMain.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String moveToMain(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		SignUpInDTO dto = (SignUpInDTO)session.getAttribute("userInfo");
+		String id = dto.getId();
+		String pw = dto.getPw();
+		
+		int result = signUpInService.doSignIn(id, pw);
+
+		if( result == 99) {
+			//로그 클릭시 관리자 메인으로 
+			return "main_admin";
+		}else if(result ==1 ) {
+			//로그 클릭시 유저 메인으로 
+			return "main2";
+		}else {
+			return "signIn";
+		}
+
+	}
+	
+	
 	
 	//로그아웃 
 	@RequestMapping(value="/signOut.do", method= {RequestMethod.GET, RequestMethod.POST})

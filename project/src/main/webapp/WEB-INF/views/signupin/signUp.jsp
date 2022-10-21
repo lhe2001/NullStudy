@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <style>
 	.signUpForm{
 		margin-top:100px;
@@ -154,6 +157,13 @@
 
 </script>
 <body>
+	<c:set var="result" value="${result }"/>
+	<c:if test="${result=='가입실패'}">
+		<script>
+		alert("가입실패! 다시 시도해주세요")
+		</script>
+	</c:if>
+
 	
     <div id="conWrap">
     	<div class="main_signup">
