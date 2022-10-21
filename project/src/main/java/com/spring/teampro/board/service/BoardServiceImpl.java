@@ -1,5 +1,6 @@
 package com.spring.teampro.board.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.teampro.board.dao.BoardDAO;
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.PageDTO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
@@ -17,9 +19,9 @@ public class BoardServiceImpl implements BoardService{
 	
 	// 게시글 전체를 조회할 수 있는 메소드 호출
 	@Override
-	public List<BoardDTO> getListArticles() {
+	public List<BoardDTO> getListArticles(int pageNum, int amount) {
 		// dao클래스에 selectAllArticles() 메소드를 게시글 전체를 조회할 수 있게 짜면 된다.
-		List<BoardDTO> list = boardDAO.selectAllArticles();
+		List<BoardDTO> list = boardDAO.selectAllArticles(pageNum, amount);
 		// list를 리턴해주면 끝!
 		return list;
 	}
@@ -60,11 +62,21 @@ public class BoardServiceImpl implements BoardService{
 
 
 	// 게시글 전체로 검색하는 메소드
-	@Override
-	public List<BoardDTO> getAllSearch(BoardDTO dto) {
-		List<BoardDTO> list = boardDAO.searchAllArticle(dto);
-		return list;
-	}
+//	@Override
+//	public List<BoardDTO> getAllSearch(BoardDTO dto) {
+//		List<BoardDTO> list = boardDAO.searchAllArticle(dto);
+//		return list;
+//	}
+	
+	// 게시글 전체로 검색하는 메소드(ajax)
+		@Override
+		public List<BoardDTO> getAllSearch(BoardDTO dto,int pageNum, int amount) {
+			System.out.println("service dtofield : " + dto.getB_field());
+			System.out.println("service search_bar : " + dto.getSearch_bar());
+			List<BoardDTO> list = boardDAO.searchAllArticle(dto, pageNum, amount);
+			System.out.println("service list = " + list.size());
+			return list;
+		}
 
 	// 말머리로 리스트를 보여줄 메소드
 	@Override
@@ -86,10 +98,29 @@ public class BoardServiceImpl implements BoardService{
 	public int getPwd(int b_articleNo) {
 		return boardDAO.getPw(b_articleNo);
 	}
-	
+	@Override
 	// 조회수 추가 메소드
 	public void getView(BoardDTO dto) {
 		boardDAO.view(dto);
 	}
-
+	
+	// 페이징 메소드
+	@Override
+	public List<PageDTO> getPaging(int pageNum, int amount) {
+//		Map map = new HashMap();
+//		map.put("pageNum",pageNum);
+//		map.put("amount",amount);
+		System.out.println("service pageNum = " + pageNum);
+		System.out.println("service amount = " + amount);
+		List<PageDTO> list = boardDAO.paging(pageNum, amount);
+		return list;
+	}
+	
+	// 페이지 수 가져오는 메소드
+	
+	@Override
+	public int getPage() {
+		int count = boardDAO.totalCount();
+		return count;
+	}
 }
