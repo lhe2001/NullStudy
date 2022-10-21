@@ -77,7 +77,89 @@ function teamPreview(t_key){
         }
     });
 }
-
+//필드값으로 찾기
+function allTeamFilter(){
+	let t_field = $(".t_field").val();
+	$("tbody").empty();
+	let info = {
+			t_field : t_field
+	}
+	$.ajax({
+		url: "/project/teamRest/allTeamFilter.do",
+		type: "post",
+		contentType: "application/json",
+		data: JSON.stringify(info),
+		success: function(data){
+			console.log(data);
+			
+			let html = "";
+			if(data.length == 0){
+				html += "<tr><td colspan='6' style='text-align:center;'>검색 결과가 없습니다.</td></tr>"
+				$("tbody").append(html);
+			}else{
+				for(let i=0; i<data.length;i++){
+					html +="<tr>";
+					html += "<td style='max-width:30px;'><div>"+data[i].t_field2+"</div></td>";
+	 				html += "<td style='max-width:100px;'><div>"+data[i].t_name+"</div></td>";
+					html += "<td style='max-width:170px;'><div>"+data[i].t_intro+"</div></td>";
+	 				html += "<td style='max-width:50px;'><div>"+data[i].t_number+"</div></td>";
+	 				html += "<td style='max-width:50px;'><div>"+data[i].nickName+"</div></td>";
+					html += '<td><button type="button" class="memberBtn" onClick="teamPreview('+data[i].t_key+')">팀 정보</button></td>';
+					html +="</tr>";
+					
+					$("tbody").append(html);
+				}
+			}
+		},
+		error:function(){
+			alert("에러발생!!")
+		}
+	});
+}
+//팀명 검색
+function teamSearch(){
+	let t_name = $(".tSearchText").val();
+	
+	$("tbody").empty();
+	
+	let info = {
+			t_name : t_name
+	}
+	
+	$.ajax({
+		url: "/project/teamRest/allTeamFilter.do",
+		type: "post",
+		contentType: "application/json",
+		data: JSON.stringify(info),
+		success: function(data){
+			console.log(data);
+			console.log(data.length);
+			
+			$("tbody").empty();
+			
+			let html = "";
+			if(data.length == 0){
+				html += "<tr><td colspan='6' style='text-align:center;'>검색 결과가 없습니다.</td></tr>"
+				$("tbody").append(html);
+			}
+			for(let i=0; i<data.length;i++){
+				html +="<tr>";
+				html += "<td style='max-width:30px;'><div>"+data[i].t_field2+"</div></td>";
+ 				html += "<td style='max-width:100px;'><div>"+data[i].t_name+"</div></td>";
+				html += "<td style='max-width:170px;'><div>"+data[i].t_intro+"</div></td>";
+ 				html += "<td style='max-width:50px;'><div>"+data[i].t_number+"</div></td>";
+ 				html += "<td style='max-width:50px;'><div>"+data[i].nickName+"</div></td>";
+				html += '<td><button type="button" class="memberBtn" onClick="teamPreview('+data[i].t_key+')">팀 정보</button></td>';
+				html +="</tr>";
+				$("tbody").append(html);
+			}
+		},
+		error:function(){
+			alert("에러발생!!")
+		}
+	});
+	
+}
 //>>>>>>>>>>>>>>>>모달창 에서 가입요청>>>>>>>>>>>>>>>//
 
 function requestJoin(t_key){

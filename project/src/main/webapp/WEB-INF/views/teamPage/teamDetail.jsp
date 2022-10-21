@@ -85,8 +85,8 @@
         <div id="teamMenu">
             <ul>
                 <li>팀 게시판</li>
-                <li>일정등록</li>
                 <li id="newMemberAlert" onClick="reviseDday(${teamInfo.t_key})">D-Day 수정</li>
+                <li>나의 챌린지 보관함</li>
                 <li>투표하기</li>
                 <li>챌린지 수정</li>
                 <c:if test="${anyAlarm == 0 }">
