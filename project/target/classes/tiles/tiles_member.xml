@@ -46,7 +46,6 @@
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/signupin/signUp.jsp" />
    </definition>
-<<<<<<< HEAD
    
     <!-- 팀디테일 페이지  -->
    <definition name="teamDetail" extends="baseLayout">
@@ -77,7 +76,5 @@
       <put-attribute name="body" value="/WEB-INF/views/mystudy/modMemo.jsp" />
    </definition> 
 <!-- >>>>>>> .merge_file_a13196 -->
-=======
->>>>>>> master
 
 </tiles-definitions>
