@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.PageDTO;
 
 
 public interface BoardDAO {
 	
 	// 전체 글 조회
-	public List<BoardDTO> selectAllArticles();
+	public List<BoardDTO> selectAllArticles(int pageNum, int amount);
 	
 	// addNewArticle() 메소드 작성 <Board 에 글 추가>
 	public int addNewArticle(Map map);
@@ -28,7 +29,10 @@ public interface BoardDAO {
 	public List<Integer> selectRemovedArticle(int b_articleNo);
 	
 	// 서치하는 메소드
-	public List<BoardDTO> searchAllArticle(BoardDTO dto);
+//	public List<BoardDTO> searchAllArticle(BoardDTO dto);
+	
+	// 서치하는 메소드(ajax)
+	public List<BoardDTO> searchAllArticle(BoardDTO dto,int pageNum, int amount);
 	
 	// 말머리에서 선택했을때 리스트 출력시킬 메소드
 	public List<BoardDTO> wiewAllArticle(BoardDTO dto);
@@ -41,4 +45,11 @@ public interface BoardDAO {
 	
 	// 조회수 추가 메소드
 	public void view(BoardDTO dto);
+	
+	// 페이징 메소드
+	public List<PageDTO> paging(int pageNum, int amount);
+	
+	// 총 페이지 수 출력 메소드
+	public int totalCount();
 }
+

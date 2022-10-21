@@ -9,16 +9,15 @@
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
     width:100px;
     text-align:center;
+    cursor:pointer;
 }
 /* teamDetail page */
 #team_Wrapper {
     margin-top: 100px;
-    border: 1px solid red;
     max-width: 1520px;
     margin: auto;
 }
 #fstWrapper{
-    border: 1px solid black;
     display:flex;
 }
 /* team소개 */
@@ -102,6 +101,36 @@
     height:130px;
     width:100px;
 }
+.popDday{
+    text-align: center;
+    height:280px;
+    box-sizing: border-box;
+    position: relative;
+    padding: 20px 0;
+    background-color: #FFEEBB;
+    color:#554c33;
+}
+.popDday div {
+    margin:10px 0; 
+}
+.popDday input[type="date"]{
+    width:80%;
+    text-align: center;
+    border: 1px solid #ffdd77;
+    background-color: #ffdd77;
+    height:23px;
+}
+.popDday input[type="button"]{
+    border:none;
+    cursor: pointer;
+    position: absolute;
+    bottom:20px;
+    left:38%;
+    border-radius: 5px;
+    background-color: #ffd92e;
+    width:100px;
+    height:23px;
+}
 #teamMenu{
    height:130px;
    width:300px;
@@ -124,6 +153,20 @@
 #teamMenu ul li:hover{
     background-color: #FFEEBB;
     font-weight: 900;
+}
+#newMemberAlert{
+	position:relative;
+}
+#alarm{
+	position:absolute;
+	height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size: 8px;
+    top: 1.5px;
+    left: 190px;
 }
 /* 조장한마디 */
 .LeaderMenu{
@@ -246,6 +289,12 @@
     background-color: #CCDDFF;
     border-radius: 10px;;
 }
+.kickOut{
+    background-color: transparent;
+    border:none;
+    cursor: pointer;
+}
+
 /* 멤버 클릭 시 뜨는 화면 */
 #memberDetail{
     height: 200px;
@@ -273,6 +322,9 @@
     text-align: center;
     margin-top: 10px;
 }
+.challenge {
+    width:100%;
+}
 .challenge table {
     width:100%;
     height:100px;
@@ -298,27 +350,28 @@
     width:300px;
 }
 #TeamDaily {
-    max-width:31%;
-    max-height: 90%;
+    width:30%;
+    max-height: 100%;
     text-align: center;
 }
 #TeamDaily textarea{
     height:55px;
     resize: none;
-    width:120px;
+    min-width:100%;
     border:none;
     background-color: #41249870;
     color:white;
 }
 #TeamDaily table{
     height: 165px;
+    min-width:100%;
 }
 #TeamDaily table td{
     border:1px solid #4124989f;
     border-radius: 10px;
     max-height:30px;
-    min-width:125px;
-    max-width:125px;
+    min-width:50%;
+    max-width:50%;
     overflow:hidden;
     text-overflow: ellipsis;
 }
@@ -420,31 +473,42 @@
     box-sizing: border-box;
     background-color: #eeeeee;
 }
-#allTeamWrapper table {
+.allTeamTableWrap table {
     border-collapse: collapse;
     border-radius: 10px;
     margin: auto;
     font-size:14px;
+    max-width:600px;
+    width:600px;
+    max-height:430px;
 }
-#allTeamWrapper table th{
+.allTeamTableWrap #page {
+    margin-top: 20px;
+}
+.allTeamTableWrap table div{
+    height:20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.allTeamTableWrap table th{
     border-bottom: 2px solid black;
 }
-#allTeamWrapper table td{
+.allTeamTableWrap table td{
     border-bottom: 1px dashed black;
-    min-width:80px;
-}
-#allTeamWrapper table th:first-child,#allTeamWrapper td:first-child{
-    border-right: 1px solid black;
-}
-#allTeamWrapper table tr {
     height: 30px;
 }
-#allTeamWrapper table tr:hover{
-    background-color: #f5f4f4;
-    cursor: pointer;
+.allTeamTableWrap table th:first-child,.allTeamTableWrap td:first-child{
+    border-right: 1px solid black;
 }
-#allTeamWrapper table button{
-    background-color: #69acc7;
+.allTeamTableWrap table tr {
+    height: 30px;
+}
+.allTeamTableWrap table tr:hover{
+    background-color: #f5f4f4;
+}
+.allTeamTableWrap table button{
+    background-color: #69c7b5;
     color:white;
     cursor: pointer;
     border: none;
@@ -459,8 +523,92 @@
     margin: auto;
     cursor: pointer;
 }
+/* >>모달창 */
+#modal {
+    /* 전체100%로 잡고, 위치는 맨위왼쪽끝. 앱솔루트로 고정.*/
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    left:0;
+    top:0;
+    align-items: center;
+    justify-content: center;
+    /* 바탕 블러하기. */
+    background-color: rgba(114, 113, 113, 0.692);
+    backdrop-filter: blur(1.5px);
+    /* 안보이게 하기 */
+    display: none;
+   	padding:10px;
+}
+#modal h2{
+	margin: 20px 0;
+}
+#modalBox {
+    text-align: center;
+    width: 500px;
+    height: 400px;
+    background-color: #FFFFEE;
+    border-radius: 5px;
+    position: relative;
+}
+#modalBox table {
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.479);
+    border: 1px dashed darkgoldenrod;
+    width:450px;
+}
+#modalBox table td {
+    border: 1px dashed darkgoldenrod;
+}
+#modalBox button {
+    margin-top: 24px;
+    border:none;
+    border-radius: 10px;
+    position: absolute;
+    right: 20px;;
+    top:0;
+}
+#modalBox button:hover {
+    cursor: pointer;
+}
+#modalBox input {
+    border:none;
+}
+#modalBox input:hover {
+    cursor: pointer;
+}
+#modalMember {
+    margin: auto;
+    width:400px;
+    font-size: 12px;
+}
+#memberPreview{
+    height:200px;
+    max-height: 200px;
+    overflow: auto;
+    white-space: nowrap;
+    margin-top: 20px;
+}
+#memberPreview table {
+    margin: auto;
+    font-size: 12px;
+    width:400px;
+    max-height: 300px;
+}
+#memberPreview table img {
+    width:20px;
+    height:20px;
+}
+#modalMsg div {
+	font-size: 14px;
+	color:red;
+	margin:0;
+}
 
 /* 나의팀목록 */
+
 #MyteamWrapper {
     margin-top: 120px;
     text-align: center;
@@ -470,21 +618,94 @@
 }
 .MyTeamTableWrap {
     margin:20px auto;
-    width:300px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
+    width:807px;
+    border: 1px solid rgb(216, 216, 216);
     min-height: 300px;
+    max-height:300px;
     box-sizing: border-box;
+    overflow: auto;
+}
+#MyteamWrapper ::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+#MyteamWrapper ::-webkit-scrollbar-track{
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+#MyteamWrapper  ::-webkit-scrollbar-thumb {
+    background-color: #d9dcee;
+    border-radius: 5px;
+}
+/* 나의팀 목록 테이블*/
+.myteamList {
+	margin:auto;
+	width:800px;
+    overflow: auto;
+    font-size: 14px;
+    border-collapse: collapse;
+}
+.myteamList td{
+  padding:5px 0;
+}
+.myteamList thead tr:first-child{
+    background-color: #CCDDEE;
+}
+.myteamList thead tr:nth-child(2){
+    background-color: #ccddee42;
+}
+.myteamList tbody tr:hover{
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+/* 가입요청 상태 테이블*/
+#requestStatus{
+    margin:30px auto;
+    width:807px;
+    border: 1px solid rgb(216, 216, 216);
+    min-height: 200px;
+    max-height:200px;
+    box-sizing: border-box;
+    overflow: auto;
+    display:flex;
+}
+#requestStatus button {
+    border:none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #d9dcee;
+    color:navy;
+}
+#waiting{
+    margin-left:auto;
+    width:400px;
+    font-size: 14px;
+    border-collapse: collapse;
+    height:0;
+}
+#requestStatus table td{
+    padding:5px 0;
+}
+#waiting thead tr:first-child{
+    background-color: #bcd6d1;
+}
+#waiting thead tr:nth-child(2){
+    background-color: #bcd6d160;
+}
+#reject{
+    margin-right: auto;
+    width:400px;
+    font-size: 14px;
+    border-collapse: collapse;
+    height:0;
+}
+#reject thead tr:first-child{
+    background-color: #FFCCCC;
+}
+#reject thead tr:nth-child(2){
+    background-color: #ffcccc44;
 }
 
-.MyTeamTableWrap table {
-	margin:auto;
-	width:100%;
-	
-}
-.MyTeamTableWrap table td{
-	border-bottom: 1px black dashed;
-	
-}
 /*팀개설 css*/ 
 @media(min-width : 500px)
 {
@@ -494,13 +715,21 @@
     height: 100px;
     font-size: 20px;
 }
-
+#creatteamtable{
+	margin:auto;
+}
 #creatteamtable td{
-    width: 200px;
-    margin-left: auto;
     font-size: 16px;
     font-weight: 700;
-    text-align: center;
+    text-align:left;
+   	padding:20px;
+}
+#creatteamtable td:first-child{
+	text-align: center;
+	width:150px;
+}
+#creatteamtable td:first-child{
+	text-align: center;
 }
 .cre_inputs{
     padding: 10px;
@@ -508,7 +737,16 @@
     background: #fff;
     overflow: auto;
 }
-
+#t_nameCheck{
+    background-color: #69acc7;
+    border: none;
+    color:#fff;
+    cursor: pointer;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top:10px;
+}
 .cre_btn{
     margin-top: 20px;
     margin-left: 30px;
@@ -523,11 +761,31 @@
     border-radius: 5px;
 }
 
-.cre_btn:hover { background-color: #078cc0;}
-
+.cre_btn:hover, #t_nameCheck:hover { background-color: #078cc0;}
+.cre_btn:disabled, #t_nameCheck:disabled {
+	background-color:rgb(206, 206, 206);
+	cursor:not-allowed;
+}
 .crewrap select {
     width: 100px;
     padding: 10px;
     border: solid 1px #dadada;
     border-radius: 0px;
 }
+
+/* 멤버신청 */ 
+
+.newRequest{
+    text-align: center;
+    font-size: 13px;
+    height:30px;
+    line-height: 30px;
+    border-bottom: 1px dashed black;
+}
+.newRequest button{
+    border: none;
+    background-color: #B1D6CF;
+    cursor: pointer;
+    border-radius: 5px;
+}
+

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+   <definition name="baseLayout"  template="/WEB-INF/views/common/layout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/common/postIt.jsp" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+
+    <!-- 달력 페이지  -->
+   <definition name="calendar" extends="baseLayout">
+      <put-attribute name="title" value="달력페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/mystudy/calendar.jsp" />
+   </definition>
+   
+     <!-- 달력일정목록 페이지  -->
+   <definition name="calBoardList" extends="baseLayout">
+      <put-attribute name="title" value="달력일정목록 팀페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/mystudy/calBoardList.jsp" />
+   </definition>
+
+     <!-- 입력폼 이동  -->
+   <definition name="insertCalForm" extends="baseLayout">
+      <put-attribute name="title" value="입력폼 이동" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/mystudy/insertCalForm.jsp" />
+   </definition>
+
+     <!-- 입력폼 페이지  -->
+   <definition name="insertCalBoard" extends="baseLayout">
+      <put-attribute name="title" value=" 입력폼 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/mystudy/insertCalBoard.do.jsp" />
+   </definition>
+
+     <!-- 일정상세 페이지  -->
+   <definition name="calDetail" extends="baseLayout">
+      <put-attribute name="title" value="일정상세 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/mystudy/calDetail.jsp" />
+   </definition>
+
+     <!-- 수정폼 -->
+   <definition name="calUpdateForm" extends="baseLayout">
+      <put-attribute name="title" value="수정폼 " />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/mystudy/calUpdateForm.jsp" />
+   </definition>
+   
+     <!-- 메모 페이지  -->
+   <definition name="memo" extends="baseLayout">
+      <put-attribute name="title" value="메모 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/mystudy/Memo.jsp" />
+   </definition>   
+   
+   <!-- 메모수정 페이지  -->
+   <definition name="modMemo" extends="baseLayout">
+      <put-attribute name="title" value="메모수정 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/mystudy/modMemo.jsp" />
+   </definition> 
+   
+
+</tiles-definitions>

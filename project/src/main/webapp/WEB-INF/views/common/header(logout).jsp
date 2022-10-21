@@ -15,15 +15,15 @@
 </head>
 <body>
 <div id="wrapper">
-        <header>
+        <header class="mainHeader">
             <nav>
-                <div class="logo" onclick="location.href='/teampro/Main2.jsp'"></div>
+                <div class="logo" onclick="location.href='/project/moveToMain.do'"></div>
                 <ul class="navtap_items">
                     <li class="navtap">My Study <i class="fa-solid fa-book-open"></i>
                         <div class="drop l1">
                             <ul>
-                                 <li><a href="/teampro/teamCheck/teamList">My Team</a></li>
-                               <li><a href="/teampro/mypage">My Study</a></li>
+                               <li><a href="/project/mystudy/calendar.do">Calendar</a></li>
+                               <li><a href="/project/mystudy/memo.do">Memo</a></li>
                             </ul>
                         </div>
                     </li>
@@ -38,8 +38,8 @@
                     <li class="navtap">Team<i class="fa-solid fa-heart"></i>
                         <div class="drop l3">
                             <ul>
-                                  <li><a href="/teampro/teamPage/AllTeamList.jsp">All Team</a></li>
-                                <li></li>
+                                  <li><a href="/project/team/allTeamList.do">All Team</a></li>
+                                <li><a href="/project/team/myTeamList.do">My Team</a></li>
                             </ul>
                         </div>
                     </li>

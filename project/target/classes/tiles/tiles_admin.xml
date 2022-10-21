@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+   <definition name="baseLayout"  template="/WEB-INF/views/common/layout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(login).jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/common/postIt.jsp" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+
+	<!-- 관리자 회원목록 뷰  -->
+   <definition name="memberList" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout)_admin.jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/admin/memberList.jsp" />
+   </definition>
+   
+	<!-- 관리자 회원정보 수정 뷰  -->
+   <definition name="modForm" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout)_admin.jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/admin/modForm.jsp" />
+   </definition>
+   
+	<!-- 관리자 study목록 뷰  -->
+   <definition name="studyList" extends="baseLayout">
+      <put-attribute name="title" value="메인페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout)_admin.jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/admin/studyList.jsp" />
+   </definition>
+
+</tiles-definitions>

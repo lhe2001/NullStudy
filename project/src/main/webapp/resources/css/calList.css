@@ -1,0 +1,264 @@
+@charset "UTF-8";
+
+/* 일정리스트페이지 */
+    #calBoardWrap{
+        background-color: #FFC4C4;
+        max-width: 1530px;
+    }
+    
+    #allList{
+        margin: auto;
+        max-width: 1000px;
+        hegiht: 500px;
+    }
+
+    .calListMiddle{
+        max-width: 300px;
+        min-width: 300px;
+        height: 100px;
+        margin: 10px;
+        background-color: #FFE6F7;
+        display: inline-block;
+        border-radius: 10px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
+    }
+
+    #TopNumber{
+    	color: #937DC2;
+    	padding:30px 0;
+        font-size: 40px;
+        font-weight: 600;
+        text-align: center;
+    }
+    #TopText{
+    	color: #EE6983;
+        font-size: 25px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .calsmallchek{
+        margin-bottom: 10px;
+    }
+    .calTitle{
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+    .calWrite{
+    	font-size: 13px;
+    	color: #6d6d6d;
+        text-align: right;
+    }
+    #chkspan{
+        padding-left: 20px;
+    }
+
+	
+	a[data-id="cblink"]{
+		text-decoration: none;
+		color: #6d6d6d;
+	}
+	
+	a[data-id="cblink"]:visited{
+		color: #6d6d6d;
+	}
+	
+	a[data-id="cblink"]:hover{
+		text-decoration: underline;
+		color:#EE6983;
+	}
+	
+    #calListBottom{
+    	padding: 50px 0;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    #ListDelbtn{
+        width: 100px;
+        height: 50px;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bolder;
+        padding-top: 5px;
+        margin-left: 15px;
+        border: none;
+        outline: none;
+        background-color: #EE6983;
+        color: white;
+    }
+    
+    #ListDelbtn:hover{
+    	cursor: pointer;
+    }
+    
+    #cbdelWrap{
+    	padding-top:30px;
+    }
+	
+	input[id="cballchk"] + label {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #bcbcbc;
+		cursor: pointer;
+		border-radius: 5px;
+	}
+	input[id="cballchk"]:checked + label {
+		background-color: #EE6983;
+	}
+	input[id="cballchk"] {
+		display: none;
+	}
+
+	input[name="seq"]{
+		margin-left:5px;
+	}
+	
+	#nonecb{
+		text-align:center;
+		font-size:50px;
+	}
+
+/* 일정 상세보기 페이지	 */
+	#calDetailWrap{
+		max-width: 1530px;
+	}
+	#calDeContent{
+		padding-top: 30px;
+		max-width:  1530px;
+	}
+	#tbdetail{
+		margin: auto;
+		max-width: 500px;
+		min-width: 500px;
+		text-align: center;
+		background-color: #FFE6F7;
+	}
+	
+	#tbdetail th{
+		padding: 10px 0;
+	}
+	
+	#tbdetail th > p {
+		width: 50%;
+		margin-left: 130px;
+		overflow: auto;
+		background: linear-gradient(#FFE6F7, #FFC4C4);
+		color: #353866;
+	}
+	
+	#tbdetail td{
+		padding: 20px 0;
+		overflow: auto;
+		color: #353866;
+	}
+	
+	
+	 .Detailbtn{
+        width: 50px;
+        height: 30px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 14px;
+        font-weight: bolder;
+        margin-left: 15px;
+        border: none;
+        outline: none;
+        background-color: #FFABE1; 
+        color: white;
+    }
+    
+    .Detailbtn:hover{
+    	background-color: #EE6983;
+    }
+	
+/* 	일정입력,수정폼 */
+	.calinupWrap{
+		max-width: 1530px;
+	}
+	
+	.calinupContent{
+		padding-top: 30px;
+		max-width: 1530px;
+	}
+	
+	.calinupTB{
+		margin:auto;
+		max-width: 500px;
+		min-width: 500px;
+		background-color: #FFE6F7;
+		padding: 20px 0;
+		text-align: center;
+	}
+	
+	.calinupTB td{
+		padding-bottom: 10px;
+	}
+	
+	.calinupTB th{
+		padding: 10px 0;
+	}
+	
+	.ctform{
+		width: 360px;
+		height: 40px;
+		border: none;
+		outline: none;
+		text-align: center;
+	}
+	.cttextarea{
+		border: none; 
+		background-color: white;
+		overflow: auto;
+	}
+	.cselect{
+	  width: 100px;
+	  height: 35px;
+	  padding: 5px 30px 5px 10px;
+	  border-radius: 4px;
+	  outline: 0 none;
+	}
+	
+	 .insertpagebtn{
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 14px;
+        font-weight: bolder;
+        margin-top: 20px;
+        margin-right: 15px;
+        border: none;
+        outline: none;
+        background-color: #FFABE1; 
+        color: white;
+    }
+    
+    .insertpagebtn:hover{
+    	background-color: #EE6983;
+    }
+    
+     .calupBtn{
+     	width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 14px;
+        font-weight: bolder;
+        margin-top: 20px;
+        margin-left: 15px;
+        border: none;
+        outline: none;
+        background-color: #FFABE1; 
+        color: white;
+     }
+     
+     .calupBtn:hover{
+    	background-color: #EE6983;
+     }

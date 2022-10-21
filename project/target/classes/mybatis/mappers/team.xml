@@ -4,10 +4,13 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="mapper.team">
-	
+
+<!-- SELECT -->
+
 	<select id="myTeamList" resultType="myTeamListDTO" parameterType="int">
-		SELECT a.T_KEY,a.T_NAME,a.T_FIELD , t.USERKEY  FROM TEAMMEMBER t , ALLTEAM a
+		SELECT a.t_number, a.T_KEY,a.T_NAME,a.T_FIELD , t.USERKEY,to_char(t.TM_JOINDATE,'YYYY-MM-DD')AS TM_JOINDATE  FROM TEAMMEMBER t , ALLTEAM a
 		WHERE t.T_KEY = a.T_KEY AND t.userkey= #{userkey}
+		order by t.TM_JOINDATE
 	</select>
 	
 	<select id="teamInfo" resultType="teamInfoDTO" parameterType="int">
@@ -22,5 +25,156 @@
 		WHERE m.USERKEY = a.USERKEY AND m.T_KEY = #{t_key}
 	</select>
 	
+	<select id="allTeamList" resultType="teamInfoDTO" >
+		SELECT a.T_KEY ,a.T_NAME ,a.T_INTRO ,a.T_FIELD ,a.T_NUMBER  ,a2.NICKNAME   
+		FROM ALLTEAM a ,allmember a2
+		WHERE a.USERKEY = a2.USERKEY
+		order by t_create desc
+	</select>
+	
+	<select id="anyAlarm" resultType="int" parameterType="int">
+		SELECT count(*) FROM memberrequest
+		WHERE t_key=#{t_key} AND tr_result='M'
+	</select>
+	
+	<select id="getRequestList" resultType="memberRequestDTO" parameterType="int">
+		SELECT m.TR_KEY,m.USERKEY ,m.T_KEY ,a.NICKNAME FROM memberRequest m , ALLMEMBER a 
+		WHERE m.userkey = a.userkey AND tr_result ='M' AND t_key = #{t_key}
+	</select>
+	
+	<select id="getMemberCount" resultType="int" parameterType="int">
+		SELECT count(*) FROM TEAMMEMBER
+		WHERE t_key = #{t_key}
+	</select>
+	
+	<select id="alreadyRequest" resultType="int" parameterType="memberRequestDTO">
+		SELECT count(*) FROM memberrequest
+		WHERE t_key=#{t_key} AND userkey= #{userKey} AND tr_result ='M'
+	</select>
+	
+	<select id="addNewTeam_teamkey" resultType="int" parameterType="teamInfoDTO">
+		select t_key from allteam
+		where t_name= #{t_name}
+	</select>
+	
+	<select id="getTDay" resultType="String" parameterType="int">
+		select to_char(t_day, 'YYYY-MM-DD')AS t_day from allteam
+		where t_key = #{t_key}
+	</select>
+	
+	<select id="existTeamName" resultType="int" parameterType="String">
+		SELECT count(*) FROM ALLteam
+		WHERE t_name = #{t_name}
+	</select>
+	
+	<select id="getMyRequest_wait" resultType="memberRequestDTO" parameterType="int">
+		SELECT m.tr_key,m.userkey,m.T_KEY,a.T_NAME ,a.T_FIELD  FROM memberRequest m, ALLTEAM a 
+		WHERE TR_RESULT ='M' AND m.T_KEY = a.T_KEY and m.userkey=#{userKey}
+	</select>
+	
+	<select id="getMyRequest_reject" resultType="memberRequestDTO" parameterType="int">
+		SELECT m.tr_key,m.userkey,m.T_KEY,a.T_NAME ,a.T_FIELD  FROM memberRequest m, ALLTEAM a 
+		WHERE TR_RESULT ='N' AND m.T_KEY = a.T_KEY and m.userkey=#{userKey}
+	</select>
+	
+	
+<!-- UPDATE -->
+	
+	<update id="updateTeamInfo" parameterType="teamInfoDTO">
+		update AllTeam
+		set t_intro= #{t_intro} ,t_field=#{t_field}
+		where t_key= #{t_key}
+	</update>
+	
+	<update id="updateMemberCount" parameterType="teamInfoDTO">
+		update allteam
+		set t_number = #{t_number}
+		where t_key = #{t_key}
+	</update>
+	
+	<update id="updateLMemo" parameterType="teamInfoDTO">
+		update AllTeam
+		set t_lmemo= #{t_lMemo}
+		where t_key= #{t_key}
+	</update>
+
+	<update id="accpetMember" parameterType="memberRequestDTO">
+		UPDATE MEMBERREQUEST 
+		SET TR_RESULT = 'Y'
+		WHERE userKey = #{userKey} AND t_key = #{t_key}
+	</update>
+	
+	<update id="rejectMember" parameterType="memberRequestDTO">
+		UPDATE MEMBERREQUEST 
+		SET TR_RESULT = 'N'
+		WHERE userKey = #{userKey} AND t_key = #{t_key}
+	</update>
+	
+	<update id="updateDday" parameterType="TeamInfoDTO">
+		update allteam
+		set t_day= #{t_day}
+		where t_key= #{t_key}
+	</update>
+	
+<!-- INSERT -->
+
+	<insert id="memberRequest" parameterType="memberRequestDTO">
+		insert into memberrequest
+		(tr_key,UserKey,tr_result,t_key)
+		values(tr_key_seq.nextval,#{userKey},'M',#{t_key})
+	</insert>
+	
+	<insert id="addTeamMember" parameterType="memberRequestDTO">
+		insert into teammember
+		(tm_key,t_key,tm_joindate,userkey)
+		values(tm_key_seq.nextval,#{t_key},sysdate,#{userKey})
+	</insert>
+	
+	<insert id="addNewTeam_team" parameterType="teamInfoDTO">
+		insert into AllTeam
+		(t_key,t_name,t_intro,t_field,t_number,t_lmemo,userkey)
+		values(t_key_seq.nextval,#{t_name},#{t_intro},#{t_field},1,'수정해주세요',#{userKey})
+	</insert>
+	
+	<insert id="addNewTeam_member" parameterType="teamInfoDTO">
+		insert into TEAMMEMBER
+		(tm_key,t_key,userkey)
+		values(tm_key_seq.nextval,#{t_key},#{userKey})
+	</insert>
+	
+<!-- DELETE -->
+	
+	<delete id="removeMember" parameterType="teamMemberDTO">
+		DELETE FROM teammember
+		<where>
+		<if test="tm_key != 0 ">
+		and tm_key= #{tm_key}
+		</if>
+		<if test="userKey !=0 ">
+		and userKey= #{userKey}
+		</if>
+		and t_key = #{t_key}
+		</where>
+	</delete>
+	
+	<delete id="deleteTeam_request" parameterType="int">
+		DELETE FROM memberRequest
+		WHERE t_key= #{t_key}
+	</delete>
+	
+	<delete id="deleteTeam_member" parameterType="int">
+		DELETE FROM TEAMMEMBER
+		WHERE t_key= #{t_key}
+	</delete>
+	
+	<delete id="deleteTeam_team" parameterType="int">
+		DELETE FROM allTeam
+		WHERE t_key= #{t_key}
+	</delete>
+	
+	<delete id="deleteRequest" parameterType="memberRequestDTO">
+		DELETE FROM memberRequest
+		WHERE tr_key= #{tr_key}
+	</delete>
 	
 </mapper>

@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+	#calContainer{
+		max-width: 1520px;
+		background-color: #CFCFFF;
+	}
+
+	#calendarTable{
+ 		margin: auto; 
+		width: 1050px;
+		min-width: 1050px;
+		max-width: 1050px;
+		border-spacing: 1px;
+		border-collapse: separate;
+	}
+	#calCap{
+		font-size: 35px;
+		margin-bottom: 20px;
+		color: #353866;
+    	font-weight: 700;
+	}
+	
+	#calendarTable .calth{
+		width: 200px;
+		color: #353866;
+	}
+
+	#calendarTable .caltd{
+		width: 200px;
+		height: 150px;
+	    border-radius: 10px;
+	    border-left: 2px solid #AAABD3;
+	    border-bottom: 2px solid #AAABD3;
+		position: relative;
+		vertical-align: top;
+	}
+	
+	#calendarTable .caltd:hover{
+		background-color: #E8E8FF; 
+	}
+	
+ 	.insertLinkicon{ 
+ 		position: absolute;
+ 		bottom: 10px;
+ 		right: 10px;
+ 	} 
+	
+	 .clistTitle{
+	 	margin-left: 20px;
+	 	margin-bottom: 10px;
+	 	font-size: 13px;
+	 	font-weight: 500;
+	 	color: #353866;
+	 	margin-bottome: 15px;
+	}
+
+	.cPreview{
+		position: absolute;
+		left:-40px;
+		top:-30px;
+		background: pink;
+		width:40px;
+		height:40px;
+		text-align: center;
+		line-height: 40px;
+		font-weight: bold;
+		border-radius: 20px 20px 1px 20px;
+	}
+	
+	a[data-id="alinkStyle"]{
+		text-decoration: none;
+		color: #353866;
+	}
+	
+	a[data-id="alinkStyle"]:visited{
+		color: #F796B5;
+	}
+	
+	#tdinfo{
+		color: #F796B5;
+		text-align: right;
+		font-size:13px;
+	}

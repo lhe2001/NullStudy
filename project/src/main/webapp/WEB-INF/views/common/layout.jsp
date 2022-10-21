@@ -10,15 +10,12 @@
     <meta charset="UTF-8">
     <title><tiles:insertAttribute name="title" /></title>
   <link rel="stylesheet" href="/project/resources/css/simple.css" />
-<<<<<<< HEAD
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-=======
->>>>>>> JaeHyukKong
-  <script src="/project/resources/css/main.js"></script>
+  <script src="/project/resources/js/main.js"></script>
   <style>
-  	#body {
-  		margin-top:100px;
-  	}
+  body {
+  	margin-top:80px;
+  }
   </style>
   </head>
     <body>

@@ -8,11 +8,13 @@ public class TeamInfoDTO {
 	private String t_name;
 	private String t_intro;
 	private int t_field;
+	private String t_field2;
 	private int t_number;
 	private String t_lMemo;
 	private Date tcreate;
 	private int userKey;
 	private String nickName;
+	private String t_day;
 	
 	public int getT_key() {
 		return t_key;
@@ -67,6 +69,18 @@ public class TeamInfoDTO {
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	public String getT_field2() {
+		return t_field2;
+	}
+	public void setT_field2(String t_field2) {
+		this.t_field2 = t_field2;
+	}
+	public String getT_day() {
+		return t_day;
+	}
+	public void setT_day(String t_day) {
+		this.t_day = t_day;
 	}
 	
 	

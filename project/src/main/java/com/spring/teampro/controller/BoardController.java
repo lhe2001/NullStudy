@@ -1,5 +1,7 @@
 package com.spring.teampro.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -13,16 +15,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.ibatis.type.DateOnlyTypeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.spring.teampro.board.dao.BoardDAO;
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.PageDTO;
 import com.spring.teampro.board.service.BoardService;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
 @Controller("boardController")
@@ -31,30 +39,60 @@ public class BoardController{
 	private BoardService boardService;
 	
 	@Autowired
+	private BoardDAO boardDAO;
+	
+	@Autowired
 	HttpSession session;
 	
 	private static String image = "C:\\image_file";
+	
+	
 	// 전체 리스트 조회
 	@RequestMapping(value = "/board/listArticles.do", method = RequestMethod.GET)
-	public String listArticles(HttpServletRequest request, Model model) {
+	public String listArticles(HttpServletRequest request, Model model,
+			@ModelAttribute BoardDTO boardDTO
+			) {
 		System.out.println("전체 리스트 조회");
-		List<BoardDTO> articlesList = boardService.getListArticles();
+		// 페이징
+		
+		// 페이징 초기값
+		// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
+		// 첫 페이지 경우
+		int pageNum = 1;
+		int amount = 10;
+		
+//		 페이지번호를 클릭하는 경우
+		if(request.getParameter("pageNum") != null && request.getParameter("amount") != null) {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			amount = Integer.parseInt(request.getParameter("amount"));
+		}
+		
+		System.out.println("pageNum = " + pageNum);
+		System.out.println("amount = " + amount);
+		int totalCount = boardService.getPage();
+		System.out.println("totalCount = " + totalCount);
+		PageDTO pageDTO = new PageDTO(pageNum, amount, totalCount);
+		System.out.println("pageDTO = " + pageDTO);
+		
+		List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);
+		System.out.println("articlesList.size() = " + articlesList.size());
+		
 		session=request.getSession();
 		SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 		for (int i = 0; i < articlesList.size(); i++) {
-			BoardDTO dto = articlesList.get(i);
-			switch (dto.getB_field()) {
+			boardDTO = articlesList.get(i);
+			switch (boardDTO.getB_field()) {
 			case 10:
-				dto.setB_fieldName("질문");
+				boardDTO.setB_fieldName("질문");
 				break;
 			case 20:
-				dto.setB_fieldName("잡담");
+				boardDTO.setB_fieldName("잡담");
 				break;
 			case 30:
-				dto.setB_fieldName("비밀글");
+				boardDTO.setB_fieldName("비밀글");
 				break;
 			case 40:
-				dto.setB_fieldName("나도몰라");
+				boardDTO.setB_fieldName("나도몰라");
 				break;
 			default:
 				break;
@@ -62,6 +100,7 @@ public class BoardController{
 		}
 		model.addAttribute("articlesList",articlesList);
 		model.addAttribute("userInfo",userInfo);
+		model.addAttribute("pageDTO",pageDTO);
 		return "listArticles";
 	}
 	
@@ -169,12 +208,12 @@ public class BoardController{
 					String value = multipartRequest.getParameter(name);
 					map.put(name, value);
 					System.out.print(name + " : " + multipartRequest.getParameter(name) + "     ");
-//					if(mulipartRequest.getParameter("b_field").equals("30")) {
-//						int b_articlePwd = Integer.parseInt(mulipartRequest.getParameter("b_articlePwd"));
-//							if (b_articlePwd != -1) {
-//									map.put("b_articlePwd", b_articlePwd);
-//							}
-//					}
+					if(multipartRequest.getParameter("b_field").equals("30")) {
+						int b_articlePwd = Integer.parseInt(multipartRequest.getParameter("b_articlePwd"));
+							if (b_articlePwd != -1) {
+									map.put("b_articlePwd", b_articlePwd);
+							}
+					}
 				}
 				String b_imageFile = upload(multipartRequest);
 				System.out.println("b_imageFile = " + b_imageFile);
@@ -244,7 +283,7 @@ public class BoardController{
 				out.print("/board/listArticles.do'; ");
 				out.print(" </script> ");
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}
 		
@@ -326,29 +365,111 @@ public class BoardController{
 			System.out.println("답글쓰기 완료");
 		}
 		
-		// 셀렉트 박스 서치
-		@RequestMapping(value = "/board/searchArticle.do" , method = RequestMethod.POST)
-		public String searchArticle(HttpServletRequest request, HttpServletResponse response,
-					@RequestParam("field")int field,
-					@RequestParam("search_bar")String search_bar,
-					Model model) {
-			System.out.println("셀렉트 박스 서치 기능 작동");
-			session=request.getSession();
-			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-			model.addAttribute("userInfo",userInfo);
-			// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체
-			System.out.println("field = " + field);
-			System.out.println("search_bar = " + search_bar);
-			if(field == 1 || field == 2 || field == 3 || field == 4) {
-				BoardDTO dto = new BoardDTO();
-				dto.setSearch_bar(search_bar);
-				dto.setSearch_field(field);
-				List<BoardDTO> searchList = boardService.getAllSearch(dto);
-				model.addAttribute("articlesList" , searchList);
-			}
-			System.out.println("셀렉트 박스 서치 완료");
-			return "listArticles";
-		}
+//		// 셀렉트 박스 서치
+//		@RequestMapping(value = "/board/searchArticle.do" , method = RequestMethod.POST)
+//		public String searchArticle(HttpServletRequest request, HttpServletResponse response,
+//					@RequestParam("field")int field,
+//					@RequestParam("search_bar")String search_bar,
+//					@RequestBody BoardDTO boardDTO,
+//					Model model) {
+//			System.out.println("셀렉트 박스 서치 기능 작동");
+//			session=request.getSession();
+//			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+//			model.addAttribute("userInfo",userInfo);
+//			// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체
+//			System.out.println("field = " + field);
+//			System.out.println("search_bar = " + search_bar);
+//			if(field == 1 || field == 2 || field == 3 || field == 4) {
+//				BoardDTO dto = new BoardDTO();
+//				dto.setSearch_bar(search_bar);
+//				dto.setSearch_field(field);
+//				List<BoardDTO> searchList = boardService.getAllSearch(dto);
+//				model.addAttribute("articlesList" , searchList);
+//			}
+//			System.out.println("셀렉트 박스 서치 완료");
+//			return "listArticles";
+//		}
+		
+		// 셀렉트 박스 서치 아작스
+				@RequestMapping(value = "/board/searchArticle.do" , method = {RequestMethod.POST , RequestMethod.GET})
+				public @ResponseBody Map searchArticle(HttpServletRequest request, HttpServletResponse response,
+//							@RequestParam("field")int field,
+//							@RequestParam("search_bar")String search_bar,
+							@RequestBody BoardDTO boardDTO,
+							Model model) {
+					System.out.println("셀렉트 박스 서치 아작스 기능 작동");
+					
+					response.setContentType("text/html; charset=utf-8");
+					// 페이징
+					
+					// 페이징 초기값
+					// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
+					// 첫 페이지 경우
+					int pageNum = 1;
+					int amount = 10;
+					
+//					 페이지번호를 클릭하는 경우
+					if(request.getParameter("pageNum") != null && request.getParameter("amount") != null) {
+						pageNum = Integer.parseInt(request.getParameter("pageNum"));
+						amount = Integer.parseInt(request.getParameter("amount"));
+						System.out.println("페이지번호 클릭 pageNum = " + pageNum);
+						System.out.println("페이지번호 클릭 amount = " + amount);
+					}
+					
+					System.out.println("pageNum = " + pageNum);
+					System.out.println("amount = " + amount);
+					int totalCount = boardService.getPage();
+					System.out.println("totalCount = " + totalCount);
+					session=request.getSession();
+					SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+					model.addAttribute("userInfo",userInfo);
+					
+//					String search_bar = request.getParameter("search_bar");
+//					int field = Integer.parseInt(request.getParameter("field"));
+					
+					System.out.println("boardDTO.getB_field() = " + boardDTO.getB_field());
+					int field = boardDTO.getB_field();
+					System.out.println("boardDTO.getSearch_bar() = " + boardDTO.getSearch_bar());
+					String search_bar =  boardDTO.getSearch_bar();
+					System.out.println("field = " + field);
+					System.out.println("search_bar = " + search_bar);
+					List<BoardDTO> searchList = null;
+					PageDTO pdto = null;
+					// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
+					
+//						BoardDTO dto = new BoardDTO();
+						pdto = new PageDTO(pageNum, amount, totalCount);
+						boardDTO.setSearch_bar(search_bar);
+						boardDTO.setSearch_field(field);
+						searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
+						System.out.println("searchList.size() : " + searchList.size());
+						
+						for (int i = 0; i < searchList.size(); i++) {
+							boardDTO = searchList.get(i);
+							switch (boardDTO.getB_field()) {
+							case 10:
+								boardDTO.setB_fieldName("질문");
+								break;
+							case 20:
+								boardDTO.setB_fieldName("잡담");
+								break;
+							case 30:
+								boardDTO.setB_fieldName("비밀글");
+								break;
+							case 40:
+								boardDTO.setB_fieldName("나도몰라");
+								break;
+							default:
+								break;
+							}
+						}
+					
+					Map map = new HashMap();
+					map.put("searchList", searchList);
+					map.put("pageDTO",pdto);
+					System.out.println("셀렉트 박스 서치 완료");
+					return map;
+				}
 		
 		//말머리에서 가져오는 리스트 목록
 		@RequestMapping(value = "/board/selectField.do", method = RequestMethod.POST)
@@ -429,6 +550,8 @@ public class BoardController{
 			}
 			return "listArticles";
 		}
+		
+		// 페이징
 		
 		
 		

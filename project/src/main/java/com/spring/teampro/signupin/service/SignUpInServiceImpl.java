@@ -1,9 +1,12 @@
 package com.spring.teampro.signupin.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.teampro.signupin.dao.SignUpInDAO;
+import com.spring.teampro.signupin.dto.AdminDTO;
 import com.spring.teampro.signupin.dto.SignUpInDTO;;
 
 @Service
@@ -50,8 +53,55 @@ public class SignUpInServiceImpl implements SignUpInService {
 		signUpInDAO.lastTime(id);
 	}
 
+	@Override
+	public List<SignUpInDTO> getMemberList() {
+		return signUpInDAO.listMembers();
+	}
+
+	@Override
+	public List<SignUpInDTO> getListById(String keyword) {
+		return signUpInDAO.listById(keyword);
+		
+	}
+
+	@Override
+	public List<SignUpInDTO> getListByName(String keyword) {
+		return signUpInDAO.listByName(keyword);
+	}
+
+	@Override
+	public List<SignUpInDTO> getListByBoth(String keyword) {
+		return signUpInDAO.listByBoth(keyword);
+	}
+
+	@Override
+	public List<AdminDTO> getStudyList() {
+		return signUpInDAO.listTeams();
+	}
+
+	@Override
+	public List<AdminDTO> getListByTname(String keyword) {
+		return signUpInDAO.listByTname(keyword);
+	}
+
+	@Override
+	public List<AdminDTO> getListByTleader(String keyword) {
+		return signUpInDAO.listByTleader(keyword);
+	}
+
+	@Override
+	public List<AdminDTO> getListByTinfo(String keyword) {
+		return signUpInDAO.listByTinfo(keyword);
+	}
+
+	@Override
+	public void doModMember(SignUpInDTO dto) {
+		signUpInDAO.modMember(dto);
+	}
 	
-	
-	
+	@Override
+	public void doDelMember(String id) {
+		signUpInDAO.delMember(id);
+	}
 
 }

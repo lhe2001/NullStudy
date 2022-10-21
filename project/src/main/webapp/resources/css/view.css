@@ -8,7 +8,7 @@
 	display:inline-block;
 	margin-top : 150px;
 	width : 1030px;
-	height : 1100px;
+	height : 100%;
 	border : 1px solid #99A799;
 	border-radius : 2px;
 	background-color: #FEF5ED;
@@ -21,6 +21,16 @@
 	border : none;
 	outline : none;
 	color : #99A799;
+}
+
+#comment{
+	width : 1000px; 
+	height : 120px; 
+	resize : none;
+	border : none;
+	outline : none;
+	background-color: #99A799;
+	color : white;
 }
 
 #real_edit_btn {

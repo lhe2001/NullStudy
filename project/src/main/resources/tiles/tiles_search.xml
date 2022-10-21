@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+   <definition name="baseLayout_search"  template="/WEB-INF/views/common/layout_search.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+   
+   <definition name="boardSearch" extends="baseLayout_search">
+      <put-attribute name="title" value="게시글 보기" />
+      <put-attribute name="body" value="/WEB-INF/views/search/boardSearch.jsp" />
+   </definition>
+   
+   <definition name="teamSearch" extends="baseLayout_search">
+      <put-attribute name="title" value="게시글 보기" />
+      <put-attribute name="body" value="/WEB-INF/views/search/teamSearch.jsp" />
+   </definition>
+   
+   <definition name="userSearch" extends="baseLayout_search">
+      <put-attribute name="title" value="게시글 보기" />
+      <put-attribute name="body" value="/WEB-INF/views/search/userSearch.jsp" />
+   </definition>
+   
+
+</tiles-definitions>
