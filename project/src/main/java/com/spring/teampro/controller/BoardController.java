@@ -391,7 +391,7 @@ public class BoardController{
 //		}
 		
 		// 셀렉트 박스 서치 아작스
-				@RequestMapping(value = "/board/searchArticle.do" , method = RequestMethod.POST)
+				@RequestMapping(value = "/board/searchArticle.do" , method = {RequestMethod.POST , RequestMethod.GET})
 				public @ResponseBody Map searchArticle(HttpServletRequest request, HttpServletResponse response,
 //							@RequestParam("field")int field,
 //							@RequestParam("search_bar")String search_bar,
@@ -399,6 +399,7 @@ public class BoardController{
 							Model model) {
 					System.out.println("셀렉트 박스 서치 아작스 기능 작동");
 					
+					response.setContentType("text/html; charset=utf-8");
 					// 페이징
 					
 					// 페이징 초기값
@@ -411,6 +412,8 @@ public class BoardController{
 					if(request.getParameter("pageNum") != null && request.getParameter("amount") != null) {
 						pageNum = Integer.parseInt(request.getParameter("pageNum"));
 						amount = Integer.parseInt(request.getParameter("amount"));
+						System.out.println("페이지번호 클릭 pageNum = " + pageNum);
+						System.out.println("페이지번호 클릭 amount = " + amount);
 					}
 					
 					System.out.println("pageNum = " + pageNum);
@@ -433,17 +436,37 @@ public class BoardController{
 					List<BoardDTO> searchList = null;
 					PageDTO pdto = null;
 					// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
-					if(field == 1 || field == 2 || field == 3 || field == 4) {
+					
 //						BoardDTO dto = new BoardDTO();
 						pdto = new PageDTO(pageNum, amount, totalCount);
 						boardDTO.setSearch_bar(search_bar);
 						boardDTO.setSearch_field(field);
 						searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
 						System.out.println("searchList.size() : " + searchList.size());
-					}
+						
+						for (int i = 0; i < searchList.size(); i++) {
+							boardDTO = searchList.get(i);
+							switch (boardDTO.getB_field()) {
+							case 10:
+								boardDTO.setB_fieldName("질문");
+								break;
+							case 20:
+								boardDTO.setB_fieldName("잡담");
+								break;
+							case 30:
+								boardDTO.setB_fieldName("비밀글");
+								break;
+							case 40:
+								boardDTO.setB_fieldName("나도몰라");
+								break;
+							default:
+								break;
+							}
+						}
+					
 					Map map = new HashMap();
 					map.put("searchList", searchList);
-					map.put("pdto",pdto);
+					map.put("pageDTO",pdto);
 					System.out.println("셀렉트 박스 서치 완료");
 					return map;
 				}

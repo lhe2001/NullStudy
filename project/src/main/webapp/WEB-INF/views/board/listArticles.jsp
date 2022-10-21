@@ -68,6 +68,7 @@
 	    			let field = $("#field").val();
 	    			let search_bar = $("#search_bar").val();
 	    			
+	    			
 	    			let info = {
 	    				b_field : field,
 	    				search_bar : search_bar
@@ -81,25 +82,29 @@
 	    				success: function(data){
 	    					
 	    					console.log("map :", data);
+	    					console.log("pageDTO",data.pageDTO.startPage);
+	    					// 게시글
 	    					$("#list_tbody").empty();
     						
 	    					let html = "";
 	    					
 	    					if(data == null){
-    								html +='<h1 style ="text-align : center; margin-left : 20px; margin-top : 20px; color : #1C6758">' + '등록된 글이 없어요' +'</h1>';
-    						} else{
+    								
+	    						html +='<h1 style ="text-align : center; margin-left : 20px; margin-top : 20px; color : #1C6758">' + '등록된 글이 없어요' +'</h1>';
+    						
+	    					} else{
 	    						
     							for(let i = 0; i< data.searchList.length; i++){
     								console.log(data.searchList.length);
     								console.log(data.searchList[i].b_fieldName);
     								html +=	'<tr>';
     								html += '<td>' + i + '</td>';
-									if(data.searchList[i].b_fieldName === '비밀글'){
+									if(data.searchList[i].b_fieldName == '비밀글'){
 										html += '<td style = "color : tomato;">' + data.searchList[i].b_fieldName + '</td>';
 									} else {
 										html += '<td >' + data.searchList[i].b_fieldName + '</td>';
 									}
-									html += '<td>' + data.searchList[i].nickName + '</td>';
+										html += '<td>' + data.searchList[i].nickName + '</td>';
 									
 									<%--답변을 구분해야 한다 --%>
 									html += '<td align="left" width="30%">';
@@ -119,7 +124,7 @@
 										html += '<a href="${contextPath}/board/viewArticle.do?b_articleNo=' +data.searchList[i].b_articleNo+ '">'+
 										data.searchList[i].b_title + '</a>';
 									}
-									if(data.searchList[i].b_fieldName === '비밀글'){
+									if(data.searchList[i].b_fieldName == '비밀글'){
 										html +=
 											'<a id = "link_a" href = "${contextPath}/board/password.do?b_articleNo=' + data.searchList[i].b_articleNo+ '">'+
 											data.searchList[i].b_title+ '</a>';
@@ -135,7 +140,26 @@
     							
     							}
     						}
-	    				},	
+	    					
+	    					console.log(data.searchList[1].b_field);
+	    						// 페이징 
+	    					$("#paging").empty();
+	    					
+	    					let html2 = "";
+	    					if(data.pageDTO.prev){
+	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.pageNum-1) +'&amount=' + data.pageDTO.amount + '" class="btn" >' + '이전' + '</a></span>'
+	    					}
+	    					
+	    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
+	    					html2 += '<a href="${contextPath }/board/listArticles.do?pageNum=' + i + '&amount=' + data.pageDTO.amount + '&field=' + data.searchList[i].field +   ' " class="btn">'+ i + '</a>'
+	    					}
+	    					
+	    					if(data.pageDTO.prev){
+	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="btn" >' + '다음' + '</a></span>'
+	    					}
+	    					$("#paging").append(html2);
+	    				},
+	    				
 	    				error:function(){
 	    					alert("에러발생!!")
 	    				}
@@ -261,6 +285,7 @@
 									<a href="${contextPath}/board/viewArticle.do?b_articleNo=${article.b_articleNo}">
 										${article.b_title} </a>
 								</c:when>
+								
 								<c:when test="${article.b_fieldName eq '비밀글' }">
 									<a id = "link_a" href = "${contextPath}/board/password.do?b_articleNo=${article.b_articleNo}">
 										${article.b_title} </a>
@@ -280,7 +305,7 @@
 		</c:choose>
 		</tbody>
 	</table>
-				<div id="paging"> 
+			<div id="paging"> 
 				<!--이전버튼 활성화 여부 -->
 				
 				 <c:if test="${pageDTO.prev }">
@@ -294,8 +319,8 @@
 		             <c:if test="${pageDTO.next }">
 		            <span><a href="${contextPath }/board/listArticles.do?pageNum=${pageDTO.endPage + 1 }&amount=${pageDTO.amount}" class="btn">다음</a></span>
 		            </c:if>
-       			</div>
-</div>
+       		</div>
+		</div>
 </div>
 		
 <div id = "search_">
