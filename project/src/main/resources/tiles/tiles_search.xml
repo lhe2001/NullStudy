@@ -6,7 +6,7 @@
 
    <definition name="baseLayout_search"  template="/WEB-INF/views/common/layout_search.jsp">
       <put-attribute name="title" value="" />
-      <put-attribute name="header" value="/WEB-INF/views/common/header(login).jsp" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
       <put-attribute name="body" value="" />
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
