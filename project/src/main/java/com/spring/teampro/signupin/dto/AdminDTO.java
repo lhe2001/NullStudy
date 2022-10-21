@@ -7,7 +7,14 @@ public class AdminDTO {
 	private String t_intro;
 	private String name;
 	private String id;
+	private int t_key;
 	
+	public int getT_key() {
+		return t_key;
+	}
+	public void setT_key(int t_key) {
+		this.t_key = t_key;
+	}
 	public String getT_name() {
 		return t_name;
 	}

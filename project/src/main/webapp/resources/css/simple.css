@@ -503,3 +503,7 @@
             outline:none;
             cursor: pointer;
         }
+        
+        #result1{
+        	color: red;
+        }

@@ -1,0 +1,60 @@
+
+.hide{
+    display: none;
+}
+
+form {
+	display: inline;
+}
+.slWrap{
+	margin-top: 150px;
+}
+.tbWrap table{
+	margin: auto;
+	
+}
+.selectWrap{
+	width: 700px;
+	margin-left: 200px;
+}
+
+select{
+	height: 30px;
+}
+
+.searchbar .input{
+	height: 30px;
+	width: 200px;
+}
+
+.searchbar .submit, submit{
+	height: 30px;
+	width: 100px;
+}
+
+.submitAll{
+	height: 30px;
+	width: 100px;
+}
+
+th{
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(187, 187, 187);
+    
+}
+
+table{
+	width: 1300px;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+    margin-left: 20px;
+    margin-rignt: 20px;
+}
+
+tr, td{
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+}

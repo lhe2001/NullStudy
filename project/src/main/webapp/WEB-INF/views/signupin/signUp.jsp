@@ -8,9 +8,19 @@
 	.hide{
 		display:none;
 	}
+	#result1, #result2, #result3{
+		color: red;
+	}
+	#notice{
+		color: blue;
+	}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
+	$(function(){
+		signUpCheck();
+	})
 	
 	function signUpCheck(){
 		
@@ -218,7 +228,8 @@ Null study 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 �
 	            <div class="btn_s_wrap hide">
 	            <input type="submit" value="가입하기" class="sign_btn"></input>
 	            </div>
-	            <div>아이디, 이메일 중복 확인 후 가입버튼이 나타납니다.</div>
+	            <br>
+	            <div id="notice"> * 아이디, 이메일 중복 확인 후 가입버튼이 나타납니다. </div>
             </section>
             </form>
 	</div>
