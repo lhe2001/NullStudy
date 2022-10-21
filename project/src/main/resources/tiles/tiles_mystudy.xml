@@ -53,5 +53,19 @@
       <put-attribute name="body" value="/WEB-INF/views/mystudy/calUpdateForm.jsp" />
    </definition>
    
+     <!-- 메모 페이지  -->
+   <definition name="memo" extends="baseLayout">
+      <put-attribute name="title" value="메모 페이지" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/mystudy/Memo.jsp" />
+   </definition>   
+   
+   <!-- 메모수정 페이지  -->
+   <definition name="modMemo" extends="baseLayout">
+      <put-attribute name="title" value="메모수정 페이지" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/mystudy/modMemo.jsp" />
+   </definition> 
+   
 
 </tiles-definitions>

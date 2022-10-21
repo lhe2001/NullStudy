@@ -63,6 +63,7 @@
 		]]>
 	</delete>
 
+<!-- 	일정 작성하기 -->
 	<insert id="insertCal" parameterType="scheduleDTO">
 		insert into myschedule(userkey, m_schedule_key, m_schedule_title, m_schedule_desc, m_schedule_date, m_schedule_write)
 		values (#{userkey}, seq_schedule.nextval, #{m_schedule_title}, #{m_schedule_desc}, #{m_schedule_date}, sysdate)

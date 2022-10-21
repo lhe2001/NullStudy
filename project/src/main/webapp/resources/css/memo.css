@@ -5,249 +5,15 @@
     box-sizing: border-box;
   }
   
-
-
-/*플래너 부분*/
-.pl_wrapper{
-    width: 300px;
-    margin-top: 90px;
+body{
+  background-color: #AAABD3;	
 }
-
-.pl_top_wrap ul{
-    margin: 20px 10px 40px;
-    /* margin: 20px 10px 0 20px; */
-}
-
-.pl_top_wrap li {
-    display: inline;
-    margin-right: 30px;
-    padding: 10px;
-  }
-  
-.theday{
-    width: 60%;
-    border-top: 3px solid #353866;
-    border-bottom: 3px solid #353866;
-}
-
-.d-day{
-    width: 40%;
-    border-top: 3px solid #353866;
-    border-bottom: 3px solid #353866;
-}
-
-.pl_title{
-    font-size: 10px;
-    font-weight: 500;
-}
-
-.pl_goal_wrap{
-    margin: 20px 10px;
-}
-
-.pl_goal_content{
-    height: 80px;
-    width: 200px;
-    border-top: 3px solid #353866;
-    border-bottom: 3px solid #353866;
-}
-
-.pl_diary_wrap{
-    margin: 20px 10px;
-}
-
-.pl_diary_content{
-    height: 80px;
-    width: 200px;
-    border-top: 3px solid #353866;
-    border-bottom: 3px solid #353866;
-}
-
-.pl_todo_wrap{
-    margin: 10px 10px;
-}
-
-.pl_todo_content{
-    height: 250px;
-    width: 200px;
-    border-top: 3px solid #353866;
-    border-bottom: 3px solid #353866;
-}
-
-
-/* 투두관련 */
-.addBox {
-    height: 40px;
-}
-
-.addBox_inner {
-    display: flex;
-    margin-bottom: 10px;
-}
-
-.addTxt{
-    width: 100%;
-    /* padding-bottom: 5px; */
-    border: none;
-    border-bottom: 1px solid rgb(163, 155, 155);
-    outline: none;
-    font-size: 10px;
-    background-color: transparent;
-}
-
-.addBtn {
-    border:none;
-    background-color: transparent;
-    font-size: 23px;
-    color: rgb(163, 155, 155);
-    cursor: pointer;
-}
-
-.addBtn:hover {
-    color: rgb(75, 74, 74);
-}
-
-.notice {
-    color: rgb(201, 65, 65);
-    font-size: 20px;
-}
-
-.listBox_inner {
-    width: 100%;
-    height: 220px;
-    margin: 10px 0;
-    overflow: auto;
-    font-size: 15px;
-}
-
-/* 스크롤바 숨기기 */
-.listBox_inner::-webkit-scrollbar { 
-    display: none;
-  }
-
-.list {
-    width: 100%;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: center;
-}
-
-input[type="checkbox"] {
-    width: 15px;
-    height: 15px;
-    margin-right: 10px;
-    border: 1px solid;
-    outline: 0;
-    cursor: pointer;
-}
-
-input[type="checkbox"]:checked {
-    background-color: #fff;
-}
-
-.listLb {
-    width: 90%;
-    display: inline-block;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-.allCheckBox {
-    display: flex;
-    justify-content: space-between;
-}
-
-.allSelect_lb {
-    color: rgb(119 112 112);
-    text-shadow: 1px 1px 1px ghostwhite;
-    font-size: 13px;
-}
-
-.allSelect_lb:hover {
-    color: rgb(75, 74, 74);
-}
-
-.allDel {
-    color: rgb(119 112 112);
-    text-shadow: 1px 1px 1px ghostwhite;
-    text-decoration: none;
-    font-size: 13px;
-}
-
-.allDel:hover {
-    color: rgb(75, 74, 74);
-}
-
-.reBtn{
-  border: none;
-}
-
-.reBtn:hover{
-  cursor: pointer;
-}
-.plBtn{
-  float: right;
-  margin-right: 3px;
-  background-color: #AAABD3;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 3px;
-  margin-top: 7px;
-}
-
-.pl_content_txt{
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  text-align: center;
-  line-height: 70px;
-}
-
-.pl_content_input{
-  width: 100%;
-  border: 1px solid rgb(189, 189, 189);
-  height: 70px;
-  border: none;
-}
-
-.hide {
-  display: none;
-}
-
-.list_memo_prog_wrap{
-  display: flex;
-}
-
-/* 나의팀목록 */
-#MyteamWrapper {
-  margin-top: 30px;
-}
-.MyTeamTableWrap {
-  background-color: #E8E8FF;
-  margin-left: 30px;
-  width: 250px;
-  min-height: 250px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
-  box-sizing: border-box;
-}
-.MyTeamTableWrap table {
-  /* margin:auto; */
-  width:100%;
-  
-}
-.MyTeamTableWrap table th{
-  padding: 10px;
-}
-.MyTeamTableWrap table td{
-  text-align: center;
-  border-bottom: 1px black dashed;
-}
-
 /*메모부분*/
 #MemoWrapper{
+  max-width: 1530px;
+  min-width: 1530px;
+  margin: auto;
   background-color: #AAABD3;
-  margin-bottom: 20px;
 }
 
 .memo_wrapper{
@@ -480,10 +246,14 @@ input[type="checkbox"]:checked {
   margin-bottom: 10px;
 }
 
-/* a { */
-/*   color: inherit; */
-/*   text-decoration: none; */
-/* } */
+a[data-id="amyStyle"] {
+  text-decoration: none;
+}
+
+a[data-id="amyStyle"]:visited {
+  text-decoration: none;
+  color: #E8E8FF;
+}
 
 #mod_clsicon{
 	cursor:pointer;
@@ -495,3 +265,13 @@ input[type="checkbox"]:checked {
 	margin: auto;
 	text-align: center;
 }
+
+a[data-name="addalink"]{
+	text-decoration: none;
+	color: #6d6d6d;
+}
+a[data-name="addalink"]:visited{
+	text-decoration: none;
+	color: pink;
+}
+
