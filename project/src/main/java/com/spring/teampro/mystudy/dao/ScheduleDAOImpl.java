@@ -43,15 +43,17 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 		return count>0?true:false;
 	}
 	//일정삭제하기
-	public boolean calMuldel(String[] schedule_key) {
+	public boolean calMuldel(String[] m_schedule_key) {
 		Map<String, String[]> map = new HashMap<String, String[]>();
-		map.put("schedule_keys", schedule_key);
+		map.put("m_schedule_keys", m_schedule_key);
 		int count = sqlSession.delete("mapper.mystudy.calMuldel", map);
+		logger.info("map count: "+count);
 		return count>0?true:false;
 	}
 	
 	//일정의 개수 조회
 	public int calCount(ScheduleDTO dto) {
+		logger.info(dto.getM_schedule_date());
 		int count = sqlSession.selectOne("mapper.mystudy.calCount", dto);
 		return count;
 	}

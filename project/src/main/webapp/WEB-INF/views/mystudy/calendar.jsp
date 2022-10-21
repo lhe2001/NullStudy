@@ -41,6 +41,7 @@
 				async:false,
 				success:function(val){
 					aObj.after("<div class='cPreview'>"+val+"</div>");
+					console.log(val);
 				},
 				error:function(){
 					alert("서버통신실패xxx");
@@ -96,7 +97,7 @@
 <table id="calendarTable">
 <caption id="calCap">
 	<a href="calendar.do?year=<%=year%>&month=<%=month-1%>" data-id="alinkStyle"><i class="fa-regular fa-square-caret-left" data-id="alinkStyle"></i></a>&nbsp;
-		<span class="y"><%=year %> .</span>
+		<span class="y"><%=year %></span>&nbsp;.&nbsp;
 		<span class="m"><%=month %></span>&nbsp;
 	<a href="calendar.do?year=<%=year%>&month=<%=month+1%>" data-id="alinkStyle"><i class="fa-regular fa-square-caret-right"></i></a>
 </caption>

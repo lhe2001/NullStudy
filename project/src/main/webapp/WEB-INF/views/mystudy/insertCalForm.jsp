@@ -30,11 +30,10 @@
 
 <body>
 	<form action="insertCalBoard.do" method="post">
+<!-- 			<input type="hidden" name="userkey" /> -->
+<!-- 			<input type="hidden" name="m_schedule_date" /> -->
+<!-- 			<input type="hidden" name="m_schedule_write" /> -->
 		<table border="1">
-			<tr>
-				<th>userkey</th>
-				<td><input type="hidden" name="userkey" /></td>
-			</tr>
 			<tr>
 				<th>일정 요일</th>
 				<td>

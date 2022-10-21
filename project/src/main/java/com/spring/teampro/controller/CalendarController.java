@@ -83,7 +83,7 @@ public class CalendarController {
 	@RequestMapping(value = "/mystudy/calCountAjax.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody public String calCountAjax(
 			Model model
-			,@RequestParam("m_schedule_date") String m_schedule_date
+			,@RequestParam String m_schedule_date
 			,@ModelAttribute ScheduleDTO sdto
 			, HttpServletRequest request
 			) {
@@ -97,6 +97,7 @@ public class CalendarController {
 		sdto.setM_schedule_date(m_schedule_date);
 		
 		int count = scheduleService.calCount(sdto);
+		logger.info(">> calCountAjax--count"+count);
 		
 		return count+"";
 	}
@@ -153,13 +154,15 @@ public class CalendarController {
 		//유저키 세션으로 잡아오기
 		HttpSession session=request.getSession();
 		Integer userkey = (Integer) session.getAttribute("userKey");
-		logger.info(">> calBoardList--userkey"+userkey);
+		logger.info(">> insertCal--userkey"+userkey);
 		sdto.setUserkey(userkey);		
 		
 		
 		//db에 저장할 형식을 만들어줘야함
 		String yyyyMMdd = sdto.getYear() + "-" + Util.isTwo(sdto.getMonth()) + "-" + Util.isTwo(sdto.getDate());
 		sdto.setM_schedule_date(yyyyMMdd);
+		logger.info(">> insertCal--yyyyMMdd"+yyyyMMdd);
+
 		
 		boolean isS = scheduleService.insertCal(sdto);
 		
@@ -175,14 +178,17 @@ public class CalendarController {
 	public String calMuldel(
 			Model model
 			,@RequestParam String[] seq
-			,@ModelAttribute ScheduleDTO dto
 			) {
 		logger.info("일정삭제 이동");
 		
+		for(int i=0;i<seq.length;i++) {
+			System.out.println("체크된키값"+seq[i]);
+		}
+			
 		boolean isS = scheduleService.calMuldel(seq);
 		
 		if(isS) {
-			return "redirect:calBoardList.do?";
+			return "redirect:calBoardList.do";
 		} else {
 			model.addAttribute("msg", "일정삭제 실패");
 			return "error";
