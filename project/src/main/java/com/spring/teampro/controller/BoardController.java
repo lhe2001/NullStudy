@@ -19,6 +19,7 @@ import org.apache.ibatis.type.DateOnlyTypeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,7 +49,9 @@ public class BoardController{
 	
 	// 전체 리스트 조회
 	@RequestMapping(value = "/board/listArticles.do", method = RequestMethod.GET)
-	public String listArticles(HttpServletRequest request, Model model) {
+	public String listArticles(HttpServletRequest request, Model model,
+			@ModelAttribute BoardDTO boardDTO
+			) {
 		System.out.println("전체 리스트 조회");
 		// 페이징
 		
@@ -77,19 +80,19 @@ public class BoardController{
 		session=request.getSession();
 		SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 		for (int i = 0; i < articlesList.size(); i++) {
-			BoardDTO dto = articlesList.get(i);
-			switch (dto.getB_field()) {
+			boardDTO = articlesList.get(i);
+			switch (boardDTO.getB_field()) {
 			case 10:
-				dto.setB_fieldName("질문");
+				boardDTO.setB_fieldName("질문");
 				break;
 			case 20:
-				dto.setB_fieldName("잡담");
+				boardDTO.setB_fieldName("잡담");
 				break;
 			case 30:
-				dto.setB_fieldName("비밀글");
+				boardDTO.setB_fieldName("비밀글");
 				break;
 			case 40:
-				dto.setB_fieldName("나도몰라");
+				boardDTO.setB_fieldName("나도몰라");
 				break;
 			default:
 				break;
