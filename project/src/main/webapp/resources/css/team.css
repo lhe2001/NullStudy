@@ -125,7 +125,7 @@
     cursor: pointer;
     position: absolute;
     bottom:20px;
-    left:31%;
+    left:38%;
     border-radius: 5px;
     background-color: #ffd92e;
     width:100px;
@@ -608,6 +608,7 @@
 }
 
 /* 나의팀목록 */
+
 #MyteamWrapper {
     margin-top: 120px;
     text-align: center;
@@ -617,21 +618,94 @@
 }
 .MyTeamTableWrap {
     margin:20px auto;
-    width:300px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
+    width:807px;
+    border: 1px solid rgb(216, 216, 216);
     min-height: 300px;
+    max-height:300px;
     box-sizing: border-box;
+    overflow: auto;
+}
+#MyteamWrapper ::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+#MyteamWrapper ::-webkit-scrollbar-track{
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+#MyteamWrapper  ::-webkit-scrollbar-thumb {
+    background-color: #d9dcee;
+    border-radius: 5px;
+}
+/* 나의팀 목록 테이블*/
+.myteamList {
+	margin:auto;
+	width:800px;
+    overflow: auto;
+    font-size: 14px;
+    border-collapse: collapse;
+}
+.myteamList td{
+  padding:5px 0;
+}
+.myteamList thead tr:first-child{
+    background-color: #CCDDEE;
+}
+.myteamList thead tr:nth-child(2){
+    background-color: #ccddee42;
+}
+.myteamList tbody tr:hover{
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+/* 가입요청 상태 테이블*/
+#requestStatus{
+    margin:30px auto;
+    width:807px;
+    border: 1px solid rgb(216, 216, 216);
+    min-height: 200px;
+    max-height:200px;
+    box-sizing: border-box;
+    overflow: auto;
+    display:flex;
+}
+#requestStatus button {
+    border:none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #d9dcee;
+    color:navy;
+}
+#waiting{
+    margin-left:auto;
+    width:400px;
+    font-size: 14px;
+    border-collapse: collapse;
+    height:0;
+}
+#requestStatus table td{
+    padding:5px 0;
+}
+#waiting thead tr:first-child{
+    background-color: #bcd6d1;
+}
+#waiting thead tr:nth-child(2){
+    background-color: #bcd6d160;
+}
+#reject{
+    margin-right: auto;
+    width:400px;
+    font-size: 14px;
+    border-collapse: collapse;
+    height:0;
+}
+#reject thead tr:first-child{
+    background-color: #FFCCCC;
+}
+#reject thead tr:nth-child(2){
+    background-color: #ffcccc44;
 }
 
-.MyTeamTableWrap table {
-	margin:auto;
-	width:100%;
-	
-}
-.MyTeamTableWrap table td{
-	border-bottom: 1px black dashed;
-	
-}
 /*팀개설 css*/ 
 @media(min-width : 500px)
 {

@@ -158,6 +158,9 @@ function leaveTeam(t_key){
 function dDay(){
    let now = new Date();
    let t_day = $(".t_day").text();
+   if(t_day == ''){
+   	t_day= now;
+   }
    let then = new Date(t_day);
    let gap = then.getTime() - now.getTime();
    gap = Math.floor(gap / (1000 * 60 * 60 * 24)) * -1;
@@ -166,7 +169,7 @@ function dDay(){
 
 //디데이 수정
 function reviseDday(t_key){
-	window.open('/project/team/reviseDday.do?t_key='+t_key,'pop','location=no,width=300,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+	window.open('/project/team/reviseDday.do?t_key='+t_key,'pop','location=no,width=540,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
 
 

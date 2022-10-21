@@ -8,8 +8,9 @@
 <!-- SELECT -->
 
 	<select id="myTeamList" resultType="myTeamListDTO" parameterType="int">
-		SELECT a.T_KEY,a.T_NAME,a.T_FIELD , t.USERKEY  FROM TEAMMEMBER t , ALLTEAM a
+		SELECT a.t_number, a.T_KEY,a.T_NAME,a.T_FIELD , t.USERKEY,to_char(t.TM_JOINDATE,'YYYY-MM-DD')AS TM_JOINDATE  FROM TEAMMEMBER t , ALLTEAM a
 		WHERE t.T_KEY = a.T_KEY AND t.userkey= #{userkey}
+		order by t.TM_JOINDATE
 	</select>
 	
 	<select id="teamInfo" resultType="teamInfoDTO" parameterType="int">
@@ -64,6 +65,16 @@
 	<select id="existTeamName" resultType="int" parameterType="String">
 		SELECT count(*) FROM ALLteam
 		WHERE t_name = #{t_name}
+	</select>
+	
+	<select id="getMyRequest_wait" resultType="memberRequestDTO" parameterType="int">
+		SELECT m.tr_key,m.userkey,m.T_KEY,a.T_NAME ,a.T_FIELD  FROM memberRequest m, ALLTEAM a 
+		WHERE TR_RESULT ='M' AND m.T_KEY = a.T_KEY and m.userkey=#{userKey}
+	</select>
+	
+	<select id="getMyRequest_reject" resultType="memberRequestDTO" parameterType="int">
+		SELECT m.tr_key,m.userkey,m.T_KEY,a.T_NAME ,a.T_FIELD  FROM memberRequest m, ALLTEAM a 
+		WHERE TR_RESULT ='N' AND m.T_KEY = a.T_KEY and m.userkey=#{userKey}
 	</select>
 	
 	
@@ -161,5 +172,9 @@
 		WHERE t_key= #{t_key}
 	</delete>
 	
+	<delete id="deleteRequest" parameterType="memberRequestDTO">
+		DELETE FROM memberRequest
+		WHERE tr_key= #{tr_key}
+	</delete>
 	
 </mapper>

@@ -139,4 +139,11 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		return service.existTeamName(t_name);
 	}
 	
+	//>>>>>>>>>>>>>>>>myTeamList 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+	//가입요청 취소하기 & //거절된 요청 삭제하기 
+	@RequestMapping(value="/teamRest/cancleRequest.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int cancleRequest(@RequestBody MemberRequestDTO dto
+			) {
+		return service.cancleRequest(dto);
+	}
 }

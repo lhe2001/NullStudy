@@ -2,6 +2,7 @@ package com.spring.teampro.team.dao;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
@@ -46,6 +47,10 @@ public interface TeamDAO {
 	int updateDday(TeamInfoDTO dto);
 
 	int existTeamName(String t_name);
+
+	Map getMyRequest(int userkey);
+
+	int cancleRequest(MemberRequestDTO dto);
 
 
 

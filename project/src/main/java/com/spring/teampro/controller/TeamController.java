@@ -1,7 +1,7 @@
 package com.spring.teampro.controller;
 
-import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +28,26 @@ public class TeamController {
 	
 	@Autowired
 	TeamService service;
+	
+	
+	//>>>>>>>>>>>>>>>>myTeamList 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+	//myTeamList로 가기 
+		@RequestMapping(value="/team/myTeamList.do", method= {RequestMethod.GET, RequestMethod.POST})
+		public String myTeamList(HttpServletRequest request, HttpServletResponse response,
+				Model model
+				) {
+			HttpSession session = request.getSession();
+			int userkey  = (Integer) session.getAttribute("userKey");
+			//1.나의 팀목록 가져오기
+			List myTeamList = service.getMyTeamList(userkey);
+			logger.info("myTeamList>>>>>>>>>>>>>>>"+myTeamList.size());
+			model.addAttribute("myTeamList", myTeamList);
+			//2.나의 가입요청 현황 가져오기
+			Map requestMap = service.getMyRequest(userkey);
+			model.addAttribute("requestMap", requestMap);
+			
+			return "myTeamList";
+		}
 	
 	//>>>>>>>>>>>>>>>>teamDATAIL 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	

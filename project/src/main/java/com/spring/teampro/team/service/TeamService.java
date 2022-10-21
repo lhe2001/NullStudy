@@ -1,7 +1,7 @@
 package com.spring.teampro.team.service;
 
-import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
@@ -46,6 +46,11 @@ public interface TeamService {
 	int updateDday(TeamInfoDTO dto);
 
 	boolean existTeamName(String t_name);
+
+	Map getMyRequest(int userkey);
+
+	int cancleRequest(MemberRequestDTO dto);
+
 
 
 

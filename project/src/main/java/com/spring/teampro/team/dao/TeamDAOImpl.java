@@ -1,7 +1,8 @@
 package com.spring.teampro.team.dao;
 
-import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -55,7 +56,7 @@ public class TeamDAOImpl implements TeamDAO {
 		return sqlSession.selectOne("mapper.team.anyAlarm",t_key);
 	}
 	
-	//가입요청List를 가져오기
+	//팀에가입요청List를 가져오기
 	@Override
 	public List getRequestList(int t_key) {
 		return sqlSession.selectList("mapper.team.getRequestList",t_key);
@@ -77,7 +78,19 @@ public class TeamDAOImpl implements TeamDAO {
 	public int existTeamName(String t_name) {
 		return sqlSession.selectOne("mapper.team.existTeamName",t_name);
 	}
-	
+	//나의 가입요청 가져오기
+	@Override
+	public Map getMyRequest(int userkey) {
+		Map map = new HashMap();
+		
+		List waitingList =  sqlSession.selectList("mapper.team.getMyRequest_wait",userkey);
+		List rejectList = sqlSession.selectList("mapper.team.getMyRequest_reject",userkey);
+		
+		map.put("waitingList", waitingList);
+		map.put("rejectList", rejectList);
+		
+		return map;
+	}
 	
 	//>>>>>>>>>>>>>>>UPDATE 수정하기>>>>>>>>>>>>>>
 	//팀정보 업데이트 하기
@@ -143,7 +156,12 @@ public class TeamDAOImpl implements TeamDAO {
 		sqlSession.delete("mapper.team.deleteTeam_member",t_key);
 		return sqlSession.delete("mapper.team.deleteTeam_team",t_key);
 	}
-
+	//가입요청 취소하기 & 거절된 요청 삭제하기
+	@Override
+	public int cancleRequest(MemberRequestDTO dto) {
+		return sqlSession.delete("mapper.team.deleteRequest",dto);
+	}
+	
 	//>>>>>>>>>>>>>>>INSERT 추가하기>>>>>>>>>>>>>>
 	//가입요청 업데이트
 	@Override

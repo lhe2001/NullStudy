@@ -13,6 +13,9 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="/project/resources/js/main.js"></script>
   <style>
+  body {
+  	margin-top:100px;
+  }
   </style>
   </head>
     <body>

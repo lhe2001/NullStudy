@@ -39,7 +39,7 @@
                         <div class="drop l3">
                             <ul>
                                   <li><a href="/project/team/allTeamList.do">All Team</a></li>
-                                <li></li>
+                                <li><a href="/project/team/myTeamList.do">My Team</a></li>
                             </ul>
                         </div>
                     </li>
