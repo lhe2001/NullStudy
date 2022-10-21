@@ -1,6 +1,7 @@
 package com.spring.teampro.board.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.PageDTO;
 
 
 @Repository("boardDAO")
@@ -19,9 +21,11 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	// selectAllArticles() 메소드 만들자!!! return 타입은 List <전체 목록 조회>
 	@Override
-	public List<BoardDTO> selectAllArticles() {
-
-		List<BoardDTO> list = sqlSession.selectList("mapper.board.selectAllArticles");
+	public List<BoardDTO> selectAllArticles(int pageNum, int amount) {
+		Map map = new HashMap();
+		map.put("pageNum",pageNum);
+		map.put("amount",amount);
+		List<BoardDTO> list = sqlSession.selectList("mapper.board.selectAllArticles",map);
 		
 		return list;
 	}
@@ -76,12 +80,30 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	// 서치하는 메소드
-	@Override
-	public List<BoardDTO> searchAllArticle(BoardDTO dto) {
-		List<BoardDTO> list = new ArrayList<BoardDTO>();
-		list = sqlSession.selectList("mapper.board.searchAllArticle",dto);
-		return list;
-	}
+//	@Override
+//	public List<BoardDTO> searchAllArticle(BoardDTO dto) {
+//		List<BoardDTO> list = new ArrayList<BoardDTO>();
+//		list = sqlSession.selectList("mapper.board.searchAllArticle",dto);
+//		return list;
+//	}
+	
+	// 서치하는 메소드 (ajax)
+		@Override
+		public List<BoardDTO> searchAllArticle(BoardDTO dto,int pageNum, int amount) {
+			List<BoardDTO> list = new ArrayList<BoardDTO>();
+			System.out.println("dto.getSearch_bar() = " + dto.getSearch_bar());
+			System.out.println("dto.getSearch_field() = " + dto.getSearch_field());
+			System.out.println("dao pageNum = " + pageNum );
+			System.out.println("dao amount = " + amount );
+			Map map = new HashMap();
+			map.put("search_field",dto.getSearch_field());
+			map.put("search_bar",dto.getSearch_bar());
+			map.put("pageNum",pageNum);
+			map.put("amount",amount);
+			list = sqlSession.selectList("mapper.board.searchAllArticle", map);
+			System.out.println();
+			return list;
+		}
 
 	// 말머리에서 선택했을때 리스트 출력시킬 메소드
 	@Override
@@ -112,5 +134,23 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void view(BoardDTO dto) {
 		sqlSession.update("mapper.board.view", dto);
+	}
+	
+	// 페이징 메소드
+	@Override
+	public List<PageDTO> paging(int pageNum, int amount) {
+		System.out.println("dao pageNum = " + pageNum );
+		System.out.println("dao amount = " + amount );
+		Map map = new HashMap();
+		map.put("pageNum",pageNum);
+		map.put("amount",amount);
+		List<PageDTO> list = sqlSession.selectList("mapper.board.paging",map);
+		return list;
+	}
+	// 총 페이지수 가져오는 메소드
+	@Override
+	public int totalCount() {
+		int count = sqlSession.selectOne("mapper.board.totalCount");
+		return count;
 	}
 }

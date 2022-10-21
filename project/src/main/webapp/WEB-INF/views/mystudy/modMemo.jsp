@@ -4,14 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-	<link href="/project/resources/css/allMystudy.css" rel="stylesheet"/> 
+
+	<link href="/project/resources/css/memo.css" rel="stylesheet"/> 
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
-</head>
 <body>
     <div class="memopopup-box show">
         <div class="memopopup">
@@ -20,7 +15,7 @@
                     <p>Modify Note</p>
                     <p id="mod_clsicon" onclick="history.back();">cancel</p>
                 </header>
-                <form method="get" action="${pageContext.request.contextPath}/mystudy/updateMemo">
+                <form method="get" action="updateMemo.do">
                     <div class="row title">
                         <label>Title</label>
                         <input type="text" name="m_memo_title" value="${oneDTO.m_memo_title }">
@@ -37,4 +32,3 @@
     </div>
 
 </body>
-</html>

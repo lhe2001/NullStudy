@@ -13,14 +13,39 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<<<<<<< HEAD
+    <script>
+    $(function(){
+    	bind();
+    	idcheck();
+    	<%-- 게시판 --%>
+    	search();
+    	select();
+		link();
+    })
+    
+    function bind(){
+    	$("#login_btn").off("click").on("click", function(){
+    		location.href = '/project/moveToSignIn.do'
+    	})
+    	
+    	$("#signUp_btn").off("click").on("click", function(){
+    		location.href = '/project/moveToSignUp.do'
+    	})
+    	
+    }
+    
+    </script>
+=======
 
+>>>>>>> master
     
 </head>
 <body>
 <div id="wrapper">
         <header class="mainHeader">
             <nav>
-                <div class="logo" href="#home"></div>
+                <div class="logo" href="#home" onclick="location.href='/project/'"></div>
                 <ul class="navtap_items">
                     <li class="navtap">My Study <i class="fa-solid fa-book-open"></i>
                         <div class="drop l1">

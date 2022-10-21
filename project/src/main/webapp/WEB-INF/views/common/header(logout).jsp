@@ -17,13 +17,13 @@
 <div id="wrapper">
         <header class="mainHeader">
             <nav>
-                <div class="logo" onclick="location.href='/teampro/Main2.jsp'"></div>
+                <div class="logo" onclick="location.href='/project/moveToMain.do'"></div>
                 <ul class="navtap_items">
                     <li class="navtap">My Study <i class="fa-solid fa-book-open"></i>
                         <div class="drop l1">
                             <ul>
-                                 <li><a href="">아직없음</a></li>
-                               <li><a href="/project/mystudy/memolist">My Study</a></li>
+                               <li><a href="/project/mystudy/calendar.do">Calendar</a></li>
+                               <li><a href="/project/mystudy/memo.do">Memo</a></li>
                             </ul>
                         </div>
                     </li>
