@@ -130,4 +130,205 @@
 		<!-- update Board set view(select view+1 from board
 			where b_articleNo = #{b_articleNo})
 			where b_articleNo = #{b_articleNo} -->
+=======
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<!--namespace = 식별자(변수,상수)-->
+	<mapper namespace="mapper.board">
+		<resultMap type="boardDTO" id="boardResult">
+			<result property="level" column = "level" />
+			<result property="B_key" column = "B_key" />
+			<result property="B_ArticleNo" column = "B_ArticleNo" />
+			<result property="B_parentNo" column = "B_parentNo" />
+			<result property="B_title" column = "B_title" />
+			<result property="B_content" column = "B_content" />
+			<result property="B_field" column = "B_field" />
+			<result property="B_writeDate" column = "B_writeDate" />
+			<result property="B_view" column = "B_view" />
+			<result property="UserKey" column = "UserKey" />
+		</resultMap>
+		
+		<!-- 멤버 전체 조회 (페이징 적용) -->
+			<select id="selectAllArticles" resultType = "boardDTO" parameterType="java.util.HashMap">
+			select * from(
+				select rownum as rnum, tmp.* from(
+					select level, b.b_key, b.b_articleno, b.b_parentno, b_title , b_content,
+						b.b_field, b.b_writedate, b.b_view, b.userkey, a.nickname
+							from board b
+							, allmember a
+								where b.userkey = a.userkey
+				 					start with b_parentno = 0
+				 					connect by prior b_articleno = b_parentno
+				 					order siblings by b_articleno desc 
+									) tmp
+									)
+									where (#{pageNum}-1) * #{amount } <![CDATA[<]]> rnum  
+									and rnum <![CDATA[<=]]> #{pageNum } * #{amount }
+			</select>	
+			
+		<!-- 가장 큰 글번호 조회 query -->
+			<select id="getMaxArticleNO" resultType = "int">	
+				SELECT NVL(max(b_articleNo),0)+1 from Board
+			</select>
+			
+		<!-- 글 등록  -->
+			<insert id="addNewArticle" parameterType = "java.util.HashMap">
+				insert into Board (B_key, B_ArticleNo, B_parentNo , B_title, B_content, B_field, B_articlePwd, UserKey, B_imageFile)
+							values(key_b.nextval,#{b_articleNo},#{b_parentNo},#{b_title},#{b_content},#{b_field},#{b_articlePwd},#{userKey},#{b_imageFile})
+			</insert>
+			
+		<!-- 	글 상세 목록 view -->
+			<select id="selectViewArticle" resultType="boardDTO" parameterType="int">
+				select b.b_articleNo, b.b_parentNo, b.b_title, b.b_content, b.b_writeDate ,b.b_view, b.b_field, b.userkey, b.b_imageFile , a.nickName 
+					from Board b,
+				 	ALLMEMBER a 
+						where b.userkey = a.userkey
+						and b_articleNo = #{b_aritcleNo }
+			</select>
+			
+		<!-- 	글 수정 -->
+			<!-- 제목과 내용을 먼저 수정하고 -->
+			<update id="modifyArticle" parameterType="java.util.HashMap">
+				update Board set
+				b_title = #{b_title },
+				b_content = #{b_content }
+			<!-- 이미지를 수정할 경우 -->
+			<if test="b_imageFile != '' and b_imageFile == null ">
+				,b_imageFile = #{b_imageFile }
+			</if>
+				where b_articleNo = #{b_articleNo }
+			</update>
+		
+		<!-- 글 삭제 -->
+			<delete id="deleteArticle" parameterType="int">
+				delete from board
+				where b_articleNo in ( 
+				select b_articleNo from board  
+				start with b_articleNo = #{b_articleNo }
+				connect by prior b_articleNo = b_parentNo ) 
+			</delete>	
+					
+		<!-- 서치 -->
+<!-- 			<select id="searchAllArticle" resultType="boardDTO" parameterType="boardDTO"> -->
+<!-- 			select * from board b -->
+<!-- 			, allmember a -->
+<!-- 			<where> -->
+<!-- 				and b.userkey = a.userkey -->
+<!-- 				<choose> -->
+<!-- 					<when test="search_field == 1"> -->
+<!-- 						and lower(b_title) like lower('%'||#{search_bar }||'%')  -->
+<!-- 					</when> -->
+<!-- 					<when test="search_field == 2"> -->
+<!-- 						and lower(b_content) like lower('%'||#{search_bar }||'%') -->
+<!-- 					</when> -->
+<!-- 					<when test="search_field == 3"> -->
+<!-- 						and lower(nickName) like lower('%'||#{search_bar }||'%') -->
+<!-- 					</when> -->
+<!-- 					<otherwise> -->
+<!-- 						and (lower(b_title) like lower('%'||#{search_bar }||'%')  -->
+<!-- 						or lower(b_content) like lower('%'||#{search_bar }||'%') -->
+<!-- 						or lower(nickName) like lower('%'||#{search_bar }||'%')) -->
+<!-- 					</otherwise> -->
+<!-- 				</choose> -->
+<!-- 			</where> -->
+<!-- 			</select> -->
+			
+			<!-- 서치 ajax-->
+			<select id="searchAllArticle" resultType="boardDTO" parameterType="java.util.HashMap">
+				select * from(
+					select rownum as rnum, tmp.* from(
+						select level, b.B_key, b.B_ArticleNo, b.B_parentNo, b.B_title , b.B_content, 
+						 b.B_field, b.B_writeDate, b.B_view, b.UserKey, a.nickName 
+						 from Board b 
+						 , ALLMEMBER a 
+						 <where>
+						 and b.userkey = a.userkey
+							<choose>
+								<when test="search_field == 1">
+									and lower(b.b_title) like lower('%'||#{search_bar }||'%') 
+								</when>
+								<when test="search_field == 2">
+									and lower(b.b_content) like lower('%'||#{search_bar }||'%')
+								</when>
+								<when test="search_field == 3">
+									and lower(a.nickName) like lower('%'||#{search_bar }||'%')
+								</when>
+								<otherwise>
+									and (lower(b.b_title) like lower('%'||#{search_bar }||'%') 
+									or lower(b.b_content) like lower('%'||#{search_bar }||'%')
+									or lower(a.nickName) like lower('%'||#{search_bar }||'%'))
+								</otherwise>
+							</choose>
+						</where> 
+						 Start with b.B_parentNo = 0 
+						 connect by prior b.B_ArticleNo = b.B_parentNo 
+						 order siblings by b.B_ArticleNo desc, b.b_writedate desc
+					) tmp
+					)
+				where (#{pageNum}-1) * #{amount } <![CDATA[<]]> rnum 
+				and rnum <![CDATA[<=]]> #{pageNum } * ${amount }
+			</select>
+		
+		<!-- 말머리 선택 조회 -->
+			<select id="wiewAllArticle" resultType="boardDTO" parameterType="boardDTO">
+			select * from board b,
+			allmember a
+			<where>
+			 and b.userkey = a.userkey
+			<if test="list_sel !=0">
+			and b_field =  #{b_field }
+			</if>
+			</where>
+			order by b_writeDate
+			</select>
+			
+		<!-- 비밀글 조회 -->
+			<select id="searchPw" resultType = "boardDTO" parameterType="int">
+			select b.b_articleNo, b.b_parentNo, b.b_title, b.b_content, b.b_writeDate , b.userkey, b.b_articlePwd, b.b_imageFile , a.nickName
+			from Board b,
+			ALLMEMBER a
+			where b.userkey = a.userkey
+			and b_articleNo = ${_parameter }
+			</select>
+			
+		<!-- 비밀번호 조회 -->
+			<select id="getPw" resultType="int" parameterType="int">
+			select b_articlePwd from board
+<!-- 			 <where> -->
+<!-- 			 <if test="b_articleNo != '' and b_articleNo != null"> -->
+				 where b_articleNo = #{b_articleNo }
+<!-- 			 </if> -->
+<!-- 			 </where> -->
+			</select>
+			
+		<!-- 조회수 view -->
+			<update id="view"  parameterType="boardDTO">
+				update Board set
+				b_view = #{b_view}
+				where b_articleNo = #{b_articleNo}
+			</update>
+		<!-- update Board set view(select view+1 from board
+			where b_articleNo = #{b_articleNo})
+			where b_articleNo = #{b_articleNo} -->
+			
+		<!-- 페이징 -->	
+			<select id="paging" resultType="boardDTO" parameterType="java.util.HashMap">
+				select * from(
+					select rownum as rnum, tmp.* from(
+					select * from board 
+					order by b_writedate desc
+					) tmp
+					)
+					where (#{pageNum-1)- * #{amount } <![CDATA[<]]> rnum 
+					and rnum <![CDATA[<=]]> ${pageNum } * ${amount }
+			</select>
+		<!-- 총 게시글수 받아오기 -->	
+			<select id="totalCount" resultType="int">
+				select count(*) as totalCount from board
+			</select>
+			
+>>>>>>> master
 </mapper>
