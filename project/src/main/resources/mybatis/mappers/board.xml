@@ -164,11 +164,7 @@
 		<!-- 비밀번호 조회 -->
 			<select id="getPw" resultType="int" parameterType="int">
 			select b_articlePwd from board
-<!-- 			 <where> -->
-<!-- 			 <if test="b_articleNo != '' and b_articleNo != null"> -->
 				 where b_articleNo = #{b_articleNo }
-<!-- 			 </if> -->
-<!-- 			 </where> -->
 			</select>
 			
 		<!-- 조회수 view -->

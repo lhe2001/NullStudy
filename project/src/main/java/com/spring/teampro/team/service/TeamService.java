@@ -21,7 +21,7 @@ public interface TeamService {
 
 	int removeMember(TeamMemberDTO dto);
 
-	List getAllTeamList();
+	List getAllTeamList(TeamInfoDTO dto);
 
 	boolean alreadyMyTeam(int userkey, int t_key);
 

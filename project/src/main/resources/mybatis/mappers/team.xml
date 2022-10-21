@@ -25,10 +25,18 @@
 		WHERE m.USERKEY = a.USERKEY AND m.T_KEY = #{t_key}
 	</select>
 	
-	<select id="allTeamList" resultType="teamInfoDTO" >
-		SELECT a.T_KEY ,a.T_NAME ,a.T_INTRO ,a.T_FIELD ,a.T_NUMBER  ,a2.NICKNAME   
+	<select id="allTeamList" resultType="teamInfoDTO" parameterType="teamInfoDTO">
+		SELECT a.T_KEY ,a.T_NAME ,a.T_INTRO ,a.T_FIELD ,a.T_NUMBER  ,a2.NICKNAME 
 		FROM ALLTEAM a ,allmember a2
-		WHERE a.USERKEY = a2.USERKEY
+		<where>
+		 a.USERKEY = a2.USERKEY
+		 <if test='t_field gt 0'>
+		 and t_field = #{t_field}
+		 </if>
+		 <if test='t_name != null'>
+		 and lower(t_name) like '%' || lower(#{t_name}) || '%'
+		 </if>
+		</where>
 		order by t_create desc
 	</select>
 	

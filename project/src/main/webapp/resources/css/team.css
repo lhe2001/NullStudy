@@ -405,14 +405,12 @@
 .tCalendar {
     min-width:350px;
     width:350px;
-    /* background-color: #FFFFCC; */
     border: 1px solid black;
    
 }
 .tTimeLine{
     border: 1px solid black;
     width:200px;
-    /* background-color: #FFEECC; */
 }
 .tVote{
     border: 1px solid black;
@@ -421,18 +419,15 @@
 .vote1{
     height:50%;
     border: 1px solid black;
-    /* background-color: #FFDDCC; */
 }
 .vote2{
     border: 1px solid yellow;
     height:50%;
-    /* background-color: #FFCCCC; */
 }
 #tSmallBoard{
     border: 1px solid black;
     width:45%;
     max-width:45%;
-    /* background-color: #FFBBCC; */
     font-size: 12px;
 }
 #tSmallBoard table{
@@ -467,22 +462,45 @@
 }
 .allTeamTableWrap {
     margin:20px auto;
-    width:600px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.479);
+    width:607px;
     min-height: 500px;
     box-sizing: border-box;
-    background-color: #eeeeee;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 3px;
+}
+#allTeamTable{
+    width:607px;
+    height:430px;
+    overflow: auto;
+}
+#allTeamTable thead tr:first-child{
+    background-color: #CCDDEE;
+}
+#allTeamTable tbody tr:hover{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+#allTeamTable::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+#allTeamTable::-webkit-scrollbar-track{
+    background-color: #a9aaac;
+    border-radius: 5px;
+}
+#allTeamTable::-webkit-scrollbar-thumb {
+    background-color: #CCDDEE;
+    border-radius: 5px;
 }
 .allTeamTableWrap table {
     border-collapse: collapse;
     border-radius: 10px;
     margin: auto;
-    font-size:14px;
+    font-size:12px;
     max-width:600px;
     width:600px;
-    max-height:430px;
+    overflow:auto;
 }
-.allTeamTableWrap #page {
+.allTeamTableWrap #search {
     margin-top: 20px;
 }
 .allTeamTableWrap table div{
@@ -491,29 +509,24 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.allTeamTableWrap table th{
-    border-bottom: 2px solid black;
-}
-.allTeamTableWrap table td{
-    border-bottom: 1px dashed black;
-    height: 30px;
-}
-.allTeamTableWrap table th:first-child,.allTeamTableWrap td:first-child{
-    border-right: 1px solid black;
-}
 .allTeamTableWrap table tr {
     height: 30px;
 }
-.allTeamTableWrap table tr:hover{
-    background-color: #f5f4f4;
-}
 .allTeamTableWrap table button{
-    background-color: #69c7b5;
+    background-color: #69acc7;
     color:white;
     cursor: pointer;
     border: none;
     border-radius: 5px;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.479);
+}
+.sBtn{
+    border: none;
+    background-color: #69acc7;
+    border:#69acc7 1px solid;
+    border-radius: 2px;
+    height:21px;
+    cursor: pointer;
 }
 .newTeam{
     background-image: url("https://ifh.cc/g/LTko7v.png");

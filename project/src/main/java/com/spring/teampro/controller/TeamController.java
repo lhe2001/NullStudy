@@ -107,8 +107,8 @@ public class TeamController {
 	public String getAllTeamList(
 			Model model
 			) {
-		
-		List list = service.getAllTeamList();
+		TeamInfoDTO dto = new TeamInfoDTO();
+		List list = service.getAllTeamList(dto);
 		model.addAttribute("allTeamList", list);
 
 	return "allTeamList";

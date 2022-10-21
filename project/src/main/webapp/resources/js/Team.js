@@ -21,29 +21,32 @@ function reviseTeamInfo(){
     })
     document.querySelector("#reviseTeam input[type='submit']").addEventListener("click",function(){
         const revise = confirm('수정 하시겠습니까?');
+    	let t_key = $(".t_key").val();
+    	let t_intro = $(".t_intro").val();
+    	let t_field = $(".t_field").val();
+    	
         if(revise == true){
-        	let t_key = $(".t_key").val();
-        	let t_intro = $(".t_intro").val();
-        	let t_field = $(".t_field").val();
-        	
-        	let info = { 
-        			t_key : t_key,
-        			t_intro : t_intro,
-        			t_field : t_field 
-        	};
-        	
-        	$.ajax({
-			url: "/project/teamRest/updateTeamInfo.do",
-			type: "post",
-			contentType: "application/json",
-			data: JSON.stringify(info),
-			success: function(data){
-				location.reload();
-			},
-			error:function(){
-				alert("에러발생!!")
-			}
-			});
+        	if(t_intro.trim() == ''){
+        		alert('빈칸을 입력해주세요');
+        	}else {
+	        	let info = { 
+	        			t_key : t_key,
+	        			t_intro : t_intro,
+	        			t_field : t_field 
+	        	};
+	        	$.ajax({
+					url: "/project/teamRest/updateTeamInfo.do",
+					type: "post",
+					contentType: "application/json",
+					data: JSON.stringify(info),
+					success: function(data){
+						location.reload();
+					},
+					error:function(){
+						alert("에러발생!!")
+					}
+				});
+        	}
         }
     })
    }

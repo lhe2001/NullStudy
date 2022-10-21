@@ -105,18 +105,6 @@ function requestJoin(t_key){
 			}
 		});
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 
