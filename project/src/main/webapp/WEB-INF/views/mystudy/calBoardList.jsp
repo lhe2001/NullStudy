@@ -18,12 +18,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-// window.addEventListener("load", calOnload);
 
-// function calOnload(){
-// 	allSel(val);
-   
-// }
 
 //전체선택 자동체크와해지
 //onclick="smallSel()"
@@ -84,21 +79,22 @@ $(function(){
                         <span id="tmonth">${sessionScope.ymd.month}월</span>
                         <span id="tdate">${sessionScope.ymd.date}일</span>
                     </div>
-                    <div id="TopText">일정목록</div>
+                    <div id="TopText"><i class="fa-regular fa-calendar"></i>&nbsp;일정목록&nbsp;<i class="fa-regular fa-calendar"></i></div>
                 </div>
                 <div id="allCheckBox">
                     <span id="chkspan">
-                        <input type="checkbox" name="all" onclick="allSel(this)"/>
+                        <input type="checkbox" name="all" onclick="allSel(this)" id="cballchk"/>
+                        <label for="cballchk"></label>
                     </span>
                 </div>
     
-                <c:forEach var="calList" items="${list }">
                 <c:if test="${list.size() == 0 }" >
-                    <div>목록이 없습니다.</div>
+                    <div id="nonecb">목록이 없습니다.</div>
                 </c:if>
+                <c:forEach var="calList" items="${list }">
                 <div class="calListMiddle">
                     <div class="calsmallchek">
-                        <input type="checkbox" name="seq" value="${calList.m_schedule_key }" onclick="smallSel()" />
+                        <input type="checkbox" name="seq" value="${calList.m_schedule_key }" onclick="smallSel()"/>
                     </div>
                     <div class="calTitle">
                         <a data-id="cblink" href="calDetail.do?m_schedule_key=${calList.m_schedule_key }"> ${calList.m_schedule_title } </a>
@@ -115,7 +111,7 @@ $(function(){
                 </c:forEach>	
                 
                 
-                <div>
+                <div id="cbdelWrap">
                     <button id="ListDelbtn">삭제</button>
                 </div>
                 <div id="calListBottom">
@@ -123,7 +119,7 @@ $(function(){
                 </div>
             </div>
         </div>
-
+	</form>
 
 </body>
 </html>
