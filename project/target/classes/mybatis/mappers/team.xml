@@ -31,13 +31,13 @@
 		<where>
 		 a.USERKEY = a2.USERKEY
 		 <if test='t_field gt 0'>
-		 and t_field = #{t_field}
+		 and a.t_field = #{t_field}
 		 </if>
 		 <if test='t_name != null'>
-		 and lower(t_name) like '%' || lower(#{t_name}) || '%'
+		 and lower(a.t_name) like '%' || lower(#{t_name}) || '%'
 		 </if>
 		</where>
-		order by t_create desc
+		order by a.t_create desc
 	</select>
 	
 	<select id="anyAlarm" resultType="int" parameterType="int">

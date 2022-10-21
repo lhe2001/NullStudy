@@ -655,7 +655,7 @@
 	margin:auto;
 	width:800px;
     overflow: auto;
-    font-size: 14px;
+    font-size: 13px;
     border-collapse: collapse;
 }
 .myteamList td{
@@ -692,7 +692,7 @@
 #waiting{
     margin-left:auto;
     width:400px;
-    font-size: 14px;
+    font-size: 13px;
     border-collapse: collapse;
     height:0;
 }
@@ -708,7 +708,7 @@
 #reject{
     margin-right: auto;
     width:400px;
-    font-size: 14px;
+    font-size: 13px;
     border-collapse: collapse;
     height:0;
 }
