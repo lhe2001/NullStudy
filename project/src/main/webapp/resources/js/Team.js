@@ -175,5 +175,13 @@ function reviseDday(t_key){
 	window.open('/project/team/reviseDday.do?t_key='+t_key,'pop','location=no,width=540,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
 
+//나의 챌린지 보관함
+function myChallenge(){
+	window.open('/project/team/myChallenge.do','pop','location=no,width=500,height=400,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+}
 
+//챌린지 수정
+function resetChallenge(){
+	window.open('/project/team/myChallenge.do','pop','location=no,width=500,height=400,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+}
 

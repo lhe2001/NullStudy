@@ -86,9 +86,8 @@
             <ul>
                 <li>팀 게시판</li>
                 <li id="newMemberAlert" onClick="reviseDday(${teamInfo.t_key})">D-Day 수정</li>
-                <li>나의 챌린지 보관함</li>
+                <li onClick="resetChallenge()">챌린지 리셋</li>
                 <li>투표하기</li>
-                <li>챌린지 수정</li>
                 <c:if test="${anyAlarm == 0 }">
                 <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})">팀원 신청
                 </c:if>
@@ -110,42 +109,67 @@
                 <input type="button" class="rBtn2" value="수정">
                 <input type="button" class="leBack" value="취소">
         </div>
-        <div id="memberWrapper">
-            <div id="memberInfo">
-          <c:forEach var="member" items="${MemberInfo}" varStatus="loop">
-            <div class="member">
-              <c:if test="${member.userKey eq teamInfo.userKey }" >
-                    <div class="king"><img src="https://ifh.cc/g/6bBq87.png"></div>
-                </c:if>
-                    <div class="photo">
-                        <img src="https://ifh.cc/g/GCpQKq.png">
-                    </div>
-                    <div class="info leaderInfo">
-                        <table>
-                        <tr>
-                            <td style="max-width:90px; min-width:90px;">
-                            	<strong>${member.nickname }</strong>
-                            	<input type="hidden" class="tm_key" value="${member.tm_key }">
-                            </td>
-                            <td style="min-width:200px; max-width:200px;">${member.intro }</td>
-                            <td style="min-width:50px; max-width:50px;">${PercentList.get(loop.index)}%</td>
-                            <td style="min-width:100px; max-width:100px;">${member.lastTime2 }</td>
-                            <td style="min-width:20px;">
-                            <c:if test="${member.userKey ne teamInfo.userKey }" >
-                                <button  class="kickOut" type="button" onclick="kickMemberOut(${member.tm_key})">
-                                 <i class="fa-solid fa-user-slash"></i>
-                                </button>
-                            </c:if>
-                            </td>
-                        </tr>
+        <div id="chWrapper">
+            <div id="chaWrap">
+                <div id="chaList">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td colspan="2">나의 지난 팀 챌린지 보관함</td>
+                            </tr>
+                            <tr>
+                                <td>타이틀</td>
+                                <td>나의 달성률</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>매일 2L씩 물마시기</td>
+                                <td>20/21</td>
+                            </tr>
+                            <tr>
+                                <td>매일 2L씩 물마시기</td>
+                                <td>20/21</td>
+                            </tr>
+                            <tr>
+                                <td>매일 2L씩 물마시기</td>
+                                <td>20/21</td>
+                            </tr>
+                            <tr>
+                                <td>매일 2L씩 물마시기</td>
+                                <td>20/21</td>
+                            </tr>
+                            <tr>
+                                <td>매일 2L씩 물마시기</td>
+                                <td>20/21</td>
+                            </tr>
+                            <tr>
+                                <td>매일 2L씩 물마시기</td>
+                                <td>20/21</td>
+                            </tr>
+                            <tr>
+                                <td>매일 2L씩 물마시기</td>
+                                <td>20/21</td>
+                            </tr>
+                            <tr>
+                                <td>매일 2L씩 물마시기</td>
+                                <td>20/21</td>
+                            </tr>
+                            <tr>
+                                <td>매일 2L씩 물마시기</td>
+                                <td>20/21</td>
+                            </tr>
+                            <tr>
+                                <td>매일 2L씩 물마시기</td>
+                                <td>20/21</td>
+                            </tr>
+                        </tbody>
                     </table>
-                    </div>
                 </div>
-              </c:forEach>
             </div>
             <div id="memberDetail">
                 <div class="photo"> <img src="https://ifh.cc/g/GCpQKq.png"><br>
-                    <div><strong>혜으니</strong></div>
+                    <div><strong>${userInfo.nickName }</strong></div>
                 </div>
                 <div class="challenge">
                     <table>
@@ -188,8 +212,7 @@
                             <td>오늘의 요약!</td>
                         </tr>
                         <tr>
-                            <td style="font-size:13px;height:85px;max-height:85px;">ure. Sapiente iure non nulla autem, ipsa ut inventore minima pariatur labore.</td>
-                        </tr>
+                            <td style="font-size:13px;height:85px;max-height:85px;">ffffffffff</td>
                         <tr>
                             <td><input class="dailyRevBtn" type="button" value="수정하기"></td>
                         </tr>
@@ -210,6 +233,81 @@
                 </div>
             </div>
         </div>
+        <div id="memberWrap">
+            <div id="memberInfo">
+          <c:forEach var="member" items="${MemberInfo}" varStatus="loop">
+            <div class="member">
+              <c:if test="${member.userKey eq teamInfo.userKey }" >
+                    <div class="king"><img src="https://ifh.cc/g/6bBq87.png"></div>
+                </c:if>
+                    <div class="photo">
+                        <img src="https://ifh.cc/g/GCpQKq.png">
+                    </div>
+                    <div class="info leaderInfo">
+                        <table>
+                        <tr>
+                            <td style="max-width:90px; min-width:90px;">
+                            	<strong>${member.nickname }</strong>
+                            	<input type="hidden" class="tm_key" value="${member.tm_key }">
+                            </td>
+                            <td style="min-width:200px; max-width:200px;">${member.intro }</td>
+                            <td style="min-width:50px; max-width:50px;">${PercentList.get(loop.index)}%</td>
+                            <td style="min-width:100px; max-width:100px;">${member.lastTime2 }</td>
+                            <td style="min-width:20px;">
+                            <c:if test="${member.userKey ne teamInfo.userKey }" >
+                                <button  class="kickOut" type="button" onclick="kickMemberOut(${member.tm_key})">
+                                 <i class="fa-solid fa-user-slash"></i>
+                                </button>
+                            </c:if>
+                            </td>
+                        </tr>
+                    </table>
+                    </div>
+                </div>
+              </c:forEach>
+            </div>
+            <div id="memberSummary">
+                    <div class="memberPhoto">
+                        <img src="https://ifh.cc/g/GCpQKq.png">
+                        <div style="text-align:center;"><strong>채여니</strong></div>
+                    </div>
+                    <div class="memberChallenge">
+                        <table>
+                            <caption style="font-size:15px; text-decoration:underline">매일 물 한잔</caption>
+                            <tr>
+                                <td class="confirm"></td>
+                                <td class="confirm"></td>
+                                <td class="confirm"></td>
+                                <td class="confirm"></td>
+                                <td class="confirm"></td>
+                                <td class="confirm"></td>
+                                <td class="confirm"></td>
+                            </tr>
+                            <tr>
+                                <td class="confirm"></td>
+                                <td class="confirm"></td>
+                                <td class="confirm"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" style="height:40px;text-align: center;">dd</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
         <div id="teamSchedule">
             <div class="tCalendar">달력</div>
             <div class="tTimeLine">일정</div>

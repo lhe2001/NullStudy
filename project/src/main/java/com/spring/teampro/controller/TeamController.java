@@ -100,6 +100,17 @@ public class TeamController {
 		return "redirect:/team/allTeamList.do";
 	}
 	
+	//나의 챌린지 보관함
+	@RequestMapping(value="/team/myChallenge.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String myChallenge(
+			Model model
+			) {
+		
+		return "teamPage/myChallenge";
+	}
+	
+	
+	
 	//>>>>>>>>>>>>>>>>allTeamList 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	
 	//allTeamList.jsp로 가기
