@@ -80,6 +80,9 @@ public class SignUpInController {
 							model.addAttribute("result", "가입실패");
 							return "signUp";
 						}
+					}else {
+						model.addAttribute("result", "가입실패");
+						return "signUp";
 					}
 					
 				}else if(emailCheck==-1) {
@@ -111,8 +114,7 @@ public class SignUpInController {
 			model.addAttribute("result", "가입실패");
 			return "signUp";
 		}
-		model.addAttribute("result", "가입실패");
-		return "signUp";
+
 	}
 	
 	
