@@ -45,6 +45,8 @@ public interface TeamDAO {
 
 	int updateDday(TeamInfoDTO dto);
 
+	int existTeamName(String t_name);
+
 
 
 }

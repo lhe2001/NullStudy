@@ -130,4 +130,13 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		}
 	}
 	
+	//>>>>>>>>>>>>>>>>팀개설 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+	//팀이름 중복체크 하기 
+	@RequestMapping(value="/teamRest/checkTeamName.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public boolean checkTeamName(@RequestBody TeamInfoDTO dto
+			) {
+		String t_name = dto.getT_name();
+		return service.existTeamName(t_name);
+	}
+	
 }

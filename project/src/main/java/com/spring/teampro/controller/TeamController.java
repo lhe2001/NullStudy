@@ -45,8 +45,10 @@ public class TeamController {
 		//3.팀멤버 정보들
 		model.addAttribute("MemberInfo",service.getTeamMemberInfo(t_key));
 		//4.오늘의 요약
-		//5.팀원알람
+		//5.팀원신청 숫자
 		model.addAttribute("anyAlarm",service.anyAlarm(t_key));
+		//6.디데이가져오기
+		model.addAttribute("dDay", service.getTDay(t_key));
 
 	return "teamDetail";
 	}
@@ -108,7 +110,7 @@ public class TeamController {
 	public String reviseDday(@RequestParam("t_key") int t_key,
 			Model model
 			) {
-		
+		//1.현재 디데이를 가져오기.
 		String dDay = service.getTDay(t_key);
 		model.addAttribute("dDay", dDay);
 		model.addAttribute("t_key", t_key);

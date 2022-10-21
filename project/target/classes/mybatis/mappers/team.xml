@@ -28,6 +28,7 @@
 		SELECT a.T_KEY ,a.T_NAME ,a.T_INTRO ,a.T_FIELD ,a.T_NUMBER  ,a2.NICKNAME   
 		FROM ALLTEAM a ,allmember a2
 		WHERE a.USERKEY = a2.USERKEY
+		order by t_create desc
 	</select>
 	
 	<select id="anyAlarm" resultType="int" parameterType="int">
@@ -59,6 +60,12 @@
 		select to_char(t_day, 'YYYY-MM-DD')AS t_day from allteam
 		where t_key = #{t_key}
 	</select>
+	
+	<select id="existTeamName" resultType="int" parameterType="String">
+		SELECT count(*) FROM ALLteam
+		WHERE t_name = #{t_name}
+	</select>
+	
 	
 <!-- UPDATE -->
 	

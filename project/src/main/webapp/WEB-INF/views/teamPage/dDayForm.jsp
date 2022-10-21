@@ -25,6 +25,7 @@ function updateDday(t_key){
 			data: JSON.stringify(info),
 			success: function(data){
 				location.reload();
+				opener.location.reload();
 			},
 			error:function(){
 				alert("에러발생!!")

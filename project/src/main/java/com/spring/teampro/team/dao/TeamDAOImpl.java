@@ -72,7 +72,11 @@ public class TeamDAOImpl implements TeamDAO {
 	public String getTDay(int t_key) {
 		return sqlSession.selectOne("mapper.team.getTDay",t_key);
 	}
-	
+	//팀이름 중복체크 
+	@Override
+	public int existTeamName(String t_name) {
+		return sqlSession.selectOne("mapper.team.existTeamName",t_name);
+	}
 	
 	
 	//>>>>>>>>>>>>>>>UPDATE 수정하기>>>>>>>>>>>>>>
@@ -156,6 +160,8 @@ public class TeamDAOImpl implements TeamDAO {
 		
 		return sqlSession.insert("mapper.team.addNewTeam_member",dto);
 	}
+
+	
 
 	
 

@@ -143,6 +143,23 @@ public class TeamServiceImpl implements TeamService {
 	public int removeMember(TeamMemberDTO dto){
 		return dao.removeMember(dto);
 	}
+	
+	//팀개설
+	@Override
+	public int addNewTeam(TeamInfoDTO dto) {
+		return dao.addNewTeam(dto);
+	}
+	
+	//팀이름 중복체크
+	@Override
+	public boolean existTeamName(String t_name) {
+		boolean result = false;
+		int count = dao.existTeamName(t_name);
+		if(count > 0) {
+			result = true;
+		}
+		return result;
+	}
 
 	//>>>>>>>>>>>>>>>>팀가입요청 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	//가입요청하기
@@ -188,10 +205,6 @@ public class TeamServiceImpl implements TeamService {
 		return dao.rejectMember(dto);
 	}
 
-	@Override
-	public int addNewTeam(TeamInfoDTO dto) {
-		return dao.addNewTeam(dto);
-	}
 
 	//디데이 가져오기
 	@Override

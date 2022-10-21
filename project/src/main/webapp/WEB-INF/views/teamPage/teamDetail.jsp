@@ -75,6 +75,9 @@
                     <td style="text-decoration:underline;">D-DAY</td>
                 </tr>
                 <tr>
+                    <td class="t_day" style="font-size:13px;">${dDay}</td>
+                </tr>
+                <tr>
                     <td class="dDate" style="font-size:40px; color:#ff580b;"></td>
                 </tr>
             </table>

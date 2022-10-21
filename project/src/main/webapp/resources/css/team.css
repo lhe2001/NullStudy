@@ -641,13 +641,21 @@
     height: 100px;
     font-size: 20px;
 }
-
+#creatteamtable{
+	margin:auto;
+}
 #creatteamtable td{
-    width: 200px;
-    margin-left: auto;
     font-size: 16px;
     font-weight: 700;
-    text-align: center;
+    text-align:left;
+   	padding:20px;
+}
+#creatteamtable td:first-child{
+	text-align: center;
+	width:150px;
+}
+#creatteamtable td:first-child{
+	text-align: center;
 }
 .cre_inputs{
     padding: 10px;
@@ -655,7 +663,16 @@
     background: #fff;
     overflow: auto;
 }
-
+#t_nameCheck{
+    background-color: #69acc7;
+    border: none;
+    color:#fff;
+    cursor: pointer;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top:10px;
+}
 .cre_btn{
     margin-top: 20px;
     margin-left: 30px;
@@ -670,8 +687,11 @@
     border-radius: 5px;
 }
 
-.cre_btn:hover { background-color: #078cc0;}
-
+.cre_btn:hover, #t_nameCheck:hover { background-color: #078cc0;}
+.cre_btn:disabled, #t_nameCheck:disabled {
+	background-color:rgb(206, 206, 206);
+	cursor:not-allowed;
+}
 .crewrap select {
     width: 100px;
     padding: 10px;

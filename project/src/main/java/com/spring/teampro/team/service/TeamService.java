@@ -45,6 +45,8 @@ public interface TeamService {
 
 	int updateDday(TeamInfoDTO dto);
 
+	boolean existTeamName(String t_name);
+
 
 
 }

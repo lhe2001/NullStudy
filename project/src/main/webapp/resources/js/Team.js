@@ -1,5 +1,4 @@
 window.addEventListener("load", teamInfoOnload);
-//window.onload = function(){
    function teamInfoOnload(){
     console.log(111)
    	reviseTeamInfo();
@@ -158,7 +157,8 @@ function leaveTeam(t_key){
 //디데이
 function dDay(){
    let now = new Date();
-   let then = new Date('2023-01-01');
+   let t_day = $(".t_day").text();
+   let then = new Date(t_day);
    let gap = then.getTime() - now.getTime();
    gap = Math.floor(gap / (1000 * 60 * 60 * 24)) * -1;
    $("#dDay .dDate").text(gap);
