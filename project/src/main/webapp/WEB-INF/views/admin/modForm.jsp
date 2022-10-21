@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <link rel="stylesheet" href="resources/css/admin(modForm).css" />
+
 <div class="wrap">
 	<div class="tbWrap">
 		<br><br><br>
@@ -44,7 +45,7 @@
 					<td><input type="text" name="email"></td>
 				</tr>
 			</table>
-			<input type="submit" class="submit" value="정보수정">
+			<input type="submit"  onclick="return confirm('정말로 수정하시겠습니까?');" class="submit" value="정보수정">
 		</form><form action = "/project/memberList.do">
 			<input type=submit class="submit" value="취소">
 		</form>
