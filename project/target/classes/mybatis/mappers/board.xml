@@ -57,12 +57,10 @@
 			</select>
 			
 		<!-- 	글 수정 -->
-			<!-- 제목과 내용을 먼저 수정하고 -->
 			<update id="modifyArticle" parameterType="java.util.HashMap">
 				update Board set
 				b_title = #{b_title },
 				b_content = #{b_content }
-			<!-- 이미지를 수정할 경우 -->
 			<if test="b_imageFile != '' and b_imageFile == null ">
 				,b_imageFile = #{b_imageFile }
 			</if>
@@ -164,11 +162,7 @@
 		<!-- 비밀번호 조회 -->
 			<select id="getPw" resultType="int" parameterType="int">
 			select b_articlePwd from board
-<!-- 			 <where> -->
-<!-- 			 <if test="b_articleNo != '' and b_articleNo != null"> -->
 				 where b_articleNo = #{b_articleNo }
-<!-- 			 </if> -->
-<!-- 			 </where> -->
 			</select>
 			
 		<!-- 조회수 view -->
@@ -177,9 +171,6 @@
 				b_view = #{b_view}
 				where b_articleNo = #{b_articleNo}
 			</update>
-		<!-- update Board set view(select view+1 from board
-			where b_articleNo = #{b_articleNo})
-			where b_articleNo = #{b_articleNo} -->
 			
 		<!-- 페이징 -->	
 			<select id="paging" resultType="boardDTO" parameterType="java.util.HashMap">
@@ -192,6 +183,7 @@
 					where (#{pageNum-1)- * #{amount } <![CDATA[<]]> rnum 
 					and rnum <![CDATA[<=]]> ${pageNum } * ${amount }
 			</select>
+			
 		<!-- 총 게시글수 받아오기 -->	
 			<select id="totalCount" resultType="int">
 				select count(*) as totalCount from board
