@@ -18,12 +18,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-// window.addEventListener("load", calOnload);
 
-// function calOnload(){
-// 	allSel(val);
-   
-// }
 
 //전체선택 자동체크와해지
 //onclick="smallSel()"
@@ -92,10 +87,10 @@ $(function(){
                     </span>
                 </div>
     
-                <c:forEach var="calList" items="${list }">
                 <c:if test="${list.size() == 0 }" >
                     <div>목록이 없습니다.</div>
                 </c:if>
+                <c:forEach var="calList" items="${list }">
                 <div class="calListMiddle">
                     <div class="calsmallchek">
                         <input type="checkbox" name="seq" value="${calList.m_schedule_key }" onclick="smallSel()" />
@@ -123,7 +118,7 @@ $(function(){
                 </div>
             </div>
         </div>
-
+	</form>
 
 </body>
 </html>
