@@ -102,6 +102,7 @@ public class MyCalendarController {
 		return count+"";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/mystudy/calBoardList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String calBoardList(
 			Model model
@@ -113,7 +114,7 @@ public class MyCalendarController {
 		
 		HttpSession session=request.getSession();
 		if(ymd == null || ymd.get("year")==null) { //일정목록페이지로 들어온 상태이기 때문에 ymd 필요없음.
-			ymd = (Map<String, String>)session.getAttribute("ymd");
+			ymd = (Map<String, String>) session.getAttribute("ymd");
 		} else {
 			session.setAttribute("ymd", ymd);
 		}
