@@ -2,6 +2,9 @@ package com.spring.teampro.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +31,15 @@ public class searchController {
 	@RequestMapping(value="/mainSearch.do", method=RequestMethod.GET)
 	public String mainSearch(Model model
 			, @RequestParam("search") String search
-			, @RequestParam("selectValue") String selectValue) {
+			, @RequestParam("selectValue") String selectValue
+			, HttpServletRequest request) {
 		System.out.println("Controller mainSearch.do");
 		// main 에서 옵션에 따라 해당 jsp로 이동
+		
+		HttpSession session = request.getSession();
+		Object userInfo = session.getAttribute("userInfo");
+		
+		if (userInfo != null) {
 		
 		if (selectValue.equals("boardSearch")) {
 			selectValue = "all"; // 전체 검색으로 설정
@@ -53,6 +62,14 @@ public class searchController {
 		} else {
 			System.out.println("main search 실패");
 			return "forward:main.do";
+			
+		}
+		
+		} else {
+			
+			model.addAttribute("searchLoginDo", "searchLoginDo");
+			
+			return "main";
 			
 		}
 		

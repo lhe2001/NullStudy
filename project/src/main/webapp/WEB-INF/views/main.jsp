@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    
 <body>
+
+	<c:if test="${searchLoginDo=='searchLoginDo'}">
+		<script>alert("로그인 후 사용해주세요.");</script>
+	</c:if>
 
     <div>
     <div id="wrapper">
@@ -15,13 +23,15 @@
                         <div class="search">
                            <form action="${pageContext.request.contextPath}/mainSearch.do" method="get">
                               <select name = "selectValue" id="selectValue">
-                                  <option value = "notSelect" selected>검색기준</option>
+                                  <option value = "notSelect" selected disabled>검색기준</option>
                                   <option value = "boardSearch">게시글 검색</option>
                                   <option value = "userSearch">유저 검색</option>
                                   <option value = "teamSearch">팀 검색</option>
                               </select>
-                               <input type="text" name="search" value="" required>
-                               <button class="submitButton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                              
+                               <input type="text" name="search" class="searchInput boardSearch userSearch teamSearch hide" required>
+                               <input type="text" name="search" class="searchNoInput" disabled placeholder="검색기준를 선택해주세요">
+                               <button class="submitButton hide" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                            </form>
                         </div>
                     </div>
