@@ -7,10 +7,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
+<link href="/project/resources/css/calList.css" rel="stylesheet">
 <title>일정 목록 보기</title>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -69,45 +72,58 @@ $(function(){
 </script>
 </head>
 <body>
-<form action="calMuldel.do" method="post">
-<input type="hidden" name="year" value="${param.year }"/>
-<input type="hidden" name="month" value="${param.month }"/>
-<input type="hidden" name="date" value="${param.date }"/>
+        <div id="calBoardWrap">
+        <form action="calMuldel.do" method="post">
+        <input type="hidden" name="year" value="${param.year }"/>
+        <input type="hidden" name="month" value="${param.month }"/>
+        <input type="hidden" name="date" value="${param.date }"/>
+            <div id="allList">
+                <div id="calListTop">
+                    <div id="TopNumber">
+                        <span id="tyear">${sessionScope.ymd.year }년</span>
+                        <span id="tmonth">${sessionScope.ymd.month}월</span>
+                        <span id="tdate">${sessionScope.ymd.date}일</span>
+                    </div>
+                    <div id="TopText">일정목록</div>
+                </div>
+                <div id="allCheckBox">
+                    <span id="chkspan">
+                        <input type="checkbox" name="all" onclick="allSel(this)"/>
+                    </span>
+                </div>
+    
+                <c:forEach var="calList" items="${list }">
+                <c:if test="${list.size() == 0 }" >
+                    <div>목록이 없습니다.</div>
+                </c:if>
+                <div class="calListMiddle">
+                    <div class="calsmallchek">
+                        <input type="checkbox" name="seq" value="${calList.m_schedule_key }" onclick="smallSel()" />
+                    </div>
+                    <div class="calTitle">
+                        <a data-id="cblink" href="calDetail.do?m_schedule_key=${calList.m_schedule_key }"> ${calList.m_schedule_title } </a>
+                    </div>
+                    <div class="calWrite">
+                        <span>
+                            작성일
+                        </span>
+                        <span>
+                            ${calList.m_schedule_write }
+                        </span>
+                    </div>
+                </div>
+                </c:forEach>	
+                
+                
+                <div>
+                    <button id="ListDelbtn">삭제</button>
+                </div>
+                <div id="calListBottom">
+                    <a data-id="cblink" href="calendar.do?year=${sessionScope.ymd.year }&month=${sessionScope.ymd.month}">달력 돌아가기</a>
+                </div>
+            </div>
+        </div>
 
 
-<table border="1">
-	<col width="50px">
-	<col width="50px">
-	<col width="300px">
-	<col width="250px">
-	<col width="250px">
-	<tr>
-		<th><input type="checkbox" name="all" onclick="allSel(this)"/></th>
-		<th>번호</th>
-		<th>제목</th>
-		<th>일정요일</th>
-		<th>작성일</th>
-	</tr>
-	<c:if test="${list.size() == 0 }" >
-		<tr>
-			<td colspan="5">목록이 없습니다.</td>
-		</tr>
-	</c:if>
-	<c:forEach var="calList" items="${list }">
-		<tr>
-		<td><input type="checkbox" name="seq" value="${calList.m_schedule_key }" onclick="smallSel()" /></td>
-		<td>${calList.m_schedule_key }</td>
-		<td><a href="calDetail.do?m_schedule_key=${calList.m_schedule_key }"> ${calList.m_schedule_title } </a></td>
-		<td>${calList.m_schedule_date }</td>
-		<td>${calList.m_schedule_write }</td>
-		</tr>
-	</c:forEach>
-	
-	<tr>
-		<td colspan="5"><a href="calendar.do?year=${sessionScope.ymd.year }&month=${sessionScope.ymd.month}">달력 돌아가기</a>
-		<button>삭제</button>
-	</tr>
-</table>
-</form>
 </body>
 </html>
