@@ -142,6 +142,13 @@
 					onchange="readURL(this);" disabled />
 				</c:if>
 			</div><hr><br>
+			<!-- 댓글 추가 div -->
+	<div id = "wrap_comment">
+		<textarea rows="4" cols="70" name = "b_c_comment"id ="comment" placeholder = "댓글을 입력해 주세요!!!" style = "padding-top : 10px; padding-left : 5px;"></textarea>
+		<input type="button" id="edit_comment" value="댓글수정" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
+		<input type="button" id="add_comment" value="댓글쓰기" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
+	</div>
+	<br><hr>
 			<div id = "btn_list">
 				<input type="button" id="list_btn"  class="btn btn-outline-light" value="목록으로" style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
 					<c:choose>
@@ -167,6 +174,7 @@
 		</div>
 	</form>
 </div>
+	
 </div>
 </div>
 <%-- <jsp:include page="/fix/footer.jsp"/> --%>

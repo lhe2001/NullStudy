@@ -9,6 +9,7 @@ public class CommentDTO {
 	private Date b_c_date; // 작성 일자
 	private int b_key; // 게시판 테이블 기본키(여기선 외래키)
 	private int userKey; // 회원 정보 테이블 기본키(여기선 외래키)
+	private String nickName; // 작성자에 쓸 변수
 	
 	public int getB_c_key() {
 		return b_c_key;
@@ -39,5 +40,11 @@ public class CommentDTO {
 	}
 	public void setUserKey(int userKey) {
 		this.userKey = userKey;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 }

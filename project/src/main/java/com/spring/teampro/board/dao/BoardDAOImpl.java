@@ -41,13 +41,13 @@ public class BoardDAOImpl implements BoardDAO {
 	// addNewArticle() 메소드 작성 <Board 에 글 추가>
 	@Override
 	public int addNewArticle(Map map) {
-
+		int result = -1;
 		int b_articleNo = getMaxArticleNO();// 새 글 번호는 메소드 리턴값으로 쓰자
 		System.out.println("DAO b_articleNo : " + b_articleNo);
 		
 		map.put("b_articleNo",b_articleNo);
 		sqlSession.insert("mapper.board.addNewArticle",map);
-		return b_articleNo;
+		return result;
 	}
 
 	// viewArticle() 메소드 작성 <글 상세 목록 view>

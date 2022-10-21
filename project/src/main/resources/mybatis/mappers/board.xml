@@ -121,11 +121,11 @@
 								<when test="search_field == 3">
 									and lower(a.nickName) like lower('%'||#{search_bar }||'%')
 								</when>
-								<otherwise>
+								<when test="search_field == 4">
 									and (lower(b.b_title) like lower('%'||#{search_bar }||'%') 
 									or lower(b.b_content) like lower('%'||#{search_bar }||'%')
 									or lower(a.nickName) like lower('%'||#{search_bar }||'%'))
-								</otherwise>
+								</when>
 							</choose>
 						</where> 
 						 Start with b.B_parentNo = 0 
@@ -188,5 +188,15 @@
 			<select id="totalCount" resultType="int">
 				select count(*) as totalCount from board
 			</select>
+			
+			
+		<!--  댓글 작성 -->	
+			<insert id="addComment" parameterType = "commentDTO">
+				insert into board_com (b_c_key, b_c_comment, b_c_date, b_key , userkey)
+				values(key_c.nextval, #{b_c_comment} , sysdate, #{b_key} , {userKey}  )
+			</insert>
+		<!--  댓글 수정 -->	
+		
+		<!--  댓글 삭제 -->	
 			
 </mapper>
