@@ -12,6 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <title>일정추가</title>
+<script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
+<link href="/project/resources/css/calList.css" rel="stylesheet">
 <%
 	String pyear = request.getParameter("year");
 	int year = Integer.parseInt(pyear);
@@ -29,15 +31,16 @@
 </head>
 
 <body>
+	<div class="calinupWrap">
+	<div class="calinupContent">
 	<form action="insertCalBoard.do" method="post">
-<!-- 			<input type="hidden" name="userkey" /> -->
-<!-- 			<input type="hidden" name="m_schedule_date" /> -->
-<!-- 			<input type="hidden" name="m_schedule_write" /> -->
-		<table border="1">
+		<table class="calinupTB">
 			<tr>
-				<th>일정 요일</th>
+				<th><p>일정 요일</p></th>
+			</tr>
+			<tr>
 				<td>
-					<select name="year" >
+					<select name="year" class="cselect">
 					<% 
 						for(int i=year-5; i<year+5; i++){
 					%>
@@ -46,7 +49,7 @@
 						}
 					%>
 					</select>년
-					<select name="month" >
+					<select name="month" class="cselect">
 					<% 
 						for(int i=1; i<=12; i++){
 					%>
@@ -55,7 +58,7 @@
 						}
 					%>
 					</select>월
-					<select name="date" >
+					<select name="date" class="cselect">
 					<% 
 						for(int i=1; i<=31; i++){
 					%>
@@ -67,20 +70,26 @@
 				</td>
 			</tr>
 			<tr>
-				<th>제목</th>
-				<td><input type="text" name="m_schedule_title" /></td>
+				<th><p>제목</p></th>
 			</tr>
 			<tr>
-				<th>내용</th>
-				<td><textarea name="m_schedule_desc" rows="10" cols="60"></textarea></td>
+				<td><input type="text" name="m_schedule_title" class="ctform" /></td>
+			</tr>
+			<tr>
+				<th><p>내용</p></th>
+			</tr>
+			<tr>
+				<td><textarea name="m_schedule_desc" rows="10" cols="50" class="cttextarea" ></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button type="button" onclick="calendar()">cancel</button>
-					<button>save</button>
+					<button type="button" onclick="calendar()" class="insertpagebtn">cancel</button>
+					<button class="insertpagebtn">save</button>
 				</td>
 			</tr>
 		</table>
 	</form>
+	</div>
+	</div>
 </body>
 </html>

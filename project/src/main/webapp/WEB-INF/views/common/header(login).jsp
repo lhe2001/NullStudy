@@ -13,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<<<<<<< HEAD
     <script>
     $(function(){
     	bind();
@@ -36,9 +35,6 @@
     }
     
     </script>
-=======
-
->>>>>>> master
     
 </head>
 <body>

@@ -157,7 +157,6 @@
 
 </script>
 <body>
-	<c:set var="result" value="${result }"/>
 	<c:if test="${result=='가입실패'}">
 		<script>
 		alert("가입실패! 다시 시도해주세요")
