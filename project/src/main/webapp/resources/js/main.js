@@ -7,6 +7,7 @@ window.onload = function(){
     bluePostIt();
     searchSelect();
     YellowPostIt();
+
 }
 
 function header(){
@@ -130,18 +131,26 @@ function YellowPostIt(){
 				}else {
 					for(let i=0; i<data.length; i++){
 					html += "<tr>";
-					html += "	<td><span> <input type='checkbox' name='todo' class='todochk"+[i]+"'> </span>"+data[i].m_td_desc+"</td>";
+					html += "	<td class='smallList'> <span> <i class='fa-solid fa-check'></i> </span>"+data[i].m_td_desc+"<span> <input type='button' name='todoDel' value='X' onClick='delTodo()'> </span><input type='hidden' name='m_td_key' value='"+data[i].m_td_key+"' ></td>";
 					html += "<tr>";
 					}
 				}
 				$("#todoList table tbody").append(html);
 			},
 			error:function(){
-				alert("에러발생!!")
+				alert("투두리스트 에러발생!!")
 			}
 		});
 	});
 }
+
+function insertTodo() {
+	$(".myTodoBtn").off("click").on("click",function(){
+	
+	
+	});
+}
+
 
 function searchSelect(){
     $("#selectValue").off("change").on("change",function(){

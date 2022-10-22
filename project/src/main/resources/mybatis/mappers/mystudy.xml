@@ -128,8 +128,8 @@
 
 <!-- 	투두리스트 -->
 	<insert id="insertTodo" parameterType="todoDTO">
-		INSERT INTO mytodo (M_TD_KEY, M_TD_DESC, M_TD_DATE, USERKEY)
-		VALUES (seq_mytodo.nextval, #{M_TD_DESC}, sysdate, #{userkey})
+		INSERT INTO mytodo (m_td_key, m_td_desc, m_td_date, userkey)
+		VALUES (seq_mytodo.nextval, #{m_td_desc}, sysdate, #{userkey})
 	</insert>
 	
 	<select id="todoCount" parameterType="int" resultType="int">

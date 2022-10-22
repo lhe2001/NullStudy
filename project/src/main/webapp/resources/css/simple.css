@@ -339,10 +339,9 @@
         }
         #todoList td{
             border-bottom: 1px dashed black;
+            width:200px;
         }
-        #todoList td:nth-child(2){
-           width:150px;
-        }
+
         #todoList button {
             margin-top: 5px;
             margin-bottom: 5px;

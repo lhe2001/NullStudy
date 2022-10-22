@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,11 +33,15 @@
 	        <div class="left"></div>
 	        <div id="todoList">
 	        	<div id="todoBtn">
-	            	<input type="text" id="todoText" placeholder="추가List">
-	            	<button type="button" id="tdaddBtn" class="tdbtncss">추가</button>
-	            	<button type="button" id="tddeleteBtn" class="tdbtncss">삭제</button>
+	        	<form name="createTodo" method="post" action="/project/mystudy/newTodo.do">
+	            	<input type="text" id="todoText" placeholder="추가List" name="m_td_desc">
+	            	<input type="button" id="tdaddBtn" class="tdbtncss" value="추가" />
+<!-- 	            	<button type="button" id="tdaddBtn" class="tdbtncss">추가</button> -->
+<!-- 	            	<button type="button" id="tddeleteBtn" class="tdbtncss">삭제</button> -->
+	        	</form>
 	        	</div>
 	            <div id="list">
+	            	<form name="frmTDDel">
 	                <table>
 	                    <thead>
 	                        <tr>
@@ -47,6 +51,7 @@
 	                    <tbody>
 	                    </tbody>
 	                </table>
+	                </form>
 	            </div>
 	        </div>
 	    </div>
@@ -65,5 +70,11 @@
 			 </table>
          </div>
 	</aside>
+		<c:set var="result" value="${result }"/>
+		<c:if test="${result=='투두개수제한'}">
+    		<script>
+    			alert("투두리스트는 5개까지 등록가능합니다.")
+    		</script>
+    	</c:if>
 </body>
 </html>

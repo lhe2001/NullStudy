@@ -22,13 +22,13 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public boolean insertTodo(TodoDTO dto) {
+	public int insertTodo(TodoDTO dto) {
 		return todoDAO.insertTodo(dto);
 	}
 
 
 	@Override
-	public boolean delTodo(int m_td_key) {
+	public int delTodo(int m_td_key) {
 		return todoDAO.delTodo(m_td_key);
 	}
 

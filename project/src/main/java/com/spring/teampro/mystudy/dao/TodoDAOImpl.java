@@ -15,9 +15,9 @@ public class TodoDAOImpl implements TodoDAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public boolean insertTodo(TodoDTO dto) {
+	public int insertTodo(TodoDTO dto) {
 		int count = sqlSession.insert("mapper.mystudy.insertTodo", dto);
-		return count>0?true:false;
+		return count;
 	}
 
 	@Override
@@ -27,9 +27,9 @@ public class TodoDAOImpl implements TodoDAO {
 	}
 
 	@Override
-	public boolean delTodo(int m_td_key) {
+	public int delTodo(int m_td_key) {
 		int count = sqlSession.insert("mapper.mystudy.deleteTodo", m_td_key);
-		return count>0?true:false;
+		return count;
 	}
 
 	@Override
