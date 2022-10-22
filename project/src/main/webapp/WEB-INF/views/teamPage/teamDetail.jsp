@@ -20,7 +20,7 @@
 		    </form>
                 <table>
                     <tr>
-                        <td>팀 이름</td>
+                        <td>그룹 이름</td>
                         <td>${teamInfo.t_name}</td>
                     </tr>
                     <tbody>
@@ -34,7 +34,7 @@
                     </tr>
                     </tbody>
                     <tr>
-                        <td>팀장</td>
+                        <td>스터디장</td>
                         <td>${teamInfo.nickName }</td>
                     </tr>
                 </table>
@@ -53,7 +53,7 @@
 	                <tr>
 	                    <td>분야</td>
 	                    <td> 
-		                    <select class="t_field">
+		                    <select class="t_field" name="t_field">
 			                	<option value="1">코딩</option>
 			                	<option value="2">자격증</option>
 			                	<option value="3">토익</option>
@@ -63,7 +63,13 @@
 	                </tr>
 	                <tr>
 	                    <td>팀장</td>
-	                    <td>${teamInfo.nickName }</td>
+	                    <td>
+	                    	<select name="t_leader" class="t_leader" >
+	                    	  <c:forEach var="members" items="${MemberInfo}" varStatus="loop">
+	                    		<option value="${members.userKey }">${members.nickname }</option>
+                    		 </c:forEach>
+	                    	</select>
+                    	</td>
 	                </tr>
 	            </table>
                 <input type="submit" value="수정">
@@ -84,19 +90,24 @@
         </div>
         <div id="teamMenu">
             <ul>
-                <li>팀 게시판</li>
+                <li>그룹 게시판</li>
                 <li id="newMemberAlert" onClick="reviseDday(${teamInfo.t_key})">D-Day 수정</li>
                 <li onClick="resetChallenge()">챌린지 리셋</li>
                 <li>투표하기</li>
                 <c:if test="${anyAlarm == 0 }">
-                <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})">팀원 신청
+                <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})">스터디원 신청
                 </c:if>
                 <c:if test="${anyAlarm > 0 }">
                 <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})" style="color:red; font-weight:bold">팀원 신청
                 	<div id="alarm">${anyAlarm }</div>
                 </c:if>
                 </li>
+                <c:if test="${userInfo.userKey eq teamInfo.userKey}">
+                  <li onClick="leaveTeam(-1)">탈퇴하기</li>
+                </c:if>
+                <c:if test="${userInfo.userKey ne teamInfo.userKey}">
                 <li onClick="leaveTeam(${teamInfo.t_key})">탈퇴하기</li>
+                </c:if>
             </ul>
         </div>
     </div>

@@ -90,7 +90,7 @@
 	
 	<update id="updateTeamInfo" parameterType="teamInfoDTO">
 		update AllTeam
-		set t_intro= #{t_intro} ,t_field=#{t_field}
+		set t_intro= #{t_intro} ,t_field=#{t_field},userKey=#{userKey}
 		where t_key= #{t_key}
 	</update>
 	

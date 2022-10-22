@@ -24,6 +24,7 @@ function reviseTeamInfo(){
     	let t_key = $(".t_key").val();
     	let t_intro = $(".t_intro").val();
     	let t_field = $(".t_field").val();
+    	let userKey = $(".t_leader").val();
     	
         if(revise == true){
         	if(t_intro.trim() == ''){
@@ -32,7 +33,8 @@ function reviseTeamInfo(){
 	        	let info = { 
 	        			t_key : t_key,
 	        			t_intro : t_intro,
-	        			t_field : t_field 
+	        			t_field : t_field,
+	        			userKey : userKey 
 	        	};
 	        	$.ajax({
 					url: "/project/teamRest/updateTeamInfo.do",
@@ -151,10 +153,14 @@ function delTeam(){
 
 //팀 탈퇴하기
 function leaveTeam(t_key){
-	const leave = confirm('정말 탈퇴하시겠습니까?');
-	if(leave == true){
-    	location.href='/project/team/leaveTeam.do?t_key='+t_key;
-    }
+	if(t_key == -1){
+		alert('스터디장은 탈퇴 하실 수 없습니다. 스터디장을 변경해주세요');
+	}else {
+		const leave = confirm('정말 탈퇴하시겠습니까?');
+		if(leave == true){
+	    	location.href='/project/team/leaveTeam.do?t_key='+t_key;
+	    }
+	}
 }
 
 //디데이
