@@ -57,10 +57,8 @@
 
 <!-- 	메모 삭제하기 -->
 	<delete id="deleteMemo" parameterType="int">
-		<![CDATA[
 		delete from mymemo
 		where m_memo_key = #{m_memo_key}
-		]]>
 	</delete>
 
 <!-- 	일정 작성하기 -->
@@ -128,8 +126,26 @@
 			rn BETWEEN 1 AND 3
 	</select>
 
+<!-- 	투두리스트 -->
+	<insert id="insertTodo" parameterType="todoDTO">
+		INSERT INTO mytodo (M_TD_KEY, M_TD_DESC, M_TD_DATE, USERKEY)
+		VALUES (seq_mytodo.nextval, #{M_TD_DESC}, sysdate, #{userkey})
+	</insert>
 	
+	<select id="todoCount" parameterType="int" resultType="int">
+		select count(*) from mytodo
+		where userkey=#{userkey}
+	</select>
 	
+	<delete id="deleteTodo" parameterType="int">
+		delete from mytodo
+		where m_td_key = #{m_td_key}
+	</delete>
 	
+	<select id="todoAllList" resultType="todoDTO" parameterType="int">
+		 SELECT * from mytodo
+		 where userkey = #{userkey}
+		 order by m_td_key
+	</select>
 	
 </mapper>

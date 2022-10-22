@@ -39,13 +39,11 @@
 		<typeAlias type="com.spring.teampro.team.dto.TeamMemberDTO" alias="teamMemberDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.team.dto.MemberRequestDTO" alias="memberRequestDTO"></typeAlias>
 		
-		<!-- memo DTO 별칭 -->
+		<!-- MYzone DTO 별칭 -->
 		<typeAlias type="com.spring.teampro.mystudy.dto.MemoDTO" alias="memoDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.mystudy.dto.ScheduleDTO" alias="scheduleDTO"></typeAlias>
-	
-<!-- >>>>>>> jessie_memo -->
-		<!-- board DTO 별칭 -->
-		<typeAlias type="com.spring.teampro.mystudy.dto.MemoDTO" alias="memoDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.mystudy.dto.TodoDTO" alias="todoDTO"></typeAlias>
+
 		
 		<!-- search DTO 별칭 -->
 		<typeAlias type="com.spring.teampro.search.dto.SearchDTO" alias="searchDTO"></typeAlias>

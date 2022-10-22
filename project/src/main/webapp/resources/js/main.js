@@ -6,6 +6,7 @@ window.onload = function(){
     postit();
     bluePostIt();
     searchSelect();
+    YellowPostIt();
 }
 
 function header(){
@@ -100,6 +101,40 @@ function bluePostIt(){
 					}
 				}
 				$("#TeamInfoP table tbody").append(html);
+			},
+			error:function(){
+				alert("에러발생!!")
+			}
+		});
+	});
+}
+
+function YellowPostIt(){
+	$(".myTodoBtn").off("click").on("click",function(){
+	
+		$.ajax({
+			url: "/project/mystudy/myTodoList.do",
+			type: "get",
+			contentType: "application/json",
+			success: function(data){
+				console.log("list :", data);
+				
+				$("#todoList table tbody").empty();
+				
+				let html = "";
+				
+				if(data.length == 0){
+					html += "<tr>";
+					html += "	<td>투두리스트가 없습니다</td>";
+					html += "<tr>";
+				}else {
+					for(let i=0; i<data.length; i++){
+					html += "<tr>";
+					html += "	<td><span> <input type='checkbox' name='todo' class='todochk"+[i]+"'> </span>"+data[i].m_td_desc+"</td>";
+					html += "<tr>";
+					}
+				}
+				$("#todoList table tbody").append(html);
 			},
 			error:function(){
 				alert("에러발생!!")
