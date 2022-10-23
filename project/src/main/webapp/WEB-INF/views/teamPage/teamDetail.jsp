@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,7 +94,7 @@
             <ul>
                 <li>그룹 게시판</li>
                 <li id="newMemberAlert" onClick="reviseDday(${teamInfo.t_key})">D-Day 수정</li>
-                <li onClick="resetChallenge()">챌린지 리셋</li>
+                <li onClick="resetChallenge(${teamInfo.t_key})">챌린지 수정 & 리셋</li>
                 <li>투표하기</li>
                 <c:if test="${anyAlarm == 0 }">
                 <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})">스터디원 신청
@@ -184,63 +186,77 @@
                 </div>
                 <div class="challenge">
                     <table>
-                        <caption style="font-size:15px; text-decoration:underline">매일 물 한잔</caption>
+                    	<input type="hidden" class="tc_key" value="${challenge.tc_key }">
+                        <caption style="font-size:15px; text-decoration:underline">${challenge.tc_title }</caption>
+	                      	<tr>
+	                      	<c:forEach var="i" begin="0" end="6">
+	                      		<c:if test="${myCurrent[i].tcs_key != null }">
+	                      			<td class="confirm" onClick="showSummary(${myCurrent[i].tcs_key})"></td>
+	                      		</c:if>
+	                      		<c:if test="${myCurrent[i].tcs_key == null }">
+	                      			<td></td>
+	                      		</c:if>
+	                      	</c:forEach>
+	                      	</tr>
+	                      	<tr>
+	                      	<c:forEach var="i" begin="7" end="13">
+	                      		<c:if test="${myCurrent[i].tcs_key != null }">
+	                      			<td class="confirm" onClick="showSummary(${myCurrent[i].tcs_key})"></td>
+	                      		</c:if>
+	                      		<c:if test="${myCurrent[i].tcs_key == null }">
+	                      			<td></td>
+	                      		</c:if>
+	                      	</c:forEach>
+	                      	</tr>
+	                      	<tr>
+	                      	<c:forEach var="i" begin="14" end="20">
+	                      		<c:if test="${myCurrent[i].tcs_key != null }">
+	                      			<td class="confirm" onClick="showSummary(${myCurrent[i].tcs_key})"></td>
+	                      		</c:if>
+	                      		<c:if test="${myCurrent[i].tcs_key == null }">
+	                      			<td></td>
+	                      		</c:if>
+	                      	</c:forEach>
+	                      	</tr>
+	                      </tbody>
                         <tr>
-                            <td class="confirm"></td>
-                            <td class="confirm"></td>
-                            <td class="confirm"></td>
-                            <td class="confirm"></td>
-                            <td class="confirm"></td>
-                            <td class="confirm"></td>
-                            <td class="confirm"></td>
-                        </tr>
-                        <tr>
-                            <td class="confirm"></td>
-                            <td class="confirm"></td>
-                            <td class="confirm"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="7"><input type="button" value="SUBMIT"></td>
+                            <td colspan="7"><input type="button" onClick="attendChallenge(${teamInfo.t_key})" value="SUBMIT"></td>
                         </tr>
                     </table>
                 </div>
                 <div id="TeamDaily">
                     <table class="TeamDailyMemo">
+                    	<thead>
+	                        <tr>
+	                            <td>오늘의 요약!</td>
+	                        </tr>
+                        </thead>
+                        <tbody>
+                        
                         <tr>
-                            <td>오늘의 요약!</td>
-                        </tr>
-                        <tr>
-                            <td style="font-size:13px;height:85px;max-height:85px;">ffffffffff</td>
+                            <td style="font-size:13px;height:85px;max-height:85px;">
+                            ${summary.tcs_summary}
+                            </td>
                         <tr>
                             <td><input class="dailyRevBtn" type="button" value="수정하기"></td>
                         </tr>
+                        </tbody>
                     </table>
-                    <form>
                     <table class="TeamDailyRevise hide">
+                    	<thead>
                         <tr>
                             <td>오늘의 요약!</td>
                         </tr>
                         <tr>
-                            <td><textarea></textarea></td>
+                            <td><textarea class="todaySummary"></textarea></td>
                         </tr>
+                        </thead>
+                        <tbody>
                         <tr>
-                            <td><input type="button" class="returnBtn" value="취소"><input type="submit"></td>
+                            <td><input type="button" class="returnBtn" value="취소"><input type="submit" value="수정"></td>
                         </tr>
+                        </tbody>
                     </table>
-                    </form>
                 </div>
             </div>
         </div>
@@ -256,7 +272,7 @@
                     </div>
                     <div class="info leaderInfo">
                         <table>
-                        <tr>
+                        <tr onClick="memberSummary(${member.userKey})">
                             <td style="max-width:90px; min-width:90px;">
                             	<strong>${member.nickname }</strong>
                             	<input type="hidden" class="tm_key" value="${member.tm_key }">
@@ -284,37 +300,9 @@
                     </div>
                     <div class="memberChallenge">
                         <table>
-                            <caption style="font-size:15px; text-decoration:underline">매일 물 한잔</caption>
-                            <tr>
-                                <td class="confirm"></td>
-                                <td class="confirm"></td>
-                                <td class="confirm"></td>
-                                <td class="confirm"></td>
-                                <td class="confirm"></td>
-                                <td class="confirm"></td>
-                                <td class="confirm"></td>
-                            </tr>
-                            <tr>
-                                <td class="confirm"></td>
-                                <td class="confirm"></td>
-                                <td class="confirm"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td colspan="7" style="height:40px;text-align: center;">dd</td>
-                            </tr>
+                            <caption style="font-size:15px; text-decoration:underline">${challenge.tc_title }</caption>
+                            <tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>

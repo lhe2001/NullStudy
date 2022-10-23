@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.teampro.team.dao.TeamDAO;
+import com.spring.teampro.team.dto.ChallengeDTO;
 import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.MyTeamListDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
@@ -150,6 +151,51 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public int updateDday(TeamInfoDTO dto) {
 		return dao.updateDday(dto);
+	}
+	//뉴 챌린지
+	@Override
+	public int addChallenge(ChallengeDTO dto) {
+		return dao.addChallenge(dto);
+	}
+	//latest Challenge 가져오기
+	@Override
+	public ChallengeDTO getLatestChallenge(int t_key) {
+		ChallengeDTO dto = dao.getLatestChallenge(t_key);
+		if(dto == null) {
+			dto = new ChallengeDTO();
+			dto.setTc_title("아직 없습니다");
+			dto.setTc_key(0);
+		}
+		return dto;
+	}
+	//attendChallenge 출석
+	@Override
+	public int attendChallenge(ChallengeDTO dto) {
+		return dao.attendChallenge(dto);
+	}
+	//나의 현재 챌린지 상태 가져오기
+	@Override
+	public List getChallengeList(ChallengeDTO dto) {
+		return dao.getChallengeList(dto);
+	}
+	//나의 현재 챌린지 서머리 가져오기
+	@Override
+	public ChallengeDTO getSummary(ChallengeDTO dto) {
+		ChallengeDTO dtoo = dao.getSummary(dto);
+		
+		if(dtoo == null) {
+			dtoo = new ChallengeDTO();
+			dtoo.setTcs_key(dto.getTcs_key());
+			dtoo.setTcs_summary("업데이트 해주세요");
+		}else if(dtoo.getTcs_summary()==null) {
+			dtoo.setTcs_summary("기록이 없습니다");
+		}
+		return dtoo;
+	}
+	//revise Summary
+	@Override
+	public int reviseSummary(ChallengeDTO dto) {
+		return dao.reviseSummary(dto);
 	}
 	
 	//>>>>>>>>>>>>>>>>팀멤버 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//

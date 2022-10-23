@@ -181,13 +181,122 @@ function reviseDday(t_key){
 	window.open('/project/team/reviseDday.do?t_key='+t_key,'pop','location=no,width=540,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
 
-//나의 챌린지 보관함
-function myChallenge(){
-	window.open('/project/team/myChallenge.do','pop','location=no,width=500,height=400,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
-}
-
 //챌린지 수정
-function resetChallenge(){
-	window.open('/project/team/myChallenge.do','pop','location=no,width=500,height=400,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+function resetChallenge(t_key){
+	window.open('/project/team/updateChallenge.do?t_key='+t_key,'pop','location=no,width=500,height=400,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
-
+//챌린지에 출석하기
+function attendChallenge(t_key){
+	let tc_key = $(".tc_key").val();
+	let info = { 
+        			t_key : t_key,
+        			tc_key : tc_key
+        	};
+        	
+        	$.ajax({
+			url: "/project/teamRest/attendChallenge.do",
+			type: "post",
+			contentType: "application/json",
+			data: JSON.stringify(info),
+			success: function(data){
+				alert('오늘의 챌린지 완료!');
+				location.reload();
+			},
+			error:function(){
+				alert("에러발생!!")
+			}
+			});
+}
+//챌린지 선택
+function attendChallenge(t_key){
+	let tc_key = $(".tc_key").val();
+	let info = { 
+        			t_key : t_key,
+        			tc_key : tc_key
+        	};
+        	
+        	$.ajax({
+			url: "/project/teamRest/attendChallenge.do",
+			type: "post",
+			contentType: "application/json",
+			data: JSON.stringify(info),
+			success: function(data){
+				alert('오늘의 챌린지 완료!');
+				location.reload();
+			},
+			error:function(){
+				alert("에러발생!!")
+			}
+			});
+}
+//서머리 보기
+function showSummary(tcs_key){
+	let info = { 
+        			tcs_key : tcs_key
+        	};
+        	
+        	$.ajax({
+			url: "/project/teamRest/showSummary.do",
+			type: "post",
+			contentType: "application/json",
+			data: JSON.stringify(info),
+			success: function(data){
+				$(".TeamDailyMemo tbody").empty();
+				
+				let html = "";
+				html += "<tr>";
+				html += "<td style='font-size:13px;height:85px;max-height:85px;'>";
+				html +=  data.tcs_summary;
+				html += "</td>";
+				html += "</tr>";
+				html += "<tr>";
+				html += "<td><input class='dailyRevBtn' type='button' value='수정하기' ></td>";
+				html += "</tr>";
+				
+				$(".TeamDailyMemo tbody").append(html);
+				
+			},
+			error:function(){
+				alert("에러발생!!")
+			}
+			});
+}
+//멤버 서머리 보기 
+function memberSummary(userKey){
+	let tc_key = $(".tc_key").val();
+	let info = { 
+        			userKey : userKey,
+        			tc_key : tc_key
+        	};
+        	
+        	$.ajax({
+				url: "/project/teamRest/memberSummary.do",
+				type: "post",
+				contentType: "application/json",
+				data: JSON.stringify(info),
+				success: function(data){
+				
+					$(".memberChallenge table tbody").empty();
+					
+					let html="";
+					if(data.length == 1 && data[0] == -1){
+						for(let i=0; i<3; i++){
+							html +="<tr>";
+							for(let j=0; j<7; j++){
+								html +="<td></td>";
+							}
+							html +="</tr>";
+						}
+					html += "<tr><td colspan='7' style='height:40px;text-align: center;'>아직 시작하지 않았어요</td></tr>";
+						
+						$(".memberChallenge table tbody").prepend(html);
+						
+					}else {
+						alert(data.length);
+					}
+				},
+				error:function(){
+					alert("에러발생!!")
+				}
+			});
+}

@@ -393,6 +393,48 @@
 .hide {
     display: none;
 }
+/* 챌린지 수정 & 리셋 팝업 */
+#updateChalWrap {
+    text-align: center;
+    font-size: 14px;
+    color:#412498;
+}
+.chalTable{
+    margin: 30px auto;
+    margin-bottom: 30px;
+    text-align: center;
+    width:380px;
+    border: 1px solid #CCCCFF;
+}
+.chalTable td{
+    height:30px;
+}
+.chalTable input:not([type="submit"]) {
+    width:250px;
+    background-color: #CCCCFF;
+    border: none;
+    height:20px;
+    border-radius: 5px;
+}
+.chalTable input[type="button"] {
+    background-color: #7a69ac;
+    border-radius: 5px;
+    border: none;
+    width:100px;
+    color:#CCCCFF;
+    cursor: pointer;
+}
+#updateChalWrap button {
+    margin: 10px 0;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color:#412498;
+}
+#updateChalWrap button i {
+    font-size: 40px;
+    color:#CCCCFF;
+}
 /* 멤버정보 */
 #memberWrap{
     display: flex;
@@ -509,10 +551,10 @@
     width:10px;
     height: 10px;
     border-radius: 3px;
-    cursor:pointer;
 }
 .memberChallenge table .confirm{
     background-color: #d3b58d;
+    cursor:pointer;
 }
 /* teamSchedule */
 #teamSchedule{

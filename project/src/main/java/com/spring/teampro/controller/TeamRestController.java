@@ -1,5 +1,6 @@
 package com.spring.teampro.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.teampro.team.dto.ChallengeDTO;
 import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
@@ -93,6 +95,7 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 	@RequestMapping(value="/teamRest/updatedDay.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public int updatedDay(@RequestBody TeamInfoDTO dto
 			) {
+		logger.info("t_day>>>>>>>>>>"+dto.getT_day());
 		return service.updateDday(dto);
 	}
 	
@@ -107,6 +110,56 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 	public int rejectMember(@RequestBody MemberRequestDTO dto
 			) {
 		return service.rejectMember(dto);
+	}
+	
+	//뉴챌린지 
+	@RequestMapping(value="/teamRest/newChallenge.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int newChallenge(@RequestBody ChallengeDTO dto
+			) {
+		return service.addChallenge(dto);
+	}
+	//챌린지 출석하기
+	@RequestMapping(value="/teamRest/attendChallenge.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int attendChallenge(HttpServletRequest request, HttpServletResponse response,
+			@RequestBody ChallengeDTO dto
+			) {
+		HttpSession session = request.getSession();
+		int userkey  = (Integer) session.getAttribute("userKey");
+		logger.info(">>>"+userkey);
+		dto.setUserKey(userkey);
+		
+		return service.attendChallenge(dto);
+	}
+	//showSummary
+	@RequestMapping(value="/teamRest/showSummary.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public ChallengeDTO showSummary(HttpServletRequest request, HttpServletResponse response,
+			@RequestBody ChallengeDTO dto
+			) {
+		HttpSession session = request.getSession();
+		int userkey  = (Integer) session.getAttribute("userKey");
+		dto.setUserKey(userkey);
+		
+		return service.getSummary(dto);
+	}
+	//멤버 서머리 보기 
+	@RequestMapping(value="/teamRest/memberSummary.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public List memberSummary(
+			@RequestBody ChallengeDTO dto
+			) {
+		List list = new ArrayList();
+		list = service.getChallengeList(dto);
+		if(list.size() == 0) {
+			list.add(-1);
+		}
+		return list;
+	}
+	//reviseSummary
+	@RequestMapping(value="/teamRest/reviseSummary.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int reviseSummary(HttpServletRequest request, HttpServletResponse response,
+			@RequestBody ChallengeDTO dto
+			) {
+		
+		return service.reviseSummary(dto);
 	}
 	
 	//>>>>>>>>>>>>>>>>allTeam 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//

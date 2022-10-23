@@ -3,6 +3,7 @@ package com.spring.teampro.team.service;
 import java.util.List;
 import java.util.Map;
 
+import com.spring.teampro.team.dto.ChallengeDTO;
 import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
@@ -50,6 +51,18 @@ public interface TeamService {
 	Map getMyRequest(int userkey);
 
 	int cancleRequest(MemberRequestDTO dto);
+
+	int addChallenge(ChallengeDTO dto);
+
+	ChallengeDTO getLatestChallenge(int t_key);
+
+	int attendChallenge(ChallengeDTO dto);
+
+	List getChallengeList(ChallengeDTO dto);
+
+	ChallengeDTO getSummary(ChallengeDTO dto);
+
+	int reviseSummary(ChallengeDTO dto);
 
 
 

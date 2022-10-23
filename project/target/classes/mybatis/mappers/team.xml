@@ -85,6 +85,24 @@
 		WHERE TR_RESULT ='N' AND m.T_KEY = a.T_KEY and m.userkey=#{userKey}
 	</select>
 	
+	<select id="getLatestChallenge" resultType="challengeDTO" parameterType="int">
+		SELECT * 
+		FROM (SELECT * FROM TEAMCHALLENGE 
+			WHERE t_key = #{t_key}
+			ORDER BY tc_key DESC)
+		WHERE rownum <![CDATA[<= 1]]>
+	</select>
+	
+	<select id="getChallengeList" resultType="challengeDTO" parameterType="int">
+		SELECT * from TCSummary
+		where tc_key = #{tc_key} and userKey = #{userKey}
+		order by tcs_key
+	</select>
+	
+	<select id="getSummary" resultType="challengeDTO" parameterType="challengeDTO">
+		SELECT s.TCS_KEY ,s.USERKEY ,s.TCS_SUMMARY ,t.TC_KEY ,t.TC_TITLE ,t.T_KEY  from TCSummary s, TeamChallenge t
+		where t.tc_key = s.tc_key and userKey = #{userKey} AND s.tcs_key = #{tcs_key}
+	</select>
 	
 <!-- UPDATE -->
 	
@@ -118,11 +136,18 @@
 		WHERE userKey = #{userKey} AND t_key = #{t_key}
 	</update>
 	
-	<update id="updateDday" parameterType="TeamInfoDTO">
-		update allteam
+	<update id="updateDday" parameterType="teamInfoDTO">
+		update AllTeam
 		set t_day= #{t_day}
 		where t_key= #{t_key}
 	</update>
+	
+	<update id="reviseSummary" parameterType="challengeDTO">
+		update TCSummary
+		set tcs_title= #{tcs_title}
+		where tcs_key= #{tcs_key}
+	</update>
+
 	
 <!-- INSERT -->
 
@@ -148,6 +173,18 @@
 		insert into TEAMMEMBER
 		(tm_key,t_key,userkey)
 		values(tm_key_seq.nextval,#{t_key},#{userKey})
+	</insert>
+	
+	<insert id="addChallenge" parameterType="challengeDTO">
+		insert into TeamChallenge
+		(tc_key,tc_title,t_key)
+		values(tc_key_seq.nextval,#{tc_title},#{t_key})
+	</insert>
+	
+	<insert id="attendChallenge" parameterType="challengeDTO">
+		insert into TCSummary
+		(tcs_key,userkey,tc_key)
+		values(tcs_key_seq.nextval,#{userKey},#{tc_key})
 	</insert>
 	
 <!-- DELETE -->
