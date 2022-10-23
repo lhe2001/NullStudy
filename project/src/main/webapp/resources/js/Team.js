@@ -275,6 +275,7 @@ function memberSummary(userKey){
 				contentType: "application/json",
 				data: JSON.stringify(info),
 				success: function(data){
+				console.log(data);
 				
 					$(".memberChallenge table tbody").empty();
 					
@@ -292,7 +293,36 @@ function memberSummary(userKey){
 						$(".memberChallenge table tbody").prepend(html);
 						
 					}else {
-						alert(data.length);
+						
+						html += "<tr>";
+						for(let i=0; i<7; i++){
+							html+="<td>";
+							if(data[i] != undefined){
+								html+="<input type='hidden' class='memberTcs' value='"+data[i].tcs_key+"'>";
+							}
+							html+="</td>";
+						}
+						html += "</tr>";
+						html += "<tr>";
+						for(let i=7; i<14; i++){
+							html+="<td>";
+							if(data[i] != undefined){
+								html+="<input type='hidden' class='memberTcs' value='"+data[i].tcs_key+"'>";
+							}
+							html+="</td>";
+						}
+						html += "</tr>";
+						for(let i=14; i<21; i++){
+							html+="<td>";
+							if(data[i] != undefined){
+								html+="<input type='hidden' class='memberTcs' value='"+data[i].tcs_key+"'>";
+							}
+							html+="</td>";
+						}
+						html += "</tr>";
+						html += "<tr><td colspan='7' style='height:40px;text-align: center;'>시작했어요</td></tr>";
+						
+						$(".memberChallenge table tbody").prepend(html);
 					}
 				},
 				error:function(){

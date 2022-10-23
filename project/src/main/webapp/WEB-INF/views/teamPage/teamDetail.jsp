@@ -302,11 +302,12 @@
                         <table>
                             <caption style="font-size:15px; text-decoration:underline">${challenge.tc_title }</caption>
                             <tbody>
+                         		<img src="https://ifh.cc/g/313rJr.gif">
                             </tbody>
                         </table>
                     </div>
-                </div>
             </div>
+        </div>
         <div id="teamSchedule">
             <div class="tCalendar">달력</div>
             <div class="tTimeLine">일정</div>
