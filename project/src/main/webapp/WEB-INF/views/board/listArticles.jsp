@@ -247,7 +247,6 @@
 	글갯수 : ${articlesList.size()} 개
 	</div>
 </div>
-
 	<table id="tb" class = "table table-hover table-bordered" style = "color : #1C6758">
 		<thead>
 		<tr style = "background-color: #A2B29F">
@@ -293,7 +292,8 @@
 						<td align='left' width='30%'>
 							<%--왼쪽 들여쓰기--%> <span style='padding-right: 30px'></span> <%-- level값이 1보다 큰경우 자식글이므로 
 								 부모글 밑에 공백으로 들여쓰기해서 자식글인걸 티내자 
-								 분기를 한번 더 타자--%> <c:choose>
+								 분기를 한번 더 타자--%> 
+								 <c:choose>
 								<c:when test="${article.level >1 }">
 									<%-- 부모글 기준으로 레벨 값 만큼 들여쓰기하자 --%>
 									<c:forEach begin="1" end="${article.level }" step="1">
@@ -303,19 +303,19 @@
 									<span>[답변]</span>
 									<%-- 마지막으로 제목을 누르면 상세 출력 페이지 이동 a태그하나 --%>
 									<a href="${contextPath}/board/viewArticle.do?b_articleNo=${article.b_articleNo}">
-										${article.b_title} </a>
+										${article.b_title}(${article.comment_cnt }) </a>
 								</c:when>
-								
 								<c:when test="${article.b_fieldName eq '비밀글' }">
 									<a id = "link_a" href = "${contextPath}/board/password.do?b_articleNo=${article.b_articleNo}">
-										${article.b_title} </a>
+										${article.b_title} (${article.comment_cnt }) </a>
 								</c:when>
 								<c:otherwise>
 									<a href="${contextPath}/board/viewArticle.do?b_articleNo=${article.b_articleNo}">
-										${article.b_title} </a>
+										${article.b_title} (${article.comment_cnt }) </a>
 								</c:otherwise>
 							</c:choose>
 						</td>
+						
 						<td>${article.b_writeDate}</td>
 						<td>${article.b_view}</td>
 						<%-- <td>${article.userkey}</td> --%>
@@ -341,7 +341,6 @@
        		</div>
 		</div>
 </div>
-		
 <div id = "search_">
 <%-- 글쓰기 영역 --%>
 	<form method="get" action="${contextPath }/board/articleForm.do"

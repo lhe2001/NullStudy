@@ -157,9 +157,9 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	// 댓글 총 갯수 가져오기
-	public int getCommentCount(CommentDTO dto) {
-		int count = sqlSession.selectOne("mapper.board.getCommentCount" ,dto);
-		return count;
+	public List<CommentDTO> getCommentCount() {
+		List<CommentDTO> list = sqlSession.selectList("mapper.board.getCommentCount");
+		return list;
 	}
 	
 	

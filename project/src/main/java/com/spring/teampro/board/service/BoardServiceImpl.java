@@ -136,5 +136,12 @@ public class BoardServiceImpl implements BoardService{
 		list = commentDAO.selectAllComment();
 		return list;
 	}
+	
+	//게시풀의 댓글 수 가져오는 메소드
+	public List<CommentDTO> getComment() {
+		List<CommentDTO> list = new ArrayList<CommentDTO>();
+		list = boardDAO.getCommentCount();
+		return list;
+	}
 	 
 }

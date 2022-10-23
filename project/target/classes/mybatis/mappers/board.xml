@@ -221,10 +221,22 @@
 					where b_c_key = #{b_c_key}
 			</delete>
 		<!-- 댓글 갯수 가져오기 -->	
-			<select id="getCommentCount" parameterType = "commentDTO">
-				select count(*) from
-					board b , board_com bc
-					where b.b_key = bc.b_key
-					and b.b_key = #{b_key}
+			<select id="getCommentCount" resultType="commentDTO" >
+				select
+					b.b_key,
+					(select count(*) from board_com bc where b.b_key = bc.b_key) as comment_cnt
+						from board b
 			</select>
+			<!-- 댓글 갯수 가져오기 2(다른버전 group by) -->	
+<!-- 			<select id="getCommentCount" parameterType = "commentDTO"> -->
+<!-- 				select  -->
+<!-- 					a.b_title , -->
+<!-- 					a.b_content , -->
+<!-- 					a.b_imagefile , -->
+<!-- 					count(b.b_c_comment)  -->
+<!-- 				from board a -->
+<!-- 				left join board_com b  -->
+<!-- 					on a.b_key = b.b_key  -->
+<!-- 				group by a.b_title ,a.b_content , a.b_imagefile -->
+<!-- 			</select> -->
 </mapper>

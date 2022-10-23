@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -68,7 +69,13 @@ public class BoardController{
 			amount = Integer.parseInt(request.getParameter("amount"));
 		}
 		
-		// 댓글 갯수를 보내주고싶은데,,
+		// 댓글 갯수 가져오기
+		List<CommentDTO> list = new ArrayList<CommentDTO>();
+		list= boardService.getComment();
+		System.out.println("commentdto list = " + list);
+		System.out.println(list.size());
+		System.out.println(list.get(0));
+		CommentDTO commentDTO = new CommentDTO();
 		
 		System.out.println("pageNum = " + pageNum);
 		System.out.println("amount = " + amount);
@@ -80,26 +87,32 @@ public class BoardController{
 		List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);
 		System.out.println("articlesList.size() = " + articlesList.size());
 		System.out.println("b_key = " + boardDTO.getB_key());
-		
 		session=request.getSession();
 		SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-		for (int i = 0; i < articlesList.size(); i++) {
-			boardDTO = articlesList.get(i);
-			switch (boardDTO.getB_field()) {
-			case 10:
-				boardDTO.setB_fieldName("질문");
-				break;
-			case 20:
-				boardDTO.setB_fieldName("잡담");
-				break;
-			case 30:
-				boardDTO.setB_fieldName("비밀글");
-				break;
-			case 40:
-				boardDTO.setB_fieldName("나도몰라");
-				break;
-			default:
-				break;
+		
+		for(int j=0 ; j <list.size(); j++) {
+			commentDTO = list.get(j);
+			for (int i = 0; i < articlesList.size(); i++) {
+				boardDTO = articlesList.get(i);
+				if(boardDTO.getB_key() == commentDTO.getB_key()) {
+					boardDTO.setComment_cnt(commentDTO.getCount_com());
+				}
+				switch (boardDTO.getB_field()) {
+				case 10:
+					boardDTO.setB_fieldName("질문");
+					break;
+				case 20:
+					boardDTO.setB_fieldName("잡담");
+					break;
+				case 30:
+					boardDTO.setB_fieldName("비밀글");
+					break;
+				case 40:
+					boardDTO.setB_fieldName("나도몰라");
+					break;
+				default:
+					break;
+				}
 			}
 		}
 		model.addAttribute("articlesList",articlesList);

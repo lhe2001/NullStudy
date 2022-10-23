@@ -54,4 +54,7 @@ public interface BoardService {
 		
 		// 댓글 리스트 가져오는 메소드
 		public List<CommentDTO> getCommentList();
+		
+		//게시풀의 댓글 수 가져오는 메소드
+		public List<CommentDTO> getComment();
 }

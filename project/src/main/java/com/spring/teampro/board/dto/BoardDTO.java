@@ -25,7 +25,9 @@ public class BoardDTO extends PageDTO {
 	private String nickName; // 작성자에 쓸 변수
 	private int search_field; // 검색 내용을 담아서 전달할 변수
 	private int b_articlePwd; // 비밀글 비밀번호
-
+	private int comment_cnt;  // 댓글 갯수 표현할 변수
+	
+	
 	public int getB_articlePwd() {
 		return b_articlePwd;
 	}
@@ -271,6 +273,14 @@ public class BoardDTO extends PageDTO {
 
 	public void setList_sel(int list_sel) {
 		this.list_sel = list_sel;
+	}
+
+	public int getComment_cnt() {
+		return comment_cnt;
+	}
+
+	public void setComment_cnt(int comment_cnt) {
+		this.comment_cnt = comment_cnt;
 	}
 
 }
