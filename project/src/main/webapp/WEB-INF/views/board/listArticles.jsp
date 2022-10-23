@@ -143,21 +143,21 @@
 	    					
 	    					console.log(data.searchList[1].b_field);
 	    						// 페이징 
-	    					$("#paging").empty();
+// 	    					$("#paging").empty();
 	    					
-	    					let html2 = "";
-	    					if(data.pageDTO.prev){
-	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.pageNum-1) +'&amount=' + data.pageDTO.amount + '" class="btn" >' + '이전' + '</a></span>'
-	    					}
+// 	    					let html2 = "";
+// 	    					if(data.pageDTO.prev){
+// 	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.pageNum-1) +'&amount=' + data.pageDTO.amount + '" class="btn" >' + '이전' + '</a></span>'
+// 	    					}
 	    					
-	    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
-	    					html2 += '<a href="${contextPath }/board/listArticles.do?pageNum=' + i + '&amount=' + data.pageDTO.amount + '&field=' + data.searchList[i].field +   ' " class="btn">'+ i + '</a>'
-	    					}
+// 	    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
+// 	    					html2 += '<a href="${contextPath }/board/listArticles.do?pageNum=' + i + '&amount=' + data.pageDTO.amount + '&field=' + data.searchList[i].field +   ' " class="btn">'+ i + '</a>'
+// 	    					}
 	    					
-	    					if(data.pageDTO.prev){
-	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="btn" >' + '다음' + '</a></span>'
-	    					}
-	    					$("#paging").append(html2);
+// 	    					if(data.pageDTO.prev){
+// 	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="btn" >' + '다음' + '</a></span>'
+// 	    					}
+// 	    					$("#paging").append(html2);
 	    				},
 	    				
 	    				error:function(){
@@ -307,9 +307,8 @@
 	</table>
 			<div id="paging"> 
 				<!--이전버튼 활성화 여부 -->
-				
 				 <c:if test="${pageDTO.prev }">
-		         	<span><a href="${contextPath }/board/listArticles.do?pageNum=${pageDTO.pageNum - 1 }&amount=${pageDTO.amount}" class="btn" >이전</a></span>
+		         	<span><a href="${contextPath }/board/listArticles.do?pageNum=${pageDTO.startPage - 1 }&amount=${pageDTO.amount}" class="btn" >이전</a></span>
 				</c:if>
 				<%-- 페이지번호 처리 --%>
 		   		<c:forEach var="num" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">

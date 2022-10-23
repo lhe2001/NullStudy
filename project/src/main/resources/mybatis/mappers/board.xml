@@ -49,7 +49,7 @@
 			
 		<!-- 	글 상세 목록 view -->
 			<select id="selectViewArticle" resultType="boardDTO" parameterType="int">
-				select b.b_articleNo, b.b_parentNo, b.b_title, b.b_content, b.b_writeDate ,b.b_view, b.b_field, b.userkey, b.b_imageFile , a.nickName 
+				select b.b_articleNo, b.b_key, b.b_parentNo, b.b_title, b.b_content, b.b_writeDate ,b.b_view, b.b_field, b.userkey, b.b_imageFile , a.nickName 
 					from Board b,
 				 	ALLMEMBER a 
 						where b.userkey = a.userkey
@@ -190,13 +190,37 @@
 			</select>
 			
 			
+		<!--  댓글 조회 -->	
+			<select id="selectAllComment" resultType="commentDTO">
+				select * from (select bc.b_c_key, bc.b_c_comment, bc.b_c_date, bc.b_key, bc.userkey , a.nickname 
+					from board_com bc, allmember a 
+					where bc.userkey = a.userkey)newcomment
+			</select>
 		<!--  댓글 작성 -->	
 			<insert id="addComment" parameterType = "commentDTO">
 				insert into board_com (b_c_key, b_c_comment, b_c_date, b_key , userkey)
-				values(key_c.nextval, #{b_c_comment} , sysdate, #{b_key} , {userKey}  )
+				values(key_c.nextval, #{b_c_comment} , sysdate, #{b_key} , #{userKey}  )
 			</insert>
+		<!-- 작성한 댓글 조회 -->
+			<select id="selectComment" resultType="commentDTO" parameterType="commentDTO">
+				select * from (select bc.b_c_key, bc.b_c_comment, bc.b_c_date, bc.b_key, bc.userkey , a.nickname 
+					from board_com bc, allmember a 
+					where bc.userkey = a.userkey)newcomment
+					where b_key = #{b_key}
+			</select>
+			
 		<!--  댓글 수정 -->	
 		
 		<!--  댓글 삭제 -->	
-			
+			<delete id="deleteComment" parameterType="commentDTO">
+				delete from board_com
+					where b_c_key = #{b_c_key}
+			</delete>
+		<!-- 댓글 갯수 가져오기 -->	
+			<select id="getCommentCount" parameterType = "commentDTO">
+				select count(*) from
+					board b , board_com bc
+					where b.b_key = bc.b_key
+					and b.b_key = #{b_key}
+			</select>
 </mapper>

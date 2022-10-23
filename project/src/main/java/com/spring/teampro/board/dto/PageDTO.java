@@ -23,10 +23,10 @@ public class PageDTO {
 			this.amount = amount;
 			this.totalCount = totalCount;
 			
-			// startPage결정
-			this.startPage = ((this.pageNum-1)*amount) + 1;
 			// endPage 자바영역(controller에서 처리해도 된다.)
 			this.endPage = ((int)Math.ceil((double)this.pageNum / 10)) * 10;
+			// startPage결정
+			this.startPage = this.endPage - 9;
 			// realEnd(진짜 마지막 페이지 번호)
 			int realEnd = (int)Math.ceil(this.totalCount / (double)this.amount);
 			System.out.println("realEnd =" + realEnd + "endPage = " + this.endPage);

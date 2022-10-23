@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.teampro.board.dao.BoardDAO;
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.CommentDTO;
 import com.spring.teampro.board.dto.PageDTO;
 import com.spring.teampro.board.service.BoardService;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
@@ -67,6 +68,8 @@ public class BoardController{
 			amount = Integer.parseInt(request.getParameter("amount"));
 		}
 		
+		// 댓글 갯수를 보내주고싶은데,,
+		
 		System.out.println("pageNum = " + pageNum);
 		System.out.println("amount = " + amount);
 		int totalCount = boardService.getPage();
@@ -76,6 +79,7 @@ public class BoardController{
 		
 		List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);
 		System.out.println("articlesList.size() = " + articlesList.size());
+		System.out.println("b_key = " + boardDTO.getB_key());
 		
 		session=request.getSession();
 		SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
@@ -177,11 +181,18 @@ public class BoardController{
 		public String viewArticle(HttpServletRequest request, HttpServletResponse response,
 				@RequestParam("b_articleNo") int b_articleNo,
 				Model model) {
-//			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-//			model.addAttribute("userInfo",userInfo);
+			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+			model.addAttribute("userInfo",userInfo);
 			System.out.println("상세보기로 이동");
 			System.out.println("b_articleNo : " + b_articleNo);
 			BoardDTO dto = new BoardDTO();
+			// 댓글 리스트를 여기서 보내준다..
+			// CommentDTO
+//			CommentDTO cdto = new CommentDTO();
+			List<CommentDTO> list = boardService.getCommentList();
+			System.out.println("commentlist.size() = " + list.size());
+			
+			// 조회수
 			dto = boardService.getViewArticle(b_articleNo);
 			int view = (dto.getB_view() + 1);
 			dto.setB_articleNo(b_articleNo);
@@ -190,6 +201,7 @@ public class BoardController{
 			// 조회수 업데이트
 			boardService.getView(dto);
 			model.addAttribute("view",dto);
+			model.addAttribute("comment",list);
 			return "viewArticle";
 		}
 		

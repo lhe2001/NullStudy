@@ -1,5 +1,6 @@
 package com.spring.teampro.board.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.teampro.board.dao.BoardDAO;
+import com.spring.teampro.board.dao.CommentDAO;
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.CommentDTO;
 import com.spring.teampro.board.dto.PageDTO;
 
 @Service("boardService")
@@ -16,6 +19,9 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Autowired
 	private BoardDAO boardDAO;
+	
+	@Autowired
+	private CommentDAO commentDAO;
 	
 	// 게시글 전체를 조회할 수 있는 메소드 호출
 	@Override
@@ -117,10 +123,18 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 페이지 수 가져오는 메소드
-	
 	@Override
 	public int getPage() {
 		int count = boardDAO.totalCount();
 		return count;
 	}
+	
+	// 댓글 조회 리스트 가져오는 메소드
+	@Override
+	public List<CommentDTO> getCommentList(){
+		List<CommentDTO> list = new ArrayList<CommentDTO>();
+		list = commentDAO.selectAllComment();
+		return list;
+	}
+	 
 }

@@ -33,6 +33,16 @@
 	color : white;
 }
 
+#view_com {
+	width : 1000px; 
+	height : 70px; 
+	resize : none;
+	border : none;
+	outline : none;
+	background-color: #99A799;
+	color : white;
+}
+
 #real_edit_btn {
 	display: none;
 }

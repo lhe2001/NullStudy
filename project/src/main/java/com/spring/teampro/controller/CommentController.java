@@ -22,7 +22,7 @@ import com.spring.teampro.board.service.CommentService;
 @Controller("commentController")
 public class CommentController {
 	@Autowired
-	private CommentService CommentService;
+	private CommentService commentService;
 	
 	@Autowired
 	private BoardService boardService;
@@ -34,12 +34,28 @@ public class CommentController {
 	HttpSession session;
 	
 	@RequestMapping(value = "board/addComment.do" , method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody List<CommentDTO> ajaxComment(HttpServletRequest requset, HttpServletResponse response,
+	public @ResponseBody List<CommentDTO> addComment(HttpServletRequest requset, HttpServletResponse response,
 			@RequestBody CommentDTO commentDTO){
 		// 댓글을 아작스로 처리할껀데,,
 		// 댓글 파라미터를 받아서 리스트에 담아 다시 던져줄거야..
 		System.out.println("댓글 추가 아작스 처리");
+		int result = commentService.getAddComment(commentDTO);
+		System.out.println("commentController result = " + result);
 		List<CommentDTO> list = new ArrayList<CommentDTO>();
+		list = commentService.getSelectComment(commentDTO);
+		System.out.println("commentController list.size() = " + list.size());
 		return list;
+		// 전달받아야 될 정보 : b_c_comment(내용), b_key(board dto의 b_key), userkey
+		
 	}
+	
+	@RequestMapping(value = "board/deleteComment.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public @ResponseBody void deleteComment(HttpServletRequest requset, HttpServletResponse response,
+			@RequestBody CommentDTO commentDTO){
+		System.out.println("댓글 삭제 아작스 처리");
+		System.out.println("deleteComment commentDTO = " + commentDTO);
+		commentService.getDeleteComment(commentDTO);
+		return;
+	}
+	
 }
