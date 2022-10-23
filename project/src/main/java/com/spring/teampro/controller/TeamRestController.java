@@ -51,16 +51,12 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 	public int updateTeamInfo(@RequestBody TeamInfoDTO dto
 			) {
 		int result = -1;
-		logger.info("updateTeamInfo>>>>>>>>>>>>>>>>>>>>");
 		String lMemo = dto.getT_lMemo();
-		logger.info("lMemo>>>>>>>>>>>>>>>>>>>>"+lMemo);
-		logger.info("t_key>>>>>>>>>>>>>>>>>>>>"+dto.getT_key());
 		if(lMemo == null) {
 			result = service.updateTeamInfo(dto);
 		}else {
 			result = service.updateLMemo(dto);
 		}
-		logger.info("result>>>>>>>>>>>>>>>>>>>>"+result);
 		return result;
 	}
 	
