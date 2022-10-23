@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.CommentDTO;
 import com.spring.teampro.board.dto.PageDTO;
 
 
@@ -50,4 +51,10 @@ public interface BoardService {
 		
 		// 총 페이지 수 가져오는 메소드
 		public int getPage();
+		
+		// 댓글 리스트 가져오는 메소드
+		public List<CommentDTO> getCommentList();
+		
+		//게시풀의 댓글 수 가져오는 메소드
+		public List<CommentDTO> getComment();
 }

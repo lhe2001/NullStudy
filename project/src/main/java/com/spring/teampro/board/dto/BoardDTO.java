@@ -5,7 +5,7 @@ import java.sql.Date;
 import org.springframework.stereotype.Component;
 
 @Component("boardDTO")
-public class BoardDTO {
+public class BoardDTO extends PageDTO {
 	// Board 테이블의 필드값
 	private int level; // 요녀석은 계층형으로 만들기 때문에 필요하다...ㅠ
 	private int b_key; // 아마도 ?시퀀스로 때울 게시판 키
@@ -25,7 +25,9 @@ public class BoardDTO {
 	private String nickName; // 작성자에 쓸 변수
 	private int search_field; // 검색 내용을 담아서 전달할 변수
 	private int b_articlePwd; // 비밀글 비밀번호
-
+	private int comment_cnt;  // 댓글 갯수 표현할 변수
+	
+	
 	public int getB_articlePwd() {
 		return b_articlePwd;
 	}
@@ -271,6 +273,14 @@ public class BoardDTO {
 
 	public void setList_sel(int list_sel) {
 		this.list_sel = list_sel;
+	}
+
+	public int getComment_cnt() {
+		return comment_cnt;
+	}
+
+	public void setComment_cnt(int comment_cnt) {
+		this.comment_cnt = comment_cnt;
 	}
 
 }
