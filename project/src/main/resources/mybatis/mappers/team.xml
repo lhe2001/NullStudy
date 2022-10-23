@@ -25,11 +25,19 @@
 		WHERE m.USERKEY = a.USERKEY AND m.T_KEY = #{t_key}
 	</select>
 	
-	<select id="allTeamList" resultType="teamInfoDTO" >
-		SELECT a.T_KEY ,a.T_NAME ,a.T_INTRO ,a.T_FIELD ,a.T_NUMBER  ,a2.NICKNAME   
+	<select id="allTeamList" resultType="teamInfoDTO" parameterType="teamInfoDTO">
+		SELECT a.T_KEY ,a.T_NAME ,a.T_INTRO ,a.T_FIELD ,a.T_NUMBER  ,a2.NICKNAME 
 		FROM ALLTEAM a ,allmember a2
-		WHERE a.USERKEY = a2.USERKEY
-		order by t_create desc
+		<where>
+		 a.USERKEY = a2.USERKEY
+		 <if test='t_field gt 0'>
+		 and a.t_field = #{t_field}
+		 </if>
+		 <if test='t_name != null'>
+		 and lower(a.t_name) like '%' || lower(#{t_name}) || '%'
+		 </if>
+		</where>
+		order by a.t_create desc
 	</select>
 	
 	<select id="anyAlarm" resultType="int" parameterType="int">
@@ -82,7 +90,7 @@
 	
 	<update id="updateTeamInfo" parameterType="teamInfoDTO">
 		update AllTeam
-		set t_intro= #{t_intro} ,t_field=#{t_field}
+		set t_intro= #{t_intro} ,t_field=#{t_field},userKey=#{userKey}
 		where t_key= #{t_key}
 	</update>
 	

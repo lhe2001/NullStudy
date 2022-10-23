@@ -21,29 +21,34 @@ function reviseTeamInfo(){
     })
     document.querySelector("#reviseTeam input[type='submit']").addEventListener("click",function(){
         const revise = confirm('수정 하시겠습니까?');
+    	let t_key = $(".t_key").val();
+    	let t_intro = $(".t_intro").val();
+    	let t_field = $(".t_field").val();
+    	let userKey = $(".t_leader").val();
+    	
         if(revise == true){
-        	let t_key = $(".t_key").val();
-        	let t_intro = $(".t_intro").val();
-        	let t_field = $(".t_field").val();
-        	
-        	let info = { 
-        			t_key : t_key,
-        			t_intro : t_intro,
-        			t_field : t_field 
-        	};
-        	
-        	$.ajax({
-			url: "/project/teamRest/updateTeamInfo.do",
-			type: "post",
-			contentType: "application/json",
-			data: JSON.stringify(info),
-			success: function(data){
-				location.reload();
-			},
-			error:function(){
-				alert("에러발생!!")
-			}
-			});
+        	if(t_intro.trim() == ''){
+        		alert('빈칸을 입력해주세요');
+        	}else {
+	        	let info = { 
+	        			t_key : t_key,
+	        			t_intro : t_intro,
+	        			t_field : t_field,
+	        			userKey : userKey 
+	        	};
+	        	$.ajax({
+					url: "/project/teamRest/updateTeamInfo.do",
+					type: "post",
+					contentType: "application/json",
+					data: JSON.stringify(info),
+					success: function(data){
+						location.reload();
+					},
+					error:function(){
+						alert("에러발생!!")
+					}
+				});
+        	}
         }
     })
    }
@@ -148,10 +153,14 @@ function delTeam(){
 
 //팀 탈퇴하기
 function leaveTeam(t_key){
-	const leave = confirm('정말 탈퇴하시겠습니까?');
-	if(leave == true){
-    	location.href='/project/team/leaveTeam.do?t_key='+t_key;
-    }
+	if(t_key == -1){
+		alert('스터디장은 탈퇴 하실 수 없습니다. 스터디장을 변경해주세요');
+	}else {
+		const leave = confirm('정말 탈퇴하시겠습니까?');
+		if(leave == true){
+	    	location.href='/project/team/leaveTeam.do?t_key='+t_key;
+	    }
+	}
 }
 
 //디데이
@@ -172,5 +181,13 @@ function reviseDday(t_key){
 	window.open('/project/team/reviseDday.do?t_key='+t_key,'pop','location=no,width=540,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
 
+//나의 챌린지 보관함
+function myChallenge(){
+	window.open('/project/team/myChallenge.do','pop','location=no,width=500,height=400,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+}
 
+//챌린지 수정
+function resetChallenge(){
+	window.open('/project/team/myChallenge.do','pop','location=no,width=500,height=400,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+}
 

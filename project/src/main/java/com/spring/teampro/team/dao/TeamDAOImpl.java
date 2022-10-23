@@ -26,7 +26,8 @@ public class TeamDAOImpl implements TeamDAO {
 	//나의 팀 리스트 가져오기
 	@Override
 	public List getMyTeamList(int userkey) {
-		
+		List list = sqlSession.selectList("mapper.team.myTeamList",userkey);
+		logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>"+list.size());
 		return sqlSession.selectList("mapper.team.myTeamList",userkey);
 	}
 	
@@ -39,8 +40,10 @@ public class TeamDAOImpl implements TeamDAO {
 	
 	//전체팀 List 가져오기
 	@Override
-	public List allTeamList() {
-		return sqlSession.selectList("mapper.team.allTeamList");
+	public List allTeamList(TeamInfoDTO dto) {
+		logger.info("DAO>>>>>>>>>>"+dto.getT_field());
+		logger.info("DAO>>>>>>>>>>"+dto.getT_name());
+		return sqlSession.selectList("mapper.team.allTeamList",dto);
 	}
 	
 	//팀멤버 정보 가져오기

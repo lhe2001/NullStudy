@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,16 +51,12 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 	public int updateTeamInfo(@RequestBody TeamInfoDTO dto
 			) {
 		int result = -1;
-		logger.info("updateTeamInfo>>>>>>>>>>>>>>>>>>>>");
 		String lMemo = dto.getT_lMemo();
-		logger.info("lMemo>>>>>>>>>>>>>>>>>>>>"+lMemo);
-		logger.info("t_key>>>>>>>>>>>>>>>>>>>>"+dto.getT_key());
 		if(lMemo == null) {
 			result = service.updateTeamInfo(dto);
 		}else {
 			result = service.updateLMemo(dto);
 		}
-		logger.info("result>>>>>>>>>>>>>>>>>>>>"+result);
 		return result;
 	}
 	
@@ -128,6 +125,12 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		}else {
 			return service.requestMember(dto);
 		}
+	}
+	//allTeamFilter 필드값으로 팀구분하기
+	@RequestMapping(value="/teamRest/allTeamFilter.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public List allTeamFilter(@RequestBody TeamInfoDTO dto, Model model
+			) {
+		return service.getAllTeamList(dto);
 	}
 	
 	//>>>>>>>>>>>>>>>>팀개설 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//

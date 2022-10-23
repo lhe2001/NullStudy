@@ -109,26 +109,26 @@ public class TeamServiceImpl implements TeamService {
 	
 	//전체 팀리스트 가져오기
 	@Override
-	public List getAllTeamList() {
+	public List getAllTeamList(TeamInfoDTO dto) {
 		
-		List list = dao.allTeamList();
+		List list = dao.allTeamList(dto);
 		
 		for(int i=0; i<list.size();i++) {
-			TeamInfoDTO dto = (TeamInfoDTO)list.get(i);
-			int t_filed = dto.getT_field();
+			TeamInfoDTO dtoo = (TeamInfoDTO)list.get(i);
+			int t_filed = dtoo.getT_field();
 			
 			switch(t_filed) {
 			case 1:
-				dto.setT_field2("코딩");
+				dtoo.setT_field2("코딩");
 				break;
 			case 2:
-				dto.setT_field2("자격증");
+				dtoo.setT_field2("자격증");
 				break;
 			case 3:
-				dto.setT_field2("토익");
+				dtoo.setT_field2("토익");
 				break;
 			case 4:
-				dto.setT_field2("기타");
+				dtoo.setT_field2("기타");
 				break;
 			}
 		}
