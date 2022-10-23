@@ -7,7 +7,7 @@ window.onload = function(){
     bluePostIt();
     searchSelect();
     YellowPostIt();
-
+	 AddTodo();
 }
 
 function header(){
@@ -141,13 +141,6 @@ function YellowPostIt(){
 				alert("투두리스트 에러발생!!")
 			}
 		});
-	});
-}
-
-function insertTodo() {
-	$(".myTodoBtn").off("click").on("click",function(){
-	
-	
 	});
 }
 

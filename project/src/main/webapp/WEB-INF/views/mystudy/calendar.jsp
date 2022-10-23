@@ -123,7 +123,9 @@
 	for(int i=1; i<=lastDay; i++){
 		%>
 		<td class="caltd">
-			<div class="dateLink"><a class="countView" data-id="alinkStyle" href="calBoardList.do?year=<%=year %>&month=<%=month %>&date=<%= i %>" style="color:<%=Util.fontColor(dayOfWeek, i) %>;"><%= i %></a></div>
+			<div class="dateLink">
+				<a class="countView" data-id="alinkStyle" href="calBoardList.do?year=<%=year %>&month=<%=month %>&date=<%= i %>" style="color:<%=Util.fontColor(dayOfWeek, i) %>;"><%= i %></a>
+			</div>
 			<div>
 				<%=getCalViewList(i, clist) %>
 			</div>

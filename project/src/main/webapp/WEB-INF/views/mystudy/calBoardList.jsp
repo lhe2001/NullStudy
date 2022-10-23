@@ -15,11 +15,8 @@
 <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
 <link href="/project/resources/css/calList.css" rel="stylesheet">
 <title>일정 목록 보기</title>
-
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-
-
 //전체선택 자동체크와해지
 //onclick="smallSel()"
 function smallSel(){
@@ -62,8 +59,6 @@ $(function(){
 		return bool;
 	})
 })
-
-
 </script>
 </head>
 <body>

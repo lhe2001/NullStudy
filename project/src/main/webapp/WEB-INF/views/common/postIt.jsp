@@ -16,10 +16,10 @@
 	    <!-- <button type="button" class="asideHide">Hide</button> -->
 	    <div id="postitBox">
 	        <button type="button" class="pink">My</button>
-	        <button type="button" class="yellow myTodoBtn">To Do</button>
+	        <button type="button" class="yellow myTodoBtn">Info</button>
 	        <button type="button" class="blue teamListBtn">Team</button>
 	    </div>
-	    <div class="postit pink none">
+	    <div class="postit pink">
 	        <div class="left"></div>
 	        <div id="userInfo">
 	            <div id="userPT"></div>
@@ -28,14 +28,14 @@
 	            <p><button type="button" id="logOut">로그아웃</button></p>
 	        </div>
 	    </div>
-	    
-	    <div class="postit yellow">
+
+	    <div class="postit yellow none">
 	        <div class="left"></div>
 	        <div id="todoList">
 	        	<div id="todoBtn">
-	        	<form name="createTodo" method="post" action="/project/mystudy/newTodo.do">
+	        	<form id="createTodo" method="post" action="/project/mystudy/AddTodo.do">
 	            	<input type="text" id="todoText" placeholder="추가List" name="m_td_desc">
-	            	<input type="button" id="tdaddBtn" class="tdbtncss" value="추가" />
+	            	<input type="submit" id="tdaddBtn" class="tdbtncss" value="추가" />
 <!-- 	            	<button type="button" id="tdaddBtn" class="tdbtncss">추가</button> -->
 <!-- 	            	<button type="button" id="tddeleteBtn" class="tdbtncss">삭제</button> -->
 	        	</form>
@@ -54,7 +54,35 @@
 	                </form>
 	            </div>
 	        </div>
-	    </div>
+	    </div>	    
+	    
+	    
+<!-- 	    <div class="postit yellow none"> -->
+<!-- 	        <div class="left"></div> -->
+<!-- 	        <div id="todoList"> -->
+<!-- 	        	<div id="todoBtn"> -->
+<!-- 	        	<form id="createTodo" method="post" action="/project/mystudy/AddTodo.do"> -->
+<!-- 	            	<input type="text" id="todoText" placeholder="추가List" name="m_td_desc"> -->
+<!-- 	            	<input type="submit" id="tdaddBtn" class="tdbtncss" value="추가" /> -->
+<!-- <!-- 	            	<button type="button" id="tdaddBtn" class="tdbtncss">추가</button> --> -->
+<!-- <!-- 	            	<button type="button" id="tddeleteBtn" class="tdbtncss">삭제</button> --> -->
+<!-- 	        	</form> -->
+<!-- 	        	</div> -->
+<!-- 	            <div id="list"> -->
+<!-- 	            	<form name="frmTDDel"> -->
+<!-- 	                <table> -->
+<!-- 	                    <thead> -->
+<!-- 	                        <tr> -->
+<!-- 	                            <th colspan="2" id="tdTBth">To Do List</th> -->
+<!-- 	                        </tr> -->
+<!-- 	                    </thead> -->
+<!-- 	                    <tbody> -->
+<!-- 	                    </tbody> -->
+<!-- 	                </table> -->
+<!-- 	                </form> -->
+<!-- 	            </div> -->
+<!-- 	        </div> -->
+<!-- 	    </div> -->
 	    
 	   <div class="postit blue none">
       	<div class="left"></div>
@@ -69,12 +97,9 @@
 				</tbody>
 			 </table>
          </div>
+         
+         
 	</aside>
-		<c:set var="result" value="${result }"/>
-		<c:if test="${result=='투두개수제한'}">
-    		<script>
-    			alert("투두리스트는 5개까지 등록가능합니다.")
-    		</script>
-    	</c:if>
+
 </body>
 </html>
