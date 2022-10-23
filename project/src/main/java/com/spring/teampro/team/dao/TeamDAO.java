@@ -22,7 +22,7 @@ public interface TeamDAO {
 
 	int removeMember(TeamMemberDTO dto);
 
-	List allTeamList();
+	List allTeamList(TeamInfoDTO dto);
 
 	int memberRequest(MemberRequestDTO dto);
 
