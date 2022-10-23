@@ -413,7 +413,6 @@ public class BoardController{
 					
 					response.setContentType("text/html; charset=utf-8");
 					// 페이징
-					
 					// 페이징 초기값
 					// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
 					// 첫 페이지 경우
@@ -421,9 +420,9 @@ public class BoardController{
 					int amount = 10;
 					
 //					 페이지번호를 클릭하는 경우
-					if(request.getParameter("pageNum") != null && request.getParameter("amount") != null) {
-						pageNum = Integer.parseInt(request.getParameter("pageNum"));
-						amount = Integer.parseInt(request.getParameter("amount"));
+					if(boardDTO.getPageNum() != 0 && boardDTO.getAmount() != 0) {
+						pageNum = boardDTO.getPageNum();
+						amount = boardDTO.getAmount();
 						System.out.println("페이지번호 클릭 pageNum = " + pageNum);
 						System.out.println("페이지번호 클릭 amount = " + amount);
 					}

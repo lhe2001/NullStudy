@@ -210,7 +210,11 @@
 			</select>
 			
 		<!--  댓글 수정 -->	
-		
+			<update id="modifyComment" parameterType="commentDTO">
+				update board_com set
+				b_c_comment = #{b_c_comment }
+				where b_c_key = #{b_c_key}
+			</update>
 		<!--  댓글 삭제 -->	
 			<delete id="deleteComment" parameterType="commentDTO">
 				delete from board_com

@@ -160,6 +160,32 @@
 			});
 		})
 	}
+ 	
+ // 댓글 수정
+  	function updateComment(){
+			 $("#delete_comment").off("click").on("click", function(){
+    			let b_c_key = $("#b_c_key").val();
+    			console.log(b_c_key);
+				 let info = {
+							 b_c_key : b_c_key
+	    					}
+			 
+			$.ajax({
+				url: "/project/board/deleteComment.do",
+				type: "post",
+				contentType : "application/json",
+				data: JSON.stringify(info),
+				success: function(data){
+					console.log("data :", data);
+					alert("댓글이 삭제되었습니다.");
+					 location.reload();
+					},
+				error:function(){
+					alert("에러발생!!")
+				}
+			});
+		})
+	}
 </script>
 	<div class = "wrapp">
 	<div class = "container">
@@ -222,12 +248,11 @@
 			</div><hr><br>
 			<!-- 댓글 추가 div -->
 	<div id = "wrap_comment">
-	<h4>comment</h4>
-		<textarea rows="4" cols="70" name = "b_c_comment"id ="comment" placeholder = "댓글을 입력해 주세요!!!" style = "padding-top : 10px; padding-left : 5px;"></textarea>
-		<input type="button" id="edit_comment" value="댓글수정" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
-		<input type="button" id="add_comment" value="댓글쓰기" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
-	</div>
-		<br><br><hr>
+		<h4>comment</h4>
+			<textarea rows="4" cols="70" name = "b_c_comment"id ="comment" placeholder = "댓글을 입력해 주세요!!!" style = "padding-top : 10px; padding-left : 5px;"></textarea>
+			<input type="button" id="add_comment" value="댓글쓰기" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
+		</div>
+			<br><br><hr>
 			<!-- 댓글이 들어갈 곳 -->
 			<h3> 댓글 입니다. </h3>
 		<div id = "view_comment">
@@ -238,15 +263,16 @@
 					작성일 : ${comment.b_c_date }
 					<c:if test="${userInfo.userKey == view.userkey }">
 					<input type = "button" id = "delete_comment" value = "댓글삭제" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
+					<input type="button" id="edit_comment" value="댓글수정" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
 					</c:if>
 					<input type = "hidden" id = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
 					</c:if>
 			</c:forEach>
-			<!-- 히든으로 commentcontroller에 줄 값 -->
 		</div>
+				<!-- 히든으로 commentcontroller에 줄 값 -->
 				<input type ="hidden" name="b_key" id ="b_key" value= "${view.b_key }"/>
-				<input type ="hidden" name="userkey" id ="userkey" value = "${userInfo.userKey }"/>
-	<br><hr>
+				<input type ="hidden" name="userkey" id ="userkey" value = "${userInfo.userKey }"/><br><hr>
+		
 			<div id = "btn_list">
 				<input type="button" id="list_btn"  class="btn btn-outline-light" value="목록으로" style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
 					<c:choose>

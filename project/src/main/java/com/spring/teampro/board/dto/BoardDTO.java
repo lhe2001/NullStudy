@@ -5,7 +5,7 @@ import java.sql.Date;
 import org.springframework.stereotype.Component;
 
 @Component("boardDTO")
-public class BoardDTO {
+public class BoardDTO extends PageDTO {
 	// Board 테이블의 필드값
 	private int level; // 요녀석은 계층형으로 만들기 때문에 필요하다...ㅠ
 	private int b_key; // 아마도 ?시퀀스로 때울 게시판 키

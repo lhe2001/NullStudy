@@ -33,13 +33,8 @@
 // 		window.addEventListener("load", teamInfoOnload);
 
 // 	      function teamInfoOnload(){
-// 	    	let obj = document.querySelector("#frmId");
-// 	  		let btn = document.querySelector("#search_btn");
-// 	  		btn.addEventListener("click", function() {
-// 	  			obj.action = "${contextPath}/board/searchArticle.do";
-// 	  			obj.method = "post"
-// 	  			obj.submit();
-// 	  		})
+// 	    	
+			
 	  		
 // 	  		function select(){
 // 	  		let sel = document.querySelector("#select");
@@ -60,18 +55,29 @@
 // 				})
 // 			}
 		$(function(){
-			search();
+				let obj = document.querySelector("#frmId");
+		  		let btn = document.querySelector("#search_btn");
+		  		btn.addEventListener("click", function() {
+		  			console.log('this :: ', this);
+		  			search();
+		  		});
+		  		
+		  		setPageEvent(10);
 		})
-	      
-	      	function search(){
-	    		$("#search_btn").off("click").on("click", function(){
+   				
+   		
+   		  		
+	      	function search(index, amount){
+// 	    		$("#search_btn").off("click").on("click", function(){
+					console.log('index :: ', index);
 	    			let field = $("#field").val();
 	    			let search_bar = $("#search_bar").val();
 	    			
-	    			
 	    			let info = {
 	    				b_field : field,
-	    				search_bar : search_bar
+	    				search_bar : search_bar,
+	    				pageNum : index,
+	    				amount : amount
 	    			}
 	    			 //아작스
 	    			$.ajax({
@@ -88,17 +94,17 @@
     						
 	    					let html = "";
 	    					
-	    					if(data == null){
+	    					if(data.length < 0){
     								
 	    						html +='<h1 style ="text-align : center; margin-left : 20px; margin-top : 20px; color : #1C6758">' + '등록된 글이 없어요' +'</h1>';
     						
 	    					} else{
 	    						
     							for(let i = 0; i< data.searchList.length; i++){
-    								console.log(data.searchList.length);
-    								console.log(data.searchList[i].b_fieldName);
+//     								console.log(data.searchList.length);
+//     								console.log(data.searchList[i].b_fieldName);
     								html +=	'<tr>';
-    								html += '<td>' + i + '</td>';
+    								html += '<td>' + (i+1) + '</td>';
 									if(data.searchList[i].b_fieldName == '비밀글'){
 										html += '<td style = "color : tomato;">' + data.searchList[i].b_fieldName + '</td>';
 									} else {
@@ -124,6 +130,7 @@
 										html += '<a href="${contextPath}/board/viewArticle.do?b_articleNo=' +data.searchList[i].b_articleNo+ '">'+
 										data.searchList[i].b_title + '</a>';
 									}
+									
 									if(data.searchList[i].b_fieldName == '비밀글'){
 										html +=
 											'<a id = "link_a" href = "${contextPath}/board/password.do?b_articleNo=' + data.searchList[i].b_articleNo+ '">'+
@@ -136,38 +143,51 @@
 										html += '<td>' + data.searchList[i].b_writeDate + '</td>';
 										html += '<td>' + data.searchList[i].b_view + '</td>';
 										html += '</tr>';
-	    						$("#list_tbody").append(html);
     							
     							}
+    							$("#list_tbody").append(html);
     						}
 	    					
 	    					console.log(data.searchList[1].b_field);
-	    						// 페이징 
-// 	    					$("#paging").empty();
 	    					
-// 	    					let html2 = "";
-// 	    					if(data.pageDTO.prev){
-// 	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.pageNum-1) +'&amount=' + data.pageDTO.amount + '" class="btn" >' + '이전' + '</a></span>'
-// 	    					}
+	    					//페이징
+	    					$("#paging").empty();
 	    					
-// 	    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
-// 	    					html2 += '<a href="${contextPath }/board/listArticles.do?pageNum=' + i + '&amount=' + data.pageDTO.amount + '&field=' + data.searchList[i].field +   ' " class="btn">'+ i + '</a>'
-// 	    					}
+	    					let html2 = "";
+	    					if(data.pageDTO.prev){
+	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.startPage - 1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '이전' + '</a></span>'
+	    					}
 	    					
-// 	    					if(data.pageDTO.prev){
-// 	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="btn" >' + '다음' + '</a></span>'
-// 	    					}
-// 	    					$("#paging").append(html2);
+	    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
+	    					html2 += '<input type="button" value="'+i+'" class="p_btn">'
+	    					}
+	    					
+	    					if(data.pageDTO.prev){
+	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '다음' + '</a></span>'
+	    					}
+	    					$("#paging").append(html2);
+	    					
+	    					setPageEvent(data.pageDTO.amount);
 	    				},
 	    				
 	    				error:function(){
 	    					alert("에러발생!!")
 	    				}
 	    			});
-	    			
-	    		})
+// 	    		})
 	    	}
-	    	
+		
+   		  		function setPageEvent(amount) {
+	   		  		let pageBtn = document.querySelectorAll(".p_btn");
+	   		  		for(var i = 0; i < pageBtn.length; i++) {
+	   		  			pageBtn[i].addEventListener("click", function() {
+		   		  			console.log('this :: ', this);
+		   		  			search($(this).val(), amount);
+		   		  		})
+	   		  		}
+   		  		}
+   		  		
+   		  		
 	    		function select(){
 		  		let sel = document.querySelector("#select");
 					sel.addEventListener("change", function() {

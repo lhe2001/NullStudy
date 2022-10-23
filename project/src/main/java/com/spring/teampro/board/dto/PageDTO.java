@@ -16,6 +16,7 @@ public class PageDTO {
 	
 	private int totalCount; // 전체게시글 수 
 	
+	public PageDTO() {}
 	// 생성자
 	public PageDTO(int pageNum, int amount, int totalCount) {
 			// 전달인자값 전달

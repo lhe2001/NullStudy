@@ -38,6 +38,9 @@ public class CommentController {
 			@RequestBody CommentDTO commentDTO){
 		// 댓글을 아작스로 처리할껀데,,
 		// 댓글 파라미터를 받아서 리스트에 담아 다시 던져줄거야..
+		// 댓글 쓸때 b_key에 따른 댓글 갯수 증가시켜서 
+		
+		
 		System.out.println("댓글 추가 아작스 처리");
 		int result = commentService.getAddComment(commentDTO);
 		System.out.println("commentController result = " + result);
@@ -58,4 +61,13 @@ public class CommentController {
 		return;
 	}
 	
+	@RequestMapping(value = "board/updateComment.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public @ResponseBody List<CommentDTO> updateComment(HttpServletRequest requset, HttpServletResponse response,
+			@RequestBody CommentDTO commentDTO){
+		System.out.println("댓글 수정 아작스 처리");
+		System.out.println("deleteComment commentDTO = " + commentDTO);
+		commentService.getDeleteComment(commentDTO);
+		List<CommentDTO> list = new ArrayList<CommentDTO>();
+		return list;
+	}
 }
