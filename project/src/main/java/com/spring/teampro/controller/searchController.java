@@ -59,7 +59,7 @@ public class searchController {
 				
 			} else {
 				System.out.println("main search 실패");
-				return "forward:/main.do";
+				return "forward:/";
 				
 			}
 		
@@ -105,12 +105,24 @@ public class searchController {
 			
 			count = Count.searchBoardSelectCount(dto);
 			map = paging(_pageNum, count);
+			dto.setStart((Integer) map.get("start"));
+			dto.setEnd((Integer) map.get("end"));
+			dto.setFirstNo((Integer) map.get("firstNo"));
+			dto.setLastNo((Integer) map.get("lastNo"));
+			dto.setLastPage((Integer) map.get("lastPage"));
+			dto.setPageNum((Integer) map.get("pageNum"));
 			list = searchService.getSearchBoardSelectList(dto);
 			
 		} else if (selectValue.equals("b_title")) {
 			
 			count = Count.b_titleSearchBoardSelectCount(dto);
 			map = paging(_pageNum, count);
+			dto.setStart((Integer) map.get("start"));
+			dto.setEnd((Integer) map.get("end"));
+			dto.setFirstNo((Integer) map.get("firstNo"));
+			dto.setLastNo((Integer) map.get("lastNo"));
+			dto.setLastPage((Integer) map.get("lastPage"));
+			dto.setPageNum((Integer) map.get("pageNum"));
 			list = searchService.getB_titleSearchBoardSelectList(dto);
 			// db 자유 게시글에서 검색어와 b_title 일치하는 거 가져옴
 			
@@ -118,6 +130,12 @@ public class searchController {
 			
 			count = Count.b_contentSearchBoardSelectCount(dto);
 			map = paging(_pageNum, count);
+			dto.setStart((Integer) map.get("start"));
+			dto.setEnd((Integer) map.get("end"));
+			dto.setFirstNo((Integer) map.get("firstNo"));
+			dto.setLastNo((Integer) map.get("lastNo"));
+			dto.setLastPage((Integer) map.get("lastPage"));
+			dto.setPageNum((Integer) map.get("pageNum"));
 			list = searchService.getB_contentSearchBoardSelectList(dto);
 			// db 자유 게시글에서 검색어와 b_content 일치하는 거 가져옴
 			
@@ -126,6 +144,12 @@ public class searchController {
 			
 			count = Count.nickNameSearchBoardSelectCount(dto);
 			map = paging(_pageNum, count);
+			dto.setStart((Integer) map.get("start"));
+			dto.setEnd((Integer) map.get("end"));
+			dto.setFirstNo((Integer) map.get("firstNo"));
+			dto.setLastNo((Integer) map.get("lastNo"));
+			dto.setLastPage((Integer) map.get("lastPage"));
+			dto.setPageNum((Integer) map.get("pageNum"));
 			list = searchService.getNickNameSearchBoardSelectList(dto);
 			// db 자유 게시글에서 검색어와 nickName 일치하는 거 가져옴
 			
@@ -134,6 +158,12 @@ public class searchController {
 			
 			count = Count.searchBoardSelectCount(dto);
 			map = paging(_pageNum, count);
+			dto.setStart((Integer) map.get("start"));
+			dto.setEnd((Integer) map.get("end"));
+			dto.setFirstNo((Integer) map.get("firstNo"));
+			dto.setLastNo((Integer) map.get("lastNo"));
+			dto.setLastPage((Integer) map.get("lastPage"));
+			dto.setPageNum((Integer) map.get("pageNum"));
 			list = searchService.getSearchBoardSelectList(dto);
 			// db 자유 게시글에서 검색어 일치하는 거 가져옴
 			
@@ -148,7 +178,7 @@ public class searchController {
 		view.addObject("search", search);
 		view.addObject("selectValue", selectValue);
 		view.addObject("list", list);
-		view.addObject("map", map);
+		view.addObject("dto", dto);
 		
 		return view;
 	}
@@ -179,13 +209,19 @@ public class searchController {
 		
 		int count = Count.t_nameSearchTeamSelectCount(dto);
 		map = paging(_pageNum, count);
+		dto.setStart((Integer) map.get("start"));
+		dto.setEnd((Integer) map.get("end"));
+		dto.setFirstNo((Integer) map.get("firstNo"));
+		dto.setLastNo((Integer) map.get("lastNo"));
+		dto.setLastPage((Integer) map.get("lastPage"));
+		dto.setPageNum((Integer) map.get("pageNum"));
 		list = searchService.getT_nameSearchTeamSelectList(dto);
 		// db에서 검색어가 없을 때 팀 목록 전체를 가져옴
 		
 		view.setViewName("teamSearch");
 		view.addObject("search", search);
 		view.addObject("list", list);
-		view.addObject("map", map);
+		view.addObject("dto", dto);
 		
 		return view;
 	}
@@ -217,42 +253,52 @@ public class searchController {
 		
 		int count = Count.nickNameSearchUserSelectCount(dto);
 		map = paging(_pageNum, count);
+		dto.setStart((Integer) map.get("start"));
+		dto.setEnd((Integer) map.get("end"));
+		dto.setFirstNo((Integer) map.get("firstNo"));
+		dto.setLastNo((Integer) map.get("lastNo"));
+		dto.setLastPage((Integer) map.get("lastPage"));
+		dto.setPageNum((Integer) map.get("pageNum"));
 		list = searchService.getNickNameSearchUserSelectList(dto);
 		// db에서 검색어가 없을 때 팀 목록 전체를 가져옴
 		
 		view.setViewName("userSearch");
 		view.addObject("search", search);
 		view.addObject("list", list);
-		view.addObject("map", map);
+		view.addObject("dto", dto);
 
 		return view;
 	}
 	
 	public Map paging(int _pageNum, int count) {
 		
+		System.out.println("Controller paging 입장");
+		
 		int pageNum = 1;		// 현재 페이지
-		int countPerPage = 2;	// 한 페이지당 보여줄 글 개수
+		int countPerPage = 7;	// 한 페이지당 보여줄 글 개수
 		pageNum = _pageNum;
+		System.out.println("현재페이지 : " + pageNum);
 		
 		int lastPage = (int)Math.ceil(((double)count / countPerPage)); // 마지막 페이징번호 링크
+		System.out.println(lastPage + " = " + count + " / " + countPerPage + " (올림)");
 		int section = 5; // 한 페이지에 보이는 a링크 페이지 수
 		int sec_position = (int)Math.ceil(((double)pageNum / section));
+		System.out.println("마지막 페이지" + lastPage + " = count " + count + " / " + "countPerPage " + countPerPage + " (올림)");
 		int firstNo = ((sec_position-1) * section) + 1; // 첫번째 a링크
 		int lastNo = firstNo + section - 1; // 마지막 a링크
 		int start = ((countPerPage * pageNum) - countPerPage) + 1;
 		int end = countPerPage * pageNum;
+		if(firstNo < 1){ firstNo = 1; }
+		if(lastNo > lastPage){lastNo = lastPage;}
 				
-		SearchDTO dto = new SearchDTO();
-		
-		dto.setStart(start);
-		dto.setEnd(end);
-		dto.setFirstNo(firstNo);
-		dto.setLastNo(lastNo);
-		dto.setLastPage(lastPage);
-		dto.setPageNum(pageNum);
-		
 		Map map = new HashMap();
-		map.put("dto", dto);
+		
+		map.put("start", start);
+		map.put("end", end);
+		map.put("firstNo", firstNo);
+		map.put("lastNo", lastNo);
+		map.put("lastPage", lastPage);
+		map.put("pageNum", pageNum);
 		
 		return map;
 	}

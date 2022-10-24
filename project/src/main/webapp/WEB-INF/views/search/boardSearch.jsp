@@ -80,23 +80,23 @@
 
 <c:if test="${list.size() != 0}">
 	<div class="pagingDiv">
-		<c:set var="dto" value="${map.dto}"/>
+		<c:set var="dto" value="${dto}"/>
 		<!-- paging -->
 		<c:if test="${dto.firstNo ne 1}">
-			<a href="/project/boardSearch.do?pageNum=${dto.firstNo-1}" font-weight:bold; class="pagingA"> 이전 </a>
+			<a href="/project/boardSearch.do?pageNum=${dto.firstNo-1}&search=${search}" font-weight:bold; class="pagingA"> 이전 </a>
 		</c:if>
 	
 		<c:forEach var="i" begin="${dto.firstNo}" end="${dto.lastNo}">
 			<c:if test="${dto.pageNum eq i }">
-				<a href="/project/boardSearch.do?pageNum=${i }" style="color:red;font-weight:bold;">${i}</a>&nbsp;
+				<a href="/project/boardSearch.do?pageNum=${i }&search=${search}" style="color:red;font-weight:bold;">${i}</a>&nbsp;
 			</c:if>
 			<c:if test="${ not (dto.pageNum eq i) }">
-				<a href="/project/boardSearch.do?pageNum=${i }">${i }</a>&nbsp;
+				<a href="/project/boardSearch.do?pageNum=${i }&search=${search}">${i }</a>&nbsp;
 			</c:if>
 		</c:forEach>
 	
 		<c:if test="${dto.lastNo ne dto.lastPage}">
-			<a href="/project/boardSearch.do?pageNum=${dto.lastNo+1}" font-weight:bold; class="pagingA"> 다음 </a>
+			<a href="/project/boardSearch.do?pageNum=${dto.lastNo+1}&search=${search}" font-weight:bold; class="pagingA"> 다음 </a>
 		</c:if>
 	</div>
 </c:if>

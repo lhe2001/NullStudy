@@ -11,6 +11,7 @@
     <title><tiles:insertAttribute name="title" /></title>
   <link rel="stylesheet" href="resources/css/simple.css" />
   <link rel="stylesheet" href="resources/css/searchBoard.css" />
+  <link rel="stylesheet" href="resources/css/profileUpdate.css" />
   <script src="resources/css/main.js"></script>
   <style>
   	#body {

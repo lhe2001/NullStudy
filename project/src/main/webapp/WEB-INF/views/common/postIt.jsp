@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+
+    %>
     
 <!DOCTYPE html>
 <html>
@@ -10,25 +12,31 @@
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
 	<!-- 사이드바 -->
    <div id="shadow"></div>
    <aside>
 	    <!-- <button type="button" class="asideHide">Hide</button> -->
 	    <div id="postitBox">
-	        <button type="button" class="pink">My</button>
+	        <button type="button" class="pink" >My</button>
 	        <button type="button" class="yellow">To Do</button>
 	        <button type="button" class="blue teamListBtn">Team</button>
 	    </div>
-	    <div class="postit pink none">
+	    
+	    <div class="postit pink ud">
 	        <div class="left"></div>
 	        <div id="userInfo">
 	            <div id="userPT"></div>
-	            <h1>Annie</h1>
-	            <p>Team : Null</p>
-	            <p><button type="button" id="logOut">로그아웃</button></p>
-	            <p><button type="button" id="userDataChange">정보수정</button></p>
+	            <h1>${sessionScope.userInfo.nickName}</h1>
+	            <p>내 소개 : ${sessionScope.userInfo.intro}</p>
+	            
+	            <form action="profileUpdate.do" method="get">
+	            <p><button type="submit" id="userDataChange">정보수정</button></p>
+	            </form>
+	            
 	        </div>
 	    </div>
+	    
 	    <div class="postit yellow">
 	        <div class="left"></div>
 	        <div id="todoList">
@@ -74,6 +82,9 @@
 				</tbody>
 			 </table>
          </div>
+         </div>
+         
+         
 	</aside>
 </body>
 </html>
