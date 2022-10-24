@@ -230,14 +230,6 @@
 	                        </tr>
                         </thead>
                         <tbody>
-                        
-                        <tr>
-                            <td style="font-size:13px;height:85px;max-height:85px;">
-                            ${summary.tcs_summary}
-                            </td>
-                        <tr>
-                            <td><input class="dailyRevBtn" type="button" value="수정하기"></td>
-                        </tr>
                         </tbody>
                     </table>
                     <table class="TeamDailyRevise hide">
