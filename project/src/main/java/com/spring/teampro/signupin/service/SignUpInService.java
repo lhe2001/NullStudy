@@ -2,6 +2,7 @@ package com.spring.teampro.signupin.service;
 
 import java.util.List;
 
+import com.spring.teampro.board.dto.BoardDTO;
 import com.spring.teampro.signupin.dto.AdminDTO;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
 
@@ -41,7 +42,7 @@ public interface SignUpInService {
 	
 	public void doDelMember(String id);
 	
-	
+	public List<BoardDTO> getTopArticles();
 	
 	
 }

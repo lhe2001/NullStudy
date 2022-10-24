@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.teampro.board.dto.BoardDTO;
 import com.spring.teampro.signupin.dto.AdminDTO;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
 
@@ -169,5 +170,11 @@ public class SignUpInDAOImpl implements SignUpInDAO {
 	public SignUpInDTO modUserInfo(SignUpInDTO udto) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<BoardDTO> getTopArticles() {
+		List list = sqlSession.selectList("mapper.member.topActicles");
+		return list;
 	}
 }

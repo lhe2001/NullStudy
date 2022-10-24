@@ -4,6 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<style>
+	td{
+	text-align: center;
+	}
+</style>
     
 <body>
 
@@ -69,11 +74,20 @@
 						<%-- varStatus의 count를 사용해서 글번호 1부터 자동 --%>
 						<%-- <td>${article.b_parentNo}</td> --%>
 						<c:choose>
-						<c:when test="${article.b_fieldName eq '비밀글'}">
-						<td style = "color : tomato;">${article.b_fieldName }</td>
+						<c:when test="${article.b_field eq '10'}">
+						<td>질문</td>
+						</c:when>
+						<c:when test="${article.b_field eq '20'}">
+						<td>잡담</td>
+						</c:when>
+						<c:when test="${article.b_field eq '30'}">
+						<td>비밀글</td>
+						</c:when>
+						<c:when test="${article.b_field eq '40'}">
+						<td>나도몰라</td>
 						</c:when>
 						<c:otherwise>
-						<td >${article.b_fieldName }</td>
+						<td >${article.b_field }</td>
 						</c:otherwise>
 						</c:choose>
 						<td>${article.nickName} </td>
