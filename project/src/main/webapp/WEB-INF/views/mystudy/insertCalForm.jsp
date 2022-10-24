@@ -29,7 +29,7 @@
 <body>
 	<div class="calinupWrap">
 	<div class="calinupContent">
-	<form action="insertCalBoard.do" method="post">
+	<form action="insertCalBoard.do" method="post" enctype="multipart/form-data">
 		<table class="calinupTB">
 		<caption>*일정 제목은 10자 이하로 해주세요</caption>
 			<tr>
@@ -77,6 +77,12 @@
 			</tr>
 			<tr>
 				<td><textarea name="m_schedule_desc" rows="10" cols="50" class="cttextarea" ></textarea></td>
+			</tr>
+			<tr>
+				<th><p>파일</p></th>
+			</tr>
+			<tr>
+				<td><input type="file" name="m_memo_img"></td>
 			</tr>
 			<tr>
 				<td colspan="2">

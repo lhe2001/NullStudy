@@ -33,6 +33,7 @@
     </div>
         
     <div class="memo_wrapper">
+    <ul>
        <li class="memoadd-box">
             <div class="micon"><i class="fa-solid fa-plus"></i></div>
             <p>Add new note <i class="fa-regular fa-note-sticky"></i></p>
@@ -55,6 +56,7 @@
             </div>
           </li>          
         </c:forEach>
+    </ul>
     </div>
     
     <div id="memopagebar">
