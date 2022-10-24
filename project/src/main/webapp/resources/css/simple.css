@@ -384,13 +384,34 @@
             padding: 10px;
             text-align: left;
             font-size: 15px;
+            max-height: 197px;
+    		overflow:auto;
         }
+        #TeamInfoP::-webkit-scrollbar{
+		    width: 5px;
+		    height: 5px;
+		}
+		#TeamInfoP::-webkit-scrollbar-track{
+		    background-color: rgba(0,0,0,0.1);
+		    border-radius: 5px;
+		}
+		#TeamInfoP::-webkit-scrollbar-thumb {
+		    background-color:#7cb9e4;
+		    border-radius: 5px;
+		}
         #TeamInfoP table td {
             border-bottom: 1px dashed black; 
-            font-size: 15px;
+            font-size: 13px;
         }
         #TeamInfoP span {
         	color:tomato;
+        }
+        #TeamInfoP td a:link{
+        	color:black;
+        	text-decoration:none;
+        }
+        #TeamInfoP td a:visited{
+        	color:black;
         }
         
         /* footer */
