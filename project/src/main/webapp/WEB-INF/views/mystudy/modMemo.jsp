@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 
-
+<title>메모수정페이지</title>
 	<link href="/project/resources/css/memo.css" rel="stylesheet"/> 
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
 <body>

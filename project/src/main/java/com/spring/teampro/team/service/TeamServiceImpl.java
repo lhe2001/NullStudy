@@ -9,8 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.teampro.team.dao.TeamDAO;
+import com.spring.teampro.team.dto.ChallengeDTO;
 import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.MyTeamListDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
@@ -139,7 +143,8 @@ public class TeamServiceImpl implements TeamService {
 	//팀삭제
 	@Override
 	public int deleteTeam(int t_key) {
-		return dao.deleteTeam(t_key);
+		List list = dao.getTCkey(t_key);
+		return dao.deleteTeam(t_key,list);
 	}
 	//디데이 가져오기
 	@Override
@@ -151,7 +156,56 @@ public class TeamServiceImpl implements TeamService {
 	public int updateDday(TeamInfoDTO dto) {
 		return dao.updateDday(dto);
 	}
-	
+	//뉴 챌린지
+	@Override
+	public int addChallenge(ChallengeDTO dto) {
+		return dao.addChallenge(dto);
+	}
+	//latest Challenge 가져오기
+	@Override
+	public ChallengeDTO getLatestChallenge(int t_key) {
+		ChallengeDTO dto = dao.getLatestChallenge(t_key);
+		if(dto == null) {
+			dto = new ChallengeDTO();
+			dto.setTc_title("아직 없습니다");
+			dto.setTc_key(0);
+		}
+		return dto;
+	}
+	//attendChallenge 출석
+	@Override
+	public int attendChallenge(ChallengeDTO dto) {
+		return dao.attendChallenge(dto);
+	}
+	//나의 현재 챌린지 상태 가져오기
+	@Override
+	public List getChallengeList(ChallengeDTO dto) {
+		return dao.getChallengeList(dto);
+	}
+	//나의 현재 챌린지 서머리 가져오기
+	@Override
+	public ChallengeDTO getSummary(ChallengeDTO dto) {
+		ChallengeDTO dtoo = dao.getSummary(dto);
+		
+		if(dtoo == null) {
+			dtoo = new ChallengeDTO();
+			dtoo.setTcs_key(dto.getTcs_key());
+			dtoo.setTcs_summary("업데이트 해주세요");
+		}else if(dtoo.getTcs_summary()==null) {
+			dtoo.setTcs_summary("기록이 없습니다");
+		}
+		return dtoo;
+	}
+	//revise Summary
+	@Override
+	public int reviseSummary(ChallengeDTO dto) {
+		return dao.reviseSummary(dto);
+	}
+	//updateChallengeTitle
+	@Override
+	public int updateChallengeTitle(ChallengeDTO dto) {
+		return dao.updateChallengeTitle(dto);
+	}
 	//>>>>>>>>>>>>>>>>팀멤버 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	//팀 멤버 정보 가져오기
 	@Override
@@ -285,6 +339,13 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public int cancleRequest(MemberRequestDTO dto) {
 		return dao.cancleRequest(dto);
+	}
+
+	//>>>>>>>>>>>>>>>>>>>>챌린지 관련
+	//지난 챌린지 가져오기 
+	@Override
+	public List getMyHistory(ChallengeDTO dto) {
+		return dao.getMyHistory(dto);
 	}
 	
 	

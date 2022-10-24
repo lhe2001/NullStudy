@@ -78,3 +78,14 @@
         .searchTd {
             overflow: hidden;
         }
+		.listNullTr {
+			text-align:center;
+		}
+		
+		.pagingDiv {
+			text-align:center;
+		}
+        .pagingA {
+        	text-decoration: none;
+        }
+        

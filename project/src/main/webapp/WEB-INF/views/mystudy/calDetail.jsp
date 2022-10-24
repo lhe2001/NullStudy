@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
 <title>일정 상세보기</title>
 <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
 <link href="/project/resources/css/calList.css" rel="stylesheet">
-</head>
 <body>
 <div id="calDetailWrap">
 	<div id="calDeContent">
@@ -49,4 +45,3 @@
 	</div>
 </div>
 </body>
-</html>

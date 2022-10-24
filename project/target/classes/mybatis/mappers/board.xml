@@ -209,6 +209,8 @@
 					where b_key = #{b_key}
 			</select>
 			
+<<<<<<< HEAD
+=======
 		<!--  댓글 수정 -->	
 			<update id="modifyComment" parameterType="commentDTO">
 				update board_com set
@@ -239,4 +241,5 @@
 <!-- 					on a.b_key = b.b_key  -->
 <!-- 				group by a.b_title ,a.b_content , a.b_imagefile -->
 <!-- 			</select> -->
+>>>>>>> master
 </mapper>

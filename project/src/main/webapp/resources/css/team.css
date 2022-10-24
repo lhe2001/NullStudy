@@ -257,7 +257,7 @@
 #chaList table thead tr:nth-child(2) {
     background-color: #ccccff49;
 }
-#chaList table tr:hover{
+#chaList table tbody tr:hover{
     cursor: pointer;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 }
@@ -312,7 +312,6 @@
     border-radius: 10px;
     height:30px;
     text-align: center;
-    cursor: pointer;
 }
 .challenge table td input[type="button"]{
     border: none;
@@ -321,8 +320,13 @@
     color:#412498;
     height:30px;
 }
+.challenge table td input[type="button"]:disabled{
+    color: grey;
+    cursor:not-allowed;
+}
 .challenge table .confirm {
     background-color: #b5b5e4;
+    cursor:pointer;
 }
 .challenge{
     width:300px;
@@ -333,9 +337,8 @@
     text-align: center;
 }
 #TeamDaily textarea{
-    height:55px;
+    height:83px;
     resize: none;
-    min-width:100%;
     border:none;
     background-color: #b5b5e4;
     color:white;
@@ -352,6 +355,10 @@
     max-width:50%;
     overflow:hidden;
     text-overflow: ellipsis;
+}
+.TeamDailyMemo input[type="button"]:disabled {
+	color:grey;
+	cursor:not-allowed;
 }
 .TeamDailyMemo input[type="button"]{
     background-color: transparent;
@@ -392,6 +399,48 @@
 }
 .hide {
     display: none;
+}
+/* 챌린지 수정 & 리셋 팝업 */
+#updateChalWrap {
+    text-align: center;
+    font-size: 14px;
+    color:#412498;
+}
+.chalTable{
+    margin: 30px auto;
+    margin-bottom: 30px;
+    text-align: center;
+    width:380px;
+    border: 1px solid #CCCCFF;
+}
+.chalTable td{
+    height:30px;
+}
+.chalTable input:not([type="submit"]) {
+    width:250px;
+    background-color: #CCCCFF;
+    border: none;
+    height:20px;
+    border-radius: 5px;
+}
+.chalTable input[type="button"] {
+    background-color: #7a69ac;
+    border-radius: 5px;
+    border: none;
+    width:100px;
+    color:#CCCCFF;
+    cursor: pointer;
+}
+#updateChalWrap button {
+    margin: 10px 0;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color:#412498;
+}
+#updateChalWrap button i {
+    font-size: 40px;
+    color:#CCCCFF;
 }
 /* 멤버정보 */
 #memberWrap{
@@ -509,10 +558,10 @@
     width:10px;
     height: 10px;
     border-radius: 3px;
-    cursor:pointer;
 }
 .memberChallenge table .confirm{
     background-color: #d3b58d;
+    cursor:pointer;
 }
 /* teamSchedule */
 #teamSchedule{

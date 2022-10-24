@@ -10,16 +10,13 @@
 <title>Insert title here</title>
 <link href="/project/resources/css/team.css" rel="stylesheet">
 </head>
-<script src="/project/resources/js/Team.js" ></script>
+<script src="/project/resources/js/Team_member.js" ></script>
 </head>
 <body>
 	<div id="team_Wrapper">
 	    <div id="fstWrapper">
             <div id="teamInfo" class="teamInfoBox ">
-            <form name="frmDel">
-		    <div class="deleteTeamBtn" onClick="delTeam()">현재팀 삭제</div>
 		    <input type="hidden" name="t_key" class="t_key" value="${teamInfo.t_key }">
-		    </form>
                 <table>
                     <tr>
                         <td>그룹 이름</td>
@@ -40,43 +37,7 @@
                         <td>${teamInfo.nickName }</td>
                     </tr>
                 </table>
-                <button type="button" class="reviseTeamInfo revise" ><i class="fa-solid fa-pencil"></i></button>
             </div>
-            <div id="reviseTeam" class="hide teamInfoBox ">
-	            <table>
-	                <tr>
-	                    <td>팀 이름</td>
-	                    <td>${teamInfo.t_name}</td>
-	                </tr>
-	                <tr>
-	                    <td>인사말</td>
-	                    <td><input type="text" class="t_intro" required></td>
-	                </tr>
-	                <tr>
-	                    <td>분야</td>
-	                    <td> 
-		                    <select class="t_field" name="t_field">
-			                	<option value="1">코딩</option>
-			                	<option value="2">자격증</option>
-			                	<option value="3">토익</option>
-			                	<option value="4">기타</option>
-			                </select>
-	            		</td>
-	                </tr>
-	                <tr>
-	                    <td>팀장</td>
-	                    <td>
-	                    	<select name="t_leader" class="t_leader" >
-	                    	  <c:forEach var="members" items="${MemberInfo}" varStatus="loop">
-	                    		<option value="${members.userKey }">${members.nickname }</option>
-                    		 </c:forEach>
-	                    	</select>
-                    	</td>
-	                </tr>
-	            </table>
-                <input type="submit" value="수정">
-                <button type="button" class=" reviseTeamInfo back" >취소</button>
-        </div>
         <div id="dDay">
             <table>
                 <tr>
@@ -93,7 +54,7 @@
         <div id="teamMenu">
             <ul>
                 <li id="newMemberAlert" onClick="reviseDday(${teamInfo.t_key})">D-Day 수정</li>
-                <li onClick="resetChallenge(${teamInfo.t_key})">챌린지 수정 & 리셋</li>
+                <li onClick='alert("스터디장만 할 수 있습니다.")' style='cursor:not-allowed;'>챌린지 수정 & 리셋</li>
                 <c:if test="${anyAlarm == 0 }">
                 <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})">스터디원 신청
                 </c:if>
@@ -113,12 +74,6 @@
     </div>
         <div class="LeaderMenu leadersWrite ">
            <div> ${teamInfo.nickName }님의 공지사항: ${teamInfo.t_lMemo }</div>
-            <button type="button" class="reviseW rBtn"><i class="fa-solid fa-pencil"></i></button>
-        </div>
-        <div class="LeaderMenu reivseWrite hide">
-                ${teamInfo.nickName }님의 공지사항: <input type="text" class="lMemo" required><br>
-                <input type="button" class="rBtn2" value="수정">
-                <input type="button" class="leBack" value="취소">
         </div>
         <div id="chWrapper">
             <div id="chaWrap">
@@ -244,11 +199,6 @@
                             <td style="min-width:200px; max-width:200px;">${member.intro }</td>
                             <td style="min-width:100px; max-width:100px;">${member.lastTime2 }</td>
                             <td style="min-width:20px;">
-                            <c:if test="${member.userKey ne teamInfo.userKey }" >
-                                <button  class="kickOut" type="button" onclick="kickMemberOut(${member.tm_key})">
-                                 <i class="fa-solid fa-user-slash"></i>
-                                </button>
-                            </c:if>
                             </td>
                         </tr>
                     </table>
