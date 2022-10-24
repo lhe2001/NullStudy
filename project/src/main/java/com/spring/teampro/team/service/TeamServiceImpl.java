@@ -332,6 +332,13 @@ public class TeamServiceImpl implements TeamService {
 	public int cancleRequest(MemberRequestDTO dto) {
 		return dao.cancleRequest(dto);
 	}
+
+	//>>>>>>>>>>>>>>>>>>>>챌린지 관련
+	//지난 챌린지 가져오기 
+	@Override
+	public List getMyHistory(ChallengeDTO dto) {
+		return dao.getMyHistory(dto);
+	}
 	
 	
 	

@@ -74,6 +74,8 @@ public class TeamController {
 		model.addAttribute("myCurrent",service.getChallengeList(dto));
 		//6.나의 현재 챌린지 서머리 가져오기.
 		model.addAttribute("summary",service.getSummary(dto));
+		//7.getMyHistory (userkey, t_key)
+		model.addAttribute("summary",service.getMyHistory(dto));
 		//6.팀원신청 숫자
 		model.addAttribute("anyAlarm",service.anyAlarm(t_key));
 		//7.디데이가져오기

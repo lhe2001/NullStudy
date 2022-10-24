@@ -64,6 +64,8 @@ public interface TeamService {
 
 	int reviseSummary(ChallengeDTO dto);
 
+	List getMyHistory(ChallengeDTO dto);
+
 
 
 

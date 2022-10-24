@@ -110,7 +110,11 @@ public class TeamDAOImpl implements TeamDAO {
 	public ChallengeDTO getSummary(ChallengeDTO dto) {
 		return sqlSession.selectOne("mapper.team.getSummary",dto);
 	}
-	
+	//지난 챌린지 가져오기 
+	@Override
+	public List getMyHistory(ChallengeDTO dto) {
+		return sqlSession.selectList("mapper.team.getMyHistory",dto);
+	}
 	//>>>>>>>>>>>>>>>UPDATE 수정하기>>>>>>>>>>>>>>
 	//팀정보 업데이트 하기
 	@Override
