@@ -20,6 +20,15 @@
       <put-attribute name="footer" value="" />
    </definition>
    
+     <!-- 팀디테일_멤버 페이지  -->
+   <definition name="teamDetail_member" extends="baseLayout">
+      <put-attribute name="title" value="팀정보페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/teamPage/teamDetail_member.jsp" />
+      <put-attribute name="footer" value="" />
+   </definition>
+   
      <!-- allTeamList 페이지  -->
    <definition name="allTeamList" extends="baseLayout">
       <put-attribute name="title" value="전체 팀페이지" />

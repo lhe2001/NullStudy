@@ -57,11 +57,23 @@ public class TeamController {
 			@RequestParam("t_key")int t_key
 			) {
 	
-		logger.info("t_key"+t_key);
 		HttpSession session = request.getSession();
 		int userkey  = (Integer) session.getAttribute("userKey");
+		
+		String nextPage = "teamDetail_member";
+		
+
+		
 		//1. 팀정보들,,,
 		//2. 조장말
+		TeamInfoDTO tdto = service.getTeamInfo(t_key);
+		int leader = tdto.getUserKey();
+		
+		//나는 admin 또는 조장인가?
+		if(userkey == leader || userkey < 10000) {
+			nextPage= "teamDetail";
+		}
+		
 		model.addAttribute("teamInfo",service.getTeamInfo(t_key));
 		//3.팀멤버 정보들
 		model.addAttribute("MemberInfo",service.getTeamMemberInfo(t_key));
@@ -70,7 +82,6 @@ public class TeamController {
 		model.addAttribute("challenge",service.getLatestChallenge(t_key));
 		//5. 나의 현재 챌린지 상태 가져오기
 		dto.setUserKey(userkey);
-		logger.info("tcs_key"+dto.getTcs_key());
 		model.addAttribute("myCurrent",service.getChallengeList(dto));
 		//6.나의 현재 챌린지 서머리 가져오기.
 		model.addAttribute("summary",service.getSummary(dto));
@@ -81,7 +92,7 @@ public class TeamController {
 		//9.디데이가져오기
 		model.addAttribute("dDay", service.getTDay(t_key));
 
-	return "teamDetail";
+	return nextPage;
 	}
 	
 	//팀삭제
