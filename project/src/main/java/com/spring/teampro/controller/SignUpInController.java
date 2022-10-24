@@ -187,9 +187,13 @@ public class SignUpInController {
 
 		if( result == 99) {
 			//로그 클릭시 관리자 메인으로 
+			List list = signUpInService.getTopArticles();
+			model.addAttribute("articlesList", list);
 			return "main_admin";
 		}else if(result ==1 ) {
-			//로그 클릭시 유저 메인으로 
+			//로그 클릭시 유저 메인으로
+			List list = signUpInService.getTopArticles();
+			model.addAttribute("articlesList", list);
 			return "main2";
 		}else {
 			return "signIn";
