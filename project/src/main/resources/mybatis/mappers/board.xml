@@ -100,7 +100,6 @@
 <!-- 				</choose> -->
 <!-- 			</where> -->
 <!-- 			</select> -->
-			
 			<!-- 서치 ajax-->
 			<select id="searchAllArticle" resultType="boardDTO" parameterType="java.util.HashMap">
 				select * from(
@@ -111,9 +110,9 @@
 						 , ALLMEMBER a 
 						 <where>
 						 and b.userkey = a.userkey
-						 <if test="list_sel !=0">
-							and b.b_field =  #{b_field }
-						</if>
+						 <if test="b_field2 !=0 or b_field2 !=-1">
+							and b.B_field = #{b_field2 }
+							</if>
 							<choose>
 								<when test="search_field == 1">
 									and lower(b.b_title) like lower('%'||#{search_bar }||'%') 
@@ -242,4 +241,5 @@
 <!-- 					on a.b_key = b.b_key  -->
 <!-- 				group by a.b_title ,a.b_content , a.b_imagefile -->
 <!-- 			</select> -->
+
 </mapper>

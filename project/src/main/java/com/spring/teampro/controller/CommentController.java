@@ -32,7 +32,7 @@ public class CommentController {
 	
 	@Autowired
 	HttpSession session;
-	
+	// 댓글 추가
 	@RequestMapping(value = "board/addComment.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public @ResponseBody List<CommentDTO> addComment(HttpServletRequest requset, HttpServletResponse response,
 			@RequestBody CommentDTO commentDTO){
@@ -51,7 +51,7 @@ public class CommentController {
 		// 전달받아야 될 정보 : b_c_comment(내용), b_key(board dto의 b_key), userkey
 		
 	}
-	
+	// 댓글 삭제
 	@RequestMapping(value = "board/deleteComment.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public @ResponseBody void deleteComment(HttpServletRequest requset, HttpServletResponse response,
 			@RequestBody CommentDTO commentDTO){
@@ -61,13 +61,13 @@ public class CommentController {
 		return;
 	}
 	
+	// 댓글 수정
 	@RequestMapping(value = "board/updateComment.do" , method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody List<CommentDTO> updateComment(HttpServletRequest requset, HttpServletResponse response,
+	public @ResponseBody void updateComment(HttpServletRequest requset, HttpServletResponse response,
 			@RequestBody CommentDTO commentDTO){
 		System.out.println("댓글 수정 아작스 처리");
 		System.out.println("deleteComment commentDTO = " + commentDTO);
-		commentService.getDeleteComment(commentDTO);
-		List<CommentDTO> list = new ArrayList<CommentDTO>();
-		return list;
+		commentService.getUpdateComment(commentDTO);
+		return;
 	}
 }

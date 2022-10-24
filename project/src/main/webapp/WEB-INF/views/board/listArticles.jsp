@@ -4,10 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <title>글 목록 출력창</title>
 
 <!-- bootstrap css -->
@@ -61,23 +57,33 @@
 		  			console.log('this :: ', this);
 		  			search();
 		  		});
-		  		
-		  		setPageEvent(10);
+		  		let pageAmount = $("#pageAmount").val();
+		  		console.log("pageAmount ==" , pageAmount);
+		  		setPageEvent(pageAmount);
 		})
-   				
-   		
    		  		
 	      	function search(index, amount){
 // 	    		$("#search_btn").off("click").on("click", function(){
 					console.log('index :: ', index);
 	    			let field = $("#field").val();
 	    			let search_bar = $("#search_bar").val();
-	    			
+	    			let sel = $("#select").val();
+	    			let pageAmount2 = $("#pageAmount").val();
+	    			console.log("pageAmount ::", pageAmount2);
+					if(sel == '글머리'){
+						alert('글머리 이외의 것을 선택해 주세요!')
+						location.href="${contextPath}/board/listArticles.do"
+					}
+	    			console.log("sel" , sel);
+			  		let sel2= document.querySelector("#select").value;
+			  		console.log('sel2', sel2);
 	    			let info = {
 	    				b_field : field,
 	    				search_bar : search_bar,
 	    				pageNum : index,
-	    				amount : amount
+	    				amount : pageAmount2,
+	    				b_field2 : sel
+	    				
 	    			}
 	    			 //아작스
 	    			$.ajax({
@@ -93,11 +99,9 @@
 	    					$("#list_tbody").empty();
     						
 	    					let html = "";
-	    					
+	    				
 	    					if(data.length < 0){
-    								
 	    						html +='<h1 style ="text-align : center; margin-left : 20px; margin-top : 20px; color : #1C6758">' + '등록된 글이 없어요' +'</h1>';
-    						
 	    					} else{
 	    						
     							for(let i = 0; i< data.searchList.length; i++){
@@ -148,7 +152,7 @@
     							$("#list_tbody").append(html);
     						}
 	    					
-	    					console.log(data.searchList[1].b_field);
+// 	    					console.log(data.searchList[1].b_field);
 	    					
 	    					//페이징
 	    					$("#paging").empty();
@@ -187,16 +191,15 @@
 	   		  		}
    		  		}
    		  		
-   		  		
-	    		function select(){
-		  		let sel = document.querySelector("#select");
-					sel.addEventListener("change", function() {
-				let obj = document.querySelector("#frmSelect");
-					obj.action = "${contextPath}/board/selectField.do";
-					obj.method = "post"
-					obj.submit();
-					})
-				}
+	    		function setSelect(){
+		  			let sel = document.querySelector("#select");
+		  				console.log("sel",sel);
+		  				sel.addEventListener("change",function(){
+		  					console.log(this.value)
+		  				})
+		  				
+	    		}
+	    		
 				function link (){
 				let link = document.querySelector("#link_a");
 					link.addEventListener("click", function() {
@@ -206,8 +209,8 @@
 					obj.submit();
 					})
 				}
+				
 </script>
-</head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 	<%-- contextPath = ${contextPath } --> /Project_JH --%>
@@ -222,12 +225,12 @@
 	<h5 style ="text-align : left; margin-left : 20px;"> 자유롭게 글을 작성해 주세요!!</h5>
 	
 	<div id = "page_select">
-		<select onchange="change(this)" class="form-select btn-outline-info" 
+		<select id = "pageAmount" class="form-select btn-outline-info" 
 		style = "border-radius : 4px; margin-top : 7px; float: right; margin-right : 20px; " aria-label="Default select example">
-			<option value="10" ${pageDTO.amount eq 10 ? 'selected' : '' }>10개씩 보기</option>
-			<option value="20" ${pageDTO.amount eq 20 ? 'selected' : '' }>20개씩 보기</option>
-			<option value="50" ${pageDTO.amount eq 50 ? 'selected' : '' }>50개씩 보기</option>
-			<option value="100" ${pageDTO.amount eq 100 ? 'selected' : '' }>100개씩 보기</option>
+			<option value="10" selected>10개씩 보기</option>
+			<option value="20" >20개씩 보기</option>
+			<option value="50" >50개씩 보기</option>
+			<option value="100" >100개씩 보기</option>
 		</select>
 	</div>
 	
@@ -235,7 +238,7 @@
 	<form id="frmSelect" name="frmSelectName" method = "post"> 
 		<select id="select" name="list_sel" class="form-select btn-outline-info" 
 		style = "border-radius : 4px; margin-top : 7px; " aria-label="Default select example" >
-			<option selected>글머리</option> 
+			<option value = "-1" selected>글머리</option> 
 			<option value="0" >전체</option>
 			<option value="10">질문</option>
 			<option value="20">잡담</option>
@@ -366,10 +369,10 @@
 			</div>
 		</div>
 			<input type="submit" value=글쓰러가기  class="btn btn-outline-light" id = "write_btn" style = "border : 1px solid #99A799; color : #99A799;">
+			<input type="button" id="list_btn" class="btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' style = "float : left; margin-left : 10px; border : 1px solid #99A799; color : #99A799;"/>
 		</c:when>
 		</c:choose>	
 	</form>
 </div>	
 <%-- <jsp:include page="/fix/footer.jsp"/> --%>
 </body>
-</html>

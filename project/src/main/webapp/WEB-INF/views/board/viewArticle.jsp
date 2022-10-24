@@ -89,6 +89,8 @@
     $(function(){
 		addComment();
 		deleteComment();
+		update();
+		updateComment();
 	})
 		// 댓글 추가
       	function addComment(){
@@ -129,15 +131,14 @@
     					location.reload();
     				},
     				error:function(){
-    					alert("에러발생!!")
+    					alert("댓글을 입력해 주세요!!")
     				}
     			});
     		})
     	}
-    	
  	// 댓글 삭제
   	function deleteComment(){
-			 $("#delete_comment").off("click").on("click", function(){
+			 $("[id=delete_comment]").off("click").on("click", function(){
     			let b_c_key = $("#b_c_key").val();
     			console.log(b_c_key);
 				 let info = {
@@ -161,23 +162,36 @@
 		})
 	}
  	
+ 
  // 댓글 수정
+ 	function update(){
+ 	 $("#edit_comment").off("click").on("click", function(){
+			document.querySelector("#view_com").removeAttribute("readonly");
+			document.querySelector("#edit_comment").classList.add("hidden");
+ 			$("#real_edit_comment")[0].classList.remove("hidden");	
+ 			$("#real_edit_comment").removeClass("hidden");	
+ 		})
+ 	}
+ 	
   	function updateComment(){
-			 $("#delete_comment").off("click").on("click", function(){
+			 $("#real_edit_comment").off("click").on("click", function(){
     			let b_c_key = $("#b_c_key").val();
     			console.log(b_c_key);
-				 let info = {
-							 b_c_key : b_c_key
+    			let b_c_comment = $("#view_com").val();
+				
+    			let info = {
+							 b_c_key : b_c_key,
+							 b_c_comment : b_c_comment
 	    					}
 			 
-			$.ajax({
-				url: "/project/board/deleteComment.do",
+				$.ajax({
+				url: "/project/board/updateComment.do",
 				type: "post",
 				contentType : "application/json",
 				data: JSON.stringify(info),
 				success: function(data){
 					console.log("data :", data);
-					alert("댓글이 삭제되었습니다.");
+					alert("댓글이 수정되었습니다.");
 					 location.reload();
 					},
 				error:function(){
@@ -261,9 +275,10 @@
 					<input type = "text" id = "view_com" value = "${comment.b_c_comment }" readonly>
 					작성자 : ${comment.nickName }
 					작성일 : ${comment.b_c_date }
-					<c:if test="${userInfo.userKey == view.userkey }">
+					<c:if test="${view.nickName == comment.nickName }">
 					<input type = "button" id = "delete_comment" value = "댓글삭제" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
-					<input type="button" id="edit_comment" value="댓글수정" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
+					<input type="button" id="edit_comment" value="수정" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
+					<input type="button" id="real_edit_comment" value="댓글수정" class ="hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
 					</c:if>
 					<input type = "hidden" id = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
 					</c:if>

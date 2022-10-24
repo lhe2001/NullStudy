@@ -13,4 +13,7 @@ public interface CommentService {
 	
 	// 댓글 삭제
 	public void getDeleteComment(CommentDTO commentDTO);
+	
+	// 댓글 수정
+	public void getUpdateComment(CommentDTO commentDTO);
 }

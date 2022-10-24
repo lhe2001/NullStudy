@@ -60,6 +60,14 @@
 						pw.classList.add('hidden');
 					}
 			})
+			
+			var userkey  = ${adminUserKey};
+			if(userkey==1){
+				document.querySelector("#notice").classList.remove('hidden');
+			}else{
+				document.querySelector("#notice").classList.add('hidden');
+			}
+			
 	}
 </script>
 <div id = "wrapp">
@@ -75,10 +83,9 @@
 				 <select id = "select_list" class = "btn-outline-info" style = "float : left; margin-left : 10px; height : 30px; margin : 5px;" name="b_field">
 					<option value="10">질문</option>
 					<option value="20">잡담</option>
-					<option id = "secret" value="30" style="color:tomato;">
-					비밀글
-					</option>
+					<option id = "secret" value="30" style="color:tomato;">비밀글</option>
 					<option value="40">나도몰라</option>
+					<option id="notice" class = "hidden" value="50">공지</option>
 				</select>
 				<div class = "pww">
 					<span id = "pw" class = "hidden">비밀번호!</span>
