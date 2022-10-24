@@ -51,7 +51,7 @@ public class BoardController{
 	public String listArticles(HttpServletRequest request, Model model,
 			@ModelAttribute BoardDTO boardDTO
 			) {
-		
+		HttpSession session = request.getSession();
 		SignUpInDTO adminCheck = (SignUpInDTO) session.getAttribute("userInfo");
 		String userId = adminCheck.getId();
 		if("admin".equals(userId)) {
@@ -195,6 +195,7 @@ public class BoardController{
 		@RequestMapping(value = "/board/articleForm.do", method = RequestMethod.GET)
 		public String goArticleForm(HttpServletRequest request, HttpServletResponse response, Model model) {
 			
+			HttpSession session = request.getSession();
 			SignUpInDTO adminCheck = (SignUpInDTO) session.getAttribute("userInfo");
 			String userId = adminCheck.getId();
 			int adminUserKey = adminCheck.getUserKey();
@@ -274,7 +275,7 @@ public class BoardController{
 				@RequestParam("b_articleNo") int b_articleNo,
 				Model model) {
 			
-			
+			HttpSession session = request.getSession();
 			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 			String userId = userInfo.getId();
 			if("admin".equals(userId)) {
