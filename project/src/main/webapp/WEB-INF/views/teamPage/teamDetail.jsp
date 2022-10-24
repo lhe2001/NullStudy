@@ -92,10 +92,8 @@
         </div>
         <div id="teamMenu">
             <ul>
-                <li>그룹 게시판</li>
                 <li id="newMemberAlert" onClick="reviseDday(${teamInfo.t_key})">D-Day 수정</li>
                 <li onClick="resetChallenge(${teamInfo.t_key})">챌린지 수정 & 리셋</li>
-                <li>투표하기</li>
                 <c:if test="${anyAlarm == 0 }">
                 <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})">스터디원 신청
                 </c:if>
@@ -191,7 +189,7 @@
 	                      	<tr>
 	                      	<c:forEach var="i" begin="0" end="6">
 	                      		<c:if test="${myCurrent[i].tcs_key != null }">
-	                      			<td class="confirm" onClick="showSummary(${myCurrent[i].tcs_key})"></td>
+	                      			<td class="confirm" onClick="showSummary(${myCurrent[i].tcs_key},this)"></td>
 	                      		</c:if>
 	                      		<c:if test="${myCurrent[i].tcs_key == null }">
 	                      			<td></td>
@@ -272,7 +270,7 @@
                     </div>
                     <div class="info leaderInfo">
                         <table>
-                        <tr onClick="memberSummary(${member.userKey})">
+                        <tr onClick="memberSummary(${member.userKey},this)">
                             <td style="max-width:90px; min-width:90px;">
                             	<strong>${member.nickname }</strong>
                             	<input type="hidden" class="tm_key" value="${member.tm_key }">
@@ -296,13 +294,12 @@
             <div id="memberSummary">
                     <div class="memberPhoto">
                         <img src="https://ifh.cc/g/GCpQKq.png">
-                        <div style="text-align:center;"><strong>채여니</strong></div>
+                        <div style="text-align:center;"><strong id="memNick">채여니</strong></div>
                     </div>
                     <div class="memberChallenge">
                         <table>
                             <caption style="font-size:15px; text-decoration:underline">${challenge.tc_title }</caption>
                             <tbody>
-                         		<img src="https://ifh.cc/g/313rJr.gif">
                             </tbody>
                         </table>
                     </div>

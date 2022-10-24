@@ -333,9 +333,8 @@
     text-align: center;
 }
 #TeamDaily textarea{
-    height:55px;
+    height:83px;
     resize: none;
-    min-width:100%;
     border:none;
     background-color: #b5b5e4;
     color:white;
