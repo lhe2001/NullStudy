@@ -16,7 +16,7 @@
 	    <!-- <button type="button" class="asideHide">Hide</button> -->
 	    <div id="postitBox">
 	        <button type="button" class="pink">My</button>
-	        <button type="button" class="yellow">Plan</button>
+	        <button type="button" class="yellow planList">Plan</button>
 	        <button type="button" class="blue teamListBtn">Team</button>
 	    </div>
 	    <div class="postit pink">
@@ -31,17 +31,18 @@
 	    <div class="postit yellow none">
 	        <div class="left"></div>
 	        <div id="todoList">
-	            <div id="list">
+	            <div id="pListTB">
 	                <table>
 	                    <thead>
 	                        <tr>
-	                            <th><i class="fa-regular fa-calendar-check">My Plan</i></th>
+	                            <th><i class="fa-regular fa-calendar-check">&nbsp;My Plan</i></th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
 	                    </tbody>
 	                </table>
 	            </div>
+	            <button id="goCalBtn" onclick="location.href='/project/mystudy/calendar.do';">달력</button>
 	        </div>
 	    </div>
 	   <div class="postit blue none">

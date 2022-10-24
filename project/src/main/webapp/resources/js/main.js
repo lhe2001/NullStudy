@@ -6,6 +6,7 @@ window.onload = function(){
     postit();
     bluePostIt();
     searchSelect();
+    YellowPostIt();
 }
 
 function header(){
@@ -122,5 +123,41 @@ function searchSelect(){
         }
 
     })
+}
+
+
+function YellowPostIt(){
+
+	$(".planList").off("click").on("click",function(){
+	
+		$.ajax({
+			url: "/project/mystudy/myPlanList.do",
+			type: "get",
+			contentType: "application/json",
+			success: function(data){
+				console.log("list :", data);
+				
+				$("#pListTB table tbody").empty();
+				
+				let html = "";
+				
+				if(data.length == 0){
+					html += "<tr>";
+					html += "	<td>오늘 일정이 없습니다</td>";
+					html += "<tr>";
+				}else {
+					for(let i=0; i<data.length; i++){
+					html += "<tr>";
+					html += "	<td><span> <i class='fa-solid fa-check'></i> </span>"+data[i].m_schedule_title+"</td>";
+					html += "<tr>";
+					}
+				}
+				$("#pListTB table tbody").append(html);
+			},
+			error:function(){
+				alert("에러발생!!")
+			}
+		});
+	});
 }
 

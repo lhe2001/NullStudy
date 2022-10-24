@@ -254,7 +254,56 @@ public class MyCalendarController {
 	}
 	
 	
-	
+	//메인용 일정List
+	@RequestMapping(value="/mystudy/myPlanList.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody public List myPlanList(
+		HttpServletRequest request
+		,@ModelAttribute ScheduleDTO sdto
+		,String year, String month, String date
+			) {
+		HttpSession session = request.getSession();
+		int userkey  = (Integer) session.getAttribute("userKey");
+		logger.info("userkey"+userkey);
+		sdto.setUserkey(userkey);
+		
+		//요청할 때 
+		if(year==null || month==null) {
+			Calendar cal = Calendar.getInstance();
+			year = cal.get(Calendar.YEAR)+"";
+			month = cal.get(Calendar.MONTH)+1+"";
+			date = cal.get(Calendar.DATE)+"";
+		} else {
+			//크기를 비교하기 위해 정수형으로 변환
+			int yearInt = Integer.parseInt(year);
+			int monthInt = Integer.parseInt(month);
+			int dateInt =  Integer.parseInt(date);
+			
+			//월이 증가하다가 12보다 커질 때
+			if( monthInt >12){
+				monthInt = 1;	//1월로 변경
+				yearInt++;		//다음해
+			} 
+			if(monthInt<1){
+				monthInt = 12;
+				yearInt--;
+			}
+			
+			year = yearInt+"";
+			month = String.valueOf(monthInt);
+			date = dateInt+"";
+		}
+		
+		String yyyyMMdd = year+"-"+Util.isTwo(month)+"-"+Util.isTwo(date);
+		sdto.setM_schedule_date(yyyyMMdd);
+		logger.info("plan날짜"+yyyyMMdd);
+		
+		int count = scheduleService.calCount(sdto);
+		logger.info(">> planCount--count"+count);
+		
+		List list = scheduleService.calBoardList(sdto);
+		
+		return list;
+	}
 	
 	
 	
