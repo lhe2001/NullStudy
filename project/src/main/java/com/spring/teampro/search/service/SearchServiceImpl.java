@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.teampro.search.dao.SearchDAO;
-import com.spring.teampro.search.dao.SearchDAO;
-import com.spring.teampro.search.dao.SearchDAO;
 import com.spring.teampro.search.dto.SearchDTO;
 
 @Service
@@ -16,71 +14,73 @@ public class SearchServiceImpl implements SearchService {
 	@Autowired
 	SearchDAO searchDAO;
 	
+	SearchDTO dto = new SearchDTO(); 
+	
 	// 자유 게시판
 	@Override
-	public List<SearchDTO> getBoardAllSelectList() {
+	public List<SearchDTO> getBoardAllSelectList(SearchDTO dto) {
 		
-		List<SearchDTO> list = searchDAO.boardAllSelectList();
+		List<SearchDTO> list = searchDAO.boardAllSelectList(dto);
 		return list;
 	}
 	
 	@Override
-	public List<SearchDTO> getSearchBoardSelectList(String search) {
+	public List<SearchDTO> getSearchBoardSelectList(SearchDTO dto) {
 		
-		List<SearchDTO> list = searchDAO.searchBoardSelectList(search);
+		List<SearchDTO> list = searchDAO.searchBoardSelectList(dto);
 		return list;
 	}
 	
 	@Override
-	public List<SearchDTO> getB_titleSearchBoardSelectList(String search) {
+	public List<SearchDTO> getB_titleSearchBoardSelectList(SearchDTO dto) {
 		
-		List<SearchDTO> list = searchDAO.b_titleSearchBoardSelectList(search);
+		List<SearchDTO> list = searchDAO.b_titleSearchBoardSelectList(dto);
 		return list;
 	}
 	
 	@Override
-	public List<SearchDTO> getB_contentSearchBoardSelectList(String search) {
+	public List<SearchDTO> getB_contentSearchBoardSelectList(SearchDTO dto) {
 		
-		List<SearchDTO> list = searchDAO.b_contentSearchBoardSelectList(search);
+		List<SearchDTO> list = searchDAO.b_contentSearchBoardSelectList(dto);
 		return list;
 	}
 	
 	@Override
-	public List<SearchDTO> getNickNameSearchBoardSelectList(String search) {
+	public List<SearchDTO> getNickNameSearchBoardSelectList(SearchDTO dto) {
 		
-		List<SearchDTO> list = searchDAO.nickNameSearchBoardSelectList(search);
+		List<SearchDTO> list = searchDAO.nickNameSearchBoardSelectList(dto);
 		return list;
 	}
 	
 	// 팀 목록
 	
 	@Override
-	public List<SearchDTO> getTeamAllList() {
+	public List<SearchDTO> getTeamAllList(SearchDTO dto) {
 		
-		List<SearchDTO> list = searchDAO.teamAllList();
+		List<SearchDTO> list = searchDAO.teamAllList(dto);
 		return list;
 	}
 	
 	@Override
-	public List<SearchDTO> getT_nameSearchTeamSelectList(String search) {
+	public List<SearchDTO> getT_nameSearchTeamSelectList(SearchDTO dto) {
 		
-		List<SearchDTO> list = searchDAO.t_nameSearchTeamSelectList(search);
+		List<SearchDTO> list = searchDAO.t_nameSearchTeamSelectList(dto);
 		return list;
 	}
 	
 	// 유저 목록
 	
 	@Override
-	public List<SearchDTO> getUserAllList() {	
+	public List<SearchDTO> getUserAllList(SearchDTO dto) {	
 			
-		List<SearchDTO> list = searchDAO.userAllList();
+		List<SearchDTO> list = searchDAO.userAllList(dto);
 		return list;
 	}
 	
 	@Override
-	public List<SearchDTO> getNickNameSearchUserSelectList(String search) {	
+	public List<SearchDTO> getNickNameSearchUserSelectList(SearchDTO dto) {	
 		
-		List<SearchDTO> list = searchDAO.nickNameSearchUserSelectList(search);
+		List<SearchDTO> list = searchDAO.nickNameSearchUserSelectList(dto);
 		return list;
 	}
 	

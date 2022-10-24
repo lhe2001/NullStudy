@@ -26,6 +26,7 @@
 	            <h1>Annie</h1>
 	            <p>Team : Null</p>
 	            <p><button type="button" id="logOut">로그아웃</button></p>
+	            <p><button type="button" id="userDataChange">정보수정</button></p>
 	        </div>
 	    </div>
 	    <div class="postit yellow">
