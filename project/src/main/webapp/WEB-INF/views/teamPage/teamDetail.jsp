@@ -135,8 +135,8 @@
                         </thead>
                         <tbody>
                         <c:forEach var="history" items="${myHistory }">
-                            <tr onClick="history(${history.tc_key})">
-                                <td>${history.tc_title}</td>
+                            <tr onClick="history(${history.tc_key},this)">
+                                <td class="history_title">${history.tc_title}</td>
                                 <td>${history.length}/21</td>
                             </tr>
                          </c:forEach>
@@ -259,7 +259,7 @@
             <div id="memberSummary">
                     <div class="memberPhoto">
                         <img src="https://ifh.cc/g/GCpQKq.png">
-                        <div style="text-align:center;"><strong id="memNick">채여니</strong></div>
+                        <div style="text-align:center;"><strong id="memNick"></strong></div>
                     </div>
                     <div class="memberChallenge">
                         <table>

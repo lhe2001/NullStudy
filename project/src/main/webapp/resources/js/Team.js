@@ -159,18 +159,18 @@ function dailyMemoRevise(){
         }
     })
 }
-
 //미리 클릭해두기
 function preClick(){
 	let mySummary = $(".challenge table .confirm");
 	let total = mySummary.length;
-	let lastOne = (total-1);
-	mySummary[lastOne].click();
+	if(total > 0){
+		let lastOne = (total-1);
+		mySummary[lastOne].click();
+	}
 	
 	let member = $(".member table tr");
 	member[0].click();
 }
-
 //서머리 보기
 function showSummary(tcs_key,e){
 
@@ -204,7 +204,11 @@ function showSummary(tcs_key,e){
 			});
 }
 //지난 챌린지 보관함 click 시
-function history(tc_key){
+function history(tc_key,e){
+	let tc_title = e.querySelector(".history_title").innerText;
+	
+	$(".challenge caption").empty();
+	$(".challenge caption").append(tc_title);
 
 	let info = { 
         			tc_key : tc_key

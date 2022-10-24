@@ -312,7 +312,6 @@
     border-radius: 10px;
     height:30px;
     text-align: center;
-    cursor: pointer;
 }
 .challenge table td input[type="button"]{
     border: none;
@@ -327,6 +326,7 @@
 }
 .challenge table .confirm {
     background-color: #b5b5e4;
+    cursor:pointer;
 }
 .challenge{
     width:300px;
