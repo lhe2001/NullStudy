@@ -154,6 +154,9 @@ public class SignUpInController {
 			HttpSession session = req.getSession();
 			session.setAttribute("userInfo", signUpInService.getUserInfo(id));
 			session.setAttribute("userKey", signUpInService.getUserInfo(id).getUserKey());
+			
+			List list = signUpInService.getTopArticles();
+			model.addAttribute("articlesList", list);
 			return "main_admin";
 		}else if(result ==1 ) {
 			//로그인 성공 > 메인2로 이동
@@ -161,6 +164,9 @@ public class SignUpInController {
 			HttpSession session = req.getSession();
 			session.setAttribute("userInfo", signUpInService.getUserInfo(id));
 			session.setAttribute("userKey", signUpInService.getUserInfo(id).getUserKey());
+			
+			List list = signUpInService.getTopArticles();
+			model.addAttribute("articlesList", list);
 			
 			return "main2";
 		}else {

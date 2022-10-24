@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.teampro.board.dto.BoardDTO;
 import com.spring.teampro.signupin.dao.SignUpInDAO;
 import com.spring.teampro.signupin.dto.AdminDTO;
 import com.spring.teampro.signupin.dto.SignUpInDTO;;
@@ -102,6 +103,12 @@ public class SignUpInServiceImpl implements SignUpInService {
 	@Override
 	public void doDelMember(String id) {
 		signUpInDAO.delMember(id);
+	}
+
+	@Override
+	public List<BoardDTO> getTopArticles() {
+		return signUpInDAO.getTopArticles();
+		 
 	}
 
 }

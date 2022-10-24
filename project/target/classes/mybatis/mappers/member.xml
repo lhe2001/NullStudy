@@ -118,5 +118,21 @@
 		where lower(id) = lower(#{id})
 	</delete>
 	
+	<!-- 인기글 가져오는 쿼리문 -->
+	
+	<select id="topActicles" resultType="boardDTO">
+		SELECT * from(
+			SELECT rownum AS rnum, tmp.* from(
+			select  b.B_key, b.B_ArticleNo, b.B_parentNo, b.B_title , b.B_content, b.B_field, b.B_writeDate, b.B_view, b.UserKey, a.nickName 
+			from Board b 
+			, ALLMEMBER a 
+			where b.userkey = a.userkey 
+			AND b.B_VIEW IS NOT null
+			order by b.B_VIEW DESC 
+			) tmp
+		)
+		WHERE 1 <![CDATA[<=]]> rnum AND rnum <![CDATA[<=]]> 10
+	</select>
+	
 	
 </mapper>

@@ -2,6 +2,7 @@ package com.spring.teampro.signupin.dao;
 
 import java.util.List;
 
+import com.spring.teampro.board.dto.BoardDTO;
 import com.spring.teampro.signupin.dto.AdminDTO;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
 
@@ -43,6 +44,9 @@ public interface SignUpInDAO {
 	public List<AdminDTO> listByTleader(String keyword);
 	
 	public List<AdminDTO> listByTinfo(String keyword);
+	
+	public List<BoardDTO> getTopArticles();
+	
 	
 	
 }
