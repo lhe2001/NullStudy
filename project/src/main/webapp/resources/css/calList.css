@@ -92,6 +92,7 @@
     
     #ListDelbtn:hover{
     	cursor: pointer;
+    	background-color: #937DC2;
     }
     
     #cbdelWrap{
