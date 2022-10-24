@@ -114,6 +114,19 @@
 			SELECT TC_KEY FROM TEAMCHALLENGE t 
 			WHERE T_KEY = #{t_key}
 	</select>
+	
+	<select id="getMainTeamList" resultType="teamInfoDTO" >
+		SELECT *
+		FROM (SELECT a.T_KEY ,a.T_NAME ,a.T_INTRO ,a.T_FIELD ,a.T_NUMBER  ,a2.NICKNAME, a.t_create  FROM ALLTEAM a ,allmember a2
+		WHERE a.userkey = a2.userkey
+		order by a.t_create DESC)
+		WHERE rownum <![CDATA[<= 10]]>
+	</select>
+	
+	<select id="alreadyToday" resultType="int" parameterType="challengeDTO">
+		SELECT count(*) FROM TCSUMMARY
+		WHERE tc_key = #{tc_key} AND to_char(tcs_date,'YYYY-MM-DD')= #{tcs_date} AND USERKEY = #{userKey}
+	</select>
 
 <!-- UPDATE -->
 	

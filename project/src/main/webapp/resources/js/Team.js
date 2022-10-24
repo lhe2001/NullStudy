@@ -434,17 +434,20 @@ function attendChallenge(t_key){
         	};
         	
         	$.ajax({
-			url: "/project/teamRest/attendChallenge.do",
-			type: "post",
-			contentType: "application/json",
-			data: JSON.stringify(info),
-			success: function(data){
-				alert('오늘의 챌린지 완료!');
-				location.reload();
-			},
-			error:function(){
-				alert("에러발생!!")
-			}
+				url: "/project/teamRest/attendChallenge.do",
+				type: "post",
+				contentType: "application/json",
+				data: JSON.stringify(info),
+				success: function(data){
+					if(data == -1){
+						alert(data);
+					}else{
+						alert(data);
+					}
+				},
+				error:function(){
+					alert("에러발생!!")
+				}
 			});
 }
 //챌린지 선택

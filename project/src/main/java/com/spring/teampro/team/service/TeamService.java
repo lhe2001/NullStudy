@@ -68,6 +68,10 @@ public interface TeamService {
 
 	int updateChallengeTitle(ChallengeDTO dto);
 
+	List getMainTeamList();
+
+	boolean alreadyToday(ChallengeDTO dto);
+
 
 
 

@@ -9,12 +9,62 @@
 	text-align: center;
 	}
 </style>
-    
+<script>
+$(document).ready( function() {
+	getMainTeamList();
+	moveToAllTeam();
+});
+function getMainTeamList(){
+	
+	$.ajax({
+		url: "/project/teamRest/getMainTeamList.do",
+		type: "post",
+		contentType: "application/json",
+		success: function(data){
+			console.log(data);
+			$("#teamBoard tbody").empty();
+			
+			let html="";
+			for(let i=0; i<data.length; i++){
+				html += "<tr>";
+				html += "<td>";
+				html += (i+1);
+				html += "</td>";
+				html += "<td>";
+				html += data[i].t_field2;
+				html += "</td>";
+				html += "<td>";
+				html += data[i].t_name;
+				html += "</td>";
+				html += "<td>";
+				html += data[i].t_number;
+				html += "</td>";
+				html += "</tr>";
+			}
+			$("#teamBoard tbody").append(html);
+		},
+		error:function(){
+			alert("에러발생!!")
+		}
+	});
+}
+function moveToAllTeam(){
+	$(document).on("click","#teamBoard tr",function(e){
+		let userkey = ${userInfo.userKey-1};
+		console.log(userkey);
+		if(userkey != -1){
+			location.href='/project/team/allTeamList.do';
+		}else{
+			alert('로그인을 먼저 해주세요!');
+		}
+	});
+}
+</script>
 <body>
 
-	<c:if test="${searchLoginDo=='searchLoginDo'}">
-		<script>alert("로그인 후 사용해주세요.");</script>
-	</c:if>
+<%-- 	<c:if test="${searchLoginDo=='searchLoginDo'}"> --%>
+<!-- 		<script>alert("로그인 후 사용해주세요.");</script> -->
+<%-- 	</c:if> --%>
 
     <div>
     <div id="wrapper">
@@ -121,38 +171,17 @@
 		</c:choose>
 	</table>
                         </div>
-                          <div id="teamBoard"><h3>팀 구함<i class="fa-solid fa-hand-back-fist"></i></h3>
+                          <div id="teamBoard"><h3>최근 개설된 팀<i class="fa-solid fa-hand-back-fist"></i></h3>
                           	<table>
                         		<thead >
                         			<tr>
+                        				<th>No.</th>
                         				<th>필드</th>
                         				<th>팀이름</th>
                         				<th>인원수</th>
                        				</tr>
                         		</thead>
                         		<tbody>
-                        		<c:forEach var="allTeamList" items="${allTeamList}" >
-                        			<tr>
-                        				<td>
-                        					<c:choose>
-								            	<c:when test="${allTeamList.teamField eq 1 }" >
-								            	코딩
-								            	</c:when>
-								              	<c:when test="${allTeamList.teamField eq 2 }" >
-								            	자격증
-								            	</c:when>
-								             	 <c:when test="${allTeamList.teamField eq 3 }" >
-								           		토익
-								            	</c:when>
-								              	<c:when test="${allTeamList.teamField eq 4 }" >
-								            	기타
-						            			</c:when>
-						            		</c:choose>
-					            		</td>
-                        				<td>${allTeamList. teamName}</td>
-                        				<td>${allTeamList. teamNumber}</td>
-                       				</tr>
-                     			</c:forEach>
                         		</tbody>
                         	</table>
                         </div>

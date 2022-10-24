@@ -71,6 +71,10 @@ public interface TeamDAO {
 
 	List getTCkey(int t_key);
 
+	List getMainTeamList();
+
+	int alreadyToday(ChallengeDTO dto);
+
 
 
 }

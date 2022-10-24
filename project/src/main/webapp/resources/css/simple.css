@@ -199,17 +199,13 @@
             border-bottom: 1px solid black;
         }
         #topBoard td,#teamBoard td {
-            border-bottom: 1px dashed black;
             height:37px;
             padding:5px;
             box-sizing: border-box;
         }
         #topBoard tr:not(thead tr):hover {
             cursor: pointer;
-            background-color: #f5f4f4;
-        }
-        #topBoard td:nth-child(n+3){
-            font-size: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
         }
         /* 팀 구함 */
         #teamBoard {
@@ -227,11 +223,12 @@
         }
         #teamBoard tr:not(thead tr):hover {
             cursor: pointer;
-            background-color: #f5f4f4;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
         }
         #teamBoard table{
         	width:100%;
         }
+      
          /* 사이드바 */
         .asideHide {
             position: fixed;

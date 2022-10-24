@@ -56,6 +56,32 @@ public class TeamServiceImpl implements TeamService {
 		return list;
 	}
 	
+	@Override
+	public List getMainTeamList() {
+		List<TeamInfoDTO> list = dao.getMainTeamList();
+		
+		for(int i=0; i<list.size();i++) {
+			TeamInfoDTO dto = list.get(i);
+			int t_filed = dto.getT_field();
+			
+			switch(t_filed) {
+			case 1:
+				dto.setT_field2("코딩");
+				break;
+			case 2:
+				dto.setT_field2("자격증");
+				break;
+			case 3:
+				dto.setT_field2("토익");
+				break;
+			case 4:
+				dto.setT_field2("기타");
+				break;
+			}
+		}
+		return list;
+	}
+	
 	//내가 속한 팀인가요?
 	@Override
 	public boolean alreadyMyTeam(int userkey,int t_key) {
@@ -171,6 +197,16 @@ public class TeamServiceImpl implements TeamService {
 			dto.setTc_key(0);
 		}
 		return dto;
+	}
+	//오늘 출석을 했는가? 
+	@Override
+	public boolean alreadyToday(ChallengeDTO dto) {
+		boolean result = false;
+		int count = dao.alreadyToday(dto);
+		if(count > 0) {
+			result = true;
+		}
+		return result;
 	}
 	//attendChallenge 출석
 	@Override
