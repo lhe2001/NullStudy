@@ -161,6 +161,9 @@ public class BoardController{
 		System.out.println("totalCount = " + totalCount);
 		PageDTO pageDTO = new PageDTO(pageNum, amount, totalCount);
 		System.out.println("pageDTO = " + pageDTO);
+		// 공지글 조회 때문에 어쩔 수 없이 가져오는 메소드
+		List<CommentDTO> noticeList=boardService.getNoticeList();
+		System.out.println("noticeList = " + noticeList);
 		
 		List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);
 		System.out.println("articlesList.size() = " + articlesList.size());
@@ -188,11 +191,15 @@ public class BoardController{
 				case 40:
 					boardDTO.setB_fieldName("나도몰라");
 					break;
+				case 50:
+					boardDTO.setB_fieldName("나도몰라");
+					break;	
 				default:
 					break;
 				}
 			}
 		}
+		model.addAttribute("noticeList",noticeList);
 		model.addAttribute("articlesList",articlesList);
 		model.addAttribute("userInfo",userInfo);
 		model.addAttribute("pageDTO",pageDTO);
