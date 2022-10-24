@@ -138,10 +138,16 @@ public class BoardServiceImpl implements BoardService{
 		return list;
 	}
 	@Override
-	//게시풀의 댓글 수 가져오는 메소드
+	// 게시풀의 댓글 수 가져오는 메소드
 	public List<CommentDTO> getComment() {
 		List<CommentDTO> list = new ArrayList<CommentDTO>();
 		list = boardDAO.getCommentCount();
+		return list;
+	}
+	// 공지글만 가져오기
+	@Override
+	public List<CommentDTO> getNoticeList() {
+		List<CommentDTO> list = boardDAO.getNotice();
 		return list;
 	}
 	 

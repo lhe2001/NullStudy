@@ -98,7 +98,6 @@
 	    			let comment = $("#comment").val();
 	    			let b_key = $("#b_key").val();
 	    			let userKey = $("#userkey").val();
-    			 	
 	    			
 	    			console.log(comment);
 	    			console.log(b_key);
@@ -109,8 +108,8 @@
     					b_key : b_key,
     					userKey : userKey
  	    			}
-    			 
-    			$.ajax({
+    			
+    			 $.ajax({
     				url: "/project/board/addComment.do",
     				type: "post",
     				contentType : "application/json",
@@ -136,6 +135,7 @@
     			});
     		})
     	}
+    	
  	// 댓글 삭제
   	function deleteComment(){
 			 $("[id=delete_comment]").off("click").on("click", function(){
@@ -247,6 +247,7 @@
 				disabled> ${view.b_content } 
 			</textarea><br>
 			<%-- 이미지가 있을 경우 표시 --%>
+			\${view.b_imageFile } -------> ${view.b_imageFile }
 			<div id = "image" >
 				<c:if test="${not empty (view.b_imageFile) && view.b_imageFile != 'null'}">
 					이 미 지 : 

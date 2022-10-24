@@ -96,6 +96,7 @@ public class BoardDAOImpl implements BoardDAO {
 			System.out.println("dto.getSearch_field() = " + dto.getSearch_field());
 			System.out.println("dao pageNum = " + pageNum );
 			System.out.println("dao amount = " + amount );
+			System.out.println("dao b_field2 = " + dto.getB_field2() );
 			Map map = new HashMap();
 			map.put("b_field2", dto.getB_field2());
 			map.put("search_field",dto.getSearch_field());
@@ -155,12 +156,17 @@ public class BoardDAOImpl implements BoardDAO {
 		int count = sqlSession.selectOne("mapper.board.totalCount");
 		return count;
 	}
-	
+	@Override
 	// 댓글 총 갯수 가져오기
 	public List<CommentDTO> getCommentCount() {
 		List<CommentDTO> list = sqlSession.selectList("mapper.board.getCommentCount");
 		return list;
 	}
-	
+	@Override
+	// 공지글만 가져오기
+	public List<CommentDTO> getNotice(){
+		List<CommentDTO> list = sqlSession.selectList("mapper.board.getNotice");
+		return list;
+	}
 	
 }

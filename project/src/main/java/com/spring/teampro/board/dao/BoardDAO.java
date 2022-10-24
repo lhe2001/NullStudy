@@ -55,5 +55,8 @@ public interface BoardDAO {
 	
 	// 게시글의 댓글수 가져오는 메소드
 	public List<CommentDTO> getCommentCount();
+	
+	// 공지글만 가져오기
+	public List<CommentDTO> getNotice();
 }
 

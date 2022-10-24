@@ -110,10 +110,10 @@
 						 , ALLMEMBER a 
 						 <where>
 						 and b.userkey = a.userkey
-						 <if test="b_field2 !=0 or b_field2 !=-1">
+							<if test="b_field2 !=0 or b_field2 != -1">
 							and b.B_field = #{b_field2 }
 							</if>
-							<choose>
+							 <choose>
 								<when test="search_field == 1">
 									and lower(b.b_title) like lower('%'||#{search_bar }||'%') 
 								</when>
@@ -229,6 +229,7 @@
 					(select count(*) from board_com bc where b.b_key = bc.b_key) as comment_cnt
 						from board b
 			</select>
+			
 			<!-- 댓글 갯수 가져오기 2(다른버전 group by) -->	
 <!-- 			<select id="getCommentCount" parameterType = "commentDTO"> -->
 <!-- 				select  -->
@@ -241,5 +242,12 @@
 <!-- 					on a.b_key = b.b_key  -->
 <!-- 				group by a.b_title ,a.b_content , a.b_imagefile -->
 <!-- 			</select> -->
+
+		<!-- 공지글만 가져오기 -->
+			<select id="getNotice" resultType="boardDTO">
+				select * from board b, allmember a
+					where  b.userkey = a.userkey
+					and b_field = 50
+			</select>
 
 </mapper>

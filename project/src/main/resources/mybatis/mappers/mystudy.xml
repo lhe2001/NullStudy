@@ -127,9 +127,5 @@
 		WHERE
 			rn BETWEEN 1 AND 3
 	</select>
-
-	
-	
-	
 	
 </mapper>

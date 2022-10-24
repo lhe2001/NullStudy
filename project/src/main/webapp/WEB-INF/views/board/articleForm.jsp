@@ -84,8 +84,8 @@
 					<option value="10">질문</option>
 					<option value="20">잡담</option>
 					<option id = "secret" value="30" style="color:tomato;">비밀글</option>
-					<option value="40">나도몰라</option>
-					<option id="notice" class = "hidden" value="50">공지</option>
+					<option value="40">유우머</option>
+					<option id="notice" class = "hidden" value="50" style ="color:#ea7f27;">공지</option>
 				</select>
 				<div class = "pww">
 					<span id = "pw" class = "hidden">비밀번호!</span>

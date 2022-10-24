@@ -1,4 +1,4 @@
-package com.spring.teampro.controller;
+package com.spring.teampro.controller.common;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,30 +11,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class FileDownloadController
- */
-@WebServlet("/download.do")
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller("fileDownloadController")
 public class FileDownloadController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
    
 	 public FileDownloadController() {
 	        super();
 	        // TODO Auto-generated constructor stub
 	    }
-
-		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			doHandle(request, response);
-		}
-
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			doHandle(request, response);
-		}
-
+	 	@RequestMapping(value = "/board/download.do", method = {RequestMethod.GET, RequestMethod.POST})
 		protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String file_repo = "C:\\image_file";
 			String b_imageFile = (String) request.getParameter("b_imageFile");
 			String b_articleNo = request.getParameter("b_articleNo");
+			System.out.println("download.do b_articleNo = " + b_articleNo);
 			System.out.println("b_imageFile : " + b_imageFile);
 			
 			response.setHeader("Cache-Control", "no-cache");
@@ -42,7 +35,7 @@ public class FileDownloadController extends HttpServlet {
 
 			OutputStream out = response.getOutputStream();
 			// 글번호에 대한 파일 경로
-			String downFile = file_repo +"\\"+ b_articleNo + "\\" + b_imageFile;
+			String downFile = file_repo +"\\"+ -1 + "\\" + b_imageFile;
 			
 			File f = new File(downFile);
 			FileInputStream in = new FileInputStream( f );

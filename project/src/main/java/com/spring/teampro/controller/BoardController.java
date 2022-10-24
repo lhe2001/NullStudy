@@ -85,7 +85,11 @@ public class BoardController{
 			System.out.println("totalCount = " + totalCount);
 			PageDTO pageDTO = new PageDTO(pageNum, amount, totalCount);
 			System.out.println("pageDTO = " + pageDTO);
+			// 공지글 조회 때문에 어쩔 수 없이 가져오는 메소드
+			List<CommentDTO> noticeList=boardService.getNoticeList();
+			System.out.println("noticeList = " + noticeList);
 			
+			// 전체 리스트 가져오기
 			List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);
 			System.out.println("articlesList.size() = " + articlesList.size());
 			System.out.println("b_key = " + boardDTO.getB_key());
@@ -110,7 +114,10 @@ public class BoardController{
 						boardDTO.setB_fieldName("비밀글");
 						break;
 					case 40:
-						boardDTO.setB_fieldName("나도몰라");
+						boardDTO.setB_fieldName("유우머");
+						break;
+					case 50:
+						boardDTO.setB_fieldName("공지");
 						break;
 					default:
 						break;
@@ -118,6 +125,7 @@ public class BoardController{
 				}
 			}
 			model.addAttribute("articlesList",articlesList);
+			model.addAttribute("noticeList",noticeList);
 			model.addAttribute("userInfo",userInfo);
 			model.addAttribute("pageDTO",pageDTO);
 			return "listArticles(admin)";
@@ -239,7 +247,7 @@ public class BoardController{
 			System.out.println("userInfo.getUserKey() = " + userInfo.getUserKey());
 			map.put("b_parentNo" , 0);
 			map.put("b_imageFile", b_imageFile);
-			map.put("userKey", userInfo.getUserKey()); //임시로 넣어놓은 유저키
+			map.put("userKey", userInfo.getUserKey());
 			
 			try {
 				int b_articleNo = boardService.getAddArticle(map);
@@ -585,7 +593,10 @@ public class BoardController{
 								boardDTO.setB_fieldName("비밀글");
 								break;
 							case 40:
-								boardDTO.setB_fieldName("나도몰라");
+								boardDTO.setB_fieldName("유우머");
+								break;
+							case 50:
+								boardDTO.setB_fieldName("공지");
 								break;
 							default:
 								break;
@@ -610,7 +621,7 @@ public class BoardController{
 			dto.setList_sel(list_sel);
 			dto.setB_field(list_sel);
 			List<BoardDTO> list = boardService.getSelectViewArticle(dto);
-			// (0 일경우 전체 글 출력, 10 = 질문, 20 = 잡담, 30 = 비밀글, 40 = 나도몰라)
+			// (0 일경우 전체 글 출력, 10 = 질문, 20 = 잡담, 30 = 비밀글, 40 = 유우머, 50 = 공지)
 			System.out.println("list_sel =  " + list_sel );
 			System.out.println("list.size() =" + list.size() );
 			System.out.println("dto.getB_field() = " + dto.getB_field());
@@ -634,6 +645,10 @@ public class BoardController{
 						break;
 					case 40:
 						dto.setB_fieldName("나도몰라");
+						System.out.println("dto fieldName: " + dto.getB_fieldName());
+						break;
+					case 50:
+						dto.setB_fieldName("공지");
 						System.out.println("dto fieldName: " + dto.getB_fieldName());
 						break;
 					default:
@@ -696,10 +711,12 @@ public class BoardController{
 				MultipartFile mFile = multipartRequest.getFile(fileName);
 				b_imageFile = mFile.getOriginalFilename();
 				File file = new File(image + "\\temp\\" + fileName);
+				System.out.println("file ===> " + file);
 				if(mFile.getSize() !=0) {
 					if(!file.exists()) {
 						file.getParentFile().mkdirs();
 						mFile.transferTo(new File(image + "\\temp\\" + b_imageFile));
+						System.out.println("mFile ====> " + mFile);
 					}
 				}
 			}

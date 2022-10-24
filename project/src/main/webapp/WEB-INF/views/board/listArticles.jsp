@@ -99,18 +99,18 @@
 	    					$("#list_tbody").empty();
     						
 	    					let html = "";
-	    				
-	    					if(data.length < 0){
-	    						html +='<h1 style ="text-align : center; margin-left : 20px; margin-top : 20px; color : #1C6758">' + '등록된 글이 없어요' +'</h1>';
-	    					} else{
-	    						
+	    					
+	    					if(data.searchList.length == 0){
+	    						html += '<h1 style ="text-align : center; margin-left : 20px; margin-top : 20px; color : #1C6758">' + '등록된 글이 없어요' +'</h1>';
+	    					} 
     							for(let i = 0; i< data.searchList.length; i++){
-//     								console.log(data.searchList.length);
-//     								console.log(data.searchList[i].b_fieldName);
+    								
     								html +=	'<tr>';
-    								html += '<td>' + (i+1) + '</td>';
+    								html += '<td>' + data.searchList[i].b_articleNo + '</td>';
 									if(data.searchList[i].b_fieldName == '비밀글'){
 										html += '<td style = "color : tomato;">' + data.searchList[i].b_fieldName + '</td>';
+									} else if(data.searchList[i].b_fieldName == '공지')  {
+										html += '<td style = "color : #ea7f27;">' + data.searchList[i].b_fieldName + '</td>';
 									} else {
 										html += '<td >' + data.searchList[i].b_fieldName + '</td>';
 									}
@@ -150,7 +150,7 @@
     							
     							}
     							$("#list_tbody").append(html);
-    						}
+    						
 	    					
 // 	    					console.log(data.searchList[1].b_field);
 	    					
@@ -249,7 +249,13 @@
 	<div style = " margin-left : 10px; font-size : 20px; font-weight :bold; " >
 	글갯수 : ${articlesList.size()} 개
 	</div>
-</div>
+	<br>
+	</div>
+	<div id = "notice">
+		<c:forEach var ="notice" begin = "0" items="${ noticeList}" end ="${noticeList.size() }" >
+				 ${notice.nickName } ${notice.b_title }
+		</c:forEach>
+	</div>
 	<table id="tb" class = "table table-hover table-bordered" style = "color : #1C6758">
 		<thead>
 		<tr style = "background-color: #A2B29F">
@@ -278,12 +284,15 @@
 					<tr>
 						<%--<td>${article.level }</td> --%>
 						<%--<td>${article.b_key }</td> --%>
-						<td>${num.count }</td>
+						<td>${article.b_articleNo }</td>
 						<%-- varStatus의 count를 사용해서 글번호 1부터 자동 --%>
 						<%-- <td>${article.b_parentNo}</td> --%>
 						<c:choose>
 						<c:when test="${article.b_fieldName eq '비밀글'}">
 						<td style = "color : tomato;">${article.b_fieldName }</td>
+						</c:when>
+						<c:when test="${article.b_fieldName eq '공지'}">
+						<td style = "color : #ea7f27;">${article.b_fieldName }</td>
 						</c:when>
 						<c:otherwise>
 						<td >${article.b_fieldName }</td>
@@ -368,8 +377,10 @@
 				<input type="button" id="search_btn" class="btn btn-outline-light" name="search" value=검색하기 style = "margin-bottom : 6px; border : 1px solid #99A799; color : #99A799;"> 
 			</div>
 		</div>
-			<input type="submit" value=글쓰러가기  class="btn btn-outline-light" id = "write_btn" style = "border : 1px solid #99A799; color : #99A799;">
-			<input type="button" id="list_btn" class="btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' style = "float : left; margin-left : 10px; border : 1px solid #99A799; color : #99A799;"/>
+			<div id = "listbtn">
+				<input type="submit" value=글쓰러가기  class="btn btn-outline-light" id = "write_btn" style = "border : 1px solid #99A799; color : #99A799;">
+				<input type="button" id="list_btn" class="btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' style = " border : 1px solid #99A799; color : #99A799;"/>
+			</div>
 		</c:when>
 		</c:choose>	
 	</form>
