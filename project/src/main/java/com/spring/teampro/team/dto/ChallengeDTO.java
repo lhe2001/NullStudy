@@ -8,6 +8,7 @@ public class ChallengeDTO {
 	private String tc_title;
 	private int tcs_key;
 	private String tcs_summary;
+	private int length;
 	
 	
 	public int getUserKey() {
@@ -45,6 +46,12 @@ public class ChallengeDTO {
 	}
 	public void setTcs_summary(String tcs_summary) {
 		this.tcs_summary = tcs_summary;
+	}
+	public int getLength() {
+		return length;
+	}
+	public void setLength(int length) {
+		this.length = length;
 	}
 	
 	

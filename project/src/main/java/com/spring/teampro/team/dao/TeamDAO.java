@@ -67,6 +67,8 @@ public interface TeamDAO {
 
 	List getMyHistory(ChallengeDTO dto);
 
+	int updateChallengeTitle(ChallengeDTO dto);
+
 
 
 }

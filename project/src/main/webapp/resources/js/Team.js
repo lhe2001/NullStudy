@@ -134,23 +134,28 @@ function dailyMemoRevise(){
         if(dele == true){
         	let tcs_key = $(".tcs_key").val();
         	let tcs_summary = $(".todaySummary").val();
-        	let info = {
-        		tcs_key : tcs_key,
-        		tcs_summary : tcs_summary
-        	};
         	
-        	$.ajax({
-				url: "/project/teamRest/reviseSummary.do",
-				type: "post",
-				contentType: "application/json",
-				data: JSON.stringify(info),
-				success: function(data){
-					location.reload();
-				},
-				error:function(){
-					alert("에러발생!!")
-				}
-			});
+        	if(tcs_summary.trim() == ''){
+        		alert('입력해주세요');
+        	}else {
+	        	let info = {
+	        		tcs_key : tcs_key,
+	        		tcs_summary : tcs_summary
+	        	};
+	        	
+	        	$.ajax({
+					url: "/project/teamRest/reviseSummary.do",
+					type: "post",
+					contentType: "application/json",
+					data: JSON.stringify(info),
+					success: function(data){
+						location.reload();
+					},
+					error:function(){
+						alert("에러발생!!")
+					}
+				});
+        	}
         }
     })
 }
@@ -182,25 +187,81 @@ function showSummary(tcs_key,e){
 			contentType: "application/json",
 			data: JSON.stringify(info),
 			success: function(data){
-				$(".TeamDailyMemo tbody").empty();
+				$(".TeamDailyMemo tbody #todaySummary").empty();
 				
 				let html = "";
-				html += "<tr>";
 				html += "<td style='font-size:13px;height:85px;max-height:85px;'>";
 				html += "<input type='hidden' class='tcs_key' value='"+data.tcs_key+"'>";
 				html +=  data.tcs_summary;
 				html += "</td>";
-				html += "</tr>";
-				html += "<tr>";
-				html += "<td><input class='dailyRevBtn' type='button' value='수정하기' ></td>";
-				html += "</tr>";
 				
-				$(".TeamDailyMemo tbody").append(html);
+				$(".TeamDailyMemo tbody #todaySummary").append(html);
 				
 			},
 			error:function(){
 				alert("에러발생!!")
 			}
+			});
+}
+//지난 챌린지 보관함 click 시
+function history(tc_key){
+
+	let info = { 
+        			tc_key : tc_key
+        	};
+        	
+        	$.ajax({
+				url: "/project/teamRest/history.do",
+				type: "post",
+				contentType: "application/json",
+				data: JSON.stringify(info),
+				success: function(data){
+					$(".challenge table tbody").empty();
+				
+				html = "";
+				//html = "<input type='hidden' class='tc_key' value="+data[0].tc_key+">";
+				//html = "<caption style='font-size:15px; text-decoration:underline'>dddd</caption>";
+				html +="<tr>";
+				for(let i=0; i<7; i++){
+					if(data[i] != undefined){
+						html+="<td class='confirm' onClick='showSummary("+data[i].tcs_key+",this)'></td>";
+					}else {
+						html+="<td>";
+					}
+					html+="</td>";
+				}
+				html += "</tr>";
+				html += "<tr>";
+				for(let i=7; i<14; i++){
+					if(data[i] != undefined){
+						html+="<td class='confirm' onClick='showSummary("+data[i].tcs_key+",this)'></td>";
+					}else {
+						html+="<td>";
+					}
+					html+="</td>";
+				}
+				html += "</tr>";
+				html += "<tr>";
+				for(let i=14; i<21; i++){
+					if(data[i] != undefined){
+						html+="<td class='confirm' onClick='showSummary("+data[i].tcs_key+",this)'></td>";
+					}else {
+						html+="<td>";
+					}
+					html+="</td>";
+				}
+				html += "</tr>";
+				html += "<tr>";
+				html += "<td colspan='7'><input type='button' value='SUBMIT'disabled></td>";
+				html += "</tr>";
+	            
+					$(".challenge table tbody").append(html);
+					$(".dailyRevBtn").prop("disabled",true);
+					
+				},
+				error:function(){
+					alert("에러발생!!")
+				}
 			});
 }
 
@@ -253,8 +314,7 @@ function memberSummary(userKey,e){
 						html += "<tr>";
 						for(let i=7; i<14; i++){
 							if(data[i] != undefined){
-								html+="<td class='confirm'>";
-								html+="<input type='hidden' class='memberTcs' value='"+data[i].tcs_key+"'>";
+								html+="<td class='confirm sum' value='"+data[i].tcs_key+"'>";
 							}else {
 								html+="<td>";
 							}
@@ -263,8 +323,7 @@ function memberSummary(userKey,e){
 						html += "</tr>";
 						for(let i=14; i<21; i++){
 							if(data[i] != undefined){
-								html+="<td class='confirm'>";
-								html+="<input type='hidden' class='memberTcs' value='"+data[i].tcs_key+"'>";
+								html+="<td class='confirm sum' value='"+data[i].tcs_key+"'>";
 							}else {
 								html+="<td>";
 							}
@@ -387,23 +446,34 @@ function attendChallenge(t_key){
 //챌린지 선택
 function attendChallenge(t_key){
 	let tc_key = $(".tc_key").val();
-	let info = { 
-        			t_key : t_key,
-        			tc_key : tc_key
-        	};
-        	
-        	$.ajax({
-			url: "/project/teamRest/attendChallenge.do",
-			type: "post",
-			contentType: "application/json",
-			data: JSON.stringify(info),
-			success: function(data){
-				alert('오늘의 챌린지 완료!');
-				location.reload();
-			},
-			error:function(){
-				alert("에러발생!!")
-			}
-			});
+	
+	let mySummary = $(".challenge table .confirm");
+	let total = mySummary.length;
+	console.log(total);
+	
+	if(total >= 21){
+		$(".challenge table input[type='button'] ").prop('disabled',true);
+		alert('챌린지를 완료했어요!!대단하네요!!');
+	}else {
+		let info = { 
+	        			t_key : t_key,
+	        			tc_key : tc_key
+	        	};
+	        	
+	        	$.ajax({
+					url: "/project/teamRest/attendChallenge.do",
+					type: "post",
+					contentType: "application/json",
+					data: JSON.stringify(info),
+					success: function(data){
+						alert('오늘의 챌린지 완료!');
+						location.reload();
+					},
+					error:function(){
+						alert("에러발생!!")
+					}
+				});
+	}
+	
 }
 

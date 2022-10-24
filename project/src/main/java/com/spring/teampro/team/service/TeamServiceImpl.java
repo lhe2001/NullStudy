@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.teampro.team.dao.TeamDAO;
 import com.spring.teampro.team.dto.ChallengeDTO;
@@ -197,7 +200,11 @@ public class TeamServiceImpl implements TeamService {
 	public int reviseSummary(ChallengeDTO dto) {
 		return dao.reviseSummary(dto);
 	}
-	
+	//updateChallengeTitle
+	@Override
+	public int updateChallengeTitle(ChallengeDTO dto) {
+		return dao.updateChallengeTitle(dto);
+	}
 	//>>>>>>>>>>>>>>>>팀멤버 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	//팀 멤버 정보 가져오기
 	@Override

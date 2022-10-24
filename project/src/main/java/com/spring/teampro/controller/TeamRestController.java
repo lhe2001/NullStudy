@@ -141,6 +141,18 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		
 		return service.getSummary(dto);
 	}
+	//showSummary
+	@RequestMapping(value="/teamRest/history.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public List history(HttpServletRequest request, HttpServletResponse response,
+			@RequestBody ChallengeDTO dto
+			) {
+		HttpSession session = request.getSession();
+		int userkey  = (Integer) session.getAttribute("userKey");
+		dto.setUserKey(userkey);
+		
+		//현황 가져오기
+		return service.getChallengeList(dto);
+	}
 	//멤버 서머리 보기 
 	@RequestMapping(value="/teamRest/memberSummary.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public List memberSummary(
@@ -160,6 +172,13 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 			) {
 		
 		return service.reviseSummary(dto);
+	}
+	//updateChallengeTitle
+	@RequestMapping(value="/teamRest/updateChallengeTitle.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public int updateChallengeTitle(@RequestBody ChallengeDTO dto
+			) {
+		
+		return service.updateChallengeTitle(dto);
 	}
 	
 	//>>>>>>>>>>>>>>>>allTeam 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//

@@ -134,46 +134,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>매일 2L씩 물마시기</td>
-                                <td>20/21</td>
+                        <c:forEach var="history" items="${myHistory }">
+                            <tr onClick="history(${history.tc_key})">
+                                <td>${history.tc_title}</td>
+                                <td>${history.length}/21</td>
                             </tr>
-                            <tr>
-                                <td>매일 2L씩 물마시기</td>
-                                <td>20/21</td>
-                            </tr>
-                            <tr>
-                                <td>매일 2L씩 물마시기</td>
-                                <td>20/21</td>
-                            </tr>
-                            <tr>
-                                <td>매일 2L씩 물마시기</td>
-                                <td>20/21</td>
-                            </tr>
-                            <tr>
-                                <td>매일 2L씩 물마시기</td>
-                                <td>20/21</td>
-                            </tr>
-                            <tr>
-                                <td>매일 2L씩 물마시기</td>
-                                <td>20/21</td>
-                            </tr>
-                            <tr>
-                                <td>매일 2L씩 물마시기</td>
-                                <td>20/21</td>
-                            </tr>
-                            <tr>
-                                <td>매일 2L씩 물마시기</td>
-                                <td>20/21</td>
-                            </tr>
-                            <tr>
-                                <td>매일 2L씩 물마시기</td>
-                                <td>20/21</td>
-                            </tr>
-                            <tr>
-                                <td>매일 2L씩 물마시기</td>
-                                <td>20/21</td>
-                            </tr>
+                         </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -186,6 +152,7 @@
                     <table>
                     	<input type="hidden" class="tc_key" value="${challenge.tc_key }">
                         <caption style="font-size:15px; text-decoration:underline">${challenge.tc_title }</caption>
+                        <tbody>
 	                      	<tr>
 	                      	<c:forEach var="i" begin="0" end="6">
 	                      		<c:if test="${myCurrent[i].tcs_key != null }">
@@ -216,10 +183,10 @@
 	                      		</c:if>
 	                      	</c:forEach>
 	                      	</tr>
-	                      </tbody>
                         <tr>
                             <td colspan="7"><input type="button" onClick="attendChallenge(${teamInfo.t_key})" value="SUBMIT"></td>
                         </tr>
+	                      </tbody>
                     </table>
                 </div>
                 <div id="TeamDaily">
@@ -230,6 +197,11 @@
 	                        </tr>
                         </thead>
                         <tbody>
+                        	<tr id="todaySummary">
+                        	</tr>
+                        	<tr>
+								<td><input class='dailyRevBtn' type='button' value='수정하기' ></td>
+							</tr>
                         </tbody>
                     </table>
                     <table class="TeamDailyRevise hide">
@@ -242,6 +214,8 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <tr>
+                        </tr>
                         <tr>
                             <td><input type="button" class="returnBtn" value="취소"><input type="submit" value="수정"></td>
                         </tr>
@@ -268,7 +242,6 @@
                             	<input type="hidden" class="tm_key" value="${member.tm_key }">
                             </td>
                             <td style="min-width:200px; max-width:200px;">${member.intro }</td>
-                            <td style="min-width:50px; max-width:50px;">${PercentList.get(loop.index)}%</td>
                             <td style="min-width:100px; max-width:100px;">${member.lastTime2 }</td>
                             <td style="min-width:20px;">
                             <c:if test="${member.userKey ne teamInfo.userKey }" >

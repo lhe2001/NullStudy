@@ -165,6 +165,11 @@ public class TeamDAOImpl implements TeamDAO {
 	public int reviseSummary(ChallengeDTO dto) {
 		return sqlSession.update("mapper.team.reviseSummary",dto);
 	}
+	//updateChallengeTitle
+	@Override
+	public int updateChallengeTitle(ChallengeDTO dto) {
+		return sqlSession.update("mapper.team.updateChallengeTitle",dto);
+	}
 	
 	//>>>>>>>>>>>>>>>DELETE 삭제하기>>>>>>>>>>>>>>
 	//멤버 강퇴하기 
