@@ -20,10 +20,26 @@
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
    
+   <definition name="listArticles(admin)" extends="baseLayout">
+      <put-attribute name="title" value="게시판 메인" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout)_admin.jsp" />
+       <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/board/listArticles.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+   
    <!-- 글 작성 폼 -->
    <definition name="articleForm" extends="baseLayout">
       <put-attribute name="title" value="글 작성 페이지" />
       <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+        <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/board/articleForm.jsp" />
+  	  <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+   
+   <definition name="articleForm(admin)" extends="baseLayout">
+      <put-attribute name="title" value="글 작성 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout)_admin.jsp" />
         <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/board/articleForm.jsp" />
   	  <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
@@ -51,6 +67,14 @@
    <definition name="viewArticle" extends="baseLayout">
       <put-attribute name="title" value="글 작성 페이지" />
       <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+        <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/board/viewArticle.jsp" />
+  	  <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+   
+   <definition name="viewArticle(admin)" extends="baseLayout">
+      <put-attribute name="title" value="글 작성 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout)_admin.jsp" />
         <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/board/viewArticle.jsp" />
   	  <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />

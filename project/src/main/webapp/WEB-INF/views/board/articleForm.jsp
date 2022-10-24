@@ -60,6 +60,14 @@
 						pw.classList.add('hidden');
 					}
 			})
+			
+			var userkey  = ${adminUserKey};
+			if(userkey==1){
+				document.querySelector("#notice").classList.remove('hidden');
+			}else{
+				document.querySelector("#notice").classList.add('hidden');
+			}
+			
 	}
 </script>
 <div id = "wrapp">
@@ -79,6 +87,7 @@
 					비밀글
 					</option>
 					<option value="40">나도몰라</option>
+					<option id="notice" class = "hidden" value="50">공지</option>
 				</select>
 				<div class = "pww">
 					<span id = "pw" class = "hidden">비밀번호!</span>

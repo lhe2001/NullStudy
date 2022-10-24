@@ -41,14 +41,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="navtap">Team<i class="fa-solid fa-heart"></i>
-                        <div class="drop l3">
-                            <ul>
-                                  <li><a href="/project/team/allTeamList.do">All Team</a></li>
-                                <li></li>
-                            </ul>
-                        </div>
-                    </li>
+
                     <form action="/project/signOut.do" method="post">
                     <li><button class="logout" type="submit">로그아웃</button></li>
                     </form>
