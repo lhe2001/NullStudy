@@ -3,14 +3,10 @@
 
     %>
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
+<title>사이드포스트잇</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
-</head>
 <body>
 
 	<!-- 사이드바 -->
@@ -18,12 +14,20 @@
    <aside>
 	    <!-- <button type="button" class="asideHide">Hide</button> -->
 	    <div id="postitBox">
+<<<<<<< HEAD
 	        <button type="button" class="pink" >My</button>
 	        <button type="button" class="yellow">To Do</button>
 	        <button type="button" class="blue teamListBtn">Team</button>
 	    </div>
 	    
 	    <div class="postit pink ud">
+=======
+	        <button type="button" class="pink">My</button>
+	        <button type="button" class="yellow planList">Plan</button>
+	        <button type="button" class="blue teamListBtn">Team</button>
+	    </div>
+	    <div class="postit pink">
+>>>>>>> master
 	        <div class="left"></div>
 	        <div id="userInfo">
 	            <div id="userPT"></div>
@@ -36,37 +40,26 @@
 	            
 	        </div>
 	    </div>
+<<<<<<< HEAD
 	    
 	    <div class="postit yellow">
+=======
+	    <div class="postit yellow none">
+>>>>>>> master
 	        <div class="left"></div>
 	        <div id="todoList">
-	            <div id="list">
+	            <div id="pListTB">
 	                <table>
 	                    <thead>
 	                        <tr>
-	                            <th><input type="checkbox"></th>
-	                            <th>To Do List</th>
+	                            <th><i class="fa-regular fa-calendar-check">&nbsp;My Plan</i></th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                        <tr>
-	                            <td><input type="checkbox" name="todo"></td>
-	                            <td>웹페이지 만들기</td>
-	                        </tr>
-	                        <tr>
-	                            <td><input type="checkbox" name="todo"></td>
-	                            <td>자바 공부하기</td>
-	                        </tr>
-	                        <tr>
-	                            <td><input type="checkbox" name="todo"></td>
-	                            <td>오라클 공부하기</td>
-	                        </tr>
 	                    </tbody>
 	                </table>
 	            </div>
-	            <button type="button" id="addBtn" >추가</button>
-	            <button type="button" id="deleteBtn">삭제</button>
-	            <input type="text" id="todoText" placeholder="추가List">
+	            <button id="goCalBtn" onclick="location.href='/project/mystudy/calendar.do';">달력</button>
 	        </div>
 	    </div>
 	   <div class="postit blue none">
@@ -87,4 +80,3 @@
          
 	</aside>
 </body>
-</html>

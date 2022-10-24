@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.CommentDTO;
 import com.spring.teampro.board.dto.PageDTO;
 
 
@@ -51,5 +52,8 @@ public interface BoardDAO {
 	
 	// 총 페이지 수 출력 메소드
 	public int totalCount();
+	
+	// 게시글의 댓글수 가져오는 메소드
+	public List<CommentDTO> getCommentCount();
 }
 

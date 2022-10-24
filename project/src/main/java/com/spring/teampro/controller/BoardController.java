@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,6 +31,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.teampro.board.dao.BoardDAO;
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.CommentDTO;
 import com.spring.teampro.board.dto.PageDTO;
 import com.spring.teampro.board.service.BoardService;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
@@ -67,6 +69,14 @@ public class BoardController{
 			amount = Integer.parseInt(request.getParameter("amount"));
 		}
 		
+		// 댓글 갯수 가져오기
+		List<CommentDTO> list = new ArrayList<CommentDTO>();
+		list= boardService.getComment();
+		System.out.println("commentdto list = " + list);
+		System.out.println(list.size());
+		System.out.println(list.get(0));
+		CommentDTO commentDTO = new CommentDTO();
+		
 		System.out.println("pageNum = " + pageNum);
 		System.out.println("amount = " + amount);
 		int totalCount = boardService.getPage();
@@ -76,26 +86,33 @@ public class BoardController{
 		
 		List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);
 		System.out.println("articlesList.size() = " + articlesList.size());
-		
+		System.out.println("b_key = " + boardDTO.getB_key());
 		session=request.getSession();
 		SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-		for (int i = 0; i < articlesList.size(); i++) {
-			boardDTO = articlesList.get(i);
-			switch (boardDTO.getB_field()) {
-			case 10:
-				boardDTO.setB_fieldName("질문");
-				break;
-			case 20:
-				boardDTO.setB_fieldName("잡담");
-				break;
-			case 30:
-				boardDTO.setB_fieldName("비밀글");
-				break;
-			case 40:
-				boardDTO.setB_fieldName("나도몰라");
-				break;
-			default:
-				break;
+		
+		for(int j=0 ; j <list.size(); j++) {
+			commentDTO = list.get(j);
+			for (int i = 0; i < articlesList.size(); i++) {
+				boardDTO = articlesList.get(i);
+				if(boardDTO.getB_key() == commentDTO.getB_key()) {
+					boardDTO.setComment_cnt(commentDTO.getCount_com());
+				}
+				switch (boardDTO.getB_field()) {
+				case 10:
+					boardDTO.setB_fieldName("질문");
+					break;
+				case 20:
+					boardDTO.setB_fieldName("잡담");
+					break;
+				case 30:
+					boardDTO.setB_fieldName("비밀글");
+					break;
+				case 40:
+					boardDTO.setB_fieldName("나도몰라");
+					break;
+				default:
+					break;
+				}
 			}
 		}
 		model.addAttribute("articlesList",articlesList);
@@ -177,11 +194,18 @@ public class BoardController{
 		public String viewArticle(HttpServletRequest request, HttpServletResponse response,
 				@RequestParam("b_articleNo") int b_articleNo,
 				Model model) {
-//			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-//			model.addAttribute("userInfo",userInfo);
+			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+			model.addAttribute("userInfo",userInfo);
 			System.out.println("상세보기로 이동");
 			System.out.println("b_articleNo : " + b_articleNo);
 			BoardDTO dto = new BoardDTO();
+			// 댓글 리스트를 여기서 보내준다..
+			// CommentDTO
+//			CommentDTO cdto = new CommentDTO();
+			List<CommentDTO> list = boardService.getCommentList();
+			System.out.println("commentlist.size() = " + list.size());
+			
+			// 조회수
 			dto = boardService.getViewArticle(b_articleNo);
 			int view = (dto.getB_view() + 1);
 			dto.setB_articleNo(b_articleNo);
@@ -190,6 +214,7 @@ public class BoardController{
 			// 조회수 업데이트
 			boardService.getView(dto);
 			model.addAttribute("view",dto);
+			model.addAttribute("comment",list);
 			return "viewArticle";
 		}
 		
@@ -401,7 +426,6 @@ public class BoardController{
 					
 					response.setContentType("text/html; charset=utf-8");
 					// 페이징
-					
 					// 페이징 초기값
 					// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
 					// 첫 페이지 경우
@@ -409,9 +433,9 @@ public class BoardController{
 					int amount = 10;
 					
 //					 페이지번호를 클릭하는 경우
-					if(request.getParameter("pageNum") != null && request.getParameter("amount") != null) {
-						pageNum = Integer.parseInt(request.getParameter("pageNum"));
-						amount = Integer.parseInt(request.getParameter("amount"));
+					if(boardDTO.getPageNum() != 0 && boardDTO.getAmount() != 0) {
+						pageNum = boardDTO.getPageNum();
+						amount = boardDTO.getAmount();
 						System.out.println("페이지번호 클릭 pageNum = " + pageNum);
 						System.out.println("페이지번호 클릭 amount = " + amount);
 					}

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.teampro.board.dto.BoardDTO;
+import com.spring.teampro.board.dto.CommentDTO;
 import com.spring.teampro.board.dto.PageDTO;
 
 
@@ -154,4 +155,12 @@ public class BoardDAOImpl implements BoardDAO {
 		int count = sqlSession.selectOne("mapper.board.totalCount");
 		return count;
 	}
+	
+	// 댓글 총 갯수 가져오기
+	public List<CommentDTO> getCommentCount() {
+		List<CommentDTO> list = sqlSession.selectList("mapper.board.getCommentCount");
+		return list;
+	}
+	
+	
 }

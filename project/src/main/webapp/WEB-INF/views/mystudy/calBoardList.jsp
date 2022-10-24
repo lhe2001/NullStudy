@@ -8,20 +8,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
+<title>일정 목록 보기</title>
 <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
 <link href="/project/resources/css/calList.css" rel="stylesheet">
-<title>일정 목록 보기</title>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-
-
 //전체선택 자동체크와해지
-//onclick="smallSel()"
 function smallSel(){
 	let chks = document.getElementsByName("seq");
 	for(let i=0; i<chks.length; i++){
@@ -65,7 +59,6 @@ $(function(){
 
 
 </script>
-</head>
 <body>
         <div id="calBoardWrap">
         <form action="calMuldel.do" method="post">
@@ -122,4 +115,3 @@ $(function(){
 	</form>
 
 </body>
-</html>

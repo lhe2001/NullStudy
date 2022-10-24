@@ -95,7 +95,6 @@ function allTeamFilter(){
 			let html = "";
 			if(data.length == 0){
 				html += "<tr><td colspan='6' style='text-align:center;'>검색 결과가 없습니다.</td></tr>"
-				$("tbody").append(html);
 			}else{
 				for(let i=0; i<data.length;i++){
 					html +="<tr>";
@@ -107,9 +106,9 @@ function allTeamFilter(){
 					html += '<td><button type="button" class="memberBtn" onClick="teamPreview('+data[i].t_key+')">팀 정보</button></td>';
 					html +="</tr>";
 					
-					$("tbody").append(html);
 				}
 			}
+					$("tbody").append(html);
 		},
 		error:function(){
 			alert("에러발생!!")
@@ -140,8 +139,8 @@ function teamSearch(){
 			let html = "";
 			if(data.length == 0){
 				html += "<tr><td colspan='6' style='text-align:center;'>검색 결과가 없습니다.</td></tr>"
-				$("tbody").append(html);
 			}
+				
 			for(let i=0; i<data.length;i++){
 				html +="<tr>";
 				html += "<td style='max-width:30px;'><div>"+data[i].t_field2+"</div></td>";
@@ -151,8 +150,8 @@ function teamSearch(){
  				html += "<td style='max-width:50px;'><div>"+data[i].nickName+"</div></td>";
 				html += '<td><button type="button" class="memberBtn" onClick="teamPreview('+data[i].t_key+')">팀 정보</button></td>';
 				html +="</tr>";
-				$("tbody").append(html);
 			}
+				$("tbody").append(html);
 		},
 		error:function(){
 			alert("에러발생!!")
