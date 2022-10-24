@@ -126,10 +126,6 @@ function searchSelect(){
     })
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> copy2
 function YellowPostIt(){
 
 	$(".planList").off("click").on("click",function(){
