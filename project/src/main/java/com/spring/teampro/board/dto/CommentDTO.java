@@ -10,6 +10,7 @@ public class CommentDTO {
 	private int b_key; // 게시판 테이블 기본키(여기선 외래키)
 	private int userKey; // 회원 정보 테이블 기본키(여기선 외래키)
 	private String nickName; // 작성자에 쓸 변수
+	private int comment_cnt;  // 댓글 갯수
 	
 	public int getB_c_key() {
 		return b_c_key;
@@ -46,5 +47,17 @@ public class CommentDTO {
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	public int getCount_com() {
+		return comment_cnt;
+	}
+	public void setCount_com(int count_com) {
+		this.comment_cnt = count_com;
+	}
+	public int getComment_cnt() {
+		return comment_cnt;
+	}
+	public void setComment_cnt(int comment_cnt) {
+		this.comment_cnt = comment_cnt;
 	}
 }

@@ -39,13 +39,13 @@
 
     function boardonload(){
 
-			let obj = document.querySelector("#frmForm");
-			let btn = document.querySelector("#list_btn");
-			btn.addEventListener("click", function() {
-				obj.action = "${contextPath}/board/listArticles.do";
-				obj.method = "get"
-				obj.submit();
-			})
+// 			let obj = document.querySelector("#frmForm");
+// 			let btn = document.querySelector("#list_btn");
+// 			btn.addEventListener("click", function() {
+// 				obj.action = "${contextPath}/board/listArticles.do";
+// 				obj.method = "get"
+// 				obj.submit();
+// 			})
 			
 			let select = document.querySelector("#select_list");
 			let pwd = document.querySelector("#pwd");
@@ -91,7 +91,7 @@
 			</div>
 		</div>
 			<textarea rows="10" cols="70" name="b_content" id = "article_content" placeholder = "내용을 입력해 주세요!!!" style = "padding-top : 10px; padding-left : 5px;"></textarea><br><hr>
-		 		<input type="button" id="list_btn" class="btn btn-outline-light" value="목록으로"  style = "float : left; margin-left : 10px; border : 1px solid #99A799; color : #99A799;"/>
+		 		<input type="button" id="list_btn" class="btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' style = "float : left; margin-left : 10px; border : 1px solid #99A799; color : #99A799;"/>
 				<input type="submit" id = "write_btn" value="글쓰기" class="btn btn-outline-light" style = "float : right; margin-right : 50px; border : 1px solid #99A799; color : #99A799;"/>
 		</form>
 	</div>
