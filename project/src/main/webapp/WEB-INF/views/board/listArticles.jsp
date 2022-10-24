@@ -99,11 +99,9 @@
 	    					$("#list_tbody").empty();
     						
 	    					let html = "";
-	    					
+	    				
 	    					if(data.length < 0){
-    								
 	    						html +='<h1 style ="text-align : center; margin-left : 20px; margin-top : 20px; color : #1C6758">' + '등록된 글이 없어요' +'</h1>';
-    						
 	    					} else{
 	    						
     							for(let i = 0; i< data.searchList.length; i++){
