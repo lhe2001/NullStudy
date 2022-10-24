@@ -8,29 +8,29 @@ public interface SearchService {
 
 	// 게시판 List
 	
-	List<SearchDTO> getBoardAllSelectList();
+	List<SearchDTO> getBoardAllSelectList(SearchDTO dto);
 
-	List<SearchDTO> getSearchBoardSelectList(String search);
+	List<SearchDTO> getSearchBoardSelectList(SearchDTO dto);
 
-	List<SearchDTO> getB_titleSearchBoardSelectList(String search);
+	List<SearchDTO> getB_titleSearchBoardSelectList(SearchDTO dto);
 
-	List<SearchDTO> getB_contentSearchBoardSelectList(String search);
+	List<SearchDTO> getB_contentSearchBoardSelectList(SearchDTO dto);
 
-	List<SearchDTO> getNickNameSearchBoardSelectList(String search);
+	List<SearchDTO> getNickNameSearchBoardSelectList(SearchDTO dto);
 
 	
 	// 팀 List
 	
-	List<SearchDTO> getTeamAllList();
+	List<SearchDTO> getTeamAllList(SearchDTO dto);
 
-	List<SearchDTO> getT_nameSearchTeamSelectList(String search);
+	List<SearchDTO> getT_nameSearchTeamSelectList(SearchDTO dto);
 	
 	
 	// 유저 List
 
-	List<SearchDTO> getUserAllList();
+	List<SearchDTO> getUserAllList(SearchDTO dto);
 
-	List<SearchDTO> getNickNameSearchUserSelectList(String search);
+	List<SearchDTO> getNickNameSearchUserSelectList(SearchDTO dto);
 
 
 }

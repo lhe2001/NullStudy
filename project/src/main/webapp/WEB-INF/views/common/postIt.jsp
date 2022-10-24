@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+
+    %>
     
 
 <title>사이드포스트잇</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
 <body>
+
 	<!-- 사이드바 -->
    <div id="shadow"></div>
    <aside>
@@ -19,9 +22,13 @@
 	        <div class="left"></div>
 	        <div id="userInfo">
 	            <div id="userPT"></div>
-	            <h1>Annie</h1>
-	            <p>Team : Null</p>
-	            <p><button type="button" id="logOut">로그아웃</button></p>
+	            <h1>${sessionScope.userInfo.nickName}</h1>
+	            <p>내 소개 : ${sessionScope.userInfo.intro}</p>
+	            
+	            <form action="profileUpdate.do" method="get">
+	            <p><button type="submit" id="userDataChange">정보수정</button></p>
+	            </form>
+	            
 	        </div>
 	    </div>
 	    <div class="postit yellow none">
@@ -54,5 +61,8 @@
 				</tbody>
 			 </table>
          </div>
+         </div>
+         
+         
 	</aside>
 </body>
