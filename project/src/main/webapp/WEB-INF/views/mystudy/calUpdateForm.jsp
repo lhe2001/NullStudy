@@ -3,14 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
 <title>수정폼</title>
 <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
 <link href="/project/resources/css/calList.css" rel="stylesheet">
-</head>
 <body>
 <div class="calinupWrap">
 <div class="calinupContent">
@@ -18,6 +14,7 @@
 <input type="hidden" name="m_schedule_key" value="${sdto.m_schedule_key }"/>
 <input type="hidden" name="userkey" value="${sdto.m_schedule_key }" />
 <table class="calinupTB">
+	<caption>*일정 제목은 10자 이하로 해주세요</caption>
 	<tr>
 		<th><p>일정요일</p></th>
 	</tr>
@@ -69,4 +66,3 @@
 </div>
 </div>
 </body>
-</html>

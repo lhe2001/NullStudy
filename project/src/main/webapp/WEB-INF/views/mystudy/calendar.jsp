@@ -8,10 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
 <title>달력 페이지</title>
 <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
 
@@ -52,7 +49,6 @@
 		});
 	});
 </script>
-</head>
 <%
 	//달력의 날짜를 바꾸기 위해 전달된 year와 month 파라미터 받기(redirect는 안됨)
 	String paramYear = request.getParameter("year");
@@ -159,4 +155,3 @@
 	}
 %>
 </body>
-</html>
