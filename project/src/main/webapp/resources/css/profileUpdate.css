@@ -1,4 +1,16 @@
 
+	.modwrap{
+		margin-top: 200px;
+	}
+	
+	#modtable {
+		margin: auto;
+	}
+	
+	
+	.inputModwrap {
+	 	margin-left: 470px;
+	}
 	
 	#modtable td{
 	    width: 200px;
