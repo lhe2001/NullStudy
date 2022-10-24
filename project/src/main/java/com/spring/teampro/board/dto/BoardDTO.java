@@ -16,7 +16,8 @@ public class BoardDTO extends PageDTO {
 	private String b_content; // 글 내용 String타입
 	private String b_fieldName; // 변수로만 사용할 필드(int)값을 (String)으로 변환하여 사용할 값
 	private int list_sel; // 변수로만 사용할 필드(int)값을 (String)으로 변환하여 사용할 값
-	private int b_field; // 분야인데 10,20,30,40일 경우 select박스로 value값 가져올듯?
+	private int b_field; // 분야인데 1,2,3,4일 경우 select박스로 value값 가져올듯?
+	private int b_field2; // 분야인데 10,20,30,40일 경우 select박스로 value값 가져올듯?
 	private Date b_writeDate; // 디폴트값 sysdate
 	private int b_view; // 조회수...
 	private int userkey; // 회원정보 테이블에 있는 녀석을 사용할 변수
@@ -281,6 +282,14 @@ public class BoardDTO extends PageDTO {
 
 	public void setComment_cnt(int comment_cnt) {
 		this.comment_cnt = comment_cnt;
+	}
+
+	public int getB_field2() {
+		return b_field2;
+	}
+
+	public void setB_field2(int b_field2) {
+		this.b_field2 = b_field2;
 	}
 
 }

@@ -79,6 +79,7 @@
 					비밀글
 					</option>
 					<option value="40">나도몰라</option>
+					
 				</select>
 				<div class = "pww">
 					<span id = "pw" class = "hidden">비밀번호!</span>

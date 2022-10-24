@@ -97,7 +97,7 @@ public class BoardDAOImpl implements BoardDAO {
 			System.out.println("dao pageNum = " + pageNum );
 			System.out.println("dao amount = " + amount );
 			Map map = new HashMap();
-			
+			map.put("b_field2", dto.getB_field2());
 			map.put("search_field",dto.getSearch_field());
 			map.put("search_bar",dto.getSearch_bar());
 			map.put("pageNum",pageNum);

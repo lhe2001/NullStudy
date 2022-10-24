@@ -31,6 +31,11 @@ public class CommentDAOImpl implements CommentDAO {
 		sqlSession.delete("mapper.board.deleteComment",dto);
 	}
 	
+	// 댓글 수정 메소드
+	public void modifyComment(CommentDTO dto) {
+		sqlSession.update("mapper.board.modifyComment",dto);
+	}
+	
 	public List<CommentDTO> selectAllComment(){
 		List<CommentDTO> list = new ArrayList<CommentDTO>();
 		list = sqlSession.selectList("mapper.board.selectAllComment");

@@ -14,5 +14,8 @@ public interface CommentDAO {
 	// 댓글 삭제 메소드
 	public void deleteComment(CommentDTO dto);
 	
+	// 댓글 수정 메소드
+	public void modifyComment(CommentDTO dto);
+	
 	public List<CommentDTO> selectAllComment();
 }

@@ -100,7 +100,6 @@
 <!-- 				</choose> -->
 <!-- 			</where> -->
 <!-- 			</select> -->
-			
 			<!-- 서치 ajax-->
 			<select id="searchAllArticle" resultType="boardDTO" parameterType="java.util.HashMap">
 				select * from(
@@ -111,6 +110,9 @@
 						 , ALLMEMBER a 
 						 <where>
 						 and b.userkey = a.userkey
+						 <if test="b_field2 !=0 or b_field2 !=-1">
+							and b.B_field = #{b_field2 }
+							</if>
 							<choose>
 								<when test="search_field == 1">
 									and lower(b.b_title) like lower('%'||#{search_bar }||'%') 
@@ -210,7 +212,7 @@
 			</select>
 			
 		<!--  댓글 수정 -->	
-			<update id="modifyComment" parameterType="commentDTO">
+			<update id="modifyComment"  parameterType="commentDTO">
 				update board_com set
 				b_c_comment = #{b_c_comment }
 				where b_c_key = #{b_c_key}
@@ -239,4 +241,5 @@
 <!-- 					on a.b_key = b.b_key  -->
 <!-- 				group by a.b_title ,a.b_content , a.b_imagefile -->
 <!-- 			</select> -->
+
 </mapper>

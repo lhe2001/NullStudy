@@ -35,6 +35,8 @@ import com.spring.teampro.board.dto.CommentDTO;
 import com.spring.teampro.board.dto.PageDTO;
 import com.spring.teampro.board.service.BoardService;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
+
+import freemarker.core.CollectionAndSequence;
 @Controller("boardController")
 public class BoardController{
 	@Autowired
@@ -47,7 +49,6 @@ public class BoardController{
 	HttpSession session;
 	
 	private static String image = "C:\\image_file";
-	
 	
 	// 전체 리스트 조회
 	@RequestMapping(value = "/board/listArticles.do", method = RequestMethod.GET)
@@ -390,31 +391,6 @@ public class BoardController{
 			System.out.println("답글쓰기 완료");
 		}
 		
-//		// 셀렉트 박스 서치
-//		@RequestMapping(value = "/board/searchArticle.do" , method = RequestMethod.POST)
-//		public String searchArticle(HttpServletRequest request, HttpServletResponse response,
-//					@RequestParam("field")int field,
-//					@RequestParam("search_bar")String search_bar,
-//					@RequestBody BoardDTO boardDTO,
-//					Model model) {
-//			System.out.println("셀렉트 박스 서치 기능 작동");
-//			session=request.getSession();
-//			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-//			model.addAttribute("userInfo",userInfo);
-//			// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체
-//			System.out.println("field = " + field);
-//			System.out.println("search_bar = " + search_bar);
-//			if(field == 1 || field == 2 || field == 3 || field == 4) {
-//				BoardDTO dto = new BoardDTO();
-//				dto.setSearch_bar(search_bar);
-//				dto.setSearch_field(field);
-//				List<BoardDTO> searchList = boardService.getAllSearch(dto);
-//				model.addAttribute("articlesList" , searchList);
-//			}
-//			System.out.println("셀렉트 박스 서치 완료");
-//			return "listArticles";
-//		}
-		
 		// 셀렉트 박스 서치 아작스
 				@RequestMapping(value = "/board/searchArticle.do" , method = {RequestMethod.POST , RequestMethod.GET})
 				public @ResponseBody Map searchArticle(HttpServletRequest request, HttpServletResponse response,
@@ -435,10 +411,11 @@ public class BoardController{
 //					 페이지번호를 클릭하는 경우
 					if(boardDTO.getPageNum() != 0 && boardDTO.getAmount() != 0) {
 						pageNum = boardDTO.getPageNum();
-						amount = boardDTO.getAmount();
 						System.out.println("페이지번호 클릭 pageNum = " + pageNum);
-						System.out.println("페이지번호 클릭 amount = " + amount);
 					}
+					amount = boardDTO.getAmount();
+					System.out.println(" amount = " + amount);
+					System.out.println("b_fieldName ="+ boardDTO.getB_fieldName());
 					
 					System.out.println("pageNum = " + pageNum);
 					System.out.println("amount = " + amount);
@@ -447,11 +424,11 @@ public class BoardController{
 					session=request.getSession();
 					SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 					model.addAttribute("userInfo",userInfo);
-					
-//					String search_bar = request.getParameter("search_bar");
-//					int field = Integer.parseInt(request.getParameter("field"));
-					
+					//  0 : 전체 , 10 : 질문 , 20: 잡담, 30: 비밀글, 40:나도몰라
+					System.out.println("b_field2 == " + boardDTO.getB_field2());
+					int field2 =boardDTO.getB_field2();
 					System.out.println("boardDTO.getB_field() = " + boardDTO.getB_field());
+
 					int field = boardDTO.getB_field();
 					System.out.println("boardDTO.getSearch_bar() = " + boardDTO.getSearch_bar());
 					String search_bar =  boardDTO.getSearch_bar();
@@ -463,8 +440,10 @@ public class BoardController{
 					
 //						BoardDTO dto = new BoardDTO();
 						pdto = new PageDTO(pageNum, amount, totalCount);
+						System.out.println("boardDTO.getB_field2() = " + boardDTO.getB_field2());
 						boardDTO.setSearch_bar(search_bar);
 						boardDTO.setSearch_field(field);
+						boardDTO.setB_field2(field2);
 						searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
 						System.out.println("searchList.size() : " + searchList.size());
 						

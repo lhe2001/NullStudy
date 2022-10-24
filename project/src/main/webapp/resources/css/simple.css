@@ -41,7 +41,7 @@
             cursor: pointer;
         }
         nav {
-            display: flex;
+            display: flex !important;
             justify-content: space-between;
             flex-grow: 1;
             font-size:18px;

@@ -28,4 +28,9 @@ public class CommentServiceImpl implements CommentService {
 	public void getDeleteComment(CommentDTO commentDTO) {
 		commentDAO.deleteComment(commentDTO);
 	}
+	
+	// 댓글 수정
+	public void getUpdateComment(CommentDTO commentDTO) {
+		commentDAO.modifyComment(commentDTO);
+	}
 }

@@ -79,6 +79,7 @@ public class BoardServiceImpl implements BoardService{
 		public List<BoardDTO> getAllSearch(BoardDTO dto,int pageNum, int amount) {
 			System.out.println("service dtofield : " + dto.getB_field());
 			System.out.println("service search_bar : " + dto.getSearch_bar());
+			System.out.println("service b_field2 : " + dto.getB_field2());
 			List<BoardDTO> list = boardDAO.searchAllArticle(dto, pageNum, amount);
 			System.out.println("service list = " + list.size());
 			return list;
@@ -136,7 +137,7 @@ public class BoardServiceImpl implements BoardService{
 		list = commentDAO.selectAllComment();
 		return list;
 	}
-	
+	@Override
 	//게시풀의 댓글 수 가져오는 메소드
 	public List<CommentDTO> getComment() {
 		List<CommentDTO> list = new ArrayList<CommentDTO>();
