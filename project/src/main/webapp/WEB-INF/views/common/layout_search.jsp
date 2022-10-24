@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="resources/css/simple.css" />
   <link rel="stylesheet" href="resources/css/searchBoard.css" />
   <link rel="stylesheet" href="resources/css/profileUpdate.css" />
-  <script src="resources/css/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="/project/resources/js/main.js"></script>
   <style>
   	#body {
   		margin-top:80px;
