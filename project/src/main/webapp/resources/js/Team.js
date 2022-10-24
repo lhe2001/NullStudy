@@ -425,62 +425,42 @@ function reviseDday(t_key){
 function resetChallenge(t_key){
 	window.open('/project/team/updateChallenge.do?t_key='+t_key,'pop','location=no,width=500,height=400,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
-//챌린지에 출석하기
+//챌린지 출석
 function attendChallenge(t_key){
 	let tc_key = $(".tc_key").val();
-	let info = { 
-        			t_key : t_key,
-        			tc_key : tc_key
-        	};
-        	
-        	$.ajax({
+	if(tc_key == 0){
+		alert('챌린지를 먼저 설정해주세요!');
+	}else{
+		let mySummary = $(".challenge table .confirm");
+		let total = mySummary.length;
+		
+		if(total >= 21){
+			$(".challenge table input[type='button'] ").prop('disabled',true);
+			alert('챌린지를 완료했어요!!대단하네요!!');
+		}else {
+			let info = { 
+	    			t_key : t_key,
+	    			tc_key : tc_key
+	    	};
+	    	
+	    	$.ajax({
 				url: "/project/teamRest/attendChallenge.do",
 				type: "post",
 				contentType: "application/json",
 				data: JSON.stringify(info),
 				success: function(data){
 					if(data == -1){
-						alert(data);
-					}else{
-						alert(data);
+						alert('오늘은 이미 챌린지를 완료하였어요!');
+					}else {
+						alert('오늘의 챌린지 완료!');
+						location.reload();
 					}
 				},
 				error:function(){
 					alert("에러발생!!")
 				}
 			});
-}
-//챌린지 선택
-function attendChallenge(t_key){
-	let tc_key = $(".tc_key").val();
-	
-	let mySummary = $(".challenge table .confirm");
-	let total = mySummary.length;
-	console.log(total);
-	
-	if(total >= 21){
-		$(".challenge table input[type='button'] ").prop('disabled',true);
-		alert('챌린지를 완료했어요!!대단하네요!!');
-	}else {
-		let info = { 
-	        			t_key : t_key,
-	        			tc_key : tc_key
-	        	};
-	        	
-	        	$.ajax({
-					url: "/project/teamRest/attendChallenge.do",
-					type: "post",
-					contentType: "application/json",
-					data: JSON.stringify(info),
-					success: function(data){
-						alert('오늘의 챌린지 완료!');
-						location.reload();
-					},
-					error:function(){
-						alert("에러발생!!")
-					}
-				});
+		}
 	}
-	
 }
 
