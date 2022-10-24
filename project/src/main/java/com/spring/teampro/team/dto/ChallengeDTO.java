@@ -9,6 +9,7 @@ public class ChallengeDTO {
 	private int tcs_key;
 	private String tcs_summary;
 	private int length;
+	private String tcs_date;
 	
 	
 	public int getUserKey() {
@@ -52,6 +53,12 @@ public class ChallengeDTO {
 	}
 	public void setLength(int length) {
 		this.length = length;
+	}
+	public String getTcs_date() {
+		return tcs_date;
+	}
+	public void setTcs_date(String tcs_date) {
+		this.tcs_date = tcs_date;
 	}
 	
 	

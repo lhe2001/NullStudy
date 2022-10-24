@@ -28,7 +28,6 @@ public class TeamDAOImpl implements TeamDAO {
 	@Override
 	public List getMyTeamList(int userkey) {
 		List list = sqlSession.selectList("mapper.team.myTeamList",userkey);
-		logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>"+list.size());
 		return sqlSession.selectList("mapper.team.myTeamList",userkey);
 	}
 	
@@ -42,9 +41,13 @@ public class TeamDAOImpl implements TeamDAO {
 	//전체팀 List 가져오기
 	@Override
 	public List allTeamList(TeamInfoDTO dto) {
-		logger.info("DAO>>>>>>>>>>"+dto.getT_field());
-		logger.info("DAO>>>>>>>>>>"+dto.getT_name());
 		return sqlSession.selectList("mapper.team.allTeamList",dto);
+	}
+	
+	//전체팀 getMainTeamList 가져오기
+	@Override
+	public List getMainTeamList() {
+		return sqlSession.selectList("mapper.team.getMainTeamList");
 	}
 	
 	//팀멤버 정보 가져오기
@@ -115,6 +118,14 @@ public class TeamDAOImpl implements TeamDAO {
 	public List getMyHistory(ChallengeDTO dto) {
 		return sqlSession.selectList("mapper.team.getMyHistory",dto);
 	}
+	//오늘 출석을 했는가? 
+	@Override
+	public int alreadyToday(ChallengeDTO dto) {
+		logger.info(">>>>>>"+dto.getTc_key());
+		logger.info(">>>>>>"+dto.getUserKey());
+		return sqlSession.selectOne("mapper.team.alreadyToday",dto);
+	}
+	
 	//>>>>>>>>>>>>>>>UPDATE 수정하기>>>>>>>>>>>>>>
 	//팀정보 업데이트 하기
 	@Override

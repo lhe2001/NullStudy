@@ -1,6 +1,8 @@
 package com.spring.teampro.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +33,8 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 	
 	@Autowired
 	TeamService service;
+	
+	//>>>>>>>>>>>>>>>>main 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
 	//나의팀List
 	@RequestMapping(value="/teamRest/myTeamList.do", method= {RequestMethod.GET, RequestMethod.POST})
@@ -45,6 +49,14 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 		
 		return list;
 	}
+	//getMainTeamList
+	@RequestMapping(value="/teamRest/getMainTeamList.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public List getMainTeamList(
+			) {
+		
+		return service.getMainTeamList();
+	}
+	
 	
 	//>>>>>>>>>>>>>>>>teamDetail 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	
@@ -125,10 +137,24 @@ private static final Logger logger = LoggerFactory.getLogger(TeamController.clas
 			) {
 		HttpSession session = request.getSession();
 		int userkey  = (Integer) session.getAttribute("userKey");
-		logger.info(">>>"+userkey);
 		dto.setUserKey(userkey);
 		
-		return service.attendChallenge(dto);
+		Date now = new Date();
+		SimpleDateFormat tansFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String tcs_date = tansFormat.format(now);
+		logger.info(tcs_date);
+		
+		dto.setTcs_date(tcs_date);
+		//확인하기 
+		boolean result = service.alreadyToday(dto);
+		logger.info(">>>>>>>>>>>>>>>>>>>"+result);
+		int count = -1;
+		if(result == true) {
+			return count;
+		}else {
+			System.out.println("여기오나???????????????????????????????");
+			return service.attendChallenge(dto);
+		}
 	}
 	//showSummary
 	@RequestMapping(value="/teamRest/showSummary.do", method= {RequestMethod.GET, RequestMethod.POST})
