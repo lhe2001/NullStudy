@@ -70,8 +70,10 @@ public class TeamController {
 		int leader = tdto.getUserKey();
 		
 		//나는 admin 또는 조장인가?
-		if(userkey == leader || userkey < 10000) {
+		if(userkey == leader) {
 			nextPage= "teamDetail";
+		}else if(userkey < 10000) {
+			nextPage="teamDetail_admin";
 		}
 		
 		model.addAttribute("teamInfo",service.getTeamInfo(t_key));
@@ -156,6 +158,16 @@ public class TeamController {
 		model.addAttribute("requestList", list);
 		
 		return "teamPage/memberRequest";
+	}
+	//팀원 신청_멤버 팝업 이동.
+	@RequestMapping(value="/team/newRequest_member.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String newRequest_member(@RequestParam("t_key") int t_key,
+			Model model
+			) {
+		List list = service.getRequestList(t_key);
+		model.addAttribute("requestList", list);
+		
+		return "teamPage/memberRequest_member";
 	}
 	
 	//디데이 수정 팝업 이동.

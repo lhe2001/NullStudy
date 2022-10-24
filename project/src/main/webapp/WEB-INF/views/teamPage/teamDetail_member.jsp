@@ -54,7 +54,7 @@
         <div id="teamMenu">
             <ul>
                 <li id="newMemberAlert" onClick="reviseDday(${teamInfo.t_key})">D-Day 수정</li>
-                <li onClick="resetChallenge(${teamInfo.t_key})">챌린지 수정 & 리셋</li>
+                <li onClick='alert("스터디장만 할 수 있습니다.")' style='cursor:not-allowed;'>챌린지 수정 & 리셋</li>
                 <c:if test="${anyAlarm == 0 }">
                 <li id="newMemberAlert" onClick="newMemberRequest(${teamInfo.t_key})">스터디원 신청
                 </c:if>
@@ -74,12 +74,6 @@
     </div>
         <div class="LeaderMenu leadersWrite ">
            <div> ${teamInfo.nickName }님의 공지사항: ${teamInfo.t_lMemo }</div>
-            <button type="button" class="reviseW rBtn"><i class="fa-solid fa-pencil"></i></button>
-        </div>
-        <div class="LeaderMenu reivseWrite hide">
-                ${teamInfo.nickName }님의 공지사항: <input type="text" class="lMemo" required><br>
-                <input type="button" class="rBtn2" value="수정">
-                <input type="button" class="leBack" value="취소">
         </div>
         <div id="chWrapper">
             <div id="chaWrap">
@@ -205,11 +199,6 @@
                             <td style="min-width:200px; max-width:200px;">${member.intro }</td>
                             <td style="min-width:100px; max-width:100px;">${member.lastTime2 }</td>
                             <td style="min-width:20px;">
-                            <c:if test="${member.userKey ne teamInfo.userKey }" >
-                                <button  class="kickOut" type="button" onclick="kickMemberOut(${member.tm_key})">
-                                 <i class="fa-solid fa-user-slash"></i>
-                                </button>
-                            </c:if>
                             </td>
                         </tr>
                     </table>
