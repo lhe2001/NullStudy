@@ -49,6 +49,24 @@
 		</tbody>
 	</table>
 	
+		<!-- paging -->
+	<c:if test="${firstNo ne 1}">
+		<a href="/project/userSearch.do?pageNum=${firstNo-1}" style="color:red;font-weight:bold;"> 이전 </a>&nbsp;
+	</c:if>
+
+	<c:forEach var="i" begin="${firstNo}" end="${lastNo}">
+		<c:if test="${pageNum eq i }">
+			<a href="/project/userSearch.do?pageNum=${i }" style="color:red;font-weight:bold;">${i}</a>&nbsp;
+		</c:if>
+		<c:if test="${ not (pageNum eq i) }">
+			<a href="/project/userSearch.do?pageNum=${i }">${i }</a>&nbsp;
+		</c:if>
+	</c:forEach>
+
+	<c:if test="${lastNo ne lastPage}">
+		<a href="/project/userSearch.do?pageNum=${lastNo+1}" style="color:red;font-weight:bold;"> 다음 </a>&nbsp;
+	</c:if>
+	
 </div>
 
 </body>

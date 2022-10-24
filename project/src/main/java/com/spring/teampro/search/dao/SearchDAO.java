@@ -8,25 +8,25 @@ public interface SearchDAO {
 
 	// 자유 게시판
 	
-	List<SearchDTO> boardAllSelectList();
+	List<SearchDTO> boardAllSelectList(SearchDTO dto);
 
-	List<SearchDTO> searchBoardSelectList(String search);
+	List<SearchDTO> searchBoardSelectList(SearchDTO dto);
 
-	List<SearchDTO> b_titleSearchBoardSelectList(String search);
+	List<SearchDTO> b_titleSearchBoardSelectList(SearchDTO dto);
 
-	List<SearchDTO> b_contentSearchBoardSelectList(String search);
+	List<SearchDTO> b_contentSearchBoardSelectList(SearchDTO dto);
 
-	List<SearchDTO> nickNameSearchBoardSelectList(String search);
+	List<SearchDTO> nickNameSearchBoardSelectList(SearchDTO dto);
 
 	// 팀 목록
 	
-	List<SearchDTO> teamAllList();
+	List<SearchDTO> teamAllList(SearchDTO dto);
 	
-	List<SearchDTO> t_nameSearchTeamSelectList(String search);
+	List<SearchDTO> t_nameSearchTeamSelectList(SearchDTO dto);
 
 	// 유저 목록
 
-	List<SearchDTO> userAllList();
+	List<SearchDTO> userAllList(SearchDTO dto);
 
-	List<SearchDTO> nickNameSearchUserSelectList(String search);
+	List<SearchDTO> nickNameSearchUserSelectList(SearchDTO dto);
 }

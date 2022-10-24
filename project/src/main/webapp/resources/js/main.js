@@ -109,8 +109,9 @@ function bluePostIt(){
 	});
 }
 
+// 메인 search 옵션 클릭 이벤트
 function searchSelect(){
-    $("#selectValue").off("change").on("change",function(){
+    $("#selectValue").off("change").on("change", function(){
         let selected = $("#selectValue").val();
         console.log(selected)
 
@@ -124,7 +125,6 @@ function searchSelect(){
 
     })
 }
-
 
 function YellowPostIt(){
 
