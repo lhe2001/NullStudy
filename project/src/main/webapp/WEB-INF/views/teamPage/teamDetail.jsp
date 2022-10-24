@@ -305,40 +305,7 @@
                     </div>
             </div>
         </div>
-        <div id="teamSchedule">
-            <div class="tCalendar">달력</div>
-            <div class="tTimeLine">일정</div>
-            <div class="tVote">
-                <div class="vote1">투표1</div>
-                <div class="vote2">투표2</div>
-            </div>
-            <div id="tSmallBoard">
-                <table class="overflow" border="1">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                            <th>작성일</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>2</td>
-                            <td class="overflow">음 너무 졸린데? 엽떡먹고 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus, alias laudantium! Voluptate pariatur facere vitae adipisci modi odit fugiat sapiente porro maxime, soluta odio quisquam, ad tempora unde ab corporis? </td>
-                            <td>Annie</td>
-                            <td>2022.10.14 11:49AM</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td class="overflow">음 너무 졸린데? 엽떡먹고 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus, alias laudantium! Voluptate pariatur facere vitae adipisci modi odit fugiat sapiente porro maxime, soluta odio quisquam, ad tempora unde ab corporis? </td>
-                            <td>Annie</td>
-                            <td>2022.10.14 11:49AM</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+       
    	</div>
 </body>
 </html>
