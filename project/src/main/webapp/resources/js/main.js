@@ -126,9 +126,6 @@ function searchSelect(){
     })
 }
 
-
-<<<<<<< HEAD
-=======
 function YellowPostIt(){
 
 	$(".planList").off("click").on("click",function(){
@@ -164,4 +161,3 @@ function YellowPostIt(){
 	});
 }
 
->>>>>>> master

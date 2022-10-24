@@ -14,20 +14,11 @@
    <aside>
 	    <!-- <button type="button" class="asideHide">Hide</button> -->
 	    <div id="postitBox">
-<<<<<<< HEAD
-	        <button type="button" class="pink" >My</button>
-	        <button type="button" class="yellow">To Do</button>
-	        <button type="button" class="blue teamListBtn">Team</button>
-	    </div>
-	    
-	    <div class="postit pink ud">
-=======
 	        <button type="button" class="pink">My</button>
 	        <button type="button" class="yellow planList">Plan</button>
 	        <button type="button" class="blue teamListBtn">Team</button>
 	    </div>
 	    <div class="postit pink">
->>>>>>> master
 	        <div class="left"></div>
 	        <div id="userInfo">
 	            <div id="userPT"></div>
@@ -40,12 +31,7 @@
 	            
 	        </div>
 	    </div>
-<<<<<<< HEAD
-	    
-	    <div class="postit yellow">
-=======
 	    <div class="postit yellow none">
->>>>>>> master
 	        <div class="left"></div>
 	        <div id="todoList">
 	            <div id="pListTB">
