@@ -63,6 +63,14 @@
   	  <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
    
+   <definition name="replyForm(admin)" extends="baseLayout">
+      <put-attribute name="title" value="답글 작성 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout)_admin.jsp" />
+        <put-attribute name="side" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/board/replyForm.jsp" />
+  	  <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+   
     <!-- 글 상세목록 페이지 -->
    <definition name="viewArticle" extends="baseLayout">
       <put-attribute name="title" value="글 작성 페이지" />

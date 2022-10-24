@@ -424,6 +424,21 @@ public class BoardController{
 		// 답글 쓰기 창으로 이동
 		@RequestMapping(value ="/board/replyForm.do", method = RequestMethod.GET)
 		public String replyForm(HttpServletRequest request, Model model) {
+			
+			HttpSession session = request.getSession();
+			SignUpInDTO adminCheck = (SignUpInDTO) session.getAttribute("userInfo");
+			String userId = adminCheck.getId();
+			if("admin".equals(userId)) {
+				System.out.println("답글 쓰기 창으로 이동");
+				int b_articleNo = Integer.parseInt(request.getParameter("b_articleNo"));
+				int b_field = Integer.parseInt(request.getParameter("b_field"));
+				model.addAttribute("b_articleNo" , b_articleNo);
+				model.addAttribute("b_field" , b_field);
+				SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+				model.addAttribute("userInfo", userInfo);
+				return "replyForm(admin)";
+			}else {
+			
 			System.out.println("답글 쓰기 창으로 이동");
 			int b_articleNo = Integer.parseInt(request.getParameter("b_articleNo"));
 			int b_field = Integer.parseInt(request.getParameter("b_field"));
@@ -432,6 +447,7 @@ public class BoardController{
 			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 			model.addAttribute("userInfo", userInfo);
 			return "replyForm";
+			}
 		}
 		
 		// 답글 쓰기 완료

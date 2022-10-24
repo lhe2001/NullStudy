@@ -111,6 +111,9 @@
 						 , ALLMEMBER a 
 						 <where>
 						 and b.userkey = a.userkey
+						 <if test="list_sel !=0">
+							and b.b_field =  #{b_field }
+						</if>
 							<choose>
 								<when test="search_field == 1">
 									and lower(b.b_title) like lower('%'||#{search_bar }||'%') 
@@ -209,10 +212,8 @@
 					where b_key = #{b_key}
 			</select>
 			
-<<<<<<< HEAD
-=======
 		<!--  댓글 수정 -->	
-			<update id="modifyComment" parameterType="commentDTO">
+			<update id="modifyComment"  parameterType="commentDTO">
 				update board_com set
 				b_c_comment = #{b_c_comment }
 				where b_c_key = #{b_c_key}
@@ -241,5 +242,4 @@
 <!-- 					on a.b_key = b.b_key  -->
 <!-- 				group by a.b_title ,a.b_content , a.b_imagefile -->
 <!-- 			</select> -->
->>>>>>> master
 </mapper>
