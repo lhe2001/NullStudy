@@ -1,123 +1,13 @@
 window.addEventListener("load", teamInfoOnload);
    function teamInfoOnload(){
-    console.log(111)
-   	reviseTeamInfo();
-    leWrite();
     dailyMemoRevise();
     dDay();
     getMemberSummary();
     preClick();
    }
 
-//팀정보 수정
-function reviseTeamInfo(){
 
-    document.querySelector(".revise").addEventListener("click",function(){
-        console.log("click")
-        document.querySelector("#reviseTeam").classList.remove("hide");
-        document.querySelector("#teamInfo").classList.add("hide");
-    })
-    document.querySelector(".back").addEventListener("click",function(){
-        document.querySelector("#reviseTeam").classList.add("hide");
-        document.querySelector("#teamInfo").classList.remove("hide");
-    })
-    document.querySelector("#reviseTeam input[type='submit']").addEventListener("click",function(){
-        const revise = confirm('수정 하시겠습니까?');
-    	let t_key = $(".t_key").val();
-    	let t_intro = $(".t_intro").val();
-    	let t_field = $(".t_field").val();
-    	let userKey = $(".t_leader").val();
-    	
-        if(revise == true){
-        	if(t_intro.trim() == ''){
-        		alert('빈칸을 입력해주세요');
-        	}else {
-	        	let info = { 
-	        			t_key : t_key,
-	        			t_intro : t_intro,
-	        			t_field : t_field,
-	        			userKey : userKey 
-	        	};
-	        	$.ajax({
-					url: "/project/teamRest/updateTeamInfo.do",
-					type: "post",
-					contentType: "application/json",
-					data: JSON.stringify(info),
-					success: function(data){
-						location.reload();
-					},
-					error:function(){
-						alert("에러발생!!")
-					}
-				});
-        	}
-        }
-    })
-   }
 
-//조장한마디 수정
-function leWrite(){
-    document.querySelector(".reviseW").addEventListener("click",function(){
-        document.querySelector(".reivseWrite").classList.remove("hide");
-        document.querySelector(".leadersWrite").classList.add("hide");
-    })
-    document.querySelector(".leBack").addEventListener("click",function(){
-        document.querySelector(".reivseWrite").classList.add("hide");
-        document.querySelector(".leadersWrite").classList.remove("hide");
-    })
-    document.querySelector(".reivseWrite .rBtn2").addEventListener("click",function(event){
-        event.preventDefault();
-        const revise2 = confirm('수정 하시겠습니까???')
-        if(revise2 == true){
-        	let t_key = $(".t_key").val();
-        	let t_lMemo = $(".lMemo").val();
-        	
-        	let info = { 
-        			t_key : t_key,
-        			t_lMemo : t_lMemo 
-        	};
-        	
-        	$.ajax({
-			url: "/project/teamRest/updateTeamInfo.do",
-			type: "post",
-			contentType: "application/json",
-			data: JSON.stringify(info),
-			success: function(data){
-				location.reload();
-			},
-			error:function(){
-				alert("에러발생!!")
-			}
-			});
-        }
-    })
-}
-
-//멤버강퇴
-function kickMemberOut(tm_key){
-	 const revise3 = confirm('정말 강퇴 시키시겠습니까?')
-	 let t_key = $(".t_key").val();
-	 if(revise3 == true){
-        	console.log(tm_key);
-        	let info = { 
-        			tm_key : tm_key,
-        			t_key : t_key
-        	};
-        	
-        	$.ajax({
-			url: "/project/teamRest/removeMember.do",
-			type: "post",
-			contentType: "application/json",
-			data: JSON.stringify(info),
-			success: function(data){
-				location.reload();
-			},
-			error:function(){
-				alert("에러발생!!")
-			}
-			});
-        }
-}
 
 //오늘의 요약 수정
 function dailyMemoRevise(){
@@ -377,7 +267,7 @@ function getMemberSummary(){
 };
 //팀원 신청
 function newMemberRequest(t_key){
-	window.open('/project/team/newRequest.do?t_key='+t_key,'pop','location=no,width=500,height=300,top=100,left=100,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+	window.open('/project/team/newRequest_member.do?t_key='+t_key,'pop','location=no,width=500,height=300,top=100,left=100,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 };
 
 //팀삭제
@@ -420,10 +310,6 @@ function dDay(){
 //디데이 수정
 function reviseDday(t_key){
 	window.open('/project/team/reviseDday.do?t_key='+t_key,'pop','location=no,width=540,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
-}
-//챌린지 수정
-function resetChallenge(t_key){
-	window.open('/project/team/updateChallenge.do?t_key='+t_key,'pop','location=no,width=500,height=400,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
 //챌린지에 출석하기
 function attendChallenge(t_key){

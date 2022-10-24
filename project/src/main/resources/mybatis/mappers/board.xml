@@ -110,9 +110,15 @@
 						 , ALLMEMBER a 
 						 <where>
 						 and b.userkey = a.userkey
+<<<<<<< HEAD
 						 <if test="b_field2 !=0 or b_field2 !=-1">
 							and b.B_field = #{b_field2 }
 							</if>
+=======
+						 <if test="list_sel !=0">
+							and b.b_field =  #{b_field }
+						</if>
+>>>>>>> master
 							<choose>
 								<when test="search_field == 1">
 									and lower(b.b_title) like lower('%'||#{search_bar }||'%') 

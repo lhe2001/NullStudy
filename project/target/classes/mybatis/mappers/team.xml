@@ -85,7 +85,36 @@
 		WHERE TR_RESULT ='N' AND m.T_KEY = a.T_KEY and m.userkey=#{userKey}
 	</select>
 	
+	<select id="getLatestChallenge" resultType="challengeDTO" parameterType="int">
+		SELECT * 
+		FROM (SELECT * FROM TEAMCHALLENGE 
+			WHERE t_key = #{t_key}
+			ORDER BY tc_key DESC)
+		WHERE rownum <![CDATA[<= 1]]>
+	</select>
 	
+	<select id="getChallengeList" resultType="challengeDTO" parameterType="int">
+		SELECT * from TCSummary
+		where tc_key = #{tc_key} and userKey = #{userKey}
+		order by tcs_key
+	</select>
+	
+	<select id="getSummary" resultType="challengeDTO" parameterType="challengeDTO">
+		SELECT s.TCS_KEY ,s.USERKEY ,s.TCS_SUMMARY ,t.TC_KEY ,t.TC_TITLE ,t.T_KEY  from TCSummary s, TeamChallenge t
+		where t.tc_key = s.tc_key and s.tcs_key = #{tcs_key}
+	</select>
+	
+	<select id="getMyHistory" resultType="challengeDTO" parameterType="challengeDTO">
+			SELECT DISTINCT t.TC_KEY ,t.TC_TITLE ,t.T_KEY , s.USERKEY, count(TCS_KEY)AS length  FROM TEAMCHALLENGE t , TCSUMMARY s
+			WHERE t.TC_KEY = s.TC_KEY AND t_key = #{t_key} AND userkey = #{userKey}
+			GROUP BY t.TC_KEY,t.TC_TITLE,t.t_key,s.USERKEY 
+	</select>
+	
+	<select id="getTCkey" resultType="int" parameterType="int">
+			SELECT TC_KEY FROM TEAMCHALLENGE t 
+			WHERE T_KEY = #{t_key}
+	</select>
+
 <!-- UPDATE -->
 	
 	<update id="updateTeamInfo" parameterType="teamInfoDTO">
@@ -118,11 +147,24 @@
 		WHERE userKey = #{userKey} AND t_key = #{t_key}
 	</update>
 	
-	<update id="updateDday" parameterType="TeamInfoDTO">
-		update allteam
+	<update id="updateDday" parameterType="teamInfoDTO">
+		update AllTeam
 		set t_day= #{t_day}
 		where t_key= #{t_key}
 	</update>
+	
+	<update id="reviseSummary" parameterType="challengeDTO">
+		update TCSummary
+		set tcs_summary= #{tcs_summary}
+		where tcs_key= #{tcs_key}
+	</update>
+	
+	<update id="updateChallengeTitle" parameterType="challengeDTO">
+		update TEAMCHALLENGE
+		set tc_title= #{tc_title}
+		where tc_key= #{tc_key}
+	</update>
+
 	
 <!-- INSERT -->
 
@@ -148,6 +190,18 @@
 		insert into TEAMMEMBER
 		(tm_key,t_key,userkey)
 		values(tm_key_seq.nextval,#{t_key},#{userKey})
+	</insert>
+	
+	<insert id="addChallenge" parameterType="challengeDTO">
+		insert into TeamChallenge
+		(tc_key,tc_title,t_key)
+		values(tc_key_seq.nextval,#{tc_title},#{t_key})
+	</insert>
+	
+	<insert id="attendChallenge" parameterType="challengeDTO">
+		insert into TCSummary
+		(tcs_key,userkey,tc_key)
+		values(tcs_key_seq.nextval,#{userKey},#{tc_key})
 	</insert>
 	
 <!-- DELETE -->
@@ -179,6 +233,20 @@
 		DELETE FROM allTeam
 		WHERE t_key= #{t_key}
 	</delete>
+	
+	<delete id="deleteTeam_summary" parameterType="java.util.List">
+		DELETE FROM TCSUMMARY
+		WHERE tc_key in
+		<foreach item="tc_key" collection="list" open="(" separator="," close=")" >
+		 #{tc_key}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteTeam_challenge" parameterType="int">
+		DELETE FROM TEAMCHALLENGE
+		WHERE t_key= #{t_key}
+	</delete>
+	
 	
 	<delete id="deleteRequest" parameterType="memberRequestDTO">
 		DELETE FROM memberRequest

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.teampro.team.dto.ChallengeDTO;
 import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
@@ -94,7 +95,26 @@ public class TeamDAOImpl implements TeamDAO {
 		
 		return map;
 	}
-	
+	//latest challenge 가져오기
+	@Override
+	public ChallengeDTO getLatestChallenge(int t_key) {
+		return sqlSession.selectOne("mapper.team.getLatestChallenge",t_key);
+	}
+	//나의 현재 챌린지 상태 가져오기
+	@Override
+	public List getChallengeList(ChallengeDTO dto) {
+		return sqlSession.selectList("mapper.team.getChallengeList",dto);
+	}
+	//나의 현재 챌린지 서머리 가져오기
+	@Override
+	public ChallengeDTO getSummary(ChallengeDTO dto) {
+		return sqlSession.selectOne("mapper.team.getSummary",dto);
+	}
+	//지난 챌린지 가져오기 
+	@Override
+	public List getMyHistory(ChallengeDTO dto) {
+		return sqlSession.selectList("mapper.team.getMyHistory",dto);
+	}
 	//>>>>>>>>>>>>>>>UPDATE 수정하기>>>>>>>>>>>>>>
 	//팀정보 업데이트 하기
 	@Override
@@ -137,7 +157,18 @@ public class TeamDAOImpl implements TeamDAO {
 	//디데이 수정하기
 	@Override
 	public int updateDday(TeamInfoDTO dto) {
+		logger.info("dto.getT_day()"+dto.getT_day());
 		return sqlSession.update("mapper.team.updateDday",dto);
+	}
+	//revise Summary
+	@Override
+	public int reviseSummary(ChallengeDTO dto) {
+		return sqlSession.update("mapper.team.reviseSummary",dto);
+	}
+	//updateChallengeTitle
+	@Override
+	public int updateChallengeTitle(ChallengeDTO dto) {
+		return sqlSession.update("mapper.team.updateChallengeTitle",dto);
 	}
 	
 	//>>>>>>>>>>>>>>>DELETE 삭제하기>>>>>>>>>>>>>>
@@ -154,10 +185,20 @@ public class TeamDAOImpl implements TeamDAO {
 	}
 	//팀삭제
 	@Override
-	public int deleteTeam(int t_key) {
-		sqlSession.delete("mapper.team.deleteTeam_request",t_key);
-		sqlSession.delete("mapper.team.deleteTeam_member",t_key);
+	public int deleteTeam(int t_key, List list) {
+		if(list.size()>0) {
+			sqlSession.delete("mapper.team.deleteTeam_summary",list);
+		}else {
+			sqlSession.delete("mapper.team.deleteTeam_challenge",t_key);
+			sqlSession.delete("mapper.team.deleteTeam_request",t_key);
+			sqlSession.delete("mapper.team.deleteTeam_member",t_key);
+		}
 		return sqlSession.delete("mapper.team.deleteTeam_team",t_key);
+	}
+	//getTCkey
+	@Override
+	public List getTCkey(int t_key) {
+		return sqlSession.selectList("mapper.team.getTCkey",t_key);
 	}
 	//가입요청 취소하기 & 거절된 요청 삭제하기
 	@Override
@@ -171,6 +212,11 @@ public class TeamDAOImpl implements TeamDAO {
 	public int memberRequest(MemberRequestDTO dto) {
 		return sqlSession.insert("mapper.team.memberRequest",dto);
 	}
+	//newChallenge
+	@Override
+	public int addChallenge(ChallengeDTO dto) {
+		return sqlSession.insert("mapper.team.addChallenge",dto);
+	}
 
 	//새팀 생성하고 member넣기
 	@Override
@@ -181,7 +227,12 @@ public class TeamDAOImpl implements TeamDAO {
 		
 		return sqlSession.insert("mapper.team.addNewTeam_member",dto);
 	}
-
+	
+	//challenge 출석
+		@Override
+		public int attendChallenge(ChallengeDTO dto) {
+			return sqlSession.insert("mapper.team.attendChallenge",dto);
+		}
 	
 
 	

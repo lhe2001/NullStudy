@@ -96,6 +96,18 @@
             box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.1);
             line-height: 40px;
         }
+        .drop a:link {
+        	color:black;
+        	text-decoration:none;
+        }
+         .drop a:visited {
+        	color:black;
+        	text-decoration:none;
+        }
+         .drop a:hover {
+        	cursor: pointer;
+            color:rgba(0, 0, 0, 0.5);
+        }
         .drop ul {
             list-style:none;
         }
@@ -330,33 +342,52 @@
             background-color: #f382ac;
             cursor: pointer;
         }
+        #userDataChange {
+            font-size: 12px;
+            color:#f2edea;
+            border: none;
+            border-radius: 5px;
+            width:80px;
+            height: 20px;
+            background-color: #f382ac;
+            cursor: pointer;
+        }
         /* todoList */
         #todoList {
             margin: 10px 0;
             font-size: 12px;
             text-align: left;
             accent-color: #69c7b5;
+            overflow: auto;
+        }
+        #todoList th{
+        	text-align: center;
         }
         #todoList td{
             border-bottom: 1px dashed black;
+            padding: 3px 0;
+            width: 200px;
         }
         #todoList td:nth-child(2){
            width:150px;
         }
         #todoList button {
-            margin-top: 5px;
-            margin-bottom: 5px;
+            margin: 5px 50px;
             width: 50px;
             background-color: white;
             border: none;
             border-radius: 5px;
             box-shadow: 5px 1px 10px rgba(0, 0, 0, 0.514);
             cursor: pointer;
+            text-align: center;
         }
         #todoText {
             width: 150px;
             font-size: 12px;
+            padding-left: 5px;
+            overflow: hidden;
         }
+        
         /* TeamInfo */
         #TeamInfoP {
             box-sizing: border-box;

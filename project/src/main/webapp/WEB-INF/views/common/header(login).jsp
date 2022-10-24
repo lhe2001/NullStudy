@@ -3,13 +3,8 @@
 	contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" 
 %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>로그인헤더</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -36,7 +31,6 @@
     
     </script>
     
-</head>
 <body>
 <div id="wrapper">
         <header class="mainHeader">
@@ -74,4 +68,3 @@
         </header>
 </div>
 </body>
-</html>

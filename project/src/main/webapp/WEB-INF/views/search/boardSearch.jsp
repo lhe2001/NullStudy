@@ -41,7 +41,7 @@
 	
 </div>
 
-<c:if test="${listNull == 1}">
+<c:if test="${list.size() == 0}">
 	<h5 class="searchW">해당 ' ${search} '에 대한 게시글이 없습니다</h5>
 	<!-- 검색어에 대한 조회 데이터가 없을 때 출력 -->
 </c:if>
@@ -57,18 +57,48 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="dto" items="${list}" varStatus="status">
-				<tr class="searchTr">
-					<td>${status.count}</td>
-					<td class="searchTd">
-					<a href="/teampro/board/viewArticle.do?b_articleNo=${dto.b_articleNo }">${dto.b_title }</a>
-					</td>
-					<td class="searchTd">${dto.nickName }</td>
-					<td>${dto.b_writedate }</td>
-				</tr>
-			</c:forEach>
+			<c:if test="${list!=null}">
+				<c:forEach var="dto" items="${list}" varStatus="status">
+					<tr class="searchTr">
+						<td>${status.count}</td>
+						<td class="searchTd">
+						<a href="/teampro/board/viewArticle.do?b_articleNo=${dto.b_articleNo }">${dto.b_title }</a>
+						</td>
+						<td class="searchTd">${dto.nickName }</td>
+						<td>${dto.b_writedate }</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+			<c:if test="${list.size() == 0}">
+				<tr class="listNullTr">
+					<td colspan="4">조회된 내용이 없습니다.</td>
+				<tr>
+			</c:if>
 		</tbody>
 	</table>
 </div>
+
+<c:if test="${list.size() != 0}">
+	<div class="pagingDiv">
+		<c:set var="dto" value="${dto}"/>
+		<!-- paging -->
+		<c:if test="${dto.firstNo ne 1}">
+			<a href="/project/boardSearch.do?pageNum=${dto.firstNo-1}&search=${search}" font-weight:bold; class="pagingA"> 이전 </a>
+		</c:if>
+	
+		<c:forEach var="i" begin="${dto.firstNo}" end="${dto.lastNo}">
+			<c:if test="${dto.pageNum eq i }">
+				<a href="/project/boardSearch.do?pageNum=${i }&search=${search}" style="color:red;font-weight:bold;">${i}</a>&nbsp;
+			</c:if>
+			<c:if test="${ not (dto.pageNum eq i) }">
+				<a href="/project/boardSearch.do?pageNum=${i }&search=${search}">${i }</a>&nbsp;
+			</c:if>
+		</c:forEach>
+	
+		<c:if test="${dto.lastNo ne dto.lastPage}">
+			<a href="/project/boardSearch.do?pageNum=${dto.lastNo+1}&search=${search}" font-weight:bold; class="pagingA"> 다음 </a>
+		</c:if>
+	</div>
+</c:if>
 
 </body>

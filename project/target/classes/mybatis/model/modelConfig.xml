@@ -35,6 +35,7 @@
 		<typeAlias type="com.spring.teampro.team.dto.MyTeamListDTO" alias="myTeamListDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.team.dto.TeamInfoDTO" alias="teamInfoDTO"></typeAlias>
 		<typeAlias type="com.spring.teampro.team.dto.TeamMemberDTO" alias="teamMemberDTO"></typeAlias>
+		<typeAlias type="com.spring.teampro.team.dto.ChallengeDTO" alias="challengeDTO"></typeAlias>
 <!-- ======= -->
 
 		<typeAlias type="com.spring.teampro.team.dto.MyTeamListDTO" alias="myTeamListDTO"></typeAlias>
@@ -52,6 +53,9 @@
 		
 		<!-- search DTO 별칭 -->
 		<typeAlias type="com.spring.teampro.search.dto.SearchDTO" alias="searchDTO"></typeAlias>
+		
+		<!-- profile DTO 별칭 -->
+		<typeAlias type="com.spring.teampro.profile.dto.ProfileUpdateDTO" alias="profileUpdateDTO"></typeAlias>
 	</typeAliases>
 	
 

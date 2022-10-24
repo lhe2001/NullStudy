@@ -26,7 +26,18 @@ public class SearchDTO {
 	private String t_name;
 	private Date t_create;
 	
+	// search
+	private String search;
 	
+	// Paging
+	private int start;
+	private int end;
+	private int firstNo;
+	private int lastNo;
+	private int lastPage;
+	private int pageNum;
+	
+
 	
 	// db allmember 테이블 컬럼 getter setter
 	public int getUserKey() {
@@ -120,4 +131,50 @@ public class SearchDTO {
 		this.t_create = t_create;
 	}
 	
+	// search
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	
+	// Paging
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	public int getFirstNo() {
+		return firstNo;
+	}
+	public void setFirstNo(int firstNo) {
+		this.firstNo = firstNo;
+	}
+	public int getLastNo() {
+		return lastNo;
+	}
+	public void setLastNo(int lastNo) {
+		this.lastNo = lastNo;
+	}
+	public int getLastPage() {
+		return lastPage;
+	}
+	public void setLastPage(int lastPage) {
+		this.lastPage = lastPage;
+	}
+	public int getPageNum() {
+		return pageNum;
+	}
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
 }

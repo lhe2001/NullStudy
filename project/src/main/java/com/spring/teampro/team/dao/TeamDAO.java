@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.spring.teampro.team.dto.ChallengeDTO;
 import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
@@ -32,7 +33,7 @@ public interface TeamDAO {
 
 	int acceptMember(MemberRequestDTO dto);
 
-	int deleteTeam(int t_key);
+	int deleteTeam(int t_key, List list);
 
 	int updateMemberCount(int t_key);
 
@@ -51,6 +52,24 @@ public interface TeamDAO {
 	Map getMyRequest(int userkey);
 
 	int cancleRequest(MemberRequestDTO dto);
+
+	int addChallenge(ChallengeDTO dto);
+
+	ChallengeDTO getLatestChallenge(int t_key);
+
+	int attendChallenge(ChallengeDTO dto);
+
+	List getChallengeList(ChallengeDTO dto);
+
+	ChallengeDTO getSummary(ChallengeDTO dto);
+
+	int reviseSummary(ChallengeDTO dto);
+
+	List getMyHistory(ChallengeDTO dto);
+
+	int updateChallengeTitle(ChallengeDTO dto);
+
+	List getTCkey(int t_key);
 
 
 
