@@ -33,7 +33,7 @@ public interface TeamDAO {
 
 	int acceptMember(MemberRequestDTO dto);
 
-	int deleteTeam(int t_key);
+	int deleteTeam(int t_key, List list);
 
 	int updateMemberCount(int t_key);
 
@@ -68,6 +68,8 @@ public interface TeamDAO {
 	List getMyHistory(ChallengeDTO dto);
 
 	int updateChallengeTitle(ChallengeDTO dto);
+
+	List getTCkey(int t_key);
 
 
 

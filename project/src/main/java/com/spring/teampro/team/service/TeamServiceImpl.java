@@ -143,7 +143,8 @@ public class TeamServiceImpl implements TeamService {
 	//팀삭제
 	@Override
 	public int deleteTeam(int t_key) {
-		return dao.deleteTeam(t_key);
+		List list = dao.getTCkey(t_key);
+		return dao.deleteTeam(t_key,list);
 	}
 	//디데이 가져오기
 	@Override

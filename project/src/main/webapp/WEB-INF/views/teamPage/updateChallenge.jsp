@@ -57,6 +57,7 @@
 				data: JSON.stringify(info),
 				success: function(data){
 					opener.location.reload();
+					location.reload();
 				},
 				error:function(){
 					alert("에러발생!!")

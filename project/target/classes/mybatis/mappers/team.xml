@@ -109,6 +109,11 @@
 			WHERE t.TC_KEY = s.TC_KEY AND t_key = #{t_key} AND userkey = #{userKey}
 			GROUP BY t.TC_KEY,t.TC_TITLE,t.t_key,s.USERKEY 
 	</select>
+	
+	<select id="getTCkey" resultType="int" parameterType="int">
+			SELECT TC_KEY FROM TEAMCHALLENGE t 
+			WHERE T_KEY = #{t_key}
+	</select>
 
 <!-- UPDATE -->
 	
@@ -228,6 +233,20 @@
 		DELETE FROM allTeam
 		WHERE t_key= #{t_key}
 	</delete>
+	
+	<delete id="deleteTeam_summary" parameterType="java.util.List">
+		DELETE FROM TCSUMMARY
+		WHERE tc_key in
+		<foreach item="tc_key" collection="list" open="(" separator="," close=")" >
+		 #{tc_key}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteTeam_challenge" parameterType="int">
+		DELETE FROM TEAMCHALLENGE
+		WHERE t_key= #{t_key}
+	</delete>
+	
 	
 	<delete id="deleteRequest" parameterType="memberRequestDTO">
 		DELETE FROM memberRequest
