@@ -233,8 +233,8 @@ public class searchController {
 		
 		System.out.println("Controller userSearch.do");
 		System.out.println(search);
-		
-		int _pageNum = 0;
+
+		int _pageNum = 1;
 		String str_pageNum = request.getParameter("pageNum");
 		if(str_pageNum != null) {
 			_pageNum = Integer.parseInt(str_pageNum);
@@ -246,7 +246,6 @@ public class searchController {
 		Map map = new HashMap();
 		ModelAndView view = new ModelAndView();
 		SearchDTO dto = new SearchDTO(); 
-		
 		dto.setSearch(search);
 		
 		int count = Count.nickNameSearchUserSelectCount(dto);
@@ -274,7 +273,7 @@ public class searchController {
 		System.out.println("Controller paging 입장");
 		
 		int pageNum = 1;		// 처음 페이지
-		int countPerPage = 5;	// 한 페이지당 보여줄 글 개수
+		int countPerPage = 15;	// 한 페이지당 보여줄 글 개수
 		pageNum = _pageNum;	    // 현재 페이지
 		
 		int lastPage = (int)Math.ceil(((double)count / countPerPage)); // 마지막 페이징번호 링크

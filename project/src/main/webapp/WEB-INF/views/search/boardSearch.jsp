@@ -41,21 +41,11 @@
 	
 </div>
 
-
 <c:if test="${list.size() == 0}">
 	<h5 class="searchW block">해당 ' ${search} '에 대한 게시글이 없습니다</h5>
 	<!-- 검색어에 대한 조회 데이터가 없을 때 출력 -->
 </c:if>
 	
-<select class="pagingOption block" name="pagingValue" id="pagingValue">
-	<option value="10" selected>10</option>
-	<option value="15">15</option>
-	<option value="30">30</option>
-    <option value="50">50</option>
-    <option value="100">100</option>
-</select>
-	
-
 <div class="searchTbWrap">
 	<table class="searchTb">
 		<thead>

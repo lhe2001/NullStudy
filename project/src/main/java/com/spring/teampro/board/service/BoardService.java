@@ -60,4 +60,7 @@ public interface BoardService {
 		
 		//공지글만 가져오는 메소드
 		public List<CommentDTO> getNoticeList();
+		
+		// 셀렉트박스 메소드(ajax)
+		public List<BoardDTO> getSearch(BoardDTO dto,int pageNum, int amount);
 }
