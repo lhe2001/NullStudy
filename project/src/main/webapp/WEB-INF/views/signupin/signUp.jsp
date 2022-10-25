@@ -29,11 +29,8 @@
 		
 		//아이디 중복 체크 
 		$("#idCheck_btn").off("click").on("click", function(){
-			
 			if ($('.idcheck').val() != '') {
-				
-				$.ajax({
-				
+				$.ajax({				
 					type: 'GET',
 					url: '/project/idcheck.do',
 					data: 'id=' + $('.idcheck').val(),
@@ -49,20 +46,16 @@
 								$('.btn_s_wrap').removeClass('hide')
 							}else{
 								$('.btn_s_wrap').addClass('hide')
-							}
-							
+							}	
 						}else{
 							$('#result1').text('이미 사용중인 아이디입니다.');
 							$('.btn_s_wrap').addClass('hide')
-
 						}
 					},
-					
 					error: function(a, b, c) {
 		                console.log(a, b, c);
 					}	
 				})
-				
 			} else {
 		        alert('아이디를 입력하세요.');
 		        $('.idcheck').focus();				
