@@ -156,20 +156,23 @@
  // 댓글 수정
 
  	function update(){
- 	 $("#edit_comment").off("click").on("click", function(){
-			document.querySelector("#view_com").removeAttribute("readonly");
-			document.querySelector("#edit_comment").classList.add("hidden");
-			
- 				$("#real_edit_comment")[0].classList.remove("hidden");	
- 				$("#real_edit_comment").removeClass("hidden");	
+ 	 $(".edit_comment").off("click").on("click", function(e){
+ 			let edit = e.target.getAttribute("data-edit_b_c_key");
+ 			let button = e.target.parentNode.querySelector("#real_edit_comment");
+ 			console.log(button);
+ 			console.log(e.target);
+ 			e.target.style.display = "none";
+ 			button.style.display = "block";
+ 			let view_com = e.target.parentNode.querySelector(".view_com");
+ 			view_com.removeAttribute("readonly");
  		})
  	}
  	
   	function updateComment(){
-			 $("#real_edit_comment").off("click").on("click", function(){
-				 let b_c_key = $(this).parent().find(".b_c_key").val();
-    			console.log(b_c_key);
-    			let b_c_comment = $("#view_com").val();
+			 $(".real_edit_comment").off("click").on("click", function(e){
+				 let b_c_key = $(this).attr("data-real_edit_b_c_key");
+    			console.log(">>>>>ffff",b_c_key);
+    			let b_c_comment = $(this).parent().find(".view_com").val();
 				
     			let info = {
 							b_c_key : b_c_key,
@@ -266,14 +269,14 @@
 			<c:forEach var="comment" items="${comment }" varStatus="num">
 					<div>
 					<c:if test="${comment.b_key == view.b_key }">
-						<input type = "text" id = "view_com" value = "${comment.b_c_comment }" readonly>
+						<input type = "text" id = "view_com" class = "view_com" value = "${comment.b_c_comment }" readonly>
 							<div id = "comment_name" style ="float : left; margin-left : 20px;  ">
 								작성자 : ${comment.nickName }	${comment.b_c_date }
 							</div>
 						<c:if test="${userInfo.userKey == comment.userKey}">
 						<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
-						<input type="button" id="edit_comment" value="수정" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
-						<input type="button" id="real_edit_comment" value="댓글수정" class ="color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+						<input type="button" id="edit_comment" value="수정" data-edit_b_c_key = "${comment.b_c_key } " class ="edit_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
+						<input type="button" id="real_edit_comment" value="댓글수정" data-real_edit_b_c_key = "${comment.b_c_key }" class ="real_edit_comment color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
 						</c:if>
 						<input type = "hidden" class = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
 						</c:if>
