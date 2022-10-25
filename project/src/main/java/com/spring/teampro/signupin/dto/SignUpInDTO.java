@@ -17,6 +17,15 @@ public class SignUpInDTO {
 	private Date lastTime;
 	private int photo;
 	
+	//For paging
+	private int start;
+	private int end;
+	private int firstNo;
+	private int lastNo;
+	private int lastPage;
+	private int pageNum;
+	private int count;
+	
 	
 	public String getName() {
 		return name;
@@ -96,6 +105,50 @@ public class SignUpInDTO {
 		return "SignUpInDTO [userKey=" + userKey + ", id=" + id + ", pw=" + pw + ", rePw=" + rePw + ", name=" + name
 				+ ", sex=" + sex + ", nickName=" + nickName + ", email=" + email + ", joinDate=" + joinDate + ", intro="
 				+ intro + ", lastTime=" + lastTime + ", photo=" + photo + "]";
+	}
+	
+	
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	public int getFirstNo() {
+		return firstNo;
+	}
+	public void setFirstNo(int firstNo) {
+		this.firstNo = firstNo;
+	}
+	public int getLastNo() {
+		return lastNo;
+	}
+	public void setLastNo(int lastNo) {
+		this.lastNo = lastNo;
+	}
+	public int getLastPage() {
+		return lastPage;
+	}
+	public void setLastPage(int lastPage) {
+		this.lastPage = lastPage;
+	}
+	public int getPageNum() {
+		return pageNum;
+	}
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 }
