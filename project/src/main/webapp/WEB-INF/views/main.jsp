@@ -131,9 +131,9 @@ function alretTopArcticle(){
 </script>
 <body>
 
-<%-- 	<c:if test="${searchLoginDo=='searchLoginDo'}"> --%>
-<!-- 		<script>alert("로그인 후 사용해주세요.");</script> -->
-<%-- 	</c:if> --%>
+	<c:if test="${searchLoginDo=='searchLoginDo'}">
+		<script>alert("로그인 후 사용해주세요.");</script>
+	</c:if>
 
     <div>
     <div id="wrapper">
