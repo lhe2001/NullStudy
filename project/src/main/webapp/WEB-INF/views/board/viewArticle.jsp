@@ -262,6 +262,7 @@
 			<h3 style = "color:#353866"> 댓글 입니다. </h3>
 		<div id = "view_comment">
 			<c:forEach var="comment" items="${comment }" varStatus="num">
+					<div>
 					<c:if test="${comment.b_key == view.b_key }">
 						<input type = "text" id = "view_com" value = "${comment.b_c_comment }" readonly>
 							<div id = "comment_name" style ="float : left; margin-left : 20px;  ">
@@ -274,6 +275,7 @@
 						</c:if>
 						<input type = "hidden" class = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
 						</c:if>
+						</div>
 			</c:forEach>
 		</div>
 				<!-- 히든으로 commentcontroller에 줄 값 -->
