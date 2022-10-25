@@ -32,15 +32,15 @@
                     <li class="navtap">My Study <i class="fa-solid fa-book-open"></i>
                         <div class="drop l1">
                             <ul>
-                               <li>My Team</li>
-                               <li>My Study</li>
+                               <li>Calendar</li>
+                               <li>Memo</li>
                             </ul>
                         </div>
                     </li>
                     <li class="navtap">Community <i class="fa-regular fa-comment"></i>
                         <div class="drop l2">
                             <ul>
-                                <li>Free Board</li>
+                                <li>Board</li>
                                 <li></li>
                             </ul>
                         </div>
@@ -49,7 +49,7 @@
                         <div class="drop l3">
                             <ul>
                                 <li>All Team</li>
-                                <li></li>
+                                <li>My Team</li>
                             </ul>
                         </div>
                     </li>
