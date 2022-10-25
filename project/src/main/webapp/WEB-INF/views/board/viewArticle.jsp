@@ -154,54 +154,6 @@
 	}
  
  // 댓글 수정
- 	function update(){
- 	 $(".edit_comment").off("click").on("click", function(e){
-				console.log(e.target);
-				$(this).parent().find(".b_c_key").val();
- 				$(this).attr("data-b_c_key_edit");
- 				
- 				$(".delete_comment").attr("data-b_c_key");
- 					document.querySelector(".edit_comment").classList.add("hidden");
- 				
- 				let edit_key = $(this).parent().find(".b_c_key").val();
- 				let del_key =$(this).parent().find(".b_c_key").val();
- 				if ( edit_key == del_key){
- 					document.querySelector(".view_com").removeAttribute("readonly");
- 					$(".real_edit_comment").parent().find(".real_edit_comment").removeClass("hidden")
- 				}
-//  				console.log("bckey 1 ::" , $(this).parent().find(".b_c_key").val());
-//  				console.log("bckey 2 ::" , $(this).attr("data-b_c_key_edit"));
-//  				console.log("bckey 3 ::" , $(".delete_comment").attr("data-b_c_key"));
-//  				console.log($(".real_edit_comment").parent().find(".real_edit_comment").removeClass("hidden"));
- 		})
- 	}
-  	function updateComment(){
-			 $("#real_edit_comment").off("click").on("click", function(){
-				 let b_c_key = $(this).parent().find(".b_c_key").val();
-    			console.log(b_c_key);
-    			let b_c_comment = $("#view_com").val();
-				
-    			let info = {
-							b_c_key : b_c_key,
-							b_c_comment : b_c_comment
-	    					}
-			 
-				$.ajax({
-				url: "/project/board/updateComment.do",
-				type: "post",
-				contentType : "application/json",
-				data: JSON.stringify(info),
-				success: function(data){
-					console.log("data :", data);
-					alert("댓글이 수정되었습니다.");
-					 location.reload();
-					},
-				error:function(){
-					alert("에러발생!!")
-				}
-			});
-		})
-	}
 </script>
 	<div class = "wrapp">
 	<div class = "container">
@@ -282,7 +234,6 @@
 						<c:if test="${userInfo.userKey == comment.userKey}">
 						<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
 						<input type="button" id="edit_comment" value="수정" data-b_c_key_edit = "${comment.b_c_key }"  class ="edit_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
-						<input type="button" id="real_edit_comment" value="댓글수정" class ="real_edit_comment color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
 						</c:if>
 						<input type = "hidden" class = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
 						</c:if>
