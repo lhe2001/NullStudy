@@ -100,6 +100,7 @@
 <!-- 				</choose> -->
 <!-- 			</where> -->
 <!-- 			</select> -->
+
 			<!-- 서치 ajax-->
 			<select id="searchAllArticle" resultType="boardDTO" parameterType="java.util.HashMap">
 				select * from(
@@ -110,7 +111,7 @@
 						 , ALLMEMBER a 
 						 <where>
 						 and b.userkey = a.userkey
-							<if test="b_field2 !=0 or b_field2 != -1">
+							<if test="b_field2 !=0 and b_field2 != -1">
 							and b.B_field = #{b_field2 }
 							</if>
 							 <choose>
