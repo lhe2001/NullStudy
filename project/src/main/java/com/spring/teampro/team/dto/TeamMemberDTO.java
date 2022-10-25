@@ -13,7 +13,7 @@ public class TeamMemberDTO {
 	Date lastTime;
 	String lastTime2;
 	String intro;
-	int photo;
+	String photo;
 	
 	public int getT_key() {
 		return t_key;
@@ -57,10 +57,10 @@ public class TeamMemberDTO {
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
-	public int getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
-	public void setPhoto(int photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 	public String getLastTime2() {

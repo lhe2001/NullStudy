@@ -20,7 +20,7 @@
 	</select>
 	
 	<select id="teamMemberInfo" resultType="teamMemberDTO" parameterType="int">
-		SELECT m.T_KEY, m.TM_KEY , m.TM_JOINDATE ,m.USERKEY ,a.NICKNAME ,a.LASTTIME ,a.INTRO  
+		SELECT m.T_KEY, m.TM_KEY , m.TM_JOINDATE ,m.USERKEY ,a.NICKNAME ,a.LASTTIME ,a.INTRO , a.photo 
 		FROM teammember m, allmember a
 		WHERE m.USERKEY = a.USERKEY AND m.T_KEY = #{t_key}
 	</select>
@@ -128,6 +128,11 @@
 		SELECT count(*) FROM TCSUMMARY
 		WHERE tc_key = #{tc_key} AND to_char(tcs_date,'YYYY-MM-DD')= #{tcs_date} AND USERKEY = #{userKey}
 	</select>
+	
+	<select id="getPhoto" resultType="String" parameterType="int">
+		SELECT photo FROM allmember
+		WHERE USERKEY = #{userKey}
+	</select>
 
 <!-- UPDATE -->
 	
@@ -179,6 +184,11 @@
 		where tc_key= #{tc_key}
 	</update>
 
+	<update id="setPhoto" parameterType="profileUpdateDTO">
+		update ALLMEMBER
+		set photo = #{photo}
+		where userKey = #{userKey}
+	</update>
 	
 <!-- INSERT -->
 

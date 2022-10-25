@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
 <title>사이드포스트잇</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
@@ -18,7 +18,11 @@
 	    <div class="postit pink">
 	        <div class="left"></div>
 	        <div id="userInfo">
-	            <div id="userPT"></div>
+	            <div id="userPT" onClick="changeProfile()">
+                        <c:if test="${userInfo.photo != null}">
+		            		<img style="width:95px; height:95px; border-radius:50%;" src='/project/team/download.do?userkey=${userInfo.userKey }'>
+                        </c:if>
+	            </div>
 	            <h1 class="mainNickName">${sessionScope.userInfo.nickName}</h1>
 	            <p class="mainIntro">인사말<br>${sessionScope.userInfo.intro}</p>
 	            

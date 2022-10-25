@@ -100,7 +100,13 @@
                 </div>
             </div>
             <div id="memberDetail">
-                <div class="photo"> <img src="https://ifh.cc/g/GCpQKq.png"><br>
+                <div class="photo"> 
+                <c:if test="${userInfo.photo == null}">
+                        <img src="https://ifh.cc/g/GCpQKq.png"><br>
+                        </c:if>
+                        <c:if test="${userInfo.photo != null}">
+                        <img src="/project/team/download.do?userkey=${userInfo.userKey }"><br>
+                        </c:if>
                     <div><strong>${userInfo.nickName }</strong></div>
                 </div>
                 <div class="challenge">
@@ -187,7 +193,12 @@
                     <div class="king"><img src="https://ifh.cc/g/6bBq87.png"></div>
                 </c:if>
                     <div class="photo">
+                    	<c:if test="${member.photo == null}">
                         <img src="https://ifh.cc/g/GCpQKq.png">
+                        </c:if>
+                        <c:if test="${member.photo != null}">
+                        <img src="/project/team/download.do?userkey=${member.userKey }">
+                        </c:if>
                     </div>
                     <div class="info leaderInfo">
                         <table>

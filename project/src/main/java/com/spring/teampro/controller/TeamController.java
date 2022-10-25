@@ -1,5 +1,11 @@
 package com.spring.teampro.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +22,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.spring.teampro.profile.dto.ProfileUpdateDTO;
 import com.spring.teampro.team.dto.ChallengeDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
 import com.spring.teampro.team.dto.TeamMemberDTO;
@@ -27,9 +36,103 @@ public class TeamController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TeamController.class);
 	
+	private static String image = "C:\\profile_file";
+	
 	@Autowired
 	TeamService service;
 	
+	//프로필 사진 업데이트 하기
+	@RequestMapping(value="/team/changeProfile.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String changeProfile(HttpServletRequest request, HttpServletResponse response,
+			Model model
+			) {
+		HttpSession session = request.getSession();
+		int userkey  = (Integer) session.getAttribute("userKey");
+		
+		return "teamPage/changeProfile";
+	}
+	
+	//프로필사진 가져오기
+	@RequestMapping(value="/team/download.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public void getProfile(@RequestParam("userkey") int userkey,
+			HttpServletRequest request, HttpServletResponse response,
+			Model model
+			) throws IOException {
+		
+		logger.info("profile"+userkey);
+		
+		OutputStream out = response.getOutputStream();
+		
+		String photo = service.getPhoto(userkey);
+		String downFile = image + "\\temp\\" + photo;
+		
+		File f = new File(downFile);
+		FileInputStream in = new FileInputStream( f );
+		// 버퍼를 이용해 8kb씩 전송
+		byte[] buf = new byte[1024 * 8];
+		while(true) {
+			int count = in.read(buf);
+			if(count == -1) {
+				break;
+			}
+			out.write(buf, 0, count);
+		}
+		
+		in.close();
+		out.close();
+	}
+	
+	//프로필 사진 업로드
+	@RequestMapping(value="/team/upload.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String upload(MultipartHttpServletRequest multirequest, 
+			HttpServletResponse response,HttpServletRequest request,
+			Model model
+			) throws Exception {
+		HttpSession session = request.getSession();
+		int userkey  = (Integer) session.getAttribute("userKey");
+		
+		ProfileUpdateDTO dto = new ProfileUpdateDTO();
+		dto.setUserKey(userkey);
+		
+		Enumeration enu = multirequest.getParameterNames();
+		while(enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+			String value = multirequest.getParameter(name);
+		}
+		//파일이름 반환
+		String fileName = upload(multirequest);
+		model.addAttribute("fileName", fileName);
+		dto.setPhoto(fileName);
+		
+		int result = service.setPhoto(dto);
+		logger.info(">>>>>>>>>upload"+fileName +"//" +result);
+		
+		return "teamPage/changeProfile";
+	}
+	
+	//파일 이름 가져오는 메소드
+	private String upload(MultipartHttpServletRequest multipartRequest)
+			throws Exception {
+
+		String photo = null;
+		
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		
+		while(fileNames.hasNext()) {
+			String fileName = fileNames.next();
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			photo = mFile.getOriginalFilename();
+			File file = new File(image + "\\temp\\" + fileName);
+			System.out.println("file ===> " + file);
+			if(mFile.getSize() !=0) {
+				if(!file.exists()) {
+					file.getParentFile().mkdirs();
+					mFile.transferTo(new File(image + "\\temp\\" + photo));
+				}
+			}
+		}
+		return photo;
+	}
 	
 	//>>>>>>>>>>>>>>>>myTeamList 페이지 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	//myTeamList로 가기 
