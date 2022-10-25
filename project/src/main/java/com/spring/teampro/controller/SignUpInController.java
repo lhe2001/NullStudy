@@ -1,7 +1,6 @@
  package com.spring.teampro.controller;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.teampro.board.dto.BoardDTO;
 import com.spring.teampro.signupin.dto.AdminDTO;
 import com.spring.teampro.signupin.dto.SignUpInDTO;
 import com.spring.teampro.signupin.service.SignUpInService;
@@ -330,5 +330,16 @@ public class SignUpInController {
 		model.addAttribute("list", signUpInService.getMemberList());
 		return "memberList";
 	}
+	
+	//메인에 탑10 글 출력
+	@RequestMapping(value="/topArticles.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody public List<BoardDTO> getTopArticles() {
+		System.out.println("topArticles.do 접근 ");
+		List list = signUpInService.getTopArticles();
+		System.out.println(list.size());
+		return list;
+	}
+	
+	
 	
 }

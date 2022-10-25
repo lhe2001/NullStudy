@@ -41,10 +41,20 @@
 	
 </div>
 
+
 <c:if test="${list.size() == 0}">
-	<h5 class="searchW">해당 ' ${search} '에 대한 게시글이 없습니다</h5>
+	<h5 class="searchW block">해당 ' ${search} '에 대한 게시글이 없습니다</h5>
 	<!-- 검색어에 대한 조회 데이터가 없을 때 출력 -->
 </c:if>
+	
+<select class="pagingOption block" name="pagingValue" id="pagingValue">
+	<option value="10" selected>10</option>
+	<option value="15">15</option>
+	<option value="30">30</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+</select>
+	
 
 <div class="searchTbWrap">
 	<table class="searchTb">
@@ -62,7 +72,7 @@
 					<tr class="searchTr">
 						<td>${status.count}</td>
 						<td class="searchTd">
-						<a href="/teampro/board/viewArticle.do?b_articleNo=${dto.b_articleNo }">${dto.b_title }</a>
+						<a href="${pageContext.request.contextPath}/board/viewArticle.do?b_articleNo=${dto.b_articleNo }">${dto.b_title }</a>
 						</td>
 						<td class="searchTd">${dto.nickName }</td>
 						<td>${dto.b_writedate }</td>
@@ -70,34 +80,42 @@
 				</c:forEach>
 			</c:if>
 			<c:if test="${list.size() == 0}">
-				<tr class="listNullTr">
-					<td colspan="4">조회된 내용이 없습니다.</td>
+				<tr class="listNullTr searchTr">
+					<td colspan="4">[ 조회된 내용이 없습니다 ]</td>
 				<tr>
 			</c:if>
 		</tbody>
 	</table>
 </div>
 
-<c:if test="${list.size() != 0}">
+<c:if test="${dto.lastPage != 1}">
 	<div class="pagingDiv">
 		<c:set var="dto" value="${dto}"/>
 		<!-- paging -->
+		<c:if test="${dto.firstNo gt 5}">
+			<a href="/project/boardSearch.do?pageNum=${dto.firstNo-1}&search=${search}&selectValue=${selectValue}" font-weight:bold; class="pagingA"> << </a>&nbsp;
+		</c:if>
+		
 		<c:if test="${dto.firstNo ne 1}">
-			<a href="/project/boardSearch.do?pageNum=${dto.firstNo-1}&search=${search}" font-weight:bold; class="pagingA"> 이전 </a>
+			<a href="/project/boardSearch.do?pageNum=${dto.pageNum-1}&search=${search}&selectValue=${selectValue}" font-weight:bold; class="pagingA"> < </a>
 		</c:if>
 	
 		<c:forEach var="i" begin="${dto.firstNo}" end="${dto.lastNo}">
 			<c:if test="${dto.pageNum eq i }">
-				<a href="/project/boardSearch.do?pageNum=${i }&search=${search}" style="color:red;font-weight:bold;">${i}</a>&nbsp;
+				<a href="/project/boardSearch.do?pageNum=${i }&search=${search}&selectValue=${selectValue}" style="color:red;font-weight:bold;">${i}</a>&nbsp;
 			</c:if>
 			<c:if test="${ not (dto.pageNum eq i) }">
-				<a href="/project/boardSearch.do?pageNum=${i }&search=${search}">${i }</a>&nbsp;
+				<a href="/project/boardSearch.do?pageNum=${i }&search=${search}&selectValue=${selectValue}">${i }</a>&nbsp;
 			</c:if>
 		</c:forEach>
 	
 		<c:if test="${dto.lastNo ne dto.lastPage}">
-			<a href="/project/boardSearch.do?pageNum=${dto.lastNo+1}&search=${search}" font-weight:bold; class="pagingA"> 다음 </a>
+			<a href="/project/boardSearch.do?pageNum=${dto.pageNum+1}&search=${search}&selectValue=${selectValue}" font-weight:bold; class="pagingA"> > </a>&nbsp;
 		</c:if>
+		<c:if test="${dto.lastNo ne dto.lastPage}">
+			<a href="/project/boardSearch.do?pageNum=${dto.lastNo+1}&search=${search}&selectValue=${selectValue}" font-weight:bold; class="pagingA"> >> </a>
+		</c:if>
+		
 	</div>
 </c:if>
 

@@ -11,7 +11,7 @@
 		<br><br><br>
 		<h1>[ ${modUser.id } ] 회원정보 수정 </h1>
 		<form action="/project/modMember.do">
-			<table>
+			<table id="modTb">
 				<tr>
 					<td class="modTitle">아이디</td>
 					<td>

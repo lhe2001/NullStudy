@@ -11,21 +11,9 @@
     <script>
     $(function(){
     	bind();
-    	idcheck();
-    	<%-- 게시판 --%>
-    	search();
-    	select();
-		link();
     })
     
     function bind(){
-    	$("#login_btn").off("click").on("click", function(){
-    		location.href = '/project/moveToSignIn.do'
-    	})
-    	
-    	$("#signUp_btn").off("click").on("click", function(){
-    		location.href = '/project/moveToSignUp.do'
-    	})
     	
     	$(".drop").off("click").on("click",function(){
     		alert('로그인 후 이용 가능 합니다.');
@@ -44,15 +32,15 @@
                     <li class="navtap">My Study <i class="fa-solid fa-book-open"></i>
                         <div class="drop l1">
                             <ul>
-                               <li>My Team</li>
-                               <li>My Study</li>
+                               <li>Calendar</li>
+                               <li>Memo</li>
                             </ul>
                         </div>
                     </li>
                     <li class="navtap">Community <i class="fa-regular fa-comment"></i>
                         <div class="drop l2">
                             <ul>
-                                <li>Free Board</li>
+                                <li>Board</li>
                                 <li></li>
                             </ul>
                         </div>
@@ -61,7 +49,7 @@
                         <div class="drop l3">
                             <ul>
                                 <li>All Team</li>
-                                <li></li>
+                                <li>My Team</li>
                             </ul>
                         </div>
                     </li>

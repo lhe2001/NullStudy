@@ -4,16 +4,20 @@
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 
-	<definition name="baseLayout_profile"  template="/WEB-INF/views/common/layout_search.jsp">
+	<definition name="baseLayout_profile"  template="/WEB-INF/views/common/layout.jsp">
       	<put-attribute name="title" value="" />
       	<put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      	<put-attribute name="side" value="/WEB-INF/views/common/postIt.jsp" />
       	<put-attribute name="body" value="" />
    		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    	</definition>
    	
    	<definition name="profileUpdate" extends="baseLayout_profile">
       	<put-attribute name="title" value="프로필 수정" />
+      	<put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
+      	<put-attribute name="side" value="" />
       	<put-attribute name="body" value="/WEB-INF/views/profile/profileUpdate.jsp" />
+   		<put-attribute name="footer" value="" />
    	</definition>
 
 </tiles-definitions>

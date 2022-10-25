@@ -38,22 +38,23 @@ select{
 }
 
 
-th{
+.tbWrap th{
     width: 100px;
     padding: 10px;
     text-align: center;
  	background-color: rgb(187, 187, 187);
 }
 
-table{
+.tbWrap table{
 	width: 1300px;
     border-top: 1px solid #444444;
     border-collapse: collapse;
     margin-left: 20px;
     margin-rignt: 20px;
+    margin: auto;
 }
 
-tr, td{
+.tbWrap tr, .tbWrap td{
     border-bottom: 1px solid #444444;
     padding: 10px;
     text-align: center;

@@ -8,8 +8,6 @@ public interface SearchDAO {
 
 	// 자유 게시판
 	
-	List<SearchDTO> boardAllSelectList(SearchDTO dto);
-
 	List<SearchDTO> searchBoardSelectList(SearchDTO dto);
 
 	List<SearchDTO> b_titleSearchBoardSelectList(SearchDTO dto);
@@ -20,13 +18,9 @@ public interface SearchDAO {
 
 	// 팀 목록
 	
-	List<SearchDTO> teamAllList(SearchDTO dto);
-	
 	List<SearchDTO> t_nameSearchTeamSelectList(SearchDTO dto);
 
 	// 유저 목록
-
-	List<SearchDTO> userAllList(SearchDTO dto);
 
 	List<SearchDTO> nickNameSearchUserSelectList(SearchDTO dto);
 }

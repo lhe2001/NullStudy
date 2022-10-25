@@ -175,6 +175,7 @@ public class SignUpInDAOImpl implements SignUpInDAO {
 	@Override
 	public List<BoardDTO> getTopArticles() {
 		List list = sqlSession.selectList("mapper.member.topActicles");
+		System.out.println("dao list size: " + list.size());
 		return list;
 	}
 }

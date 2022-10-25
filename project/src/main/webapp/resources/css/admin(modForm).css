@@ -11,7 +11,7 @@ form {
 	text-align: center;
 }
 
-tr, td{
+#modTb tr, #modTb td{
     border-bottom: 1px solid #444444;
     padding: 10px;
     text-align: center;

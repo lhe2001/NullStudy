@@ -4,17 +4,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <style>
-	td{
+	#teamBoard tr, #topBoard tr{
 	text-align: center;
+	}
+		.articleA{
+	text-decoration: none;
+	color: black;
+	
+	}
+	.articleA:visited{
+	color: black;
 	}
 </style>
 <script>
 $(document).ready( function() {
-	getMainTeamList();
+ 	getMainTeamList(); 
 	moveToAllTeam();
+ 	getMainTopArticles();
 });
-function getMainTeamList(){
+ function getMainTeamList(){
 	
 	$.ajax({
 		url: "/project/teamRest/getMainTeamList.do",
@@ -48,6 +58,51 @@ function getMainTeamList(){
 		}
 	});
 }
+
+function getMainTopArticles(){
+	
+	$.ajax({
+		url: "/project/topArticles.do",
+		type: "post",
+		contentType: "application/json",
+		success: function(data){
+			console.log(data);
+			$("#topBoard tbody").empty();
+			
+			let html="";
+			for(let i=0; i<data.length; i++){
+				html += "<tr>";
+				html += "<td>";
+				html += (i+1);
+				html += "</td>";
+				html += "<td>";
+				html += data[i].b_fieldName;
+				html += "</td>";
+				html += "<td>";
+				html += data[i].nickName;
+				html += "</td>";
+				html += "<td>";
+				html += "<a class='articleA' href='/project/board/viewArticle.do?b_articleNo=";
+				html += data[i].b_articleNo;
+				html += "'>"
+				html += data[i].b_title;
+				html += "</a>"
+				html += "</td>";
+				html += "<td>";
+				html += data[i].b_writeDate;
+				html += "</td>";
+				html += "</tr>";
+				
+			}
+			$("#topBoard tbody").append(html);
+			alretTopArcticle();
+		},
+
+		error:function(){
+			alert("에러발생!!")
+		}
+	}); 
+}
 function moveToAllTeam(){
 	$(document).on("click","#teamBoard tr",function(e){
 		let userkey = ${userInfo.userKey-1};
@@ -59,6 +114,20 @@ function moveToAllTeam(){
 		}
 	});
 }
+
+function alretTopArcticle(){
+	$(document).on("click",".articleA",function(e){
+		e.preventDefault();
+		let userkey = ${userInfo.userKey-1};
+		console.log(userkey);
+		if(userkey ==-1){
+			alert('로그인을 먼저 해주세요!');
+		}else{
+			location.href=$(this).attr("href")
+		}
+	});
+}
+
 </script>
 <body>
 
@@ -95,81 +164,22 @@ function moveToAllTeam(){
                     <div id="boardWrap">
                         <div id="topBoard">
                             <h3>인기글<i class="fa-brands fa-hotjar"></i></h3>
-	  <table>
-		<tr>
-			<th>글 번호</th>
-			<%--<th>부모 글 번호</th> --%>
-			<th>분야</th>
-			<th>작성자</th>
-			<th>제목</th>
-			<th>작성일</th>
-			<%--<th>조회수(임시)</th> --%>
-			<%--<th>유저 키</th> --%>
-			<%--(join으로 nick가져올거임)  --%>
-		</tr>
-		<%--여기서 분기나 탑시다--%>
-		<c:choose>
-			<%-- forward된 list가 비어있을때!! --%>
-			<c:when test="${empty articlesList}">
-				<h1 style ="text-align : center; margin-left : 20px; margin-top : 20px; color : #1C6758">등록된 글이 없어요....</h1>
-			</c:when>
-			<%-- forward된 list에 내용이 있을때!! --%>
-			<c:when test="${not empty articlesList }">
-				<%-- forEach로 변수에 담아 jstl로 출력해준다.. --%>
-				<c:forEach var="article" items="${articlesList }" varStatus="num">
-					<tr>
-						<%--<td>${article.level }</td> --%>
-						<%--<td>${article.b_key }</td> --%>
-						<td>${num.count }</td>
-						<%-- varStatus의 count를 사용해서 글번호 1부터 자동 --%>
-						<%-- <td>${article.b_parentNo}</td> --%>
-						<c:choose>
-						<c:when test="${article.b_field eq '10'}">
-						<td>질문</td>
-						</c:when>
-						<c:when test="${article.b_field eq '20'}">
-						<td>잡담</td>
-						</c:when>
-						<c:when test="${article.b_field eq '30'}">
-						<td>비밀글</td>
-						</c:when>
-						<c:when test="${article.b_field eq '40'}">
-						<td>나도몰라</td>
-						</c:when>
-						<c:otherwise>
-						<td >${article.b_field }</td>
-						</c:otherwise>
-						</c:choose>
-						<td>${article.nickName} </td>
-						
-						<%--답변을 구분해야 한다 --%>
-						<td align='left' width='30%'>
-							<%--왼쪽 들여쓰기--%> <span style='padding-right: 30px'></span> <%-- level값이 1보다 큰경우 자식글이므로 
-								 부모글 밑에 공백으로 들여쓰기해서 자식글인걸 티내자 
-								 분기를 한번 더 타자--%> <c:choose>
-								<c:when test="${article.level >1 }">
-									<%-- 부모글 기준으로 레벨 값 만큼 들여쓰기하자 --%>
-									<c:forEach begin="1" end="${article.level }" step="1">
-										<span style='padding-left: 25px'></span>
-									</c:forEach>
-									<%-- 제목앞에 답글인걸 표시하는 표시 하나추가 --%>
-									<span>[답변]</span>
-									<%-- 마지막으로 제목을 누르면 상세 출력 페이지 이동 a태그하나 --%>
-										${article.b_title}
-								</c:when>
-								<c:otherwise>
-										${article.b_title} 
-								</c:otherwise>
-							</c:choose>
-						</td>
-						<td>${article.b_writeDate}</td>
-						<%--<td>${article.b_view}</td> --%>
-						<%-- <td>${article.userkey}</td> --%>
-					</tr>
-				</c:forEach>
-			</c:when>
-		</c:choose>
-	</table>
+                            <table>
+                            	<thead>
+                            		<tr>
+                            			<th>글번호</th>
+                            			<th>분야</th>
+                            			<th>작성자</th>
+                            			<th>제목</th>
+                            			<th>작성일</th>
+                            		</tr>
+                            	</thead>
+                            	<tbody>
+                            	</tbody>
+                            	
+                            </table>
+                            
+ 
                         </div>
                           <div id="teamBoard"><h3>최근 개설된 팀<i class="fa-solid fa-hand-back-fist"></i></h3>
                           	<table>
