@@ -435,7 +435,7 @@ function dDay(){
 
 //디데이 수정
 function reviseDday(t_key){
-	window.open('/project/team/changeProfile.do?t_key='+t_key,'pop','location=no,width=540,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+	window.open('/project/team/reviseDday.do?t_key='+t_key,'pop','location=no,width=540,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
 //챌린지 수정
 function resetChallenge(t_key){
