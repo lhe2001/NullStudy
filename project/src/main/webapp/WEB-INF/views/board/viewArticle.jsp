@@ -154,6 +154,46 @@
 	}
  
  // 댓글 수정
+<<<<<<< HEAD
+=======
+ 	function update(){
+ 	 $("#edit_comment").off("click").on("click", function(){
+			document.querySelector("#view_com").removeAttribute("readonly");
+			document.querySelector("#edit_comment").classList.add("hidden");
+			
+ 				$("#real_edit_comment")[0].classList.remove("hidden");	
+ 				$("#real_edit_comment").removeClass("hidden");	
+ 		})
+ 	}
+ 	
+  	function updateComment(){
+			 $("#real_edit_comment").off("click").on("click", function(){
+				 let b_c_key = $(this).parent().find(".b_c_key").val();
+    			console.log(b_c_key);
+    			let b_c_comment = $("#view_com").val();
+				
+    			let info = {
+							b_c_key : b_c_key,
+							b_c_comment : b_c_comment
+	    					}
+			 
+				$.ajax({
+				url: "/project/board/updateComment.do",
+				type: "post",
+				contentType : "application/json",
+				data: JSON.stringify(info),
+				success: function(data){
+					console.log("data :", data);
+					alert("댓글이 수정되었습니다.");
+					 location.reload();
+					},
+				error:function(){
+					alert("에러발생!!")
+				}
+			});
+		})
+	}
+>>>>>>> jaeHyukkong5
 </script>
 	<div class = "wrapp">
 	<div class = "container">
@@ -226,18 +266,21 @@
 		<div id = "view_comment">
 			<c:forEach var="comment" items="${comment }" varStatus="num">
 					<c:if test="${comment.b_key == view.b_key }">
-					<div>
-						<input type = "text" id = "view_com" class= "view_com" value = "${comment.b_c_comment }" readonly>
+						<input type = "text" id = "view_com" value = "${comment.b_c_comment }" readonly>
 							<div id = "comment_name" style ="float : left; margin-left : 20px;  ">
 								작성자 : ${comment.nickName }	${comment.b_c_date }
 							</div>
 						<c:if test="${userInfo.userKey == comment.userKey}">
 						<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+<<<<<<< HEAD
 						<input type="button" id="edit_comment" value="수정" data-b_c_key_edit = "${comment.b_c_key }"  class ="edit_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
+=======
+						<input type="button" id="edit_comment" value="수정" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
+						<input type="button" id="real_edit_comment" value="댓글수정" class ="color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+>>>>>>> jaeHyukkong5
 						</c:if>
 						<input type = "hidden" class = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
 						</c:if>
-					</div>
 			</c:forEach>
 		</div>
 				<!-- 히든으로 commentcontroller에 줄 값 -->
