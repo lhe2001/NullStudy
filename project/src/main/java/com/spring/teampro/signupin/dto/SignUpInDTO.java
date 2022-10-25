@@ -15,7 +15,7 @@ public class SignUpInDTO {
 	private Date joinDate;
 	private String intro;
 	private Date lastTime;
-	private int photo;
+	private String photo;
 	
 	
 	public String getName() {
@@ -85,10 +85,10 @@ public class SignUpInDTO {
 	public void setLastTime(Date lastTime) {
 		this.lastTime = lastTime;
 	}
-	public int getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
-	public void setPhoto(int photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 	@Override

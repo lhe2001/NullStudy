@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.teampro.profile.dto.ProfileUpdateDTO;
 import com.spring.teampro.team.dto.ChallengeDTO;
 import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
@@ -23,6 +24,7 @@ public class TeamDAOImpl implements TeamDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
+
 	//>>>>>>>>>>>>>>>SELECT 단순 가져오기>>>>>>>>>>>>>>
 	//나의 팀 리스트 가져오기
 	@Override
@@ -130,7 +132,13 @@ public class TeamDAOImpl implements TeamDAO {
 	public List getTCkey(int t_key) {
 		return sqlSession.selectList("mapper.team.getTCkey",t_key);
 	}
-
+	//getPhoto
+	@Override
+	public String getPhoto(int userkey) {
+		logger.info(">>>>"+userkey);
+		return sqlSession.selectOne("mapper.team.getPhoto",userkey);
+	}
+	
 	//>>>>>>>>>>>>>>>UPDATE 수정하기>>>>>>>>>>>>>>
 	//팀정보 업데이트 하기
 	@Override
@@ -185,6 +193,14 @@ public class TeamDAOImpl implements TeamDAO {
 	@Override
 	public int updateChallengeTitle(ChallengeDTO dto) {
 		return sqlSession.update("mapper.team.updateChallengeTitle",dto);
+	}
+	//updateProfile
+	@Override
+	public int setPhoto(ProfileUpdateDTO dto) {
+		int result = sqlSession.update("mapper.team.setPhoto",dto);
+		logger.info("USERKEY"+dto.getUserKey());
+		System.out.println("upload"+result);
+		return result;
 	}
 	
 	//>>>>>>>>>>>>>>>DELETE 삭제하기>>>>>>>>>>>>>>

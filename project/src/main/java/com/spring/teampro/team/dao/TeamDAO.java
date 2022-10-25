@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.spring.teampro.profile.dto.ProfileUpdateDTO;
 import com.spring.teampro.team.dto.ChallengeDTO;
 import com.spring.teampro.team.dto.MemberRequestDTO;
 import com.spring.teampro.team.dto.TeamInfoDTO;
@@ -74,6 +75,10 @@ public interface TeamDAO {
 	List getMainTeamList();
 
 	int alreadyToday(ChallengeDTO dto);
+
+	int setPhoto(ProfileUpdateDTO dto);
+
+	String getPhoto(int userkey);
 
 
 

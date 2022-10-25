@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.spring.teampro.profile.dto.ProfileUpdateDTO;
 import com.spring.teampro.team.dao.TeamDAO;
 import com.spring.teampro.team.dto.ChallengeDTO;
 import com.spring.teampro.team.dto.MemberRequestDTO;
@@ -28,6 +29,15 @@ public class TeamServiceImpl implements TeamService {
 	@Autowired
 	TeamDAO dao;
 	
+	@Override
+	public int setPhoto(ProfileUpdateDTO dto) {
+		return dao.setPhoto(dto);
+	}
+	
+	@Override
+	public String getPhoto(int userkey) {
+		return dao.getPhoto(userkey);
+	}
 	//>>>>>>>>>>>>>>>>팀 관련>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 	//나의 팀 리스트
 	@Override
