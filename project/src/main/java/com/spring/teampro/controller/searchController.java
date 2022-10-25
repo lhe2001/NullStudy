@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -75,11 +76,13 @@ public class searchController {
 	@RequestMapping(value="/boardSearch.do", method=RequestMethod.GET)
 	public ModelAndView boardSearch(HttpServletRequest request
 						, @RequestParam("search") String search
-						, @RequestParam("selectValue") String selectValue) {
+						, @RequestParam("selectValue") String selectValue
+						, @RequestParam(value="pagingValue", defaultValue="15") int pagingValue) {
 		// @RequestParam("search") 검색어 sql로 전달
 		System.out.println("Controller boardSearch.do");
 		System.out.println(search);
 		System.out.println(selectValue);
+		System.out.println(pagingValue);
 		
 		int _pageNum = 1;
 		String str_pageNum = request.getParameter("pageNum");
@@ -104,7 +107,7 @@ public class searchController {
 		if (selectValue.equals("all")) {
 			
 			count = Count.searchBoardSelectCount(dto);
-			map = paging(_pageNum, count);
+			map = paging(_pageNum, count, pagingValue);
 			dto.setStart((Integer) map.get("start"));
 			dto.setEnd((Integer) map.get("end"));
 			dto.setFirstNo((Integer) map.get("firstNo"));
@@ -117,7 +120,7 @@ public class searchController {
 		} else if (selectValue.equals("b_title")) {
 			
 			count = Count.b_titleSearchBoardSelectCount(dto);
-			map = paging(_pageNum, count);
+			map = paging(_pageNum, count, pagingValue);
 			dto.setStart((Integer) map.get("start"));
 			dto.setEnd((Integer) map.get("end"));
 			dto.setFirstNo((Integer) map.get("firstNo"));
@@ -130,7 +133,7 @@ public class searchController {
 		} else if (selectValue.equals("b_content")) {
 			
 			count = Count.b_contentSearchBoardSelectCount(dto);
-			map = paging(_pageNum, count);
+			map = paging(_pageNum, count, pagingValue);
 			dto.setStart((Integer) map.get("start"));
 			dto.setEnd((Integer) map.get("end"));
 			dto.setFirstNo((Integer) map.get("firstNo"));
@@ -144,7 +147,7 @@ public class searchController {
 		} else if (selectValue.equals("nickName")) {
 			
 			count = Count.nickNameSearchBoardSelectCount(dto);
-			map = paging(_pageNum, count);
+			map = paging(_pageNum, count, pagingValue);
 			dto.setStart((Integer) map.get("start"));
 			dto.setEnd((Integer) map.get("end"));
 			dto.setFirstNo((Integer) map.get("firstNo"));
@@ -158,7 +161,7 @@ public class searchController {
 		} else if (selectValue.equals("boardSearch")) {
 			
 			count = Count.searchBoardSelectCount(dto);
-			map = paging(_pageNum, count);
+			map = paging(_pageNum, count, pagingValue);
 			dto.setStart((Integer) map.get("start"));
 			dto.setEnd((Integer) map.get("end"));
 			dto.setFirstNo((Integer) map.get("firstNo"));
@@ -187,10 +190,12 @@ public class searchController {
 	// -------------------------팀 검색----------------------------------	
 	@RequestMapping(value="/teamSearch.do", method=RequestMethod.GET)
 	public ModelAndView teamSearch(@RequestParam("search") String search
-								   , HttpServletRequest request) {
+								   , HttpServletRequest request
+								   , @RequestParam(value="pagingValue", defaultValue="15") int pagingValue) {
 		
 		System.out.println("Controller teamSearch.do");
 		System.out.println(search);
+		System.out.println(pagingValue);
 
 		int _pageNum = 1;
 		String str_pageNum = request.getParameter("pageNum");
@@ -208,7 +213,7 @@ public class searchController {
 		
 		int count = Count.nickNameSearchUserSelectCount(dto);
 		System.out.println("count : " + count);
-		map = paging(_pageNum, count);
+		map = paging(_pageNum, count, pagingValue);
 		dto.setStart((Integer) map.get("start"));
 		dto.setEnd((Integer) map.get("end"));
 		dto.setFirstNo((Integer) map.get("firstNo"));
@@ -229,10 +234,12 @@ public class searchController {
 	// --------------------------------유저 검색-------------------------------
 	@RequestMapping(value="/userSearch.do", method=RequestMethod.GET)
 	public ModelAndView userSearch(@RequestParam("search") String search
-								   , HttpServletRequest request) {
+								   , HttpServletRequest request
+								   , @RequestParam(value="pagingValue", defaultValue="15") int pagingValue) {
 		
 		System.out.println("Controller userSearch.do");
 		System.out.println(search);
+		System.out.println(pagingValue);
 
 		int _pageNum = 1;
 		String str_pageNum = request.getParameter("pageNum");
@@ -250,7 +257,7 @@ public class searchController {
 		
 		int count = Count.nickNameSearchUserSelectCount(dto);
 		System.out.println("count : " + count);
-		map = paging(_pageNum, count);
+		map = paging(_pageNum, count, pagingValue);
 		dto.setStart((Integer) map.get("start"));
 		dto.setEnd((Integer) map.get("end"));
 		dto.setFirstNo((Integer) map.get("firstNo"));
@@ -268,14 +275,14 @@ public class searchController {
 		return view;
 	}
 	
-	public Map paging(int _pageNum, int count) {
+	public Map paging(int _pageNum, int count, int pagingValue) {
 		
 		System.out.println("Controller paging 입장");
 		
 		int pageNum = 1;		// 처음 페이지
 		int countPerPage = 15;	// 한 페이지당 보여줄 글 개수
+		countPerPage = pagingValue; // 사용자가 선택한 보기 개수
 		pageNum = _pageNum;	    // 현재 페이지
-		
 		int lastPage = (int)Math.ceil(((double)count / countPerPage)); // 마지막 페이징번호 링크
 		int section = 5; // 한 페이지에 보이는 a링크 페이지 수
 		int sec_position = (int)Math.ceil(((double)pageNum / section));

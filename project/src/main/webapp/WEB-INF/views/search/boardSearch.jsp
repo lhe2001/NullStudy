@@ -12,7 +12,25 @@
 	<form name="frmListAfter" method="get" action="${pageContext.request.contextPath}/boardSearch.do">
         <h3 style="color: #69c7b5" class="searchTitle">자유게시판</h3>
         <div class="searchLine">
-        
+        	
+        	<select name = "pagingValue" id="pagingValue">
+            
+                <option value="15" selected disabled>보기</option>
+                <option value="10" 
+                <c:if test="${pagingValue == '10'}">selected</c:if>
+                >10개</option>
+                <option value="15"
+                <c:if test="${pagingValue == '15'}">selected</c:if>
+                >15개</option>
+                <option value="30"
+                <c:if test="${pagingValue == '30'}">selected</c:if>
+                >30개</option>
+                <option value="50"
+                <c:if test="${pagingValue == '50'}">selected</c:if>
+                >50개</option>
+                
+            </select>
+        	
             <select name = "selectValue" id="selectValue">
             
                 <option value = all
