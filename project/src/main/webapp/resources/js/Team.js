@@ -121,43 +121,48 @@ function kickMemberOut(tm_key){
 
 //오늘의 요약 수정
 function dailyMemoRevise(){
-	$(document).on('click',".dailyRevBtn",function(){
-        document.querySelector(".TeamDailyMemo").classList.add("hide");
-        document.querySelector(".TeamDailyRevise").classList.remove("hide");
-    })
-    $(document).on('click',".returnBtn",function(){
-        document.querySelector(".TeamDailyMemo").classList.remove("hide");
-        document.querySelector(".TeamDailyRevise").classList.add("hide");
-    })
-    $(document).on('click',".TeamDailyRevise input[type='submit']",function(){
-        const dele = confirm('수정 하시겠습니까?')
-        if(dele == true){
-        	let tcs_key = $(".tcs_key").val();
-        	let tcs_summary = $(".todaySummary").val();
-        	
-        	if(tcs_summary.trim() == ''){
-        		alert('입력해주세요');
-        	}else {
-	        	let info = {
-	        		tcs_key : tcs_key,
-	        		tcs_summary : tcs_summary
-	        	};
+		$(document).on('click',".dailyRevBtn",function(){
+			let tcs_key = $(".tcs_key").val();
+			if(tcs_key == undefined){
+				alert('챌린지를 먼저 진행해주세요!');
+			}else{
+		        document.querySelector(".TeamDailyMemo").classList.add("hide");
+		        document.querySelector(".TeamDailyRevise").classList.remove("hide");
+		    }
+	    })
+	    $(document).on('click',".returnBtn",function(){
+	        document.querySelector(".TeamDailyMemo").classList.remove("hide");
+	        document.querySelector(".TeamDailyRevise").classList.add("hide");
+	    })
+	    $(document).on('click',".TeamDailyRevise input[type='submit']",function(){
+	        const dele = confirm('수정 하시겠습니까?')
+	        if(dele == true){
+	        	let tcs_key = $(".tcs_key").val();
+	        	let tcs_summary = $(".todaySummary").val();
 	        	
-	        	$.ajax({
-					url: "/project/teamRest/reviseSummary.do",
-					type: "post",
-					contentType: "application/json",
-					data: JSON.stringify(info),
-					success: function(data){
-						location.reload();
-					},
-					error:function(){
-						alert("에러발생!!")
-					}
-				});
-        	}
-        }
-    })
+	        	if(tcs_summary.trim() == ''){
+	        		alert('입력해주세요');
+	        	}else {
+		        	let info = {
+		        		tcs_key : tcs_key,
+		        		tcs_summary : tcs_summary
+		        	};
+		        	
+		        	$.ajax({
+						url: "/project/teamRest/reviseSummary.do",
+						type: "post",
+						contentType: "application/json",
+						data: JSON.stringify(info),
+						success: function(data){
+							location.reload();
+						},
+						error:function(){
+							alert("에러발생!!")
+						}
+					});
+	        	}
+	        }
+	    })
 }
 //미리 클릭해두기
 function preClick(){
@@ -405,13 +410,15 @@ function leaveTeam(t_key){
 //디데이
 function dDay(){
    let now = new Date();
+   console.log(now);
    let t_day = $(".t_day").text();
    if(t_day == ''){
    	t_day= now;
    }
    let then = new Date(t_day);
-   let gap = then.getTime() - now.getTime();
-   gap = Math.floor(gap / (1000 * 60 * 60 * 24)) * -1;
+   let gap = now.getTime() - then.getTime();
+   gap = Math.floor(gap / (1000 * 60 * 60 * 24));
+   console.log(gap);
    $("#dDay .dDate").text(gap);
    //시분초를 없애보자. 
    
