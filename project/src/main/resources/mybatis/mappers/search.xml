@@ -17,7 +17,7 @@
 			 OR lower(nickName) LIKE '%' || lower(#{search}) || '%'
 			 OR lower(b_content) LIKE '%' || lower(#{search}) || '%') 
 			 ) tmp
-			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
+			 ) WHERE (#{start}) <= rnum AND rnum <= (#{end})]]>
 			
 	</select>
 	
@@ -40,7 +40,7 @@
 			 where a.USERKEY = b.USERKEY
 			 and lower(b_title) LIKE '%' || lower(#{search}) || '%'
 			 ) tmp
-			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
+			 ) WHERE (#{start}) <= rnum AND rnum <= (#{end})]]>
 			
 	</select>
 	
@@ -82,7 +82,7 @@
 			 where a.USERKEY = b.USERKEY
 			 and lower(b_content) LIKE '%' || lower(#{search}) || '%'
 			 ) tmp
-			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
+			 ) WHERE (#{start}) <= rnum AND rnum <= (#{end})]]>
 			
 	</select>
 	
@@ -103,7 +103,7 @@
 			 where a.USERKEY = t.USERKEY
 			 and lower(t_name) LIKE '%' || lower(#{search}) || '%'
 			 ) tmp
-			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
+			 ) WHERE (#{start}) <= rnum AND rnum <= (#{end})]]>
 			
 	</select>
 	
@@ -123,7 +123,7 @@
 			 FROM ALLMEMBER
 			 where lower(nickName) LIKE '%' || lower(#{search}) || '%'
 			 ) tmp
-			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
+			 ) WHERE (#{start}) <= rnum AND rnum <= (#{end})]]>
 			
 	</select>
 	
