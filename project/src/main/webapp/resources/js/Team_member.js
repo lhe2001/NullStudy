@@ -8,46 +8,50 @@ window.addEventListener("load", teamInfoOnload);
 
 
 
-
 //오늘의 요약 수정
 function dailyMemoRevise(){
-	$(document).on('click',".dailyRevBtn",function(){
-        document.querySelector(".TeamDailyMemo").classList.add("hide");
-        document.querySelector(".TeamDailyRevise").classList.remove("hide");
-    })
-    $(document).on('click',".returnBtn",function(){
-        document.querySelector(".TeamDailyMemo").classList.remove("hide");
-        document.querySelector(".TeamDailyRevise").classList.add("hide");
-    })
-    $(document).on('click',".TeamDailyRevise input[type='submit']",function(){
-        const dele = confirm('수정 하시겠습니까?')
-        if(dele == true){
-        	let tcs_key = $(".tcs_key").val();
-        	let tcs_summary = $(".todaySummary").val();
-        	
-        	if(tcs_summary.trim() == ''){
-        		alert('입력해주세요');
-        	}else {
-	        	let info = {
-	        		tcs_key : tcs_key,
-	        		tcs_summary : tcs_summary
-	        	};
+		$(document).on('click',".dailyRevBtn",function(){
+			let tcs_key = $(".tcs_key").val();
+			if(tcs_key == undefined){
+				alert('챌린지를 먼저 진행해주세요!');
+			}else{
+		        document.querySelector(".TeamDailyMemo").classList.add("hide");
+		        document.querySelector(".TeamDailyRevise").classList.remove("hide");
+		    }
+	    })
+	    $(document).on('click',".returnBtn",function(){
+	        document.querySelector(".TeamDailyMemo").classList.remove("hide");
+	        document.querySelector(".TeamDailyRevise").classList.add("hide");
+	    })
+	    $(document).on('click',".TeamDailyRevise input[type='submit']",function(){
+	        const dele = confirm('수정 하시겠습니까?')
+	        if(dele == true){
+	        	let tcs_key = $(".tcs_key").val();
+	        	let tcs_summary = $(".todaySummary").val();
 	        	
-	        	$.ajax({
-					url: "/project/teamRest/reviseSummary.do",
-					type: "post",
-					contentType: "application/json",
-					data: JSON.stringify(info),
-					success: function(data){
-						location.reload();
-					},
-					error:function(){
-						alert("에러발생!!")
-					}
-				});
-        	}
-        }
-    })
+	        	if(tcs_summary.trim() == ''){
+	        		alert('입력해주세요');
+	        	}else {
+		        	let info = {
+		        		tcs_key : tcs_key,
+		        		tcs_summary : tcs_summary
+		        	};
+		        	
+		        	$.ajax({
+						url: "/project/teamRest/reviseSummary.do",
+						type: "post",
+						contentType: "application/json",
+						data: JSON.stringify(info),
+						success: function(data){
+							location.reload();
+						},
+						error:function(){
+							alert("에러발생!!")
+						}
+					});
+	        	}
+	        }
+	    })
 }
 //미리 클릭해두기
 function preClick(){
@@ -295,13 +299,15 @@ function leaveTeam(t_key){
 //디데이
 function dDay(){
    let now = new Date();
+   console.log(now);
    let t_day = $(".t_day").text();
    if(t_day == ''){
    	t_day= now;
    }
    let then = new Date(t_day);
-   let gap = then.getTime() - now.getTime();
-   gap = Math.floor(gap / (1000 * 60 * 60 * 24)) * -1;
+   let gap = now.getTime() - then.getTime();
+   gap = Math.floor(gap / (1000 * 60 * 60 * 24));
+   console.log(gap);
    $("#dDay .dDate").text(gap);
    //시분초를 없애보자. 
    
@@ -311,59 +317,41 @@ function dDay(){
 function reviseDday(t_key){
 	window.open('/project/team/reviseDday.do?t_key='+t_key,'pop','location=no,width=540,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
 }
-//챌린지에 출석하기
+//챌린지 출석
 function attendChallenge(t_key){
 	let tc_key = $(".tc_key").val();
-	let info = { 
-        			t_key : t_key,
-        			tc_key : tc_key
-        	};
-        	
-        	$.ajax({
-			url: "/project/teamRest/attendChallenge.do",
-			type: "post",
-			contentType: "application/json",
-			data: JSON.stringify(info),
-			success: function(data){
-				alert('오늘의 챌린지 완료!');
-				location.reload();
-			},
-			error:function(){
-				alert("에러발생!!")
-			}
-			});
-}
-//챌린지 선택
-function attendChallenge(t_key){
-	let tc_key = $(".tc_key").val();
-	
-	let mySummary = $(".challenge table .confirm");
-	let total = mySummary.length;
-	console.log(total);
-	
-	if(total >= 21){
-		$(".challenge table input[type='button'] ").prop('disabled',true);
-		alert('챌린지를 완료했어요!!대단하네요!!');
-	}else {
-		let info = { 
-	        			t_key : t_key,
-	        			tc_key : tc_key
-	        	};
-	        	
-	        	$.ajax({
-					url: "/project/teamRest/attendChallenge.do",
-					type: "post",
-					contentType: "application/json",
-					data: JSON.stringify(info),
-					success: function(data){
+	if(tc_key == 0){
+		alert('챌린지를 먼저 설정해주세요!');
+	}else{
+		let mySummary = $(".challenge table .confirm");
+		let total = mySummary.length;
+		
+		if(total >= 21){
+			$(".challenge table input[type='button'] ").prop('disabled',true);
+			alert('챌린지를 완료했어요!!대단하네요!!');
+		}else {
+			let info = { 
+	    			t_key : t_key,
+	    			tc_key : tc_key
+	    	};
+	    	
+	    	$.ajax({
+				url: "/project/teamRest/attendChallenge.do",
+				type: "post",
+				contentType: "application/json",
+				data: JSON.stringify(info),
+				success: function(data){
+					if(data == -1){
+						alert('오늘은 이미 챌린지를 완료하였어요!');
+					}else {
 						alert('오늘의 챌린지 완료!');
 						location.reload();
-					},
-					error:function(){
-						alert("에러발생!!")
 					}
-				});
+				},
+				error:function(){
+					alert("에러발생!!")
+				}
+			});
+		}
 	}
-	
 }
-

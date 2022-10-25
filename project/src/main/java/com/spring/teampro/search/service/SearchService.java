@@ -8,8 +8,6 @@ public interface SearchService {
 
 	// 게시판 List
 	
-	List<SearchDTO> getBoardAllSelectList(SearchDTO dto);
-
 	List<SearchDTO> getSearchBoardSelectList(SearchDTO dto);
 
 	List<SearchDTO> getB_titleSearchBoardSelectList(SearchDTO dto);
@@ -21,14 +19,10 @@ public interface SearchService {
 	
 	// 팀 List
 	
-	List<SearchDTO> getTeamAllList(SearchDTO dto);
-
 	List<SearchDTO> getT_nameSearchTeamSelectList(SearchDTO dto);
 	
 	
 	// 유저 List
-
-	List<SearchDTO> getUserAllList(SearchDTO dto);
 
 	List<SearchDTO> getNickNameSearchUserSelectList(SearchDTO dto);
 

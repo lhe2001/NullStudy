@@ -10,6 +10,8 @@
     <meta charset="UTF-8">
     <title><tiles:insertAttribute name="title" /></title>
   <link rel="stylesheet" href="/project/resources/css/simple.css" />
+  <link rel="stylesheet" href="resources/css/searchBoard.css" />
+  <link rel="stylesheet" href="resources/css/profileUpdate.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="/project/resources/js/main.js"></script>
   <style>
