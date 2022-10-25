@@ -14,15 +14,6 @@
  href ="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
  <link rel="stylesheet"
  href ="${pageContext.request.contextPath }/resources/css/article.css">
-<%--  <c:choose> --%>
-<%-- <c:when test="${not empty userInfo.userKey }"> --%>
-<%-- <jsp:include page="/fix/header(logout).jsp"/> --%>
-<%-- </c:when> --%>
-
-<%-- <c:when test="${empty userInfo.userKey }"> --%>
-<%-- <jsp:include page="/fix/header(login).jsp"/> --%>
-<%-- </c:when> --%>
-<%-- </c:choose> --%>
 
 <style type="text/css">
 
@@ -52,6 +43,7 @@
 			let pw = document.querySelector("#pw");
 			select.addEventListener("change",function(){
 				let value = select.value;
+					
 					if(value == 30){
 					pwd.classList.remove('hidden');
 					pw.classList.remove('hidden');
@@ -61,14 +53,15 @@
 					}
 			})
 			
-			var userkey  = ${adminUserKey};
+			
+	}
+// 			var userkey  = ${adminUserKey};
+			
 			if(userkey==1){
 				document.querySelector("#notice").classList.remove('hidden');
 			}else{
 				document.querySelector("#notice").classList.add('hidden');
 			}
-			
-	}
 </script>
 <div id = "wrapp">
 <div id = "container">
