@@ -58,7 +58,10 @@ public interface BoardDAO {
 	
 	// 공지글만 가져오기
 	public List<CommentDTO> getNotice();
-	
+	// 셀렉트 하는 메소드
 	public List<BoardDTO> searchArticle(BoardDTO dto,int pageNum, int amount);
+	
+	// 셀렉트 박스 총 게시글 수 받아오기	
+	public int getSelectCount(BoardDTO dto);
 }
 

@@ -63,4 +63,7 @@ public interface BoardService {
 		
 		// 셀렉트박스 메소드(ajax)
 		public List<BoardDTO> getSearch(BoardDTO dto,int pageNum, int amount);
+		
+		// 셀렉트 박스 총게시글 가져오기
+		public int getSelectCount(BoardDTO dto);
 }
