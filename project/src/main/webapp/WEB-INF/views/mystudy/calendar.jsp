@@ -48,6 +48,8 @@
 			$(".cPreview").remove();	//마우스가 나가면 해당엘리먼트 삭제
 		});
 	});
+	
+	
 </script>
 <%
 	//달력의 날짜를 바꾸기 위해 전달된 year와 month 파라미터 받기(redirect는 안됨)
@@ -119,7 +121,7 @@
 	for(int i=1; i<=lastDay; i++){
 		%>
 		<td class="caltd">
-			<div class="dateLink"><a class="countView" data-id="alinkStyle" href="calBoardList.do?year=<%=year %>&month=<%=month %>&date=<%= i %>" style="color:<%=Util.fontColor(dayOfWeek, i) %>;"><%= i %></a></div>
+			<div class="dateLink" ><a class="countView" data-id="alinkStyle" href="calBoardList.do?year=<%=year %>&month=<%=month %>&date=<%= i %>" style="color:<%=Util.fontColor(dayOfWeek, i) %>;"><%= i %></a></div>
 			<div>
 				<%=getCalViewList(i, clist) %>
 			</div>

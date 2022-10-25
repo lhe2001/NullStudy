@@ -6,15 +6,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>  
-<%--  <c:choose> --%>
-<%-- 	<c:when test="${not empty userInfo.userKey }"> --%>
-<%-- 	<jsp:include page="/fix/header(logout).jsp"/> --%>
-<%-- </c:when> --%>
-
-<%-- <c:when test="${empty userInfo.userKey }"> --%>
-<%-- 	<jsp:include page="/fix/header(login).jsp"/> --%>
-<%-- 	</c:when> --%>
-<%-- </c:choose> --%>
 <!DOCTYPE html>
 <html>
 <head>

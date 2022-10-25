@@ -16,15 +16,6 @@
  href ="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
   <link rel="stylesheet"
  href ="${pageContext.request.contextPath }/resources/css/view.css">
-<%-- <c:choose> --%>
-<%-- <c:when test="${not empty userInfo.userKey }"> --%>
-<%-- <jsp:include page="/fix/header(logout).jsp"/> --%>
-<%-- </c:when> --%>
-
-<%-- <c:when test="${empty userInfo.userKey }"> --%>
-<%-- <jsp:include page="/fix/header(login).jsp"/> --%>
-<%-- </c:when> --%>
-<%-- </c:choose> --%>
 
 <style type="text/css">
 </style>
@@ -99,10 +90,6 @@
 	    			let b_key = $("#b_key").val();
 	    			let userKey = $("#userkey").val();
 	    			
-	    			console.log(comment);
-	    			console.log(b_key);
-	    			console.log(userKey);
-	    			
     			 let info = {
     					b_c_comment : comment,
     					b_key : b_key,
@@ -138,13 +125,17 @@
     	
  	// 댓글 삭제
   	function deleteComment(){
-			 $("[id=delete_comment]").off("click").on("click", function(){
-    			let b_c_key = $("#b_c_key").val();
-    			console.log(b_c_key);
-				 let info = {
-							 b_c_key : b_c_key
-	    					}
-			 
+			 $(".delete_comment").off("click").on("click", function(){
+				 
+				 $(this).attr("data-b_c_key");
+				 $(this).parent().find(".b_c_key").val();
+// 				 this.parentNode().querySeletor(".b_c_key").value
+				 
+				 let b_c_key = $(this).parent().find(".b_c_key").val();
+				 console.log("b_c_key" , b_c_key);
+				 
+				 let info = { b_c_key : b_c_key }
+				 
 			$.ajax({
 				url: "/project/board/deleteComment.do",
 				type: "post",
@@ -153,7 +144,7 @@
 				success: function(data){
 					console.log("data :", data);
 					alert("댓글이 삭제되었습니다.");
-					 location.reload();
+					location.reload();
 					},
 				error:function(){
 					alert("에러발생!!")
@@ -161,27 +152,28 @@
 			});
 		})
 	}
- 	
  
  // 댓글 수정
+
  	function update(){
  	 $("#edit_comment").off("click").on("click", function(){
 			document.querySelector("#view_com").removeAttribute("readonly");
 			document.querySelector("#edit_comment").classList.add("hidden");
- 			$("#real_edit_comment")[0].classList.remove("hidden");	
- 			$("#real_edit_comment").removeClass("hidden");	
+			
+ 				$("#real_edit_comment")[0].classList.remove("hidden");	
+ 				$("#real_edit_comment").removeClass("hidden");	
  		})
  	}
  	
   	function updateComment(){
 			 $("#real_edit_comment").off("click").on("click", function(){
-    			let b_c_key = $("#b_c_key").val();
+				 let b_c_key = $(this).parent().find(".b_c_key").val();
     			console.log(b_c_key);
     			let b_c_comment = $("#view_com").val();
 				
     			let info = {
-							 b_c_key : b_c_key,
-							 b_c_comment : b_c_comment
+							b_c_key : b_c_key,
+							b_c_comment : b_c_comment
 	    					}
 			 
 				$.ajax({
@@ -200,6 +192,7 @@
 			});
 		})
 	}
+
 </script>
 	<div class = "wrapp">
 	<div class = "container">
@@ -271,18 +264,20 @@
 			<h3 style = "color:#353866"> 댓글 입니다. </h3>
 		<div id = "view_comment">
 			<c:forEach var="comment" items="${comment }" varStatus="num">
+					<div>
 					<c:if test="${comment.b_key == view.b_key }">
-					<input type = "text" id = "view_com" value = "${comment.b_c_comment }" readonly>
-						<div id = "comment_name" style ="float : left; margin-left : 20px;  ">
-							작성자 : ${comment.nickName }	${comment.b_c_date }
-						</div>
-					<c:if test="${userInfo.userKey == comment.userKey}">
-					<input type = "button" id = "delete_comment" value = "댓글삭제" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
-					<input type="button" id="edit_comment" value="수정" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
-					<input type="button" id="real_edit_comment" value="댓글수정" class ="color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
-					</c:if>
-					<input type = "hidden" id = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
-					</c:if>
+						<input type = "text" id = "view_com" value = "${comment.b_c_comment }" readonly>
+							<div id = "comment_name" style ="float : left; margin-left : 20px;  ">
+								작성자 : ${comment.nickName }	${comment.b_c_date }
+							</div>
+						<c:if test="${userInfo.userKey == comment.userKey}">
+						<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+						<input type="button" id="edit_comment" value="수정" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
+						<input type="button" id="real_edit_comment" value="댓글수정" class ="color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+						</c:if>
+						<input type = "hidden" class = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
+						</c:if>
+					</div>
 			</c:forEach>
 		</div>
 				<!-- 히든으로 commentcontroller에 줄 값 -->

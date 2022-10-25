@@ -76,31 +76,6 @@
 				connect by prior b_articleNo = b_parentNo ) 
 			</delete>	
 					
-		<!-- 서치 -->
-<!-- 			<select id="searchAllArticle" resultType="boardDTO" parameterType="boardDTO"> -->
-<!-- 			select * from board b -->
-<!-- 			, allmember a -->
-<!-- 			<where> -->
-<!-- 				and b.userkey = a.userkey -->
-<!-- 				<choose> -->
-<!-- 					<when test="search_field == 1"> -->
-<!-- 						and lower(b_title) like lower('%'||#{search_bar }||'%')  -->
-<!-- 					</when> -->
-<!-- 					<when test="search_field == 2"> -->
-<!-- 						and lower(b_content) like lower('%'||#{search_bar }||'%') -->
-<!-- 					</when> -->
-<!-- 					<when test="search_field == 3"> -->
-<!-- 						and lower(nickName) like lower('%'||#{search_bar }||'%') -->
-<!-- 					</when> -->
-<!-- 					<otherwise> -->
-<!-- 						and (lower(b_title) like lower('%'||#{search_bar }||'%')  -->
-<!-- 						or lower(b_content) like lower('%'||#{search_bar }||'%') -->
-<!-- 						or lower(nickName) like lower('%'||#{search_bar }||'%')) -->
-<!-- 					</otherwise> -->
-<!-- 				</choose> -->
-<!-- 			</where> -->
-<!-- 			</select> -->
-
 			<!-- 서치 ajax-->
 			<select id="searchAllArticle" resultType="boardDTO" parameterType="java.util.HashMap">
 				select * from(

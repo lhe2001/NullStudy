@@ -1,6 +1,7 @@
 package com.spring.teampro.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -60,12 +61,11 @@ public class BoardController{
 			// 페이징
 			
 			// 페이징 초기값
-			// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
-			// 첫 페이지 경우
+			// 첫 페이지 값 1 , 보여줄 페이지수 10 으로 초기화
 			int pageNum = 1;
 			int amount = 10;
 			
-//			 페이지번호를 클릭하는 경우
+			// 페이지번호를 클릭하는 경우
 			if(request.getParameter("pageNum") != null && request.getParameter("amount") != null) {
 				pageNum = Integer.parseInt(request.getParameter("pageNum"));
 				amount = Integer.parseInt(request.getParameter("amount"));
@@ -74,25 +74,17 @@ public class BoardController{
 			// 댓글 갯수 가져오기
 			List<CommentDTO> list = new ArrayList<CommentDTO>();
 			list= boardService.getComment();
-			System.out.println("commentdto list = " + list);
-			System.out.println(list.size());
-			System.out.println(list.get(0));
 			CommentDTO commentDTO = new CommentDTO();
-			
-			System.out.println("pageNum = " + pageNum);
-			System.out.println("amount = " + amount);
 			int totalCount = boardService.getPage();
-			System.out.println("totalCount = " + totalCount);
 			PageDTO pageDTO = new PageDTO(pageNum, amount, totalCount);
-			System.out.println("pageDTO = " + pageDTO);
-			// 공지글 조회 때문에 어쩔 수 없이 가져오는 메소드
+			
+			// 공지글 조회 메소드
 			List<CommentDTO> noticeList=boardService.getNoticeList();
-			System.out.println("noticeList = " + noticeList);
 			
 			// 전체 리스트 가져오기
 			List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);
-			System.out.println("articlesList.size() = " + articlesList.size());
-			System.out.println("b_key = " + boardDTO.getB_key());
+			
+			
 			session=request.getSession();
 			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 			
@@ -148,24 +140,13 @@ public class BoardController{
 		// 댓글 갯수 가져오기
 		List<CommentDTO> list = new ArrayList<CommentDTO>();
 		list= boardService.getComment();
-		System.out.println("commentdto list = " + list);
-		System.out.println(list.size());
-		System.out.println(list.get(0));
 		CommentDTO commentDTO = new CommentDTO();
-		
-		System.out.println("pageNum = " + pageNum);
-		System.out.println("amount = " + amount);
 		int totalCount = boardService.getPage();
-		System.out.println("totalCount = " + totalCount);
 		PageDTO pageDTO = new PageDTO(pageNum, amount, totalCount);
-		System.out.println("pageDTO = " + pageDTO);
-		// 공지글 조회 때문에 어쩔 수 없이 가져오는 메소드
+		// 공지글 조회 메소드
 		List<CommentDTO> noticeList=boardService.getNoticeList();
-		System.out.println("noticeList = " + noticeList);
 		
 		List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);
-		System.out.println("articlesList.size() = " + articlesList.size());
-		System.out.println("b_key = " + boardDTO.getB_key());
 		session=request.getSession();
 		SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 		
@@ -213,22 +194,23 @@ public class BoardController{
 			SignUpInDTO adminCheck = (SignUpInDTO) session.getAttribute("userInfo");
 			String userId = adminCheck.getId();
 			int adminUserKey = adminCheck.getUserKey();
+			
 			if("admin".equals(userId)) {
 				model.addAttribute("adminUserKey", adminUserKey);
 				return "articleForm(admin)";
-			}else {
-				System.out.println("글쓰기 창으로 이동");
+				}else {
+					System.out.println("글쓰기 창으로 이동");
 				return "articleForm";
+				}
 			}
-		}
 		
-	// 글쓰기
+		// 글쓰기
 		@RequestMapping(value = "/board/addArticle.do", method = RequestMethod.POST)
 		public void addArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response
 								,Model model) throws Exception{
 			// 스크립트 한글설정
 			response.setContentType("text/html; charset=utf-8");
-			// 파라미터값 출력
+			// 파라미터값을 map형태로 저장
 			Map<String, Object> map = new HashMap<String, Object>();
 			Enumeration params = multipartRequest.getParameterNames();
 			while (params.hasMoreElements()) {
@@ -236,7 +218,7 @@ public class BoardController{
 				String value = multipartRequest.getParameter(name);
 				map.put(name, value);
 				System.out.print(name + " : " + multipartRequest.getParameter(name) + "     ");
-				
+				// 비밀글일 경우
 				if(multipartRequest.getParameter("b_field").equals("30")) {
 					int b_articlePwd = Integer.parseInt(multipartRequest.getParameter("b_articlePwd"));
 						if (b_articlePwd != -1) {
@@ -244,12 +226,10 @@ public class BoardController{
 						}
 				}
 			}
+			// 이미지 파일 이름 저장과 동시에 가져오기
 			String b_imageFile = upload(multipartRequest);
-			System.out.println("b_imageFile = " + b_imageFile);
 			session=multipartRequest.getSession();
 			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-//			model.addAttribute("userKey", userInfo.getUserKey());
-			System.out.println("userInfo.getUserKey() = " + userInfo.getUserKey());
 			map.put("b_parentNo" , 0);
 			map.put("b_imageFile", b_imageFile);
 			map.put("userKey", userInfo.getUserKey());
@@ -296,21 +276,15 @@ public class BoardController{
 			if("admin".equals(userId)) {
 
 				model.addAttribute("userInfo",userInfo);
-				System.out.println("상세보기로 이동");
-				System.out.println("b_articleNo : " + b_articleNo);
 				BoardDTO dto = new BoardDTO();
 				// 댓글 리스트를 여기서 보내준다..
-				// CommentDTO
-//				CommentDTO cdto = new CommentDTO();
 				List<CommentDTO> list = boardService.getCommentList();
-				System.out.println("commentlist.size() = " + list.size());
 				
 				// 조회수
 				dto = boardService.getViewArticle(b_articleNo);
 				int view = (dto.getB_view() + 1);
 				dto.setB_articleNo(b_articleNo);
 				dto.setB_view(view);
-				System.out.println("dto.getB_view = " + dto.getB_view());
 				// 조회수 업데이트
 				boardService.getView(dto);
 				model.addAttribute("view",dto);
@@ -319,21 +293,15 @@ public class BoardController{
 			}else {
 			
 			model.addAttribute("userInfo",userInfo);
-			System.out.println("상세보기로 이동");
-			System.out.println("b_articleNo : " + b_articleNo);
 			BoardDTO dto = new BoardDTO();
 			// 댓글 리스트를 여기서 보내준다..
-			// CommentDTO
-//			CommentDTO cdto = new CommentDTO();
 			List<CommentDTO> list = boardService.getCommentList();
-			System.out.println("commentlist.size() = " + list.size());
 			
 			// 조회수
 			dto = boardService.getViewArticle(b_articleNo);
 			int view = (dto.getB_view() + 1);
 			dto.setB_articleNo(b_articleNo);
 			dto.setB_view(view);
-			System.out.println("dto.getB_view = " + dto.getB_view());
 			// 조회수 업데이트
 			boardService.getView(dto);
 			model.addAttribute("view",dto);
@@ -357,6 +325,7 @@ public class BoardController{
 					String value = multipartRequest.getParameter(name);
 					map.put(name, value);
 					System.out.print(name + " : " + multipartRequest.getParameter(name) + "     ");
+					// 비밀글일 경우
 					if(multipartRequest.getParameter("b_field").equals("30")) {
 						int b_articlePwd = Integer.parseInt(multipartRequest.getParameter("b_articlePwd"));
 							if (b_articlePwd != -1) {
@@ -364,11 +333,10 @@ public class BoardController{
 							}
 					}
 				}
+				// 이미지 파일 이름 가져오기
 				String b_imageFile = upload(multipartRequest);
-				System.out.println("b_imageFile = " + b_imageFile);
 				session=multipartRequest.getSession();
 				SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-//				model.addAttribute("userKey", userInfo.getUserKey());
 				map.put("b_parentNo" , 0);
 				map.put("b_imageFile", b_imageFile);
 				map.put("userKey", userInfo.getUserKey()); 
@@ -416,7 +384,6 @@ public class BoardController{
 			// 스크립트 한글설정
 			response.setContentType("text/html; charset=utf-8");
 			int b_articleNo = Integer.parseInt(request.getParameter("b_articleNo"));
-			System.out.println("deleteArticle의 b_articleNo : " + b_articleNo);
 			model.addAttribute("userInfo",userInfo);
 			try {
 				boardService.getDeleteArticle(b_articleNo);
@@ -479,9 +446,8 @@ public class BoardController{
 				String name = (String) params.nextElement();
 				String value = multipartRequest.getParameter(name);
 				map.put(name, value);
-				System.out.print(name + " : " + multipartRequest.getParameter(name) + "     ");
 			}
-			
+			// 비밀글일 경우
 			if(multipartRequest.getParameter("b_field").equals("30")) {
 				int b_articlePwd = Integer.parseInt(multipartRequest.getParameter("b_articlePwd"));
 				if (b_articlePwd != -1) {
@@ -529,57 +495,38 @@ public class BoardController{
 			}
 			System.out.println("답글쓰기 완료");
 		}
-		// 셀렉트 박스 아작스
+		
+		// 셀렉트 박스 아작스 처리
 			@RequestMapping(value="/board/selectArticle.do" , method = {RequestMethod.GET,RequestMethod.POST})
 			public @ResponseBody Map selectArticle(HttpServletRequest request, HttpServletResponse response,
 					@RequestBody BoardDTO boardDTO, Model model) {
 				System.out.println("셀렉스 박스 아작스 기능 작동");
 				response.setContentType("text/html; charset=utf-8");
-				// 페이징
 				// 페이징 초기값
 				// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
 				// 첫 페이지 경우
 				int pageNum = 1;
 				int amount = 10;
 				
-//					 페이지번호를 클릭하는 경우
+				// 페이지번호를 클릭하는 경우
 				if(boardDTO.getPageNum() != 0 && boardDTO.getAmount() != 0) {
 					pageNum = boardDTO.getPageNum();
-					System.out.println("페이지번호 클릭 pageNum = " + pageNum);
 				}
 				amount = boardDTO.getAmount();
-				System.out.println(" amount = " + amount);
-				System.out.println("b_fieldName ="+ boardDTO.getB_fieldName());
-				
-				System.out.println("pageNum = " + pageNum);
-				System.out.println("amount = " + amount);
 				int totalCount = boardService.getPage();
-				System.out.println("totalCount = " + totalCount);
 				session=request.getSession();
 				SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 				model.addAttribute("userInfo",userInfo);
 				//  0 : 전체 , 10 : 질문 , 20: 잡담, 30: 비밀글, 40: 유우머
-				System.out.println("b_field2 == " + boardDTO.getB_field2());
 				int field2 =boardDTO.getB_field2();
-				System.out.println("boardDTO.getB_field() = " + boardDTO.getB_field());
 
-//				int field = boardDTO.getB_field();
-//				System.out.println("boardDTO.getSearch_bar() = " + boardDTO.getSearch_bar());
-//				String search_bar =  boardDTO.getSearch_bar();
-//				System.out.println("field = " + field);
-//				System.out.println("search_bar = " + search_bar);
 				List<BoardDTO> searchList = null;
 				PageDTO pdto = null;
-				// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
 				
-//						BoardDTO dto = new BoardDTO();
+				// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
 					pdto = new PageDTO(pageNum, amount, totalCount);
-					System.out.println("boardDTO.getB_field2() = " + boardDTO.getB_field2());
-//					boardDTO.setSearch_bar(search_bar);
-//					boardDTO.setSearch_field(field);
 					boardDTO.setB_field2(field2);
 					searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
-					System.out.println("searchList.size() : " + searchList.size());
 					
 					for (int i = 0; i < searchList.size(); i++) {
 						boardDTO = searchList.get(i);
@@ -621,51 +568,30 @@ public class BoardController{
 				
 				response.setContentType("text/html; charset=utf-8");
 				// 페이징
-				// 페이징 초기값
-				// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
-				// 첫 페이지 경우
 				int pageNum = 1;
 				int amount = 10;
 				
-//					 페이지번호를 클릭하는 경우
+				// 페이지번호를 클릭하는 경우
 				if(boardDTO.getPageNum() != 0 && boardDTO.getAmount() != 0) {
 					pageNum = boardDTO.getPageNum();
-					System.out.println("페이지번호 클릭 pageNum = " + pageNum);
 				}
 				amount = boardDTO.getAmount();
-				System.out.println(" amount = " + amount);
-				System.out.println("b_fieldName ="+ boardDTO.getB_fieldName());
-				
-				System.out.println("pageNum = " + pageNum);
-				System.out.println("amount = " + amount);
 				int totalCount = boardService.getPage();
-				System.out.println("totalCount = " + totalCount);
 				session=request.getSession();
 				SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 				model.addAttribute("userInfo",userInfo);
 				//  0 : 전체 , 10 : 질문 , 20: 잡담, 30: 비밀글, 40:나도몰라
-				System.out.println("b_field2 == " + boardDTO.getB_field2());
 				int field2 =boardDTO.getB_field2();
-				System.out.println("boardDTO.getB_field() = " + boardDTO.getB_field());
-
+				// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
 				int field = boardDTO.getB_field();
-				System.out.println("boardDTO.getSearch_bar() = " + boardDTO.getSearch_bar());
 				String search_bar =  boardDTO.getSearch_bar();
-				System.out.println("field = " + field);
-				System.out.println("search_bar = " + search_bar);
 				List<BoardDTO> searchList = null;
 				PageDTO pdto = null;
-				// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
-				
-//						BoardDTO dto = new BoardDTO();
 					pdto = new PageDTO(pageNum, amount, totalCount);
-					System.out.println("boardDTO.getB_field2() = " + boardDTO.getB_field2());
 					boardDTO.setSearch_bar(search_bar);
 					boardDTO.setSearch_field(field);
 					boardDTO.setB_field2(field2);
 					searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
-					System.out.println("searchList.size() : " + searchList.size());
-					
 					for (int i = 0; i < searchList.size(); i++) {
 						boardDTO = searchList.get(i);
 						switch (boardDTO.getB_field()) {
@@ -692,11 +618,10 @@ public class BoardController{
 				Map map = new HashMap();
 				map.put("searchList", searchList);
 				map.put("pageDTO",pdto);
-				System.out.println("셀렉트 박스 서치 완료");
 				return map;
 			}
 		
-		//말머리에서 가져오는 리스트 목록
+		// 말머리에서 가져오는 리스트 목록
 		@RequestMapping(value = "/board/selectField.do", method = RequestMethod.POST)
 		public String selectField(HttpServletRequest request, Model model,
 				@RequestParam("list_sel")int list_sel) {
@@ -708,34 +633,23 @@ public class BoardController{
 			dto.setB_field(list_sel);
 			List<BoardDTO> list = boardService.getSelectViewArticle(dto);
 			// (0 일경우 전체 글 출력, 10 = 질문, 20 = 잡담, 30 = 비밀글, 40 = 유우머, 50 = 공지)
-			System.out.println("list_sel =  " + list_sel );
-			System.out.println("list.size() =" + list.size() );
-			System.out.println("dto.getB_field() = " + dto.getB_field());
 				for (int j = 0; j < list.size(); j++) {
 						dto = list.get(j);
-					System.out.println("list1.size() = "+ list.size() );
-					System.out.println("dto field: " + dto.getB_field());
-					System.out.println("dto fieldName: " + dto.getB_fieldName());
 					switch (dto.getB_field()) {
 					case 10:
 						dto.setB_fieldName("질문");
-						System.out.println("dto fieldName: " + dto.getB_fieldName());
 						break;
 					case 20:
 						dto.setB_fieldName("잡담");
-						System.out.println("dto fieldName: " + dto.getB_fieldName());
 						break;
 					case 30:
 						dto.setB_fieldName("비밀글");
-						System.out.println("dto fieldName: " + dto.getB_fieldName());
 						break;
 					case 40:
 						dto.setB_fieldName("유우머");
-						System.out.println("dto fieldName: " + dto.getB_fieldName());
 						break;
 					case 50:
 						dto.setB_fieldName("공지");
-						System.out.println("dto fieldName: " + dto.getB_fieldName());
 						break;
 					default:
 						break;
@@ -752,7 +666,6 @@ public class BoardController{
 				,@RequestParam("b_articleNo") int b_articleNo
 				, Model model) {
 			System.out.println("비밀글 조회하러 가기");
-			System.out.println("b_articleNo = " + b_articleNo);
 			session=request.getSession();
 			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 			BoardDTO dto = new BoardDTO();
@@ -764,27 +677,28 @@ public class BoardController{
 		}
 		//비밀글 비밀번호 입력해서 조회
 		@RequestMapping(value="/board/checkPw.do", method = {RequestMethod.POST , RequestMethod.GET})
-		public String getPw(@RequestParam("b_articleNo") int b_articleNo,
+		public String getPw(HttpServletRequest request, HttpServletResponse response, @RequestParam("b_articleNo") int b_articleNo,
 				@RequestParam("pw") int b_articlePwd
-				, Model model) {
-			System.out.println("비밀번호 입력 완료");
-			System.out.println("b_articleNo = " + b_articleNo);
-			System.out.println("b_articlePwd = " + b_articlePwd );
+				, Model model) throws IOException {
+			// 스크립트 한글설정
 			int pw = boardService.getPwd(b_articleNo);
 			System.out.println("pw = " + pw);
+			System.out.println("b_articlePwd ====== " + b_articlePwd );
 			if(b_articlePwd == pw) {
 				System.out.println("비밀글 조회 성공");
 				model.addAttribute("b_articleNo",b_articleNo);
 				return "forward:/board/viewArticle.do";
+			} else  {
+				PrintWriter out = response.getWriter();
+				out.print("<script>");
+				out.print("alert('비밀번호가 틀립니다!!');");
+				out.print("</script>");
 			}
-			return "listArticles";
+			return "redirect:/board/listArticles.do";
+
 		}
 		
-		// 페이징
-		
-		
-		
-		//파일 이름 가져오는 메소드
+		//파일 저장  이름 가져오는 메소드
 		private String upload(MultipartHttpServletRequest multipartRequest)
 				throws Exception {
 	

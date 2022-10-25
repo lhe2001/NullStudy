@@ -37,8 +37,8 @@
 	</tr>
 </table>
 <div class="inputModwrap">
-<input type="button" value="취소" onclick="history.back()"  class="mod_btn">
-<input type="submit" value="수정하기" class="mod_btn">
+	<input type="button" value="취소" onclick="history.back()"  class="mod_btn">
+	<input type="submit" value="수정하기" class="mod_btn">
 </div>
 </form>
 

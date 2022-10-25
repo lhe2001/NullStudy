@@ -12,44 +12,10 @@
 <link rel="stylesheet"
  href ="${pageContext.request.contextPath }/resources/css/list.css">
 
-<%-- <c:choose> --%>
-<%-- 	<c:when test="${not empty userInfo.userKey }"> --%>
-<%-- 	<jsp:include page="/fix/header(logout).jsp"/> --%>
-<%-- </c:when> --%>
-
-<%-- <c:when test="${empty userInfo.userKey }"> --%>
-<%-- 	<jsp:include page="/fix/header(login).jsp"/> --%>
-<%-- 	</c:when> --%>
-<%-- </c:choose> --%>
-
 <style>
 </style>
 <script id = "test1234" src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
-// 		window.addEventListener("load", teamInfoOnload);
-
-// 	      function teamInfoOnload(){
-	  		
-// 	  		function select(){
-// 	  		let sel = document.querySelector("#select");
-// 				sel.addEventListener("change", function() {
-// 			let obj = document.querySelector("#frmSelect");
-// 				obj.action = "${contextPath}/board/selectField.do";
-// 				obj.method = "post"
-// 				obj.submit();
-// 				})
-// 			}
-			
-// 			function link (){
-// 			let link = document.querySelector("#link_a");
-// 				link.addEventListener("click", function() {
-// 			let obj = document.querySelector("#frmSelect");
-// 				obj.action = "${contextPath}/board/password.do";
-// 				obj.method = "post"
-// 				obj.submit();
-// 				})
-// 			}
-// 	      }
 
 		$(function(){
 		  		let btn = document.querySelector("#search_btn");
@@ -65,31 +31,25 @@
   				});
 		  		
 		  		let pageAmount = $("#pageAmount").val();
-		  		console.log("pageAmount ==" , pageAmount);
+		  		console.log("pageAmount :: " , pageAmount);
 		  		setPageEvent(pageAmount);
 		})
    		  		
+			// 셀렉트 서치 ajax
 	      	function search(index, amount){
-// 	    		$("#search_btn").off("click").on("click", function(){
-					console.log('index :: ', index);
 	    			let field = $("#field").val();
 	    			let search_bar = $("#search_bar").val();
 	    			let sel = $("#select").val();
 	    			let pageAmount2 = $("#pageAmount").val();
-	    			console.log("pageAmount ::", pageAmount2);
-	    			console.log("sel" , sel);
 			  		
 	    			let sel2= document.querySelector("#select").value;
-			  		console.log('sel2', sel2);
 	    			let info = {
 	    				b_field : field,
 	    				search_bar : search_bar,
 	    				pageNum : index,
 	    				amount : pageAmount2,
 	    				b_field2 : sel
-	    				
 	    			}
-	    			 //아작스
 	    			$.ajax({
 	    				url: "/project/board/searchArticle.do",
 	    				type: "post",
@@ -97,8 +57,6 @@
 	    				data: JSON.stringify(info),
 	    				success: function(data){
 	    					
-	    					console.log("map :", data);
-	    					console.log("pageDTO",data.pageDTO.startPage);
 	    					// 게시글
 	    					$("#list_tbody").empty();
     						
@@ -108,7 +66,6 @@
 	    						html += '<h1 style ="text-align : center; margin-left : 20px; margin-top : 20px; color : #1C6758">' + '등록된 글이 없어요' +'</h1>';
 	    					} 
     							for(let i = 0; i< data.searchList.length; i++){
-    								
     								html +=	'<tr>';
     								html += '<td>' + data.searchList[i].b_articleNo + '</td>';
 									if(data.searchList[i].b_fieldName == '비밀글'){
@@ -119,7 +76,6 @@
 										html += '<td >' + data.searchList[i].b_fieldName + '</td>';
 									}
 										html += '<td>' + data.searchList[i].nickName + '</td>';
-									
 									<%--답변을 구분해야 한다 --%>
 									html += '<td align="left" width="30%">';
 									<%--왼쪽 들여쓰기--%> 
@@ -127,7 +83,6 @@
 									<%-- level값이 1보다 큰경우 자식글이므로 
 									 부모글 밑에 공백으로 들여쓰기해서 자식글인걸 티내자 
 									 분기를 한번 더 타자--%> 
-									
 									if(data.searchList[i].level > 1){
 										for(let i = 1; i< data.searchList[i].level; i++){
 											html += '<span style="padding-left: 25px">'+'</span>';
@@ -138,7 +93,6 @@
 										html += '<a href="${contextPath}/board/viewArticle.do?b_articleNo=' +data.searchList[i].b_articleNo+ '">'+
 										data.searchList[i].b_title + '</a>';
 									}
-									
 									if(data.searchList[i].b_fieldName == '비밀글'){
 										html +=
 											'<a id = "link_a" href = "${contextPath}/board/password.do?b_articleNo=' + data.searchList[i].b_articleNo+ '">'+
@@ -150,36 +104,32 @@
 										html += '</td>'
 										
 										let date = new Date(data.searchList[i].b_writeDate);
-	    								console.log(date);
-	    								console.log(date.getFullYear());
 	    								
 										html += '<td>' + date.getFullYear()+'년'+ (date.getMonth()+1) + '월' + date.getDate() + '일'+
 										'</td>';
 										
 										html += '<td>' + data.searchList[i].b_view + '</td>';
 										html += '</tr>';
-    							
     							}
     							$("#list_tbody").append(html);
-    						
-	    					
-// 	    					console.log(data.searchList[1].b_field);
 	    					
 	    					//페이징
 	    					$("#paging").empty();
 	    					
 	    					let html2 = "";
+	    					
 	    					if(data.pageDTO.prev){
-	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.startPage - 1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '이전' + '</a></span>'
+	    						html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.startPage - 1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '이전' + '</a></span>'
 	    					}
 	    					
 	    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
-	    					html2 += '<input type="button" value="'+i+'" class="p_btn">'
+	    						html2 += '<input type="button" value="'+i+'" class="p_btn">'
 	    					}
 	    					
 	    					if(data.pageDTO.prev){
-	    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '다음' + '</a></span>'
+	    						html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '다음' + '</a></span>'
 	    					}
+	    					
 	    					$("#paging").append(html2);
 	    					
 	    					setPageEvent(data.pageDTO.amount);
@@ -257,6 +207,7 @@
 										 분기를 한번 더 타자--%> 
 										
 										if(data.searchList[i].level > 1){
+											
 											for(let i = 1; i< data.searchList[i].level; i++){
 												html += '<span style="padding-left: 25px">'+'</span>';
 											}
@@ -287,9 +238,6 @@
 		    							
 		    							}
 		    							$("#list_tbody").append(html);
-		    						
-			    					
-//		 	    					console.log(data.searchList[1].b_field);
 			    					
 			    					//페이징
 			    					$("#paging").empty();
@@ -315,18 +263,17 @@
 			    					alert("에러발생!!")
 			    				}
 			    			});
-//		 	    		})
 			    	}
 	    		
-				function link (){
-				let link = document.querySelector("#link_a");
-					link.addEventListener("click", function() {
-				let obj = document.querySelector("#frmSelect");
-					obj.action = "${contextPath}/board/password.do";
-					obj.method = "post"
-					obj.submit();
-					})
-				}
+// 				function link (){
+// 				let link = document.querySelector("#link_a");
+// 					link.addEventListener("click", function() {
+// 				let obj = document.querySelector("#frmSelect");
+// 					obj.action = "${contextPath}/board/password.do";
+// 					obj.method = "post"
+// 					obj.submit();
+// 					})
+// 				}
 				
 </script>
 <body>
