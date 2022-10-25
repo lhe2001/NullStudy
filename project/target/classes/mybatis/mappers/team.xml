@@ -108,6 +108,7 @@
 			SELECT DISTINCT t.TC_KEY ,t.TC_TITLE ,t.T_KEY , s.USERKEY, count(TCS_KEY)AS length  FROM TEAMCHALLENGE t , TCSUMMARY s
 			WHERE t.TC_KEY = s.TC_KEY AND t_key = #{t_key} AND userkey = #{userKey}
 			GROUP BY t.TC_KEY,t.TC_TITLE,t.t_key,s.USERKEY 
+			ORDER BY tc_key DESC
 	</select>
 	
 	<select id="getTCkey" resultType="int" parameterType="int">

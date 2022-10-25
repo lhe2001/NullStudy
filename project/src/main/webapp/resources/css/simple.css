@@ -126,6 +126,7 @@
         #adimg {
             height: 600px;
             background-image: url("https://i.postimg.cc/yYd7nsTK/main-Image.jpg");
+            background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             text-align: center;
@@ -272,7 +273,7 @@
             left: 20px;
             width: 200px;
             height : 220px;
-            text-align: center ;
+            text-align: left;
             z-index: 2;
             box-sizing: border-box;
             border-radius: 5px;
@@ -312,10 +313,10 @@
         }
         /* 1)회원정보 */
         #userInfo {
+            text-align: center ;
             float: right;
             width: 175px;
             margin-top: 20px;
-           
         }
         #userPT {
             margin: auto;
