@@ -113,6 +113,7 @@ public class searchController {
 			dto.setPageNum((Integer) map.get("pageNum"));
 			list = searchService.getSearchBoardSelectList(dto);
 			
+			
 		} else if (selectValue.equals("b_title")) {
 			
 			count = Count.b_titleSearchBoardSelectCount(dto);
@@ -173,7 +174,7 @@ public class searchController {
 			System.out.println("컨트롤러 boardSearch 메소드에서 getSelectList를 하는데 실패");
 			
 		}
-		
+		System.out.println("list" + list.size());
 		view.setViewName("boardSearch");
 		view.addObject("search", search);
 		view.addObject("selectValue", selectValue);
@@ -191,7 +192,7 @@ public class searchController {
 		System.out.println("Controller teamSearch.do");
 		System.out.println(search);
 
-		int _pageNum = 0;
+		int _pageNum = 1;
 		String str_pageNum = request.getParameter("pageNum");
 		if(str_pageNum != null) {
 			_pageNum = Integer.parseInt(str_pageNum);
@@ -199,15 +200,14 @@ public class searchController {
 		try {
 			_pageNum = Integer.parseInt(str_pageNum);
 		} catch (NumberFormatException nfe) {}
-
+		
 		Map map = new HashMap();
 		ModelAndView view = new ModelAndView();
 		SearchDTO dto = new SearchDTO(); 
 		dto.setSearch(search);
 		
-		List<SearchDTO> list = null;
-		
-		int count = Count.t_nameSearchTeamSelectCount(dto);
+		int count = Count.nickNameSearchUserSelectCount(dto);
+		System.out.println("count : " + count);
 		map = paging(_pageNum, count);
 		dto.setStart((Integer) map.get("start"));
 		dto.setEnd((Integer) map.get("end"));
@@ -215,7 +215,7 @@ public class searchController {
 		dto.setLastNo((Integer) map.get("lastNo"));
 		dto.setLastPage((Integer) map.get("lastPage"));
 		dto.setPageNum((Integer) map.get("pageNum"));
-		list = searchService.getT_nameSearchTeamSelectList(dto);
+		List<SearchDTO> list = searchService.getT_nameSearchTeamSelectList(dto);
 		// db에서 검색어가 없을 때 팀 목록 전체를 가져옴
 		
 		view.setViewName("teamSearch");
@@ -249,9 +249,8 @@ public class searchController {
 		
 		dto.setSearch(search);
 		
-		List<SearchDTO> list = null;
-		
 		int count = Count.nickNameSearchUserSelectCount(dto);
+		System.out.println("count : " + count);
 		map = paging(_pageNum, count);
 		dto.setStart((Integer) map.get("start"));
 		dto.setEnd((Integer) map.get("end"));
@@ -259,7 +258,7 @@ public class searchController {
 		dto.setLastNo((Integer) map.get("lastNo"));
 		dto.setLastPage((Integer) map.get("lastPage"));
 		dto.setPageNum((Integer) map.get("pageNum"));
-		list = searchService.getNickNameSearchUserSelectList(dto);
+		List<SearchDTO> list = searchService.getNickNameSearchUserSelectList(dto);
 		// db에서 검색어가 없을 때 팀 목록 전체를 가져옴
 		
 		view.setViewName("userSearch");
@@ -274,23 +273,28 @@ public class searchController {
 		
 		System.out.println("Controller paging 입장");
 		
-		int pageNum = 1;		// 현재 페이지
-		int countPerPage = 7;	// 한 페이지당 보여줄 글 개수
-		pageNum = _pageNum;
-		System.out.println("현재페이지 : " + pageNum);
+		int pageNum = 1;		// 처음 페이지
+		int countPerPage = 5;	// 한 페이지당 보여줄 글 개수
+		pageNum = _pageNum;	    // 현재 페이지
 		
 		int lastPage = (int)Math.ceil(((double)count / countPerPage)); // 마지막 페이징번호 링크
-		System.out.println(lastPage + " = " + count + " / " + countPerPage + " (올림)");
 		int section = 5; // 한 페이지에 보이는 a링크 페이지 수
 		int sec_position = (int)Math.ceil(((double)pageNum / section));
-		System.out.println("마지막 페이지" + lastPage + " = count " + count + " / " + "countPerPage " + countPerPage + " (올림)");
 		int firstNo = ((sec_position-1) * section) + 1; // 첫번째 a링크
 		int lastNo = firstNo + section - 1; // 마지막 a링크
 		int start = ((countPerPage * pageNum) - countPerPage) + 1;
 		int end = countPerPage * pageNum;
 		if(firstNo < 1){ firstNo = 1; }
 		if(lastNo > lastPage){lastNo = lastPage;}
-				
+		
+		System.out.println("pageNum : " + pageNum);
+		System.out.println("lastPage : " + lastPage);
+		System.out.println("section : " + section);
+		System.out.println("firstNo : " + firstNo);
+		System.out.println("lastNo : " + lastNo);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+		
 		Map map = new HashMap();
 		
 		map.put("start", start);
