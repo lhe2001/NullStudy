@@ -9,6 +9,10 @@ window.onload = function(){
     YellowPostIt();
 }
 
+function changeProfile(){
+	window.open('/project/team/changeProfile.do','pop','location=no,width=540,height=300,top=100,left=50,history=no,resizable=no,status=no,scrollbars=yes,menubar=no');
+}
+
 function header(){
     let navList = document.querySelectorAll(".navtap")
     for(let i=0; i<navList.length; i++){

@@ -168,13 +168,20 @@ function memberSummary(userKey,e){
 	let tc_key = $(".tc_key").val();
 	let nickName = e.querySelector("strong").innerText;
 	
+	let parent = e.parentNode.parentNode.parentNode.parentNode;
+	let img = parent.querySelector(".photo img");
+	console.log(img.src);
+	
+	$("#memberSummary img").attr("src",img.src);
+	
+
 	let info = { 
         			userKey : userKey,
         			tc_key : tc_key
         	};
 				$("#memNick").empty();
 				$("#memNick").append(nickName);
-        	
+				
         	$.ajax({
 				url: "/project/teamRest/memberSummary.do",
 				type: "post",
