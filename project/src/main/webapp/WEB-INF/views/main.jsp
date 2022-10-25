@@ -9,6 +9,14 @@
 	#teamBoard tr, #topBoard tr{
 	text-align: center;
 	}
+		.articleA{
+	text-decoration: none;
+	color: black;
+	
+	}
+	.articleA:visited{
+	color: black;
+	}
 </style>
 <script>
 $(document).ready( function() {
@@ -74,15 +82,22 @@ function getMainTopArticles(){
 				html += data[i].nickName;
 				html += "</td>";
 				html += "<td>";
+				html += "<a class='articleA' href='/project/board/viewArticle.do?b_articleNo=";
+				html += data[i].b_articleNo;
+				html += "'>"
 				html += data[i].b_title;
+				html += "</a>"
 				html += "</td>";
 				html += "<td>";
 				html += data[i].b_writeDate;
 				html += "</td>";
 				html += "</tr>";
+				
 			}
 			$("#topBoard tbody").append(html);
+			alretTopArcticle();
 		},
+
 		error:function(){
 			alert("에러발생!!")
 		}
@@ -99,6 +114,20 @@ function moveToAllTeam(){
 		}
 	});
 }
+
+function alretTopArcticle(){
+	$(document).on("click",".articleA",function(e){
+		e.preventDefault();
+		let userkey = ${userInfo.userKey-1};
+		console.log(userkey);
+		if(userkey ==-1){
+			alert('로그인을 먼저 해주세요!');
+		}else{
+			location.href=$(this).attr("href")
+		}
+	});
+}
+
 </script>
 <body>
 
