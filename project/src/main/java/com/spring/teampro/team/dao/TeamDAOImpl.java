@@ -125,7 +125,12 @@ public class TeamDAOImpl implements TeamDAO {
 		logger.info(">>>>>>"+dto.getUserKey());
 		return sqlSession.selectOne("mapper.team.alreadyToday",dto);
 	}
-	
+	//getTCkey
+	@Override
+	public List getTCkey(int t_key) {
+		return sqlSession.selectList("mapper.team.getTCkey",t_key);
+	}
+
 	//>>>>>>>>>>>>>>>UPDATE 수정하기>>>>>>>>>>>>>>
 	//팀정보 업데이트 하기
 	@Override
@@ -188,10 +193,6 @@ public class TeamDAOImpl implements TeamDAO {
 	public int removeMember(TeamMemberDTO dto) {
 		int remove = sqlSession.delete("mapper.team.removeMember",dto);
 		int t_key = dto.getT_key();
-		logger.info("t_key>>>>>>>>>"+t_key);
-		logger.info("tm_key>>>>>>>>>"+dto.getTm_key());
-		logger.info("userkey>>>>>>>>>"+dto.getuserKey());
-		logger.info("removeMember>>>>>>>>>"+remove);
 		return this.updateMemberCount(t_key);
 	}
 	//팀삭제
@@ -206,11 +207,6 @@ public class TeamDAOImpl implements TeamDAO {
 		sqlSession.delete("mapper.team.deleteTeam_request",t_key);
 		sqlSession.delete("mapper.team.deleteTeam_member",t_key);
 		return sqlSession.delete("mapper.team.deleteTeam_team",t_key);
-	}
-	//getTCkey
-	@Override
-	public List getTCkey(int t_key) {
-		return sqlSession.selectList("mapper.team.getTCkey",t_key);
 	}
 	//가입요청 취소하기 & 거절된 요청 삭제하기
 	@Override
