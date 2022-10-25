@@ -11,21 +11,9 @@
     <script>
     $(function(){
     	bind();
-    	idcheck();
-    	<%-- 게시판 --%>
-    	search();
-    	select();
-		link();
     })
     
     function bind(){
-    	$("#login_btn").off("click").on("click", function(){
-    		location.href = '/project/moveToSignIn.do'
-    	})
-    	
-    	$("#signUp_btn").off("click").on("click", function(){
-    		location.href = '/project/moveToSignUp.do'
-    	})
     	
     	$(".drop").off("click").on("click",function(){
     		alert('로그인 후 이용 가능 합니다.');

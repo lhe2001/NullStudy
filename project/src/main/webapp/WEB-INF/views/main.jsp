@@ -5,6 +5,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<style>
+	#teamBoard tr, #topBoard tr{
+	text-align: center;
+	}
+</style>
 <script>
 $(document).ready( function() {
  	getMainTeamList(); 
