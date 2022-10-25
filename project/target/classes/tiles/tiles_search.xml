@@ -14,26 +14,26 @@
    
    <definition name="boardSearch" extends="baseLayout_search">
       <put-attribute name="title" value="게시글 보기" />
-      <put-attribute name="header" value="/WEB-INF/views/common/header(login).jsp" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/search/boardSearch.jsp" />
-      <put-attribute name="footer" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
    
    <definition name="teamSearch" extends="baseLayout_search">
       <put-attribute name="title" value="팀 찾기" />
-      <put-attribute name="header" value="/WEB-INF/views/common/header(login).jsp" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/search/teamSearch.jsp" />
-      <put-attribute name="footer" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
    
    <definition name="userSearch" extends="baseLayout_search">
       <put-attribute name="title" value="유저 찾기" />
-      <put-attribute name="header" value="/WEB-INF/views/common/header(login).jsp" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header(logout).jsp" />
       <put-attribute name="side" value="" />
       <put-attribute name="body" value="/WEB-INF/views/search/userSearch.jsp" />
-      <put-attribute name="footer" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
    
 

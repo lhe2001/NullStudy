@@ -71,6 +71,8 @@ function getMainTopArticles(){
 			
 			let html="";
 			for(let i=0; i<data.length; i++){
+				let date = new Date(data[i].b_writeDate);
+				
 				html += "<tr>";
 				html += "<td>";
 				html += (i+1);
@@ -88,8 +90,9 @@ function getMainTopArticles(){
 				html += data[i].b_title;
 				html += "</a>"
 				html += "</td>";
+				html += '<td>' + date.getFullYear()+'년'+ (date.getMonth()+1) + '월' + date.getDate() + '일'+'</td>';
 				html += "<td>";
-				html += data[i].b_writeDate;
+				html += data[i].b_view;
 				html += "</td>";
 				html += "</tr>";
 				
@@ -131,9 +134,9 @@ function alretTopArcticle(){
 </script>
 <body>
 
-<%-- 	<c:if test="${searchLoginDo=='searchLoginDo'}"> --%>
-<!-- 		<script>alert("로그인 후 사용해주세요.");</script> -->
-<%-- 	</c:if> --%>
+	<c:if test="${searchLoginDo=='searchLoginDo'}">
+		<script>alert("로그인 후 사용해주세요.");</script>
+	</c:if>
 
     <div>
     <div id="wrapper">
@@ -172,6 +175,7 @@ function alretTopArcticle(){
                             			<th>작성자</th>
                             			<th>제목</th>
                             			<th>작성일</th>
+                            			<th>조회수</th>
                             		</tr>
                             	</thead>
                             	<tbody>

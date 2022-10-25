@@ -6,11 +6,11 @@
 	#modtable {
 		margin: auto;
 	}
-	
 	.inputModwrap {
-	 	margin-left: 430px;
+	 	text-align: center;
+	 	margin-right: 20px;
+	 	
 	}
-	
 	#modtable td{
 	    width: 160px;
 	    height: 50px;

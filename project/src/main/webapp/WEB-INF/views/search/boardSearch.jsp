@@ -12,7 +12,25 @@
 	<form name="frmListAfter" method="get" action="${pageContext.request.contextPath}/boardSearch.do">
         <h3 style="color: #69c7b5" class="searchTitle">자유게시판</h3>
         <div class="searchLine">
-        
+        	
+        	<select name = "pagingValue" id="pagingValue">
+            
+                <option value="15" selected disabled>보기</option>
+                <option value="10" 
+                <c:if test="${pagingValue == '10'}">selected</c:if>
+                >10개</option>
+                <option value="15"
+                <c:if test="${pagingValue == '15'}">selected</c:if>
+                >15개</option>
+                <option value="30"
+                <c:if test="${pagingValue == '30'}">selected</c:if>
+                >30개</option>
+                <option value="50"
+                <c:if test="${pagingValue == '50'}">selected</c:if>
+                >50개</option>
+                
+            </select>
+        	
             <select name = "selectValue" id="selectValue">
             
                 <option value = all
@@ -41,21 +59,11 @@
 	
 </div>
 
-
 <c:if test="${list.size() == 0}">
 	<h5 class="searchW block">해당 ' ${search} '에 대한 게시글이 없습니다</h5>
 	<!-- 검색어에 대한 조회 데이터가 없을 때 출력 -->
 </c:if>
 	
-<select class="pagingOption block" name="pagingValue" id="pagingValue">
-	<option value="10" selected>10</option>
-	<option value="15">15</option>
-	<option value="30">30</option>
-    <option value="50">50</option>
-    <option value="100">100</option>
-</select>
-	
-
 <div class="searchTbWrap">
 	<table class="searchTb">
 		<thead>
