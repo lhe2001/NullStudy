@@ -37,7 +37,7 @@ select{
 	width: 100px;
 }
 
-th{
+.slWrap th{
     width: 100px;
     padding: 10px;
     text-align: center;
@@ -45,15 +45,16 @@ th{
     
 }
 
-table{
+.slWrap table{
 	width: 1300px;
     border-top: 1px solid #444444;
     border-collapse: collapse;
     margin-left: 20px;
     margin-rignt: 20px;
+    margin: auto;
 }
 
-tr, td{
+.slWrap tr, .slWrap td{
     border-bottom: 1px solid #444444;
     padding: 10px;
     text-align: center;

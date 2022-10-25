@@ -107,8 +107,31 @@ public class SignUpInServiceImpl implements SignUpInService {
 
 	@Override
 	public List<BoardDTO> getTopArticles() {
-		return signUpInDAO.getTopArticles();
-		 
+		List<BoardDTO> list = signUpInDAO.getTopArticles(); 
+		
+		for(int i=0;i<list.size();i++) {
+			BoardDTO dto = list.get(i);
+			int b_field = dto.getB_field();
+			
+			switch(b_field) {
+			case 10:
+				dto.setB_fieldName("질문");
+				break;
+			case 20:
+				dto.setB_fieldName("잡담");
+				break;
+			case 30:
+				dto.setB_fieldName("비밀글");
+				break;
+			case 40:
+				dto.setB_fieldName("나도몰라");
+				break;
+			case 50:
+				dto.setB_fieldName("공지");
+				break;
+			}
+		}
+		return list;
 	}
 
 }
