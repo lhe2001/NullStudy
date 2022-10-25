@@ -197,13 +197,14 @@ public class TeamDAOImpl implements TeamDAO {
 	//팀삭제
 	@Override
 	public int deleteTeam(int t_key, List list) {
+		logger.info("ddddddddddddddd"+list.size());
+		logger.info("t_key>>>>>>>>>>"+t_key);
 		if(list.size()>0) {
 			sqlSession.delete("mapper.team.deleteTeam_summary",list);
-		}else {
-			sqlSession.delete("mapper.team.deleteTeam_challenge",t_key);
-			sqlSession.delete("mapper.team.deleteTeam_request",t_key);
-			sqlSession.delete("mapper.team.deleteTeam_member",t_key);
 		}
+		sqlSession.delete("mapper.team.deleteTeam_challenge",t_key);
+		sqlSession.delete("mapper.team.deleteTeam_request",t_key);
+		sqlSession.delete("mapper.team.deleteTeam_member",t_key);
 		return sqlSession.delete("mapper.team.deleteTeam_team",t_key);
 	}
 	//getTCkey
