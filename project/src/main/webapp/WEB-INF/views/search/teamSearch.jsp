@@ -12,6 +12,25 @@
 	<form name="frmListAfter" method="get" action="${pageContext.request.contextPath}/teamSearch.do">
         <h3 style="color: #69c7b5" class="searchTitle">팀찾아보기</h3>
         <div class="searchLine">    
+        		
+        	<select name = "pagingValue" id="pagingValue">
+            
+                <option value="15" selected disabled>보기</option>
+                <option value="10" 
+                <c:if test="${pagingValue == '10'}">selected</c:if>
+                >10개</option>
+                <option value="15"
+                <c:if test="${pagingValue == '15'}">selected</c:if>
+                >15개</option>
+                <option value="30"
+                <c:if test="${pagingValue == '30'}">selected</c:if>
+                >30개</option>
+                <option value="50"
+                <c:if test="${pagingValue == '50'}">selected</c:if>
+                >50개</option>
+                
+            </select>
+        		
         										<!-- 이전 검색어 -->
             <input type="text" name="search" value="${search}" class="searchBar" required>   
             <button type="submit" class="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>      
@@ -57,7 +76,7 @@
 	</table>
 </div>
 	
-<c:if test="${list.size() != 0}">
+<c:if test="${dto.lastPage != 1}">
 	<div class="pagingDiv">
 		<c:set var="dto" value="${dto}"/>
 		<!-- paging -->
