@@ -276,7 +276,7 @@
 					<input type = "text" id = "view_com" value = "${comment.b_c_comment }" readonly>
 					작성자 : ${comment.nickName }
 					작성일 : ${comment.b_c_date }
-					<c:if test="${view.nickName == comment.nickName }">
+					<c:if test="${userInfo.userKey == comment.userKey}">
 					<input type = "button" id = "delete_comment" value = "댓글삭제" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
 					<input type="button" id="edit_comment" value="수정" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
 					<input type="button" id="real_edit_comment" value="댓글수정" class ="hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">

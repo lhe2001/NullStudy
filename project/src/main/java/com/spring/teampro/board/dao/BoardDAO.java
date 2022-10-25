@@ -58,5 +58,7 @@ public interface BoardDAO {
 	
 	// 공지글만 가져오기
 	public List<CommentDTO> getNotice();
+	
+	public List<BoardDTO> searchArticle(BoardDTO dto,int pageNum, int amount);
 }
 

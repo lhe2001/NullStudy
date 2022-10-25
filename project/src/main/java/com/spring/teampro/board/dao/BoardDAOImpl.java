@@ -88,7 +88,7 @@ public class BoardDAOImpl implements BoardDAO {
 //		return list;
 //	}
 	
-	// 서치하는 메소드 (ajax)
+	// 셀렉트 서치하는 메소드 (ajax)
 		@Override
 		public List<BoardDTO> searchAllArticle(BoardDTO dto,int pageNum, int amount) {
 			List<BoardDTO> list = new ArrayList<BoardDTO>();
@@ -169,4 +169,19 @@ public class BoardDAOImpl implements BoardDAO {
 		return list;
 	}
 	
+	// 셀렉트 하는 메소드 (ajax)
+		@Override
+		public List<BoardDTO> searchArticle(BoardDTO dto,int pageNum, int amount) {
+			List<BoardDTO> list = new ArrayList<BoardDTO>();
+			System.out.println("dao pageNum = " + pageNum );
+			System.out.println("dao amount = " + amount );
+			System.out.println("dao b_field2 = " + dto.getB_field2() );
+			Map map = new HashMap();
+			map.put("b_field2", dto.getB_field2());
+			map.put("pageNum",pageNum);
+			map.put("amount",amount);
+			list = sqlSession.selectList("mapper.board.searchAllArticle", map);
+			System.out.println();
+			return list;
+		}
 }

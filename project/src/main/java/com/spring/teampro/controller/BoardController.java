@@ -129,9 +129,7 @@ public class BoardController{
 			model.addAttribute("userInfo",userInfo);
 			model.addAttribute("pageDTO",pageDTO);
 			return "listArticles(admin)";
-			
 		}else {
-		
 		System.out.println("전체 리스트 조회");
 		// 페이징
 		
@@ -189,7 +187,7 @@ public class BoardController{
 					boardDTO.setB_fieldName("비밀글");
 					break;
 				case 40:
-					boardDTO.setB_fieldName("나도몰라");
+					boardDTO.setB_fieldName("유우머");
 					break;
 				case 50:
 					boardDTO.setB_fieldName("나도몰라");
@@ -530,92 +528,172 @@ public class BoardController{
 			}
 			System.out.println("답글쓰기 완료");
 		}
+		// 셀렉트 박스 아작스
+			@RequestMapping(value="/board/selectArticle.do" , method = {RequestMethod.GET,RequestMethod.POST})
+			public @ResponseBody Map selectArticle(HttpServletRequest request, HttpServletResponse response,
+					@RequestBody BoardDTO boardDTO, Model model) {
+				System.out.println("셀렉스 박스 아작스 기능 작동");
+				response.setContentType("text/html; charset=utf-8");
+				// 페이징
+				// 페이징 초기값
+				// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
+				// 첫 페이지 경우
+				int pageNum = 1;
+				int amount = 10;
+				
+//					 페이지번호를 클릭하는 경우
+				if(boardDTO.getPageNum() != 0 && boardDTO.getAmount() != 0) {
+					pageNum = boardDTO.getPageNum();
+					System.out.println("페이지번호 클릭 pageNum = " + pageNum);
+				}
+				amount = boardDTO.getAmount();
+				System.out.println(" amount = " + amount);
+				System.out.println("b_fieldName ="+ boardDTO.getB_fieldName());
+				
+				System.out.println("pageNum = " + pageNum);
+				System.out.println("amount = " + amount);
+				int totalCount = boardService.getPage();
+				System.out.println("totalCount = " + totalCount);
+				session=request.getSession();
+				SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+				model.addAttribute("userInfo",userInfo);
+				//  0 : 전체 , 10 : 질문 , 20: 잡담, 30: 비밀글, 40: 유우머
+				System.out.println("b_field2 == " + boardDTO.getB_field2());
+				int field2 =boardDTO.getB_field2();
+				System.out.println("boardDTO.getB_field() = " + boardDTO.getB_field());
+
+//				int field = boardDTO.getB_field();
+//				System.out.println("boardDTO.getSearch_bar() = " + boardDTO.getSearch_bar());
+//				String search_bar =  boardDTO.getSearch_bar();
+//				System.out.println("field = " + field);
+//				System.out.println("search_bar = " + search_bar);
+				List<BoardDTO> searchList = null;
+				PageDTO pdto = null;
+				// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
+				
+//						BoardDTO dto = new BoardDTO();
+					pdto = new PageDTO(pageNum, amount, totalCount);
+					System.out.println("boardDTO.getB_field2() = " + boardDTO.getB_field2());
+//					boardDTO.setSearch_bar(search_bar);
+//					boardDTO.setSearch_field(field);
+					boardDTO.setB_field2(field2);
+					searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
+					System.out.println("searchList.size() : " + searchList.size());
+					
+					for (int i = 0; i < searchList.size(); i++) {
+						boardDTO = searchList.get(i);
+						switch (boardDTO.getB_field()) {
+						case 10:
+							boardDTO.setB_fieldName("질문");
+							break;
+						case 20:
+							boardDTO.setB_fieldName("잡담");
+							break;
+						case 30:
+							boardDTO.setB_fieldName("비밀글");
+							break;
+						case 40:
+							boardDTO.setB_fieldName("유우머");
+							break;
+						case 50:
+							boardDTO.setB_fieldName("공지");
+							break;
+						default:
+							break;
+						}
+					}
+				
+				Map map = new HashMap();
+				map.put("searchList", searchList);
+				map.put("pageDTO",pdto);
+				System.out.println("셀렉트 박스 서치 완료");
+				return map;
+			}
+			
 		
 		// 셀렉트 박스 서치 아작스
-				@RequestMapping(value = "/board/searchArticle.do" , method = {RequestMethod.POST , RequestMethod.GET})
-				public @ResponseBody Map searchArticle(HttpServletRequest request, HttpServletResponse response,
-//							@RequestParam("field")int field,
-//							@RequestParam("search_bar")String search_bar,
-							@RequestBody BoardDTO boardDTO,
-							Model model) {
-					System.out.println("셀렉트 박스 서치 아작스 기능 작동");
-					
-					response.setContentType("text/html; charset=utf-8");
-					// 페이징
-					// 페이징 초기값
-					// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
-					// 첫 페이지 경우
-					int pageNum = 1;
-					int amount = 10;
-					
+			@RequestMapping(value = "/board/searchArticle.do" , method = {RequestMethod.POST , RequestMethod.GET})
+			public @ResponseBody Map searchArticle(HttpServletRequest request, HttpServletResponse response,
+					@RequestBody BoardDTO boardDTO,
+					Model model) {
+				System.out.println("셀렉트 박스 서치 아작스 기능 작동");
+				
+				response.setContentType("text/html; charset=utf-8");
+				// 페이징
+				// 페이징 초기값
+				// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
+				// 첫 페이지 경우
+				int pageNum = 1;
+				int amount = 10;
+				
 //					 페이지번호를 클릭하는 경우
-					if(boardDTO.getPageNum() != 0 && boardDTO.getAmount() != 0) {
-						pageNum = boardDTO.getPageNum();
-						System.out.println("페이지번호 클릭 pageNum = " + pageNum);
-					}
-					amount = boardDTO.getAmount();
-					System.out.println(" amount = " + amount);
-					System.out.println("b_fieldName ="+ boardDTO.getB_fieldName());
-					
-					System.out.println("pageNum = " + pageNum);
-					System.out.println("amount = " + amount);
-					int totalCount = boardService.getPage();
-					System.out.println("totalCount = " + totalCount);
-					session=request.getSession();
-					SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
-					model.addAttribute("userInfo",userInfo);
-					//  0 : 전체 , 10 : 질문 , 20: 잡담, 30: 비밀글, 40:나도몰라
-					System.out.println("b_field2 == " + boardDTO.getB_field2());
-					int field2 =boardDTO.getB_field2();
-					System.out.println("boardDTO.getB_field() = " + boardDTO.getB_field());
-
-					int field = boardDTO.getB_field();
-					System.out.println("boardDTO.getSearch_bar() = " + boardDTO.getSearch_bar());
-					String search_bar =  boardDTO.getSearch_bar();
-					System.out.println("field = " + field);
-					System.out.println("search_bar = " + search_bar);
-					List<BoardDTO> searchList = null;
-					PageDTO pdto = null;
-					// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
-					
-//						BoardDTO dto = new BoardDTO();
-						pdto = new PageDTO(pageNum, amount, totalCount);
-						System.out.println("boardDTO.getB_field2() = " + boardDTO.getB_field2());
-						boardDTO.setSearch_bar(search_bar);
-						boardDTO.setSearch_field(field);
-						boardDTO.setB_field2(field2);
-						searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
-						System.out.println("searchList.size() : " + searchList.size());
-						
-						for (int i = 0; i < searchList.size(); i++) {
-							boardDTO = searchList.get(i);
-							switch (boardDTO.getB_field()) {
-							case 10:
-								boardDTO.setB_fieldName("질문");
-								break;
-							case 20:
-								boardDTO.setB_fieldName("잡담");
-								break;
-							case 30:
-								boardDTO.setB_fieldName("비밀글");
-								break;
-							case 40:
-								boardDTO.setB_fieldName("유우머");
-								break;
-							case 50:
-								boardDTO.setB_fieldName("공지");
-								break;
-							default:
-								break;
-							}
-						}
-					
-					Map map = new HashMap();
-					map.put("searchList", searchList);
-					map.put("pageDTO",pdto);
-					System.out.println("셀렉트 박스 서치 완료");
-					return map;
+				if(boardDTO.getPageNum() != 0 && boardDTO.getAmount() != 0) {
+					pageNum = boardDTO.getPageNum();
+					System.out.println("페이지번호 클릭 pageNum = " + pageNum);
 				}
+				amount = boardDTO.getAmount();
+				System.out.println(" amount = " + amount);
+				System.out.println("b_fieldName ="+ boardDTO.getB_fieldName());
+				
+				System.out.println("pageNum = " + pageNum);
+				System.out.println("amount = " + amount);
+				int totalCount = boardService.getPage();
+				System.out.println("totalCount = " + totalCount);
+				session=request.getSession();
+				SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+				model.addAttribute("userInfo",userInfo);
+				//  0 : 전체 , 10 : 질문 , 20: 잡담, 30: 비밀글, 40:나도몰라
+				System.out.println("b_field2 == " + boardDTO.getB_field2());
+				int field2 =boardDTO.getB_field2();
+				System.out.println("boardDTO.getB_field() = " + boardDTO.getB_field());
+
+				int field = boardDTO.getB_field();
+				System.out.println("boardDTO.getSearch_bar() = " + boardDTO.getSearch_bar());
+				String search_bar =  boardDTO.getSearch_bar();
+				System.out.println("field = " + field);
+				System.out.println("search_bar = " + search_bar);
+				List<BoardDTO> searchList = null;
+				PageDTO pdto = null;
+				// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
+				
+//						BoardDTO dto = new BoardDTO();
+					pdto = new PageDTO(pageNum, amount, totalCount);
+					System.out.println("boardDTO.getB_field2() = " + boardDTO.getB_field2());
+					boardDTO.setSearch_bar(search_bar);
+					boardDTO.setSearch_field(field);
+					boardDTO.setB_field2(field2);
+					searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
+					System.out.println("searchList.size() : " + searchList.size());
+					
+					for (int i = 0; i < searchList.size(); i++) {
+						boardDTO = searchList.get(i);
+						switch (boardDTO.getB_field()) {
+						case 10:
+							boardDTO.setB_fieldName("질문");
+							break;
+						case 20:
+							boardDTO.setB_fieldName("잡담");
+							break;
+						case 30:
+							boardDTO.setB_fieldName("비밀글");
+							break;
+						case 40:
+							boardDTO.setB_fieldName("유우머");
+							break;
+						case 50:
+							boardDTO.setB_fieldName("공지");
+							break;
+						default:
+							break;
+						}
+					}
+				
+				Map map = new HashMap();
+				map.put("searchList", searchList);
+				map.put("pageDTO",pdto);
+				System.out.println("셀렉트 박스 서치 완료");
+				return map;
+			}
 		
 		//말머리에서 가져오는 리스트 목록
 		@RequestMapping(value = "/board/selectField.do", method = RequestMethod.POST)
@@ -651,7 +729,7 @@ public class BoardController{
 						System.out.println("dto fieldName: " + dto.getB_fieldName());
 						break;
 					case 40:
-						dto.setB_fieldName("나도몰라");
+						dto.setB_fieldName("유우머");
 						System.out.println("dto fieldName: " + dto.getB_fieldName());
 						break;
 					case 50:

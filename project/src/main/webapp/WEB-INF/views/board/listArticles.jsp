@@ -29,8 +29,6 @@
 // 		window.addEventListener("load", teamInfoOnload);
 
 // 	      function teamInfoOnload(){
-// 	    	
-			
 	  		
 // 	  		function select(){
 // 	  		let sel = document.querySelector("#select");
@@ -41,6 +39,7 @@
 // 				obj.submit();
 // 				})
 // 			}
+			
 // 			function link (){
 // 			let link = document.querySelector("#link_a");
 // 				link.addEventListener("click", function() {
@@ -50,13 +49,21 @@
 // 				obj.submit();
 // 				})
 // 			}
+// 	      }
+
 		$(function(){
-				let obj = document.querySelector("#frmId");
 		  		let btn = document.querySelector("#search_btn");
 		  		btn.addEventListener("click", function() {
 		  			console.log('this :: ', this);
 		  			search();
 		  		});
+		  		
+		  		let sel = document.querySelector("#select");
+  				sel.addEventListener("change",function(){
+  					console.log('this :: ', this);
+  					setSelect();
+  				});
+		  		
 		  		let pageAmount = $("#pageAmount").val();
 		  		console.log("pageAmount ==" , pageAmount);
 		  		setPageEvent(pageAmount);
@@ -70,12 +77,9 @@
 	    			let sel = $("#select").val();
 	    			let pageAmount2 = $("#pageAmount").val();
 	    			console.log("pageAmount ::", pageAmount2);
-					if(sel == '글머리'){
-						alert('글머리 이외의 것을 선택해 주세요!')
-						location.href="${contextPath}/board/listArticles.do"
-					}
 	    			console.log("sel" , sel);
-			  		let sel2= document.querySelector("#select").value;
+			  		
+	    			let sel2= document.querySelector("#select").value;
 			  		console.log('sel2', sel2);
 	    			let info = {
 	    				b_field : field,
@@ -144,7 +148,14 @@
 										data.searchList[i].b_title + '</a>';
 									}
 										html += '</td>'
-										html += '<td>' + data.searchList[i].b_writeDate + '</td>';
+										
+										let date = new Date(data.searchList[i].b_writeDate);
+	    								console.log(date);
+	    								console.log(date.getFullYear());
+	    								
+										html += '<td>' + date.getFullYear()+'년'+ (date.getMonth()+1) + '월' + date.getDate() + '일'+
+										'</td>';
+										
 										html += '<td>' + data.searchList[i].b_view + '</td>';
 										html += '</tr>';
     							
@@ -180,7 +191,7 @@
 	    			});
 // 	    		})
 	    	}
-		
+				// 페이징 셋팅
    		  		function setPageEvent(amount) {
 	   		  		let pageBtn = document.querySelectorAll(".p_btn");
 	   		  		for(var i = 0; i < pageBtn.length; i++) {
@@ -191,14 +202,116 @@
 	   		  		}
    		  		}
    		  		
-	    		function setSelect(){
-		  			let sel = document.querySelector("#select");
-		  				console.log("sel",sel);
-		  				sel.addEventListener("change",function(){
-		  					console.log(this.value)
-		  				})
-		  				
-	    		}
+				// 셀렉트 아작스
+	    		function setSelect(index, amount){
+		  					
+					console.log('index :: ', index);
+		    			let sel = $("#select").val();
+		    			let pageAmount2 = $("#pageAmount").val();
+		    			console.log("pageAmount ::", pageAmount2);
+		    			
+		    			console.log("sel" , sel);
+		    			
+		    			let info = {
+		    				pageNum : index,
+		    				amount : pageAmount2,
+		    				b_field2 : sel
+		    			}
+		    			 //아작스
+		    			$.ajax({
+		    				url: "/project/board/selectArticle.do",
+		    				type: "post",
+		    				contentType : "application/json",
+		    				data: JSON.stringify(info),
+		    				success: function(data){
+		    					
+		    					console.log("map :", data);
+		    					console.log("pageDTO",data.pageDTO.startPage);
+		    					// 게시글
+		    					$("#list_tbody").empty();
+	    						
+		    					let html = "";
+		    					
+		    					if(data.searchList.length == 0){
+		    						html += '<h1 style ="text-align : center; margin-left : 20px; margin-top : 20px; color : #1C6758">' + '등록된 글이 없어요' +'</h1>';
+		    					} 
+	    							for(let i = 0; i< data.searchList.length; i++){
+	    								
+	    								html +=	'<tr>';
+	    								html += '<td>' + data.searchList[i].b_articleNo + '</td>';
+										if(data.searchList[i].b_fieldName == '비밀글'){
+											html += '<td style = "color : tomato;">' + data.searchList[i].b_fieldName + '</td>';
+										} else if(data.searchList[i].b_fieldName == '공지')  {
+											html += '<td style = "color : #ea7f27;">' + data.searchList[i].b_fieldName + '</td>';
+										} else {
+											html += '<td >' + data.searchList[i].b_fieldName + '</td>';
+										}
+											html += '<td>' + data.searchList[i].nickName + '</td>';
+										
+										<%--답변을 구분해야 한다 --%>
+										html += '<td align="left" width="30%">';
+										<%--왼쪽 들여쓰기--%> 
+										html += '<span style="padding-right: 30px">'+'</span>'; 
+										<%-- level값이 1보다 큰경우 자식글이므로 
+										 부모글 밑에 공백으로 들여쓰기해서 자식글인걸 티내자 
+										 분기를 한번 더 타자--%> 
+										
+										if(data.searchList[i].level > 1){
+											for(let i = 1; i< data.searchList[i].level; i++){
+												html += '<span style="padding-left: 25px">'+'</span>';
+											}
+											<%-- 제목앞에 답글인걸 표시하는 표시 하나추가 --%>
+											html += '<span>'+'[답변]'+'</span>';
+											<%-- 마지막으로 제목을 누르면 상세 출력 페이지 이동 a태그하나 --%>
+												html += '<a href="${contextPath}/board/viewArticle.do?b_articleNo=' +data.searchList[i].b_articleNo+ '">'+
+												data.searchList[i].b_title + '</a>';
+											}
+											
+											if(data.searchList[i].b_fieldName == '비밀글'){
+												html +=
+													'<a id = "link_a" href = "${contextPath}/board/password.do?b_articleNo=' + data.searchList[i].b_articleNo+ '">'+
+													data.searchList[i].b_title+ '</a>';
+											} else {
+												html += '<a href="${contextPath}/board/viewArticle.do?b_articleNo=' +data.searchList[i].b_articleNo+ '">'+
+												data.searchList[i].b_title + '</a>';
+											}
+												html += '</td>'
+												html += '<td>' + data.searchList[i].b_writeDate + '</td>';
+												html += '<td>' + data.searchList[i].b_view + '</td>';
+												html += '</tr>';
+		    							
+		    							}
+		    							$("#list_tbody").append(html);
+		    						
+			    					
+//		 	    					console.log(data.searchList[1].b_field);
+			    					
+			    					//페이징
+			    					$("#paging").empty();
+			    					
+			    					let html2 = "";
+			    					if(data.pageDTO.prev){
+			    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.startPage - 1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '이전' + '</a></span>'
+			    					}
+			    					
+			    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
+			    					html2 += '<input type="button" value="'+i+'" class="p_btn">'
+			    					}
+			    					
+			    					if(data.pageDTO.prev){
+			    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '다음' + '</a></span>'
+			    					}
+			    					$("#paging").append(html2);
+			    					
+			    					setPageEvent(data.pageDTO.amount);
+			    				},
+			    				
+			    				error:function(){
+			    					alert("에러발생!!")
+			    				}
+			    			});
+//		 	    		})
+			    	}
 	    		
 				function link (){
 				let link = document.querySelector("#link_a");
