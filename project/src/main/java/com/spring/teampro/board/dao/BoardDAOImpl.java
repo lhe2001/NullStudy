@@ -48,7 +48,8 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		map.put("b_articleNo",b_articleNo);
 		sqlSession.insert("mapper.board.addNewArticle",map);
-		return result;
+		System.out.println("dao result ===" + result );
+		return b_articleNo;
 	}
 
 	// viewArticle() 메소드 작성 <글 상세 목록 view>

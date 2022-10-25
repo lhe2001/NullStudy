@@ -262,6 +262,7 @@ public class BoardController{
 					File srcFile = new File(image + "\\" + "temp" + "\\" + b_imageFile);
 					// 자바 폴더 생성
 					File destDir = new File(image + "\\" + b_articleNo);
+					System.out.println("destDir ==> " + destDir);
 					destDir.mkdirs();
 					
 					FileUtils.moveFileToDirectory(srcFile, destDir, true);

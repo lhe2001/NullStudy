@@ -203,14 +203,14 @@
 </script>
 	<div class = "wrapp">
 	<div class = "container">
-		<h1 style = "margin-top : 30px; color : #1C6758">${view.nickName }님의 소중한 글입니다.</h1><hr>
+		<h1 style = "margin-top : 30px; color : #353866">${view.nickName }님의 소중한 글입니다.</h1><hr>
 	<div class = "field">
 		<form name="frmName" id=frmForm action="${contextPath }" enctype="multipart/form-data" method="post"><br>
 			<div id = "articleNo">
-				<div style="float : left; border : 1px solid #ced4da; border-radius: 4px; background-color: #e9ecef; width:100px; height:30px;" >
+				<div class ="color_btn" style="float : left;  border-radius: 4px; background-color: white; width:100px; height:30px;" >
 					글번호
 				</div> 
-				<input type="text" value="${view.b_articleNo }"  style ="background-color: #FEF5ED; float : left;  margin-left: 3px; border : 0; color :#99A799;" disabled><br>
+				<input type="text" value="${view.b_articleNo }"  style ="background-color: #FEF5ED; float : left;  margin-left: 3px; border : 0; color :#353866;" disabled><br>
 			</div>
 				<!-- 	히든으로 넘겨줄 정보	-->
 				<input type="hidden" name="b_parentNo" value="${view.b_parentNo }">
@@ -220,26 +220,26 @@
 				
 				
 			<div id = "articlewriter" >
-				<div style="float : left; border : 1px solid #ced4da; border-radius: 4px; background-color: #e9ecef; width:100px; height:30px;
+				<div class="color_btn" style="float : left; border-radius: 4px; background-color: white; width:100px; height:30px;
 			 	line-height: 1.5;">
 					글 작성자
 			</div>
 				<input type="text" name="b_writer" value="${view.nickName }" 
-				style ="background-color: #FEF5ED; float : left; margin-left: 3px; border : 0; margin-bottom: 10px; color :#99A799;" disabled> 
+				style ="background-color: #FEF5ED; float : left; margin-left: 3px; border : 0; margin-bottom: 10px; color :#353866;" disabled> 
 				</div><br>
 			<div id = "add">
-				<div style="float : left; border : 1px solid #ced4da; border-radius: 4px; background-color: #e9ecef; width:100px; height:30px;
+				<div class="color_btn" style="float : left;  border-radius: 4px; background-color : white; width:100px; height:30px;
 			 	line-height: 1.5;">
 					등 록 일 
 				</div>
-				<input type="text" value="<fmt:formatDate value="${view.b_writeDate }"/> "name="b_writeDate" 
-				style ="background-color: #FEF5ED; float : left; margin-left: 3px; border : 0; margin-bottom: 10px; color :#99A799;" disabled >
+				<input type="text" value="<fmt:formatDate value="${view.b_writeDate }"/> "name="b_writeDate" class = "color_btn"
+				style ="background-color: #FEF5ED; float : left; margin-left: 3px; border : 0; margin-bottom: 10px; color :#353866;" disabled >
 				</div>
 	
 			<div class="input-group flex-nowrap" >
-	  			<span class="input-group-text" id="addon-wrapping" style = "color :#99A799;">제목</span>
+	  			<span class="color_btn input-group-text" id="addon-wrapping" style = "background-color: white;">제목</span>
 				<input type="text" class="form-control" id="edit_title" value="${view.b_title }" 
-				style = "background-color: #A2B29F; width :700px; color :white; " name="b_title" aria-label="Username" aria-describedby="addon-wrapping" disabled>
+				style = "background-color: #e1c1ec; width :700px; color :white; " name="b_title" aria-label="Username" aria-describedby="addon-wrapping" disabled>
 			</div><br>
 			
 			<textarea rows="10" cols="70" id="edit_content" name="b_content" 
@@ -247,14 +247,13 @@
 				disabled> ${view.b_content } 
 			</textarea><br>
 			<%-- 이미지가 있을 경우 표시 --%>
-			\${view.b_imageFile } -------> ${view.b_imageFile }
 			<div id = "image" >
 				<c:if test="${not empty (view.b_imageFile) && view.b_imageFile != 'null'}">
-					이 미 지 : 
+					image : 
 				<%-- 이미지 수정에 대비해 지금 이미지 파일 이름을 저장 --%>
 				<input type="hidden" id="edit_image" name="oriFileName"
 					value="${view.b_imageFile }" />
-				<img style = "width : 200px ; height : 200px;" src="${contextPath }/download.do?b_imageFile=${view.b_imageFile }
+				<img style = "width : 200px ; height : 200px;" src="${contextPath }/board/download.do?b_imageFile=${view.b_imageFile }
 					&b_articleNo=${view.b_articleNo }" /><br>
 				<%-- 수정된 이미지 파일 이름 전송 --%>
 				<input type="file" name="b_imageFile" id="imageFile"
@@ -263,23 +262,24 @@
 			</div><hr><br>
 			<!-- 댓글 추가 div -->
 	<div id = "wrap_comment">
-		<h4>comment</h4>
+		<h4 style = "color:#353866">comment</h4>
 			<textarea rows="4" cols="70" name = "b_c_comment"id ="comment" placeholder = "댓글을 입력해 주세요!!!" style = "padding-top : 10px; padding-left : 5px;"></textarea>
-			<input type="button" id="add_comment" value="댓글쓰기" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
+			<input type="button" id="add_comment" value="댓글쓰기" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
 		</div>
 			<br><br><hr>
 			<!-- 댓글이 들어갈 곳 -->
-			<h3> 댓글 입니다. </h3>
+			<h3 style = "color:#353866"> 댓글 입니다. </h3>
 		<div id = "view_comment">
 			<c:forEach var="comment" items="${comment }" varStatus="num">
 					<c:if test="${comment.b_key == view.b_key }">
 					<input type = "text" id = "view_com" value = "${comment.b_c_comment }" readonly>
-					작성자 : ${comment.nickName }
-					작성일 : ${comment.b_c_date }
+						<div id = "comment_name" style ="float : left; margin-left : 20px;  ">
+							작성자 : ${comment.nickName }	${comment.b_c_date }
+						</div>
 					<c:if test="${userInfo.userKey == comment.userKey}">
-					<input type = "button" id = "delete_comment" value = "댓글삭제" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
-					<input type="button" id="edit_comment" value="수정" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
-					<input type="button" id="real_edit_comment" value="댓글수정" class ="hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
+					<input type = "button" id = "delete_comment" value = "댓글삭제" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+					<input type="button" id="edit_comment" value="수정" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
+					<input type="button" id="real_edit_comment" value="댓글수정" class ="color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
 					</c:if>
 					<input type = "hidden" id = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
 					</c:if>
@@ -290,24 +290,24 @@
 				<input type ="hidden" name="userkey" id ="userkey" value = "${userInfo.userKey }"/><br><hr>
 		
 			<div id = "btn_list">
-				<input type="button" id="list_btn"  class="btn btn-outline-light" value="목록으로" style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
+				<input type="button" id="list_btn"  class="color_btn btn btn-outline-light" value="목록으로" style = "float : right; margin-right : 5px; ">
 					<c:choose>
 						<c:when test="${userInfo.userKey == view.userkey }">
 <!-- 						로그인 -->
-						<input type="button" id="edit_btn" value="수정하기" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
-						<input type="button" id="del_btn" value="삭제하기" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;"> 
-						<input type="button" id="rePly_btn" value="답글쓰기" class =" btn btn-outline-light"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
+						<input type="button" id="edit_btn" value="수정하기" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
+						<input type="button" id="del_btn" value="삭제하기" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; "> 
+						<input type="button" id="rePly_btn" value="답글쓰기" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
 						</c:when>
 						<c:when test ="${empty userInfo.userKey }">
 <!-- 						비로그인 -->
-						<input type="button" id="edit_btn" value="수정하기" class = "hidden btn btn-outline-light" >
-						<input type="button" id="del_btn" value="삭제하기" class = "hidden btn btn-outline-light"> 
-						<input type="button" id="rePly_btn" value="답글쓰기" class = "hidden btn btn-outline-light">
+						<input type="button" id="edit_btn" value="수정하기" class = "color_btn hidden btn btn-outline-light" >
+						<input type="button" id="del_btn" value="삭제하기" class = "color_btn hidden btn btn-outline-light"> 
+						<input type="button" id="rePly_btn" value="답글쓰기" class = "color_btn hidden btn btn-outline-light">
 						</c:when>
 						<c:when test ="${not empty userInfo.userKey }">
-						<input type="button" id="edit_btn" value="수정하기" class="hidden btn btn-outline-light" style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
-						<input type="button" id="del_btn" value="삭제하기" class="hidden btn btn-outline-light" style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;"> 
-						<input type="button" id="rePly_btn" class="btn btn-outline-light" value="답글쓰기"  style = "float : right; margin-right : 5px; border : 1px solid #99A799; color : #99A799;">
+						<input type="button" id="edit_btn" value="수정하기" class="color_btn hidden btn btn-outline-light" style = "float : right; margin-right : 5px;">
+						<input type="button" id="del_btn" value="삭제하기" class="color_btn hidden btn btn-outline-light" style = "float : right; margin-right : 5px;"> 
+						<input type="button" id="rePly_btn" class="color_btn btn btn-outline-light" value="답글쓰기"  style = "float : right; margin-right : 5px;">
 						</c:when>
 					</c:choose>
 			<input type="button" id="real_edit_btn" value="수정" class="btn btn-outline-danger">

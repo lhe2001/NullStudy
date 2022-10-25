@@ -18,12 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller("fileDownloadController")
 public class FileDownloadController extends HttpServlet {
    
-	 public FileDownloadController() {
-	        super();
-	        // TODO Auto-generated constructor stub
-	    }
 	 	@RequestMapping(value = "/board/download.do", method = {RequestMethod.GET, RequestMethod.POST})
-		protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		protected void download(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String file_repo = "C:\\image_file";
 			String b_imageFile = (String) request.getParameter("b_imageFile");
 			String b_articleNo = request.getParameter("b_articleNo");
@@ -35,7 +31,7 @@ public class FileDownloadController extends HttpServlet {
 
 			OutputStream out = response.getOutputStream();
 			// 글번호에 대한 파일 경로
-			String downFile = file_repo +"\\"+ -1 + "\\" + b_imageFile;
+			String downFile = file_repo +"\\"+ b_articleNo + "\\" + b_imageFile;
 			
 			File f = new File(downFile);
 			FileInputStream in = new FileInputStream( f );

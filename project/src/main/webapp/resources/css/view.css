@@ -1,4 +1,9 @@
 @charset "UTF-8";
+body {
+	color : #353866;
+	background: linear-gradient(#d0d0f0, #d8b1b8);
+}
+
 .wrapp {
 	width: 100%;
  	height : 100%;
@@ -20,7 +25,8 @@
 	resize : none;
 	border : none;
 	outline : none;
-	color : #99A799;
+	color : #353866;
+	
 }
 
 #comment{
@@ -29,8 +35,8 @@
 	resize : none;
 	border : none;
 	outline : none;
-	background-color: #99A799;
-	color : white;
+	background-color: #9dc4f1;
+	color : #353866;
 }
 
 #view_com {
@@ -39,7 +45,7 @@
 	resize : none;
 	border : none;
 	outline : none;
-	background-color: #99A799;
+	background-color: #9dc4f1;
 	color : white;
 }
 
@@ -63,4 +69,14 @@
 }
 #btn_list{
 	margin-top : 10px;
+}
+
+#comment_name {
+	float: left;
+	margin-left : 30px;
+}
+
+.color_btn {
+	border : 1px solid #353866;
+	color : #353866;
 }

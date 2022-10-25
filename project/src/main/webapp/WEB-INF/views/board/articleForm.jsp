@@ -72,12 +72,12 @@
 </script>
 <div id = "wrapp">
 <div id = "container">
-	<h1 style = "margin-top : 30px; color : #1C6758">자유 게시판 글쓰기</h1><hr>
+	<h1 style = "margin-top : 30px; color : #353866">자유 게시판 글쓰기</h1><hr>
 	 <div class = "field">
 		<form name="frmName" id="frmForm" action="${contextPath }/board/addArticle.do" method="post" enctype="multipart/form-data">
 			<div class="input-group flex-nowrap">
 	  			<span class="input-group-text" id="addon-wrapping" style = "color : #99A799">제목</span>
-	  			<input type="text" id = "b_title" name="b_title" class="form-control" placeholder="제목을 입력해 주세요." style = "background-color : #A2B29F; color : white;" aria-label="Username" aria-describedby="addon-wrapping">
+	  			<input type="text" id = "b_title" name="b_title" class="form-control" placeholder="제목을 입력해 주세요." style = "background-color : #e1c1ec; color : white;" aria-label="Username" aria-describedby="addon-wrapping">
 			</div>
 				<div id = "file_flex">
 				 <select id = "select_list" class = "btn-outline-info" style = "float : left; margin-left : 10px; height : 30px; margin : 5px;" name="b_field">
@@ -94,16 +94,18 @@
 			
 			<div class="filebox">
   				<label for="ex_file">파일 업로드</label>
-  				<input type="file"  name="b_imageFile"  id="ex_file" style = "border : none; background-color: #FEF5ED; color : #FEF5ED;" onchange="readURL(this);">
+  				<input type="file"  name="b_imageFile"  id="ex_file"  class="color_btn"  onchange="readURL(this);" />
 			</div>
 		</div>
 			<textarea rows="10" cols="70" name="b_content" id = "article_content" placeholder = "내용을 입력해 주세요!!!" style = "padding-top : 10px; padding-left : 5px;"></textarea><br><hr>
-		 		<input type="button" id="list_btn" class="btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' style = "float : left; margin-left : 10px; border : 1px solid #99A799; color : #99A799;"/>
-				<input type="submit" id = "write_btn" value="글쓰기" class="btn btn-outline-light" style = "float : right; margin-right : 50px; border : 1px solid #99A799; color : #99A799;"/>
-		</form>
 	</div>
 </div>
 </div>
+			<div id = "listbtn">
+		 		<input type="button" id="list_btn" class="color_btn btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' style = "float : left; margin-left : 10px;"/>
+				<input type="submit" id = "write_btn" value="글쓰기" class="color_btn btn btn-outline-light" style = "float : right; margin-right : 50px; "/>
+			</div>
+			</form>
 	<%-- 목록 으로가는건 이런것도 있다. location.href='${contextPath}/board/listArticles.do' --%>
 <%-- <jsp:include page="/fix/footer.jsp"/> --%>
 </body>

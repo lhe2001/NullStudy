@@ -49,7 +49,7 @@
 <body>
 	<div id = "wrrap">
 	<div id = "container">
-	<h1 style="margin-top:20px; color : #1C6758;">여러분들의 소중한 답글작성 페이지 입니다.</h1>
+	<h1 style="margin-top:20px; color : #353866;">여러분들의 소중한 답글작성 페이지 입니다.</h1>
 	<hr>
 	<form action="${contextPath }/board/addReply.do" name="frmReply" id="frmReply"  method="post" enctype="multipart/form-data">	
 		
@@ -61,8 +61,8 @@
 		</div>
 		
 		<div class="input-group flex-nowrap">
-  			<p class="input-group-text" id="addon-wrapping" style = "color : #99A799">제목</p>
-		<input type="text" name="b_title" placeholder="제목을 입력하세요!!" style = "color : white; background-color: #A2B29F;"> 
+  			<p class="input-group-text" id="addon-wrapping" style = "color : #353866; background-color: white;">제목</p>
+		<input type="text" name="b_title" placeholder="제목을 입력하세요!!" style = "color : white; background-color: #d8b1b8;"> 
 		</div>
 		
 		<div class="filebox">
@@ -78,8 +78,8 @@
 		<div id = "last_btn">
 		<input type = "hidden" name = "b_parentNo" value ="${b_articleNo }">
 		<input type = "hidden" name = "b_field" value ="${b_field }">
-		<input type="button" id="btn_re" class="btn btn-outline-light" style = "border : 1px solid #99A799; color : #99A799;" value="답글작성완료">
-		 <input type="button" id="btn_can" class="btn btn-outline-light" style = "border : 1px solid #99A799; color : #99A799;" value="취소">
+		<input type="button" id="btn_re" class="color_btn btn btn-outline-light"  value="답글작성완료">
+		 <input type="button" id="btn_can" class="color_btn btn btn-outline-light"  value="취소">
 		</div>
 	</form>
 	</div>

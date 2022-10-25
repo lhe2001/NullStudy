@@ -275,8 +275,13 @@
 												html += '<a href="${contextPath}/board/viewArticle.do?b_articleNo=' +data.searchList[i].b_articleNo+ '">'+
 												data.searchList[i].b_title + '</a>';
 											}
-												html += '</td>'
-												html += '<td>' + data.searchList[i].b_writeDate + '</td>';
+											
+												let date = new Date(data.searchList[i].b_writeDate);
+		    									console.log(date);
+		    									console.log(date.getFullYear());
+		    								
+												html += '<td>' + date.getFullYear()+'년'+ (date.getMonth()+1) + '월' + date.getDate() + '일'+
+													'</td>';
 												html += '<td>' + data.searchList[i].b_view + '</td>';
 												html += '</tr>';
 		    							
@@ -334,7 +339,7 @@
 	
 	<div id = "wrapp">
 	<div id = "container">
-	<h1 style ="text-align : left; margin-left : 20px; margin-top : 20px; color : #1C6758">자유게시판</h1>
+	<h1 style ="text-align : left; margin-left : 20px; margin-top : 20px; color : #353866">자유게시판</h1>
 	<h5 style ="text-align : left; margin-left : 20px;"> 자유롭게 글을 작성해 주세요!!</h5>
 	
 	<div id = "page_select">
@@ -366,12 +371,12 @@
 	</div>
 	<div id = "notice">
 		<c:forEach var ="notice" begin = "0" items="${ noticeList}" end ="${noticeList.size() }" >
-				 ${notice.nickName } ${notice.b_title }
+				<a href = "${contextPath}/board/viewArticle.do?b_articleNo=${notice.b_articleNo}"> ${notice.nickName }님의 말씀입니다 : *${notice.b_title }*</a>
 		</c:forEach>
 	</div>
 	<table id="tb" class = "table table-hover table-bordered" style = "color : #1C6758">
 		<thead>
-		<tr style = "background-color: #A2B29F">
+		<tr style = "background-color: #e1c1ec">
 			<th>글 번호</th>
 			<%--<th>부모 글 번호</th> --%>
 			<th>분야</th>
@@ -473,8 +478,8 @@
 		<c:choose>
 			<c:when test="${empty userInfo.userKey }">
 				<input type="text" name="search_bar" id = "search_bar" data-id ="hidden" class = "form-control"  /> 
-				<input type="button" id="search_btn" class="btn btn-primary "  name="search" value=검색하기 data-id ="hidden" /> 
-				<input type="submit" value=글쓰러가기  class="btn btn-primary" id = "write_btn" data-id ="hidden" />
+				<input type="button" id="search_btn" class="color_btn btn btn-primary "  name="search" value=검색하기 data-id ="hidden" /> 
+				<input type="submit" value=글쓰러가기  class="color_btn btn btn-primary" id = "write_btn" data-id ="hidden" />
 			</c:when>
 				
 		<c:when test="${!empty userInfo.userKey }">
@@ -487,12 +492,12 @@
 					<option value="4">전체</option>
 				</select> 
 				<input type="text" name="search_bar" id = "search_bar" class = "form-control" style = "width : 300px; padding:0 10px; margin : 0 2px;" /> 
-				<input type="button" id="search_btn" class="btn btn-outline-light" name="search" value=검색하기 style = "margin-bottom : 6px; border : 1px solid #99A799; color : #99A799;"> 
+				<input type="button" id="search_btn" class="color_btn btn btn-outline-light" name="search" value=검색하기 style = "margin-bottom : 6px;"> 
 			</div>
 		</div>
 			<div id = "listbtn">
-				<input type="submit" value=글쓰러가기  class="btn btn-outline-light" id = "write_btn" style = "border : 1px solid #99A799; color : #99A799;">
-				<input type="button" id="list_btn" class="btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' style = " border : 1px solid #99A799; color : #99A799;"/>
+				<input type="submit" value=글쓰러가기  class="color_btn btn btn-outline-light" id = "write_btn" >
+				<input type="button" id="list_btn" class="color_btn btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' />
 			</div>
 		</c:when>
 		</c:choose>	
