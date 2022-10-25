@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-
-    %>
+    pageEncoding="UTF-8"%>
     
-
 <title>사이드포스트잇</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f5483c894c.js" crossorigin="anonymous"></script>
@@ -22,11 +19,11 @@
 	        <div class="left"></div>
 	        <div id="userInfo">
 	            <div id="userPT"></div>
-	            <h1>${sessionScope.userInfo.nickName}</h1>
-	            <p>내 소개 : ${sessionScope.userInfo.intro}</p>
+	            <h1 class="mainNickName">${sessionScope.userInfo.nickName}</h1>
+	            <p class="mainIntro">인사말<br>${sessionScope.userInfo.intro}</p>
 	            
 	            <form action="profileUpdate.do" method="get">
-	            <p><button type="submit" id="userDataChange">정보수정</button></p>
+	            	<p><button type="submit" id="userDataChange">프로필 수정</button></p>
 	            </form>
 	            
 	        </div>

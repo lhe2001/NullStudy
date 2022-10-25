@@ -36,6 +36,7 @@ public class SearchDTO {
 	private int lastNo;
 	private int lastPage;
 	private int pageNum;
+	private int count;
 	
 
 	

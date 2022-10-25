@@ -13,6 +13,8 @@
 
 <form action="update.do" method="get" name="updateForm">
 <table  id="modtable">
+	<tr><h3 style="text-align:center">프로필 수정</h3></tr>
+	<br>
 	<tr>
 		<td>아이디</td>
 		<td><input type="text" class="mod_inputs" name="id" value="${userInfo.id }" readonly></td>

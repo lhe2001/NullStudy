@@ -17,12 +17,6 @@ public class SearchServiceImpl implements SearchService {
 	SearchDTO dto = new SearchDTO(); 
 	
 	// 자유 게시판
-	@Override
-	public List<SearchDTO> getBoardAllSelectList(SearchDTO dto) {
-		
-		List<SearchDTO> list = searchDAO.boardAllSelectList(dto);
-		return list;
-	}
 	
 	@Override
 	public List<SearchDTO> getSearchBoardSelectList(SearchDTO dto) {
@@ -55,13 +49,6 @@ public class SearchServiceImpl implements SearchService {
 	// 팀 목록
 	
 	@Override
-	public List<SearchDTO> getTeamAllList(SearchDTO dto) {
-		
-		List<SearchDTO> list = searchDAO.teamAllList(dto);
-		return list;
-	}
-	
-	@Override
 	public List<SearchDTO> getT_nameSearchTeamSelectList(SearchDTO dto) {
 		
 		List<SearchDTO> list = searchDAO.t_nameSearchTeamSelectList(dto);
@@ -69,13 +56,6 @@ public class SearchServiceImpl implements SearchService {
 	}
 	
 	// 유저 목록
-	
-	@Override
-	public List<SearchDTO> getUserAllList(SearchDTO dto) {	
-			
-		List<SearchDTO> list = searchDAO.userAllList(dto);
-		return list;
-	}
 	
 	@Override
 	public List<SearchDTO> getNickNameSearchUserSelectList(SearchDTO dto) {	

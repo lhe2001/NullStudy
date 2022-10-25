@@ -9,17 +9,18 @@
 	<select id="searchBoardSelectList" resultType="searchDTO" parameterType="Object">
 
 	<![CDATA[SELECT * FROM
+			 ( SELECT rownum AS rnum, tmp.* FROM
 			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate, rownum
 			 FROM ALLMEMBER a, BOARD b
 			 where a.USERKEY = b.USERKEY
 			 and (lower(b_title) LIKE '%' || lower(#{search}) || '%'
 			 OR lower(nickName) LIKE '%' || lower(#{search}) || '%'
-			 OR lower(b_content) LIKE '%' || lower(#{search}) || '%')
+			 OR lower(b_content) LIKE '%' || lower(#{search}) || '%') ) tmp
 			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
 			
 	</select>
 	
-			<select id="searchBoardSelectCount" resultType="searchDTO" parameterType="Object">
+			<select id="searchBoardSelectCount" resultType="int" parameterType="Object">
 		
 					 SELECT count(*) FROM ALLMEMBER a, BOARD b
 					 where a.USERKEY = b.USERKEY
@@ -31,16 +32,16 @@
 	
 	<select id="b_titleSearchBoardSelectList" resultType="searchDTO" parameterType="Object">
 
-	<![CDATA[SELECT * FROM
+	<![CDATA[( SELECT rownum AS rnum, tmp.* FROM
 			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate, rownum
 			 FROM ALLMEMBER a, BOARD b
 			 where a.USERKEY = b.USERKEY
-			 and lower(b_title) LIKE '%' || lower(#{search}) || '%'
+			 and lower(b_title) LIKE '%' || lower(#{search}) || '%' ) tmp
 			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
 			
 	</select>
 	
-			<select id="b_titleSearchBoardSelectCount" resultType="searchDTO" parameterType="Object">
+			<select id="b_titleSearchBoardSelectCount" resultType="int" parameterType="Object">
 		
 					 SELECT count(*) FROM ALLMEMBER a, BOARD b
 					 where a.USERKEY = b.USERKEY
@@ -51,15 +52,16 @@
 	<select id="nickNameSearchBoardSelectList" resultType="searchDTO" parameterType="Object">
 
 	<![CDATA[SELECT * FROM
-			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate, rownum
+			 ( SELECT rownum AS rnum, tmp.* FROM
+			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
 			 FROM ALLMEMBER a, BOARD b
 			 where a.USERKEY = b.USERKEY
-			 and lower(nickName) LIKE '%' || lower(#{search}) || '%'
-			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
+			 and lower(nickName) LIKE '%' || lower(#{search}) || '%' ) tmp
+			 ) WHERE (#{start}) <= rnum AND rnum <= (#{end})]]>
 			
 	</select>
 	
-			<select id="nickNameSearchBoardSelectCount" resultType="searchDTO" parameterType="Object">
+			<select id="nickNameSearchBoardSelectCount" resultType="int" parameterType="Object">
 		
 					 SELECT count(*) FROM ALLMEMBER a, BOARD b
 					 where a.USERKEY = b.USERKEY
@@ -70,15 +72,16 @@
 	<select id="b_contentSearchBoardSelectList" resultType="searchDTO" parameterType="Object">
 
 	<![CDATA[SELECT * FROM
+			 ( SELECT rownum AS rnum, tmp.* FROM
 			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate, rownum
 			 FROM ALLMEMBER a, BOARD b
 			 where a.USERKEY = b.USERKEY
-			 and lower(b_content) LIKE '%' || lower(#{search}) || '%'
+			 and lower(b_content) LIKE '%' || lower(#{search}) || '%' ) tmp
 			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
 			
 	</select>
 	
-			<select id="b_contentSearchBoardSelectCount" resultType="searchDTO" parameterType="Object">
+			<select id="b_contentSearchBoardSelectCount" resultType="int" parameterType="Object">
 		
 					 SELECT count(*) FROM ALLMEMBER a, BOARD b
 					 where a.USERKEY = b.USERKEY
@@ -89,15 +92,16 @@
 	<select id="t_nameSearchTeamSelectList" resultType="searchDTO" parameterType="Object">
 
 	<![CDATA[SELECT * FROM
+			 ( SELECT rownum AS rnum, tmp.* FROM
 			 ( SELECT a.nickName, t.T_NAME, T_create, rownum
 			 FROM ALLMEMBER a, ALLTEAM t
 			 where a.USERKEY = t.USERKEY
-			 and lower(t_name) LIKE '%' || lower(#{search}) || '%'
+			 and lower(t_name) LIKE '%' || lower(#{search}) || '%' ) tmp
 			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
 			
 	</select>
 	
-			<select id="t_nameSearchTeamSelectCount" resultType="searchDTO" parameterType="Object">
+			<select id="t_nameSearchTeamSelectCount" resultType="int" parameterType="Object">
 		
 					 SELECT count(*) FROM ALLMEMBER a, ALLTEAM t
 					 where a.USERKEY = t.USERKEY
@@ -108,14 +112,15 @@
 	<select id="nickNameSearchUserSelectList" resultType="searchDTO" parameterType="Object">
 
    	<![CDATA[SELECT * FROM
+   			 ( SELECT rownum AS rnum, tmp.* FROM
 			 ( SELECT nickName, email, joinDate, userkey, rownum
 			 FROM ALLMEMBER
-			 where lower(nickName) LIKE '%' || lower(#{search}) || '%'
+			 where lower(nickName) LIKE '%' || lower(#{search}) || '%' ) tmp
 			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
 			
 	</select>
 	
-			<select id="nickNameSearchUserSelectCount" resultType="searchDTO" parameterType="Object">
+			<select id="nickNameSearchUserSelectCount" resultType="int" parameterType="Object">
 		
 		   			 SELECT count(*) FROM ALLMEMBER
 					 where lower(nickName) LIKE '%' || lower(#{search}) || '%'

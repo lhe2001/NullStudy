@@ -17,14 +17,6 @@ public class SearchDAOImpl implements SearchDAO {
 	// 자유 게시판
 	
 	SearchDTO dto = new SearchDTO();
-	@Override
-	public List<SearchDTO> boardAllSelectList(SearchDTO dto) {
-		System.out.println("SearchDAOImpl boardAllList 실행");
-			
-		List<SearchDTO> boardAllSelectList = sqlSession.selectList("mapper.search.boardAllList", dto);
-		
-		return boardAllSelectList;
-	} //  -------------------- 모든 게시글 조회
 	
 	@Override
 	public List<SearchDTO> searchBoardSelectList(SearchDTO dto) {
@@ -65,33 +57,15 @@ public class SearchDAOImpl implements SearchDAO {
 	// ----------------------- 팀 목록
 	
 	@Override
-	public List<SearchDTO> teamAllList(SearchDTO dto) {
-		System.out.println("SearchDAOImpl teamAllList 실행");
-		
-		List<SearchDTO> teamAllList = sqlSession.selectList("mapper.search.teamAllList", dto);
-		
-		return teamAllList;
-	} // 모든 팀 조회
-	
-	@Override
 	public List<SearchDTO> t_nameSearchTeamSelectList(SearchDTO dto) {
 		System.out.println("SearchDAOImpl t_nameSearchTeamSelectList 실행");
 		
 		List<SearchDTO> t_nameSearchTeamSelectList = sqlSession.selectList("mapper.search.t_nameSearchTeamSelectList", dto);
 		
 		return t_nameSearchTeamSelectList;
-	} // 이름 조회
+	} // 팀 이름 조회
 	
 	// ----------------------- 유저 조회
-	
-	@Override
-	public List<SearchDTO> userAllList(SearchDTO dto) {
-		System.out.println("SearchDAOImpl userAllList 실행");
-		
-		List<SearchDTO> userAllList = sqlSession.selectList("mapper.search.userAllList", dto);
-		
-		return userAllList;
-	} // 이름 조회
 	
 	@Override
 	public List<SearchDTO> nickNameSearchUserSelectList(SearchDTO dto) {
@@ -100,6 +74,6 @@ public class SearchDAOImpl implements SearchDAO {
 		List<SearchDTO> nickNameSearchUserSelectList = sqlSession.selectList("mapper.search.nickNameSearchUserSelectList", dto);
 		
 		return nickNameSearchUserSelectList;
-	} // 이름 조회
+	} // 닉네임 조회
 	
 }
