@@ -154,8 +154,6 @@
 	}
  
  // 댓글 수정
-<<<<<<< HEAD
-=======
  	function update(){
  	 $("#edit_comment").off("click").on("click", function(){
 			document.querySelector("#view_com").removeAttribute("readonly");
@@ -193,7 +191,6 @@
 			});
 		})
 	}
->>>>>>> jaeHyukkong5
 </script>
 	<div class = "wrapp">
 	<div class = "container">
@@ -272,12 +269,8 @@
 							</div>
 						<c:if test="${userInfo.userKey == comment.userKey}">
 						<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
-<<<<<<< HEAD
-						<input type="button" id="edit_comment" value="수정" data-b_c_key_edit = "${comment.b_c_key }"  class ="edit_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
-=======
 						<input type="button" id="edit_comment" value="수정" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
 						<input type="button" id="real_edit_comment" value="댓글수정" class ="color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
->>>>>>> jaeHyukkong5
 						</c:if>
 						<input type = "hidden" class = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
 						</c:if>
