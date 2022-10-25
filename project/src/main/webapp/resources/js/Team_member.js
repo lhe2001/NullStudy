@@ -264,6 +264,7 @@ function getMemberSummary(){
 				contentType: "application/json",
 				data: JSON.stringify(info),
 				success: function(data){
+			
 					$(".memberChallenge .memberSum").empty();
 					html ="";
 					html += "<td class='memberSum' colspan='7' style='height:40px;text-align: center;'>"+data.tcs_summary+"</td>";
@@ -341,13 +342,13 @@ function attendChallenge(t_key){
 	    			t_key : t_key,
 	    			tc_key : tc_key
 	    	};
-	    	
 	    	$.ajax({
 				url: "/project/teamRest/attendChallenge.do",
 				type: "post",
 				contentType: "application/json",
 				data: JSON.stringify(info),
 				success: function(data){
+					console.log(data);
 					if(data == -1){
 						alert('오늘은 이미 챌린지를 완료하였어요!');
 					}else {

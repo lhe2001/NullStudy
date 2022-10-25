@@ -59,8 +59,6 @@ public class TeamController {
 			Model model
 			) throws IOException {
 		
-		logger.info("profile"+userkey);
-		
 		OutputStream out = response.getOutputStream();
 		
 		String photo = service.getPhoto(userkey);

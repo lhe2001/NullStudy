@@ -37,13 +37,16 @@
     	border:none;
     	height:25px;
 	}
-
-
 </style>
+<script>
+	function updateProfile(){
+		
+	}
+</script>
 </head>
 <body>
 	<div>
-		<form 
+		<form onSubmit="opener.location.reload()"
 			action="/project/team/upload.do" 
 			method="post" 
 			enctype="multipart/form-data"
