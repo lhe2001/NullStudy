@@ -10,12 +10,13 @@
 
 	<![CDATA[SELECT * FROM
 			 ( SELECT rownum AS rnum, tmp.* FROM
-			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate, rownum
+			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
 			 FROM ALLMEMBER a, BOARD b
 			 where a.USERKEY = b.USERKEY
 			 and (lower(b_title) LIKE '%' || lower(#{search}) || '%'
 			 OR lower(nickName) LIKE '%' || lower(#{search}) || '%'
-			 OR lower(b_content) LIKE '%' || lower(#{search}) || '%') ) tmp
+			 OR lower(b_content) LIKE '%' || lower(#{search}) || '%') 
+			 ) tmp
 			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
 			
 	</select>
@@ -32,11 +33,13 @@
 	
 	<select id="b_titleSearchBoardSelectList" resultType="searchDTO" parameterType="Object">
 
-	<![CDATA[( SELECT rownum AS rnum, tmp.* FROM
-			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate, rownum
+	<![CDATA[SELECT * FROM
+			 ( SELECT rownum AS rnum, tmp.* FROM
+			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
 			 FROM ALLMEMBER a, BOARD b
 			 where a.USERKEY = b.USERKEY
-			 and lower(b_title) LIKE '%' || lower(#{search}) || '%' ) tmp
+			 and lower(b_title) LIKE '%' || lower(#{search}) || '%'
+			 ) tmp
 			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
 			
 	</select>
@@ -56,7 +59,8 @@
 			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
 			 FROM ALLMEMBER a, BOARD b
 			 where a.USERKEY = b.USERKEY
-			 and lower(nickName) LIKE '%' || lower(#{search}) || '%' ) tmp
+			 and lower(nickName) LIKE '%' || lower(#{search}) || '%' 
+			 ) tmp
 			 ) WHERE (#{start}) <= rnum AND rnum <= (#{end})]]>
 			
 	</select>
@@ -73,10 +77,11 @@
 
 	<![CDATA[SELECT * FROM
 			 ( SELECT rownum AS rnum, tmp.* FROM
-			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate, rownum
+			 ( SELECT b.b_title, a.nickName, b.b_articleNo, b.b_writedate
 			 FROM ALLMEMBER a, BOARD b
 			 where a.USERKEY = b.USERKEY
-			 and lower(b_content) LIKE '%' || lower(#{search}) || '%' ) tmp
+			 and lower(b_content) LIKE '%' || lower(#{search}) || '%'
+			 ) tmp
 			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
 			
 	</select>
@@ -93,10 +98,11 @@
 
 	<![CDATA[SELECT * FROM
 			 ( SELECT rownum AS rnum, tmp.* FROM
-			 ( SELECT a.nickName, t.T_NAME, T_create, rownum
+			 ( SELECT a.nickName, t.T_NAME, T_create
 			 FROM ALLMEMBER a, ALLTEAM t
 			 where a.USERKEY = t.USERKEY
-			 and lower(t_name) LIKE '%' || lower(#{search}) || '%' ) tmp
+			 and lower(t_name) LIKE '%' || lower(#{search}) || '%'
+			 ) tmp
 			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
 			
 	</select>
@@ -113,9 +119,10 @@
 
    	<![CDATA[SELECT * FROM
    			 ( SELECT rownum AS rnum, tmp.* FROM
-			 ( SELECT nickName, email, joinDate, userkey, rownum
+			 ( SELECT nickName, email, joinDate, userkey
 			 FROM ALLMEMBER
-			 where lower(nickName) LIKE '%' || lower(#{search}) || '%' ) tmp
+			 where lower(nickName) LIKE '%' || lower(#{search}) || '%'
+			 ) tmp
 			 ) WHERE (#{start}) <= rownum AND rownum <= (#{end})]]>
 			
 	</select>
