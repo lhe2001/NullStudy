@@ -171,6 +171,7 @@ public class SignUpInController {
 			return "main2";
 		}else {
 			//로그인 실패 >  로그인 페이지로 
+			model.addAttribute("msg", "로그인체크");
 			return "signIn";
 		}
 	}

@@ -11,10 +11,15 @@
 
 
 <body>
-		<c:set var="result" value="${result }"/>
 		<c:if test="${result=='가입성공'}">
     		<script>
     			alert("가입성공, 로그인해주세요")
+    		</script>
+    	</c:if>
+    	
+		<c:if test="${msg=='로그인체크'}">
+    		<script>
+    			alert("로그인실패!! 아이디 비번을 확인해주세요")
     		</script>
     	</c:if>
     	
