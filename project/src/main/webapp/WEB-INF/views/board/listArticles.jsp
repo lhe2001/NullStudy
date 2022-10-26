@@ -26,7 +26,7 @@
 	<h5 style ="text-align : left; margin-left : 20px;"> 자유롭게 글을 작성해 주세요!!</h5>
 	
 	<div id = "page_select">
-		<select id = "pageAmount" class="form-select btn-outline-info" 
+		<select class="page_select btn-outline-info" 
 		style = "border-radius : 4px; margin-top : 7px; float: right; margin-right : 20px; " aria-label="Default select example">
 			<option value="10" selected>10개씩 보기</option>
 			<option value="20" >20개씩 보기</option>
@@ -204,10 +204,17 @@
   					setSelect();
   				});
   				
-  				let pageAmount = $("#pageAmount").val();
+  				let selPage = document.querySelector(".page_select");
+  				selPage.addEventListener("change",function(){
+  					console.log('this :: ' , this);
+  					setSelectAmount();
+  				});
+  				
+  				let pageAmount = $(".page_select").val();
   		  		console.log("pageAmount :: " , pageAmount);
   		  		setPageEvent(pageAmount);
-  		  		setSelectPageEvent(pageAmount);
+  		  		
+//   		  		setAmountPageEvent(pageAmount);
 		  		
 		})
    		  		
@@ -216,7 +223,7 @@
 	    			let field = $("#field").val();
 	    			let search_bar = $("#search_bar").val();
 	    			let sel = $("#select").val();
-	    			let pageAmount2 = $("#pageAmount").val();
+	    			let pageAmount2 = $(".page_select").val();
 			  		
 	    			let sel2= document.querySelector("#select").value;
 	    			let info = {
@@ -309,6 +316,7 @@
 	    					$("#paging").append(html2);
 	    					
 	    					setPageEvent(data.pageDTO.amount);
+	    					setAmountPageEvent(data.pageDTO.amount);
 	    				},
 	    				
 	    				error:function(){
@@ -319,7 +327,7 @@
 	    	}
 				// 페이징 셋팅
    		  		function setPageEvent(amount) {
-	   		  		let pageBtn = document.querySelectorAll(".p_btn");
+	   		  		let pageBtn = document.querySelector(".p_btn");
 	   		  		for(var i = 0; i <= pageBtn.length; i++) {
 	   		  			pageBtn[i].addEventListener("click", function() {
 		   		  			console.log('this :: ', this);
@@ -330,10 +338,22 @@
 				
    		  		// 페이징 셋팅 (셀렉트박스)
    		  		function setSelectPageEvent(amount) {
-	   		  		let pageBtn = document.querySelectorAll(".p_btn");
+	   		  		let pageBtn = document.querySelector(".p_btn");
 	   		  		for(var i = 0; i <= pageBtn.length; i++) {
 	   		  			pageBtn[i].addEventListener("click", function() {
 		   		  			console.log('this :: ', this);
+		   		  			setSelect($(this).val(), amount);
+		   		  		})
+	   		  		}
+   		  		}
+   		  		
+   		 		 //페이징 셋팅 (보여줄 페이지 갯수 선택)
+   		  		function setAmountPageEvent(amount) {
+	   		  		let pageSel = document.querySelector(".page_select");
+	   		  		console.log("pageSel ::" , pageSel);
+	   		  		for(var i = 0; i <= pageBtn.length; i++) {
+	   		  			pageSel[i].addEventListener("change", function() {
+		   		  			console.log('amount this :: ', this);
 		   		  			setSelect($(this).val(), amount);
 		   		  		})
 	   		  		}
@@ -344,7 +364,7 @@
 		  					
 					console.log('index :: ', index);
 		    			let sel = $("#select").val();
-		    			let pageAmount2 = $("#pageAmount").val();
+		    			let pageAmount2 = $(".page_select").val();
 		    			console.log("pageAmount ::", pageAmount2);
 		    			
 		    			console.log("sel" , sel);
@@ -445,6 +465,122 @@
 			    					}
 			    					$("#paging").append(html2);
 			    					setSelectPageEvent(data.pageDTO.amount);
+			    					
+			    				},
+			    				
+			    				error:function(){
+			    					alert("에러발생!!")
+			    				}
+			    			});
+			    	}
+				
+				// 페이지 갯수 셀렉트 박스
+	    		function setSelectAmount(index, amount){
+  					
+					console.log('index :: ', index);
+					
+		    			let sel = $("#select").val();
+		    			let pageAmount3 = $(".page_select").val();
+		    			console.log("pageAmount3 ::", pageAmount3);
+		    			
+		    			console.log("sel" , sel);
+		    			
+		    			let info = {
+		    				pageNum : index,
+		    				amount : pageAmount3,
+		    				b_field2 : sel
+		    			}
+		    			 //아작스
+		    			$.ajax({
+		    				url: "/project/board/selectAmount.do",
+		    				type: "post",
+		    				contentType : "application/json",
+		    				data: JSON.stringify(info),
+		    				success: function(data){
+		    					
+		    					console.log("map :", data);
+		    					console.log("pageDTO",data.pageDTO.startPage);
+		    					// 게시글
+		    					$("#list_tbody").empty();
+	    						
+		    					let html = "";
+		    					
+		    					if(data.searchList.length == 0){
+		    						html += '<h1 style ="text-align : center; margin-left : 20px; margin-top : 20px; color : #1C6758">' + '등록된 글이 없어요' +'</h1>';
+		    					} 
+	    							for(let i = 0; i< data.searchList.length; i++){
+	    								
+	    								html +=	'<tr>';
+	    								html += '<td>' + data.searchList[i].b_articleNo + '</td>';
+										if(data.searchList[i].b_fieldName == '비밀글'){
+											html += '<td style = "color : tomato;">' + data.searchList[i].b_fieldName + '</td>';
+										} else if(data.searchList[i].b_fieldName == '공지')  {
+											html += '<td style = "color : #ea7f27;">' + data.searchList[i].b_fieldName + '</td>';
+										} else {
+											html += '<td >' + data.searchList[i].b_fieldName + '</td>';
+										}
+											html += '<td>' + data.searchList[i].nickName + '</td>';
+										
+										<%--답변을 구분해야 한다 --%>
+										html += '<td align="left" width="30%">';
+										<%--왼쪽 들여쓰기--%> 
+										html += '<span style="padding-right: 30px">'+'</span>'; 
+										<%-- level값이 1보다 큰경우 자식글이므로 
+										 부모글 밑에 공백으로 들여쓰기해서 자식글인걸 티내자 
+										 분기를 한번 더 타자--%> 
+										
+										if(data.searchList[i].level > 1){
+											
+											for(let i = 1; i< data.searchList[i].level; i++){
+												html += '<span style="padding-left: 25px">'+'</span>';
+											}
+											<%-- 제목앞에 답글인걸 표시하는 표시 하나추가 --%>
+											html += '<span>'+'[답변]'+'</span>';
+											<%-- 마지막으로 제목을 누르면 상세 출력 페이지 이동 a태그하나 --%>
+												html += '<a href="${contextPath}/board/viewArticle.do?b_articleNo=' +data.searchList[i].b_articleNo+ '">'+
+												data.searchList[i].b_title + '</a>';
+											}
+											
+											if(data.searchList[i].b_fieldName == '비밀글'){
+												html +=
+													'<a id = "link_a" href = "${contextPath}/board/password.do?b_articleNo=' + data.searchList[i].b_articleNo+ '">'+
+													data.searchList[i].b_title+ '</a>';
+											} else {
+												html += '<a href="${contextPath}/board/viewArticle.do?b_articleNo=' +data.searchList[i].b_articleNo+ '">'+
+												data.searchList[i].b_title + '</a>';
+											}
+											
+												let date = new Date(data.searchList[i].b_writeDate);
+		    									console.log(date);
+		    									console.log(date.getFullYear());
+		    								
+												html += '<td>' + date.getFullYear()+'년'+ (date.getMonth()+1) + '월' + date.getDate() + '일'+
+													'</td>';
+												html += '<td>' + data.searchList[i].b_view + '</td>';
+												html += '</tr>';
+		    							
+		    							}
+		    							$("#list_tbody").append(html);
+			    					
+			    					//페이징
+			    					$("#paging").empty();
+			    					
+			    					let html2 = "";
+			    					if(data.pageDTO.prev){
+			    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.startPage - 1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '이전' + '</a></span>';
+			    					}
+			    					
+			    					for(let i = data.pageDTO.startPage; i<= data.pageDTO.endPage; i++){
+			    						console.log("data.pageDTO.startPage ::", data.pageDTO.startPage);
+			    						console.log("data.pageDTO.endPage ::", data.pageDTO.endPage);
+			    						html2 += '<input type="button" value="'+i+'" class="p_btn color_btn btn btn-outline-light">';
+			    					}
+			    					
+			    					if(data.pageDTO.next){
+			    					html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '다음' + '</a></span>';
+			    					}
+			    					$("#paging").append(html2);
+			    					setAmountPageEvent(data.pageDTO.amount);
 			    				},
 			    				
 			    				error:function(){

@@ -66,4 +66,7 @@ public interface BoardService {
 		
 		// 셀렉트 박스 총게시글 가져오기
 		public int getSelectCount(BoardDTO dto);
+		
+		// 셀렉트 박스 페이지 갯수 가져오기
+		public List<BoardDTO> getAmount(BoardDTO dto,int pageNum, int amount);
 }

@@ -567,6 +567,77 @@ public class BoardController{
 				return map;
 			}
 			
+		// 셀렉트 박스 페이지 갯수 아작스 처리
+					@RequestMapping(value="/board/selectAmount.do" , method = {RequestMethod.GET,RequestMethod.POST})
+					public @ResponseBody Map selectAmount(HttpServletRequest request, HttpServletResponse response,
+							@RequestBody BoardDTO boardDTO, Model model) {
+						System.out.println("셀렉스 박스 페이지 갯수 아작스 기능 작동");
+						response.setContentType("text/html; charset=utf-8");
+						// 페이징 초기값
+						// 1. 화면전환 시에 조회하는 페이지번호 and 화면에 그려질 데이터개수 2개를 전달받음
+						// 첫 페이지 경우
+						int pageNum = 1;
+						int amount = 10;
+						
+						// 페이지번호를 클릭하는 경우
+						if(boardDTO.getPageNum() != 0 && boardDTO.getAmount() != 0) {
+							pageNum = boardDTO.getPageNum();
+							amount = boardDTO.getAmount();
+						}
+						
+						int totalCount2 = boardService.getPage();
+						System.out.println("totalCount2 ====> " + totalCount2);
+						System.out.println("셀렉트 박스 페이지 갯수 amount --> " + amount);
+						session=request.getSession();
+						SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+						model.addAttribute("userInfo",userInfo);
+						//  0 : 전체 , 10 : 질문 , 20: 잡담, 30: 비밀글, 40: 유우머
+						int field2 =boardDTO.getB_field2();
+						System.out.println("field2 ---> " + field2);
+						List<BoardDTO> searchList = null;
+						PageDTO pdto = null;
+						System.out.println("pageNum ---> " + pageNum);
+						System.out.println("amount ---> " + amount);
+						// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
+							boardDTO.setB_field2(field2);
+//								boardDTO.setPageNum(pageNum);
+//								boardDTO.setAmount(amount);
+							boardDTO.setTotalCount(totalCount2);
+							int totalCount = boardService.getSelectCount(boardDTO);
+							System.out.println("셀렉트 박스 아작스 totalCount --->" + totalCount);
+							pdto = new PageDTO(pageNum, amount, totalCount);
+							searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
+							
+							for (int i = 0; i < searchList.size(); i++) {
+								boardDTO = searchList.get(i);
+								switch (boardDTO.getB_field()) {
+								case 10:
+									boardDTO.setB_fieldName("질문");
+									break;
+								case 20:
+									boardDTO.setB_fieldName("잡담");
+									break;
+								case 30:
+									boardDTO.setB_fieldName("비밀글");
+									break;
+								case 40:
+									boardDTO.setB_fieldName("유우머");
+									break;
+								case 50:
+									boardDTO.setB_fieldName("공지");
+									break;
+								default:
+									break;
+								}
+							}
+						
+						Map map = new HashMap();
+						map.put("searchList", searchList);
+						map.put("pageDTO",pdto);
+						System.out.println("셀렉트 박스 서치 완료");
+						return map;
+					}
+			
 		
 		// 셀렉트 박스 서치 아작스
 			@RequestMapping(value = "/board/searchArticle.do" , method = {RequestMethod.POST , RequestMethod.GET})

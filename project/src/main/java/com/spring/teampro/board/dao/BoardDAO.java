@@ -63,5 +63,8 @@ public interface BoardDAO {
 	
 	// 셀렉트 박스 총 게시글 수 받아오기	
 	public int getSelectCount(BoardDTO dto);
+	
+	// 셀렉트 (페이지 갯수) 가져오기
+	public List<BoardDTO> searchAmount(BoardDTO dto,int pageNum, int amount);
 }
 

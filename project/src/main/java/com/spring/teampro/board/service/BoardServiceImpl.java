@@ -169,5 +169,16 @@ public class BoardServiceImpl implements BoardService{
 		result  = boardDAO.getSelectCount(dto);
 		return result;
 	}
+	
+	// 셀렉트박스 페이지 갯수 메소드(ajax)
+		@Override
+		public List<BoardDTO> getAmount(BoardDTO dto,int pageNum, int amount) {
+			System.out.println("service dtofield : " + dto.getB_field());
+			System.out.println("service search_bar : " + dto.getSearch_bar());
+			System.out.println("service b_field2 : " + dto.getB_field2());
+			List<BoardDTO> list = boardDAO.searchAllArticle(dto, pageNum, amount);
+			System.out.println("service list = " + list.size());
+			return list;
+		}
 	 
 }

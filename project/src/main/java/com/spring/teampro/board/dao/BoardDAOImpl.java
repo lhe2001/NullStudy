@@ -187,6 +187,22 @@ public class BoardDAOImpl implements BoardDAO {
 			return list;
 		}
 		
+		// 셀렉트(페이지갯수) 하는 메소드 (ajax)
+				@Override
+				public List<BoardDTO> searchAmount(BoardDTO dto,int pageNum, int amount) {
+					List<BoardDTO> list = new ArrayList<BoardDTO>();
+					System.out.println("dao pageNum = " + pageNum );
+					System.out.println("dao amount = " + amount );
+					System.out.println("dao b_field2 = " + dto.getB_field2() );
+					Map map = new HashMap();
+					map.put("b_field2", dto.getB_field2());
+					map.put("pageNum",pageNum);
+					map.put("amount",amount);
+					list = sqlSession.selectList("mapper.board.searchAllArticle", map);
+					System.out.println();
+					return list;
+				}	
+		
 	// 셀렉트 박스 총 게시글 수 받아오기
 		@Override
 		public int getSelectCount(BoardDTO dto){
