@@ -44,6 +44,7 @@
 <body>
 	<div>
 		<form 
+		    onSubmit="opener.location.reload()"
 			action="/project/team/upload.do" 
 			method="post" 
 			enctype="multipart/form-data"
