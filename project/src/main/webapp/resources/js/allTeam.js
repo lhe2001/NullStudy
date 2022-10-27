@@ -37,9 +37,6 @@ function teamPreview(t_key){
 			for(let i=0; i<data.memberList.length;i++){
 				html2 ="";
 				html2+="<tr>";
-		        html2+="		<td style='width:30px; border-radius: 50%;'>";
-		        html2+=" 		<img src='https://ifh.cc/g/GCpQKq.png'>";
-		        html2+="		</td>";
 		        html2+="		<td>"+data.memberList[i].nickname+"</td>";
 		        html2+="     	<td>"+data.memberList[i].intro+"</td>";
 		        html2+="</tr>";

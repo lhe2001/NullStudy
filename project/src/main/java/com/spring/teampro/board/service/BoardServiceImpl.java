@@ -127,6 +127,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int getPage() {
 		int count = boardDAO.totalCount();
+		System.out.println("service count ---> " + count);
 		return count;
 	}
 	
@@ -160,6 +161,13 @@ public class BoardServiceImpl implements BoardService{
 		List<BoardDTO> list = boardDAO.searchAllArticle(dto, pageNum, amount);
 		System.out.println("service list = " + list.size());
 		return list;
+	}
+	// 셀렉트 박스 총게시글 가져오기
+	@Override
+		public int getSelectCount(BoardDTO dto){
+		int result = -1;
+		result  = boardDAO.getSelectCount(dto);
+		return result;
 	}
 	 
 }

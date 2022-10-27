@@ -167,6 +167,44 @@
 				select count(*) as totalCount from board
 			</select>
 			
+		<!-- 셀렉트 박스 총 게시글 수 받아오기 -->	
+			<select id="getSelectCount" resultType="int" parameterType="boardDTO">
+				select count(*) as totalCount from(
+					select rownum as rnum, tmp.* from(
+						select level, b.B_key, b.B_ArticleNo, b.B_parentNo, b.B_title , b.B_content, 
+						 b.B_field, b.B_writeDate, b.B_view, b.UserKey, a.nickName 
+						 from Board b 
+						 , ALLMEMBER a 
+						 <where>
+						 and b.userkey = a.userkey
+							<if test="b_field2 !=0 and b_field2 != -1">
+							and b.B_field = #{b_field2 }
+							</if>
+							 <choose>
+								<when test="search_field == 1">
+									and lower(b.b_title) like lower('%'||#{search_bar }||'%') 
+								</when>
+								<when test="search_field == 2">
+									and lower(b.b_content) like lower('%'||#{search_bar }||'%')
+								</when>
+								<when test="search_field == 3">
+									and lower(a.nickName) like lower('%'||#{search_bar }||'%')
+								</when>
+								<when test="search_field == 4">
+									and (lower(b.b_title) like lower('%'||#{search_bar }||'%') 
+									or lower(b.b_content) like lower('%'||#{search_bar }||'%')
+									or lower(a.nickName) like lower('%'||#{search_bar }||'%'))
+								</when>
+							</choose>
+						</where> 
+						 Start with b.B_parentNo = 0 
+						 connect by prior b.B_ArticleNo = b.B_parentNo 
+						 order siblings by b.B_ArticleNo desc, b.b_writedate desc
+					) tmp
+					)
+				where 0 <![CDATA[<]]> rnum 
+				and rnum <![CDATA[<=]]> #{totalCount}
+			</select>
 			
 		<!--  댓글 조회 -->	
 			<select id="selectAllComment" resultType="commentDTO">

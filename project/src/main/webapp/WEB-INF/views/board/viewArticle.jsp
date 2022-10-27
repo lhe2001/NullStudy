@@ -23,10 +23,6 @@
 <body>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script type="text/javascript">
-		// 	function backToList(obj){
-		// 		obj.action = "${contextPath}/board/listArticles.do";
-		// 		obj.submit();
-		// 	}
 	window.addEventListener("load", boardonload);
 
     function boardonload(){
@@ -156,20 +152,23 @@
  // 댓글 수정
 
  	function update(){
- 	 $("#edit_comment").off("click").on("click", function(){
-			document.querySelector("#view_com").removeAttribute("readonly");
-			document.querySelector("#edit_comment").classList.add("hidden");
-			
- 				$("#real_edit_comment")[0].classList.remove("hidden");	
- 				$("#real_edit_comment").removeClass("hidden");	
+ 	 $(".edit_comment").off("click").on("click", function(e){
+ 			let edit = e.target.getAttribute("data-edit_b_c_key");
+ 			let button = e.target.parentNode.querySelector("#real_edit_comment");
+ 			console.log(button);
+ 			console.log(e.target);
+ 			e.target.style.display = "none";
+ 			button.style.display = "block";
+ 			let view_com = e.target.parentNode.querySelector(".view_com");
+ 			view_com.removeAttribute("readonly");
  		})
  	}
  	
   	function updateComment(){
-			 $("#real_edit_comment").off("click").on("click", function(){
-				 let b_c_key = $(this).parent().find(".b_c_key").val();
-    			console.log(b_c_key);
-    			let b_c_comment = $("#view_com").val();
+			 $(".real_edit_comment").off("click").on("click", function(e){
+				 let b_c_key = $(this).attr("data-real_edit_b_c_key");
+    			console.log(">>>>>ffff",b_c_key);
+    			let b_c_comment = $(this).parent().find(".view_com").val();
 				
     			let info = {
 							b_c_key : b_c_key,
@@ -210,8 +209,6 @@
 				<input type="hidden" name="b_articleNo" value="${view.b_articleNo }">
 				<input type="hidden" name="b_writer" value="${view.nickName }">
 				<input type="hidden" name="b_field" value="${view.b_field }">
-				
-				
 			<div id = "articlewriter" >
 				<div class="color_btn" style="float : left; border-radius: 4px; background-color: white; width:100px; height:30px;
 			 	line-height: 1.5;">
@@ -255,7 +252,7 @@
 			</div><hr><br>
 			<!-- 댓글 추가 div -->
 	<div id = "wrap_comment">
-		<h4 style = "color:#353866">comment</h4>
+		<h2 style = "color:#353866">comment</h2>
 			<textarea rows="4" cols="70" name = "b_c_comment"id ="comment" placeholder = "댓글을 입력해 주세요!!!" style = "padding-top : 10px; padding-left : 5px;"></textarea>
 			<input type="button" id="add_comment" value="댓글쓰기" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
 		</div>
@@ -266,14 +263,14 @@
 			<c:forEach var="comment" items="${comment }" varStatus="num">
 					<div>
 					<c:if test="${comment.b_key == view.b_key }">
-						<input type = "text" id = "view_com" value = "${comment.b_c_comment }" readonly>
-							<div id = "comment_name" style ="float : left; margin-left : 20px;  ">
+						<input type = "text" id = "view_com" class = "view_com" value = "&nbsp ${comment.b_c_comment }" readonly>
+							<div id = "comment_name" style ="float : left; margin-left : 20px; color : #353866;">
 								작성자 : ${comment.nickName }	${comment.b_c_date }
 							</div>
 						<c:if test="${userInfo.userKey == comment.userKey}">
 						<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
-						<input type="button" id="edit_comment" value="수정" class ="color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
-						<input type="button" id="real_edit_comment" value="댓글수정" class ="color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+						<input type="button" id="edit_comment" value="수정" data-edit_b_c_key = "${comment.b_c_key } " class ="edit_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
+						<input type="button" id="real_edit_comment" value="댓글수정" data-real_edit_b_c_key = "${comment.b_c_key }" class ="real_edit_comment color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
 						</c:if>
 						<input type = "hidden" class = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
 						</c:if>

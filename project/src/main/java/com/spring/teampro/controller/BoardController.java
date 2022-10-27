@@ -511,21 +511,30 @@ public class BoardController{
 				// 페이지번호를 클릭하는 경우
 				if(boardDTO.getPageNum() != 0 && boardDTO.getAmount() != 0) {
 					pageNum = boardDTO.getPageNum();
+					amount = boardDTO.getAmount();
 				}
-				amount = boardDTO.getAmount();
-				int totalCount = boardService.getPage();
+				
+				int totalCount2 = boardService.getPage();
+				System.out.println("totalCount2 ====> " + totalCount2);
+				
 				session=request.getSession();
 				SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 				model.addAttribute("userInfo",userInfo);
 				//  0 : 전체 , 10 : 질문 , 20: 잡담, 30: 비밀글, 40: 유우머
 				int field2 =boardDTO.getB_field2();
-
+				System.out.println("field2 ---> " + field2);
 				List<BoardDTO> searchList = null;
 				PageDTO pdto = null;
-				
+				System.out.println("pageNum ---> " + pageNum);
+				System.out.println("amount ---> " + amount);
 				// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
-					pdto = new PageDTO(pageNum, amount, totalCount);
 					boardDTO.setB_field2(field2);
+//					boardDTO.setPageNum(pageNum);
+//					boardDTO.setAmount(amount);
+					boardDTO.setTotalCount(totalCount2);
+					int totalCount = boardService.getSelectCount(boardDTO);
+					System.out.println("셀렉트 박스 아작스 totalCount --->" + totalCount);
+					pdto = new PageDTO(pageNum, amount, totalCount);
 					searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
 					
 					for (int i = 0; i < searchList.size(); i++) {
@@ -587,6 +596,9 @@ public class BoardController{
 				String search_bar =  boardDTO.getSearch_bar();
 				List<BoardDTO> searchList = null;
 				PageDTO pdto = null;
+				System.out.println("pageNum ---> " + pageNum);
+				System.out.println("amount ---> " + amount);
+				System.out.println("totalCount ---> " + totalCount);
 					pdto = new PageDTO(pageNum, amount, totalCount);
 					boardDTO.setSearch_bar(search_bar);
 					boardDTO.setSearch_field(field);

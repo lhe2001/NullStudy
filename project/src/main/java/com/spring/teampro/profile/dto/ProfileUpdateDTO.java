@@ -8,6 +8,7 @@ public class ProfileUpdateDTO {
 	private String email;
 	private String intro;
 	private int userKey;
+	private String photo;
 	
 	
 	public String getId() {
@@ -45,6 +46,12 @@ public class ProfileUpdateDTO {
 	}
 	public void setUserKey(int userKey) {
 		this.userKey = userKey;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 }

@@ -155,6 +155,7 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int totalCount() {
 		int count = sqlSession.selectOne("mapper.board.totalCount");
+		System.out.println("dao ====> " + count);
 		return count;
 	}
 	@Override
@@ -184,5 +185,13 @@ public class BoardDAOImpl implements BoardDAO {
 			list = sqlSession.selectList("mapper.board.searchAllArticle", map);
 			System.out.println();
 			return list;
+		}
+		
+	// 셀렉트 박스 총 게시글 수 받아오기
+		@Override
+		public int getSelectCount(BoardDTO dto){
+			int result = -1;
+			result = sqlSession.selectOne("mapper.board.getSelectCount", dto);
+			return result;
 		}
 }

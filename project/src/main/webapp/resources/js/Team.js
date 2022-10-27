@@ -279,13 +279,20 @@ function memberSummary(userKey,e){
 	let tc_key = $(".tc_key").val();
 	let nickName = e.querySelector("strong").innerText;
 	
+	let parent = e.parentNode.parentNode.parentNode.parentNode;
+	let img = parent.querySelector(".photo img");
+	console.log(img.src);
+	
+	$("#memberSummary img").attr("src",img.src);
+	
+
 	let info = { 
         			userKey : userKey,
         			tc_key : tc_key
         	};
 				$("#memNick").empty();
 				$("#memNick").append(nickName);
-        	
+				
         	$.ajax({
 				url: "/project/teamRest/memberSummary.do",
 				type: "post",
@@ -353,8 +360,10 @@ function memberSummary(userKey,e){
 function getMemberSummary(){
 	$(document).on("click",".memberChallenge .sum",function(e){
 		$(".memberChallenge table td").css('border','1px solid #838282');
+		
 		e.target.style.border = '1px solid brown';
 		let tsc_key = e.target.getAttribute('value');
+		console.log("sumary"+e.target);
 		
 		
 		let info = { 
