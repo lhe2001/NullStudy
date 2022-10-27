@@ -150,9 +150,15 @@
 
 </script>
 <body>
-	<c:if test="${result=='가입실패'}">
+	<c:if test="${result=='가입실패(DB)'}">
 		<script>
-		alert("가입실패! 다시 시도해주세요")
+		alert("가입처리중 오류발생!! 다시 시도해주세요")
+		</script>
+	</c:if>
+	
+	<c:if test="${result=='가입실패(입력)'}">
+		<script>
+		alert("아이디, 이메일, 패스워드 입력값 오류!! 다시 시도해주세요")
 		</script>
 	</c:if>
 

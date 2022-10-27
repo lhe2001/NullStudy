@@ -49,60 +49,27 @@ public class SignUpInController {
 		dto.setEmail(email);
 		
 		// dto에 담아서 전달한 아이디, 이메일, 비번 체크 메소드 실행
+		// id, email. pw: 사용 가능(1) 불가능(-1)
 		int idCheck = signUpInService.getIdCheck(dto);
 		int emailCheck = signUpInService.getEmailCheck(dto);
 		int pwCheck = signUpInService.getPwCheck(dto);
-		
-		if(idCheck==1) {
-			if(pwCheck==1) {
-				if(emailCheck==1) {
-					if(!(dto.getSex().equals("none"))) {
-						int resultAdd=signUpInService.doAddMember(dto);
-						if(resultAdd==1) {
-							//가입성공 메세지 송출 > 로그인페이지로 이동
-							model.addAttribute("result", "가입성공");
-							return "signIn";
-							
-						} else {
-							//가입 실패시 다시 회원가입페이지로
-							model.addAttribute("result", "가입실패");
-							return "signUp";
-						}
-					}else {
-						model.addAttribute("result", "가입실패");
-						return "signUp";
-					}
-					
-				}else if(emailCheck==-1) {
-					//이메일 사용불가
-					model.addAttribute("result", "가입실패");
-					return "signUp";
-				}else {
-					//db오류
-					model.addAttribute("result", "가입실패");
-					return "signUp";
-				}
-				
-			}else if(pwCheck==-1){
-				//비번값 불일치
-				model.addAttribute("result", "가입실패");
-				return "signUp";
+
+		if(idCheck==1 && pwCheck==1 && emailCheck==1 && !("none".equals(dto.getSex()) ) ) {
+			int resultAddMem=signUpInService.doAddMember(dto);
+			
+			if(resultAddMem==1) {
+				//가입성공 메세지 송출 > 로그인페이지로 이동
+				model.addAttribute("result", "가입성공");
+				return "signIn";
 			}else {
-				//db오류
-				model.addAttribute("result", "가입실패");
+				//가입실패 메세지 송출 > 회원가입 페이지로 이동
+				model.addAttribute("result", "가입실패(DB)");
 				return "signUp";
 			}
-			
-		}else if(idCheck==-1) {
-			//아이디 사용불가, 사용중이 아이디 있음
-			model.addAttribute("result", "가입실패");
-			return "signUp";
 		}else {
-			//db오류
-			model.addAttribute("result", "가입실패");
+			model.addAttribute("result", "가입실패(입력)");
 			return "signUp";
 		}
-
 	}
 	
 	
