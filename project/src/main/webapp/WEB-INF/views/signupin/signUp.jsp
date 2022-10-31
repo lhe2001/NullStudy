@@ -42,7 +42,8 @@
 							console.log( $('#result1').text() )
 							console.log( $('#result3').text() )
 							
-							if( $('#result1').text() == "사용 가능한 아이디입니다." && $('#result3').text() == "사용 가능한 이메일입니다." ){
+							if( $('#result1').text() == "사용 가능한 아이디입니다." 
+									&& $('#result3').text() == "사용 가능한 이메일입니다." ){
 								$('.btn_s_wrap').removeClass('hide')
 							}else{
 								$('.btn_s_wrap').addClass('hide')
