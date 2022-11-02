@@ -12,8 +12,6 @@
   function memberListOnload(){
 	  select();
   }
- 
- 
         function select(){
             $(".searchbox").off("change").on("change",function(){
                 let selected = $(".searchbox").val();
@@ -39,12 +37,9 @@
                     $(".searchName").addClass("hide");
                     $(".searchId").addClass("hide")
                     $(".searchBoth").removeClass("hide")
-
                 }
-
             })
         }
-
     </script>   
     
 <div class="mlWrap">
