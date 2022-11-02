@@ -69,6 +69,13 @@
 				obj.method = "GET";
 				obj.submit();
 			});
+			
+			// 대댓글 쓰기 버튼을 눌렀을때
+			$("#hide_show").off("click").on("click",function(){
+				 console.log("$(this) ::" , $(this));
+				
+				$("#reply").toggle();
+				});
 		}
     
     
@@ -78,6 +85,7 @@
 		deleteComment();
 		update();
 		updateComment();
+		addReComment();
 	})
 		// 댓글 추가
       	function addComment(){
@@ -104,7 +112,22 @@
     					if(data.length > 0){
         					let html = "";
         					for(let i = 0; i<data.length; i++){
-        						html += '<input type = "text" id = "view_com" value = "'+ data[i].b_c_comment + '" readonly>';
+        						<%--답변을 구분해야 한다 --%>
+								html += '<td align="left" width="30%">';
+								<%--왼쪽 들여쓰기--%> 
+								html += '<span style="padding-right: 30px">'+'</span>'; 
+								<%-- level값이 1보다 큰경우 자식글이므로 
+								 부모글 밑에 공백으로 들여쓰기해서 자식글인걸 티내자 
+								 분기를 한번 더 타자--%> 
+								if(data.level > 1){
+									for(let i = 1; i< data.level; i++){
+										html += '<span style="padding-left: 25px">'+'</span>';
+									}
+									<%-- 제목앞에 답글인걸 표시하는 표시 하나추가 --%>
+									html += '<span>'+'[대댓글]'+'</span>';
+									<%-- 마지막으로 제목을 누르면 상세 출력 페이지 이동 a태그하나 --%>
+									html += '<input type = "text" id = "view_com" value = "'+ data[i].b_c_comment + '" readonly>';
+									}
     							html += '작성자 : ' + data[i].nickName;
     							html += '작성일 : ' + data[i].b_c_date
         					}
@@ -118,6 +141,59 @@
     			});
     		})
     	}
+    	
+ 	// 대댓글 추가
+  	function addReComment(){
+			 $(".re_comment").off("click").on("click", function(){
+//     			let comment = $("#comment").val();
+//     			let b_key = $("#b_key").val();
+//     			let userKey = $("#userkey").val();
+//     			let b_c_commentno = $(".b_c_commentno").val();
+    			let b_c_key =  $(this).attr("data-r_b_c_key");
+
+    			
+    			 let comment = $(this).parent().find(".re_com").val();
+				 console.log("comment===" , comment);
+    			 let b_key =  $(this).parent().find(".b_key").val();
+				 console.log("b_key===" , b_key);
+    			 let userKey =  $(this).parent().find(".userKey").val();
+				 console.log("userkey===" , userkey);
+    			 let b_c_commentno =  $(this).parent().find(".b_c_commentno").val();
+				 console.log("b_c_commentno===" , b_c_commentno);
+				 
+			 let info = {
+					b_c_comment : comment,
+					b_key : b_key,
+					userKey : userKey,
+					b_c_commentno : b_c_commentno
+	    			}
+			
+			 $.ajax({
+				url: "/project/board/addReComment.do",
+				type: "post",
+				contentType : "application/json",
+				data: JSON.stringify(info),
+				success: function(data){
+					console.log("list :", data);
+// 					$("#reply").empty();
+					alert("대댓글이 작성되었습니다.");
+					if(data.length > 0){
+    					let html = "";
+    					for(let i = 0; i<data.length; i++){
+    						html += '<input type = "text" id = "view_com" value = "'+ data[i].b_c_comment + '" readonly>';
+							html += '작성자 : ' + data[i].nickName;
+							html += '작성일 : ' + data[i].b_c_date
+    					}
+// 						$("#reply").append(html);
+					}
+					location.reload();
+				},
+				error:function(){
+					alert("대댓글을 입력해 주세요!!")
+				}
+			});
+		})
+	}
     	
  	// 댓글 삭제
   	function deleteComment(){
@@ -263,20 +339,60 @@
 			<c:forEach var="comment" items="${comment }" varStatus="num">
 					<div>
 					<c:if test="${comment.b_key == view.b_key }">
-						<input type = "text" id = "view_com" class = "view_com" value = "&nbsp ${comment.b_c_comment }" readonly>
-							<div id = "comment_name" style ="float : left; margin-left : 20px; color : #353866;">
-								작성자 : ${comment.nickName }	${comment.b_c_date }
-							</div>
-						<c:if test="${userInfo.userKey == comment.userKey}">
-						<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
-						<input type="button" id="edit_comment" value="수정" data-edit_b_c_key = "${comment.b_c_key } " class ="edit_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
-						<input type="button" id="real_edit_comment" value="댓글수정" data-real_edit_b_c_key = "${comment.b_c_key }" class ="real_edit_comment color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
-						</c:if>
-						<input type = "hidden" class = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
+								 <c:choose>
+								<c:when test="${comment.level >1 }">
+									<%-- 부모글 기준으로 레벨 값 만큼 들여쓰기하자 --%>
+									<c:forEach begin="1" end="${comment.level }" step="1">
+										<span style='padding-left: 25px'></span>
+									</c:forEach>
+									<%-- 마지막으로 제목을 누르면 상세 출력 페이지 이동 a태그하나 --%>
+									<input type = "text" id = "view_re_com" class = "view_com" value = "[대댓글]&nbsp ${comment.b_c_comment }" readonly
+									 style='padding-right: 30px'>
+									 <div id = "comment_name" style ="float : left; margin-left : 55px; color : #353866; ">
+										작성자 : ${comment.nickName }	${comment.b_c_date }
+										<input type = "button" id = "hide_show" value = "대댓글쓰기"> 
+									</div>
+									<hr>
+								</c:when>
+								<c:otherwise>
+									<input type = "text" id = "view_com" class = "view_com" value = "&nbsp ${comment.b_c_comment }" readonly>
+									 <div id = "comment_name" style ="float : left; margin-left : 20px; color : #353866;">
+										작성자 : ${comment.nickName }	${comment.b_c_date }
+										<input type = "button" id = "hide_show" value = "대댓글쓰기"> 
+									</div>
+									<hr>
+								</c:otherwise>
+							</c:choose>
+<%-- 						<input type = "text" id = "view_com" class = "view_com" value = "&nbsp ${comment.b_c_comment }" readonly> --%>
+						<div id = "reply">
+								<input type = "text" id = "view_com" class = "re_com" placeholder="대댓글을 입력해주세요" >
+									<c:if test="${userInfo.userKey == comment.userKey}">
+										<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+										<input type="button" id="edit_comment" value="수정" data-edit_b_c_key = "${comment.b_c_key } " class ="edit_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
+								
+									<!-- 대댓글 쓰기 창 -->
+										<input type = "button"  value = "대댓글쓰기" data-re_b_c_key = "${comment.b_c_key }" class ="re_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+										<input type="button" id="real_edit_comment" value="댓글수정" data-real_edit_b_c_key = "${comment.b_c_key }" class ="real_edit_comment color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+									</c:if>
+								<input type = "hidden" class = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
+								<input type = "hidden" class = "b_c_commentno" name = "b_c_commentno" value = "${comment.b_c_commentno }"/>
+								<input type = "hidden" class = "b_key" name = "b_key" value = "${comment.b_key }"/>
+								<input type = "hidden" class = "userKey" name = "b_key" value = "${comment.userKey }"/>
+						</div>
+<!-- 							<input type = "text" id = "view_com" class = "re_com" placeholder="대댓글을 입력해주세요" > -->
+<%-- 						<c:if test="${userInfo.userKey == comment.userKey}"> --%>
+<%-- 						<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; "> --%>
+<%-- 						<input type="button" id="edit_comment" value="수정" data-edit_b_c_key = "${comment.b_c_key } " class ="edit_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;"> --%>
+						
+<!-- 							대댓글 쓰기 창 -->
+<%-- 						<input type = "button"  value = "대댓글쓰기" data-re_b_c_key = "${comment.b_c_key }" class ="re_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; "> --%>
+<%-- 						<input type="button" id="real_edit_comment" value="댓글수정" data-real_edit_b_c_key = "${comment.b_c_key }" class ="real_edit_comment color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; "> --%>
+<%-- 						</c:if> --%>
 						</c:if>
 					</div>
 			</c:forEach>
 		</div>
+		
 				<!-- 히든으로 commentcontroller에 줄 값 -->
 				<input type ="hidden" name="b_key" id ="b_key" value= "${view.b_key }"/>
 				<input type ="hidden" name="userkey" id ="userkey" value = "${userInfo.userKey }"/><br><hr>

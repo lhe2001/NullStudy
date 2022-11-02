@@ -1,5 +1,7 @@
 package com.spring.teampro.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -632,6 +634,77 @@ public class BoardController{
 				map.put("pageDTO",pdto);
 				return map;
 			}
+			
+		// 셀렉트 박스 페이지 갯수 선택시 ajax 처리
+			/* 
+			 * 받아야 할 값 (보여줄 페이지(amount), searchBar, 분야) 
+			 * amount 변경시 컨트롤러로 왔다가 다시 view단으로 
+			 */
+		
+		@RequestMapping(value ="/board/selectAmount.do" , method = {RequestMethod.GET , RequestMethod.POST})
+		public @ResponseBody Map selectAmount(HttpServletRequest request, HttpServletResponse response,
+				@RequestBody BoardDTO boardDTO,
+				Model model) {
+			System.out.println("셀렉트 박스 Amount Ajax");
+			response.setContentType("text/html; charset=utf-8");
+			// 페이징
+			int pageNum = 1;
+			int amount = 10;
+			
+			// 페이지번호를 클릭하는 경우
+			if(boardDTO.getPageNum() != 0 && boardDTO.getAmount() != 0) {
+				pageNum = boardDTO.getPageNum();
+			}
+			amount = boardDTO.getAmount();
+			
+			int totalCount = boardService.getPage();
+			session=request.getSession();
+			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
+			model.addAttribute("userInfo",userInfo);
+			//  0 : 전체 , 10 : 질문 , 20: 잡담, 30: 비밀글, 40:나도몰라
+			int field2 =boardDTO.getB_field2();
+			// field 값 1 : 제목, 2: 내용, 3:글 작성자, 4: 전체 근데 굳이 if 안걸고 셋팅해도 노상관
+			int field = boardDTO.getB_field();
+			String search_bar =  boardDTO.getSearch_bar();
+			List<BoardDTO> searchList = null;
+			PageDTO pdto = null;
+			System.out.println("pageNum ---> " + pageNum);
+			System.out.println("amount ---> " + amount);
+			System.out.println("totalCount ---> " + totalCount);
+				pdto = new PageDTO(pageNum, amount, totalCount);
+				boardDTO.setSearch_bar(search_bar);
+				boardDTO.setSearch_field(field);
+				boardDTO.setB_field2(field2);
+				searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
+				for (int i = 0; i < searchList.size(); i++) {
+					boardDTO = searchList.get(i);
+					switch (boardDTO.getB_field()) {
+					case 10:
+						boardDTO.setB_fieldName("질문");
+						break;
+					case 20:
+						boardDTO.setB_fieldName("잡담");
+						break;
+					case 30:
+						boardDTO.setB_fieldName("비밀글");
+						break;
+					case 40:
+						boardDTO.setB_fieldName("유우머");
+						break;
+					case 50:
+						boardDTO.setB_fieldName("공지");
+						break;
+					default:
+						break;
+					}
+				}
+			
+			Map map = new HashMap();
+			map.put("searchList", searchList);
+			map.put("pageDTO",pdto);
+			return map;
+		}
+			
 		
 		// 말머리에서 가져오는 리스트 목록
 		@RequestMapping(value = "/board/selectField.do", method = RequestMethod.POST)
