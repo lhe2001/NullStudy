@@ -26,18 +26,6 @@ public class SignUpInController {
 	@Autowired
 	SignUpInService signUpInService;
 	
-	//메인에서 로그인 버튼 누르면 로그인 페이지로 이동 
-	@RequestMapping(value="/moveToSignIn.do")
-	public String moveToSignIn() {
-		return "signIn";
-	}
-	
-	//메인에서 로그인 버튼 누르면 로그인 페이지로 이동 
-	@RequestMapping(value="/moveToSignUp.do")
-	public String moveToSignUp() {
-		return "signUp";
-	}
-	
 	//회원가입 메소드 
 	@RequestMapping(value="/signUp.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String signUp(Model model,
@@ -50,8 +38,7 @@ public class SignUpInController {
 			@RequestParam("email") String email,
 			HttpServletResponse res) throws Exception{
 		
-		PrintWriter out = res.getWriter();
-		
+		//파라미터에서 받아온 값 DTO에 세팅
 		SignUpInDTO dto = new SignUpInDTO();
 		dto.setId(id);
 		dto.setPw(pw);
@@ -60,67 +47,37 @@ public class SignUpInController {
 		dto.setNickName(nickname);
 		dto.setSex(sex);
 		dto.setEmail(email);
-
+		
+		// dto에 담아서 전달한 아이디, 이메일, 비번 체크 메소드 실행
+		// id, email. pw: 사용 가능(1) 불가능(-1)
 		int idCheck = signUpInService.getIdCheck(dto);
 		int emailCheck = signUpInService.getEmailCheck(dto);
 		int pwCheck = signUpInService.getPwCheck(dto);
-		
-		if(idCheck==1) {
-			if(pwCheck==1) {
-				if(emailCheck==1) {
-					if(!(dto.getSex().equals("none"))) {
-						int resultAdd=signUpInService.doAddMember(dto);
-						if(resultAdd==1) {
-							//가입성공 메세지 송출 > 로그인페이지로 이동
-							model.addAttribute("result", "가입성공");
-							return "signIn";
-							
-						} else {
-							//가입 실패시 다시 회원가입페이지로
-							model.addAttribute("result", "가입실패");
-							return "signUp";
-						}
-					}else {
-						model.addAttribute("result", "가입실패");
-						return "signUp";
-					}
-					
-				}else if(emailCheck==-1) {
-					//이메일 사용불가
-					model.addAttribute("result", "가입실패");
-					return "signUp";
-				}else {
-					//db오류
-					model.addAttribute("result", "가입실패");
-					return "signUp";
-				}
-				
-			}else if(pwCheck==-1){
-				//비번값 불일치
-				model.addAttribute("result", "가입실패");
-				return "signUp";
+
+		if(idCheck==1 && pwCheck==1 && emailCheck==1 && !("none".equals(dto.getSex()) ) ) {
+			int resultAddMem=signUpInService.doAddMember(dto);
+			
+			if(resultAddMem==1) {
+				//가입성공 메세지 송출 > 로그인페이지로 이동
+				model.addAttribute("result", "가입성공");
+				return "signIn";
 			}else {
-				//db오류
-				model.addAttribute("result", "가입실패");
+				//가입실패 메세지 송출 > 회원가입 페이지로 이동
+				model.addAttribute("result", "가입실패(DB)");
 				return "signUp";
 			}
-			
-		}else if(idCheck==-1) {
-			//아이디 사용불가, 사용중이 아이디 있음
-			model.addAttribute("result", "가입실패");
-			return "signUp";
 		}else {
-			//db오류
-			model.addAttribute("result", "가입실패");
+			model.addAttribute("result", "가입실패(입력)");
 			return "signUp";
 		}
-
 	}
 	
 	
-	//회원가입폼에서 아이디 중복체크
+	//회원가입폼에서 아이디 중복체크(Ajax로 넘어옴)
+	//요청한 페이지로 viewresolver 거치치 않고 결과를 넘겨주기 위해서 @ResponseBody 적용
 	@RequestMapping(value="/idcheck.do", method= {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody public int idCheck(@RequestParam("id") String id) {
+		//체크 결과에 따라 리턴값음 1(사용가능), -1(사용불가능) 
 		int result = 0;
 		SignUpInDTO dto = new SignUpInDTO();
 		dto.setId(id);
@@ -128,9 +85,10 @@ public class SignUpInController {
 		return result;
 	}
 	
-	//회원가입폼에서 이메일 중복체크
+	//회원가입폼에서 이메일 중복체크(Ajax로 넘어옴)
 	@RequestMapping(value="/emailcheck.do", method= {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody public int emailCheck(@RequestParam("email") String email) {
+		//체크 결과에 따라 리턴값음 1(사용가능), -1(사용불가능) 
 		int result = 0;
 		SignUpInDTO dto = new SignUpInDTO();
 		dto.setEmail(email);
@@ -171,6 +129,7 @@ public class SignUpInController {
 			return "main2";
 		}else {
 			//로그인 실패 >  로그인 페이지로 
+			model.addAttribute("msg", "로그인체크");
 			return "signIn";
 		}
 	}
@@ -338,6 +297,18 @@ public class SignUpInController {
 		List list = signUpInService.getTopArticles();
 		System.out.println(list.size());
 		return list;
+	}
+	
+	//메인에서 로그인 버튼 누르면 로그인 페이지로 이동 
+	@RequestMapping(value="/moveToSignIn.do")
+	public String moveToSignIn() {
+		return "signIn";
+	}
+	
+	//메인에서 로그인 버튼 누르면 로그인 페이지로 이동 
+	@RequestMapping(value="/moveToSignUp.do")
+	public String moveToSignUp() {
+		return "signUp";
 	}
 	
 	

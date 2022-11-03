@@ -1,7 +1,7 @@
 @charset "UTF-8";
 body {
 	color : #353866;
-	background: linear-gradient(#d0d0f0, #d8b1b8);
+	background-color: #e9e6eb;
 }
 
 #wrrap {
@@ -86,4 +86,5 @@ body {
 .color_btn {
 	border : 1px solid #353866;
 	color : #353866;
+	font-weight: 600;
 }

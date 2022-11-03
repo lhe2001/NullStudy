@@ -208,20 +208,28 @@
 			
 		<!--  댓글 조회 -->	
 			<select id="selectAllComment" resultType="commentDTO">
-				select * from (select bc.b_c_key, bc.b_c_comment, bc.b_c_date, bc.b_key, bc.userkey , a.nickname 
+				select * from (select level, bc.b_c_key, bc.b_c_comment, bc.b_c_date,
+				 bc.b_key, bc.userkey , bc.b_c_parentno ,bc.b_c_commentno, a.nickname 
 					from board_com bc, allmember a 
-					where bc.userkey = a.userkey)newcomment
+					where bc.userkey = a.userkey
+					start with b_c_parentno = 0 
+					 connect by prior b_c_commentno = b_c_parentno 
+					 order siblings by b_c_commentno desc)
 			</select>
 		<!--  댓글 작성 -->	
 			<insert id="addComment" parameterType = "commentDTO">
-				insert into board_com (b_c_key, b_c_comment, b_c_date, b_key , userkey)
-				values(key_c.nextval, #{b_c_comment} , sysdate, #{b_key} , #{userKey}  )
+				insert into board_com (b_c_key, b_c_parentno, b_c_commentno, b_c_comment, b_c_date, b_key , userkey)
+				values(key_c.nextval, #{b_c_parentno}, key_r.nextval,  #{b_c_comment} , sysdate, #{b_key} , #{userKey}  )
 			</insert>
 		<!-- 작성한 댓글 조회 -->
 			<select id="selectComment" resultType="commentDTO" parameterType="commentDTO">
-				select * from (select bc.b_c_key, bc.b_c_comment, bc.b_c_date, bc.b_key, bc.userkey , a.nickname 
+				select * from (select level, bc.b_c_key, bc.b_c_comment, bc.b_c_date,
+				 bc.b_key, bc.userkey , bc.b_c_parentno ,bc.b_c_commentno, a.nickname 
 					from board_com bc, allmember a 
-					where bc.userkey = a.userkey)newcomment
+					where bc.userkey = a.userkey
+					start with b_c_parentno = 0 
+					 connect by prior b_c_commentno = b_c_parentno 
+					 order siblings by b_c_commentno desc)
 					where b_key = #{b_key}
 			</select>
 			
@@ -263,5 +271,6 @@
 					where  b.userkey = a.userkey
 					and b_field = 50
 			</select>
-
+		
+		<!-- 대댓글 -->
 </mapper>
