@@ -82,6 +82,8 @@ public class BoardController{
 			
 			// 공지글 조회 메소드
 			List<CommentDTO> noticeList=boardService.getNoticeList();
+			System.out.println("noticeList === " + noticeList);
+			
 			
 			// 전체 리스트 가져오기
 			List<BoardDTO> articlesList = boardService.getListArticles(pageNum, amount);

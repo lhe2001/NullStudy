@@ -14,55 +14,10 @@
  href ="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
  <link rel="stylesheet"
  href ="${pageContext.request.contextPath }/resources/css/article.css">
-
 <style type="text/css">
-
 </style>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script type="text/javascript">
-		// 	function backToList(obj){
-		// 		obj.action = "${contextPath}/board/listArticles.do";
-		// 		obj.submit();
-		// 	}
-	window.addEventListener("load", boardonload);
-
-    function boardonload(){
-
-// 			let obj = document.querySelector("#frmForm");
-// 			let btn = document.querySelector("#list_btn");
-// 			btn.addEventListener("click", function() {
-// 				obj.action = "${contextPath}/board/listArticles.do";
-// 				obj.method = "get"
-// 				obj.submit();
-// 			})
-			
-			let select = document.querySelector("#select_list");
-			let pwd = document.querySelector("#pwd");
-			let pw = document.querySelector("#pw");
-			select.addEventListener("change",function(){
-				let value = select.value;
-					
-					if(value == 30){
-					pwd.classList.remove('hidden');
-					pw.classList.remove('hidden');
-					} else {
-						pwd.classList.add('hidden');
-						pw.classList.add('hidden');
-					}
-			})
-			
-			
-	}
-// 			var userkey  = ${adminUserKey};
-			
-			if(userkey==1){
-				document.querySelector("#notice").classList.remove('hidden');
-			}else{
-				document.querySelector("#notice").classList.add('hidden');
-			}
-</script>
 <div id = "wrapp">
 <div id = "container">
 	<h1 style = "margin-top : 30px; color : #353866">자유 게시판 글쓰기</h1><hr>
@@ -84,7 +39,6 @@
 					<span id = "pw" class = "hidden">비밀번호!</span>
 					<input type = "text" id = "pwd" name = "b_articlePwd" class = "hidden">
 				</div>
-			
 			<div class="filebox">
   				<label for="ex_file">파일 업로드</label>
   				<input type="file"  name="b_imageFile"  id="ex_file"  class="color_btn"  onchange="readURL(this);" />
@@ -98,8 +52,38 @@
 		 		<input type="button" id="list_btn" class="color_btn btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' style = "float : left; margin-left : 10px;"/>
 				<input type="submit" id = "write_btn" value="글쓰기" class="color_btn btn btn-outline-light" style = "float : right; margin-right : 50px; "/>
 			</div>
-			</form>
-	<%-- 목록 으로가는건 이런것도 있다. location.href='${contextPath}/board/listArticles.do' --%>
-<%-- <jsp:include page="/fix/footer.jsp"/> --%>
+	</form>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+		// 	function backToList(obj){
+		// 		obj.action = "${contextPath}/board/listArticles.do";
+		// 		obj.submit();
+		// 	}
+	window.addEventListener("load", boardonload);
+
+    function boardonload(){
+
+			let select = document.querySelector("#select_list");
+			let pwd = document.querySelector("#pwd");
+			let pw = document.querySelector("#pw");
+			select.addEventListener("change",function(){
+				let value = select.value;
+					
+					if(value == 30){
+					pwd.classList.remove('hidden');
+					pw.classList.remove('hidden');
+					} else {
+						pwd.classList.add('hidden');
+						pw.classList.add('hidden');
+					}
+			})
+		}
+			var userkey  = ${adminUserKey};
+			if(userkey==1){
+				document.querySelector("#notice").classList.remove('hidden');
+			}else{
+				document.querySelector("#notice").classList.add('hidden');
+			}
+</script>
 </html>

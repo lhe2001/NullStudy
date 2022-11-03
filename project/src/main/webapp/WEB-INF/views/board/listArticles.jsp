@@ -179,7 +179,7 @@
 			</div>
 		</div>
 			<div id = "listbtn">
-				<input type="submit" value=글쓰러가기  class="color_btn btn btn-outline-light" id = "write_btn" >
+				<input type="submit" value=글쓰러가기  class="color_btn btn btn-outline-light" id = "write_btn"/>
 				<input type="button" id="list_btn" class="color_btn btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' />
 			</div>
 		</c:when>
@@ -316,12 +316,10 @@
 	    					
 	    					setPageEvent(data.pageDTO.amount);
 	    				},
-	    				
 	    				error:function(){
 	    					alert("에러발생!!")
 	    				}
 	    			});
-// 	    		})
 	    	}
 				// 페이징 셋팅
    		  		function setPageEvent(amount) {
@@ -459,7 +457,6 @@
 			    			});
 			    	}
 				
-				
 	    		// 셀렉트 amount Ajax
 		      	function selectAmount(index, amount){
 		    			let field = $("#field").val();
@@ -543,20 +540,19 @@
 		    					
 		    					let html2 = "";
 		    					
-		    					if(data.pageDTO.prev){
-		    						html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.startPage - 1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '이전' + '</a></span>'
-		    					}
-		    					
-		    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
-		    						html2 += '<input type="button" value="'+i+'" class="p_btn">'
-		    					}
-		    					
-		    					if(data.pageDTO.prev){
-		    						html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '다음' + '</a></span>'
-		    					}
-		    					
+			    					if(data.pageDTO.prev){
+			    						html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.startPage - 1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '이전' + '</a></span>'
+			    					}
+			    					
+			    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
+			    						html2 += '<input type="button" value="'+i+'" class="p_btn">'
+			    					}
+			    					
+			    					if(data.pageDTO.prev){
+			    						html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '다음' + '</a></span>'
+			    					}
+			    					
 		    					$("#paging").append(html2);
-		    					
 		    					setPageEvent(data.pageDTO.amount);
 		    				},
 		    				
@@ -564,10 +560,5 @@
 		    					alert("에러발생!!")
 		    				}
 		    			});
-//	 	    		})
 		    	}
-				
-				
-				
-				
 </script>
