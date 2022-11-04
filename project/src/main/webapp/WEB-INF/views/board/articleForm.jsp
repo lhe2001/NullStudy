@@ -79,8 +79,8 @@
 					}
 			})
 		}
-			var userkey  = ${adminUserKey};
-			if(userkey==1){
+// 			var userkey  = ${adminUserKey};
+			if( ${adminUserKey}==1){
 				document.querySelector("#notice").classList.remove('hidden');
 			}else{
 				document.querySelector("#notice").classList.add('hidden');
