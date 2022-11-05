@@ -125,6 +125,7 @@ public class BoardController{
 			model.addAttribute("userInfo",userInfo);
 			model.addAttribute("pageDTO",pageDTO);
 			return "listArticles(admin)";
+		
 		}else {
 		System.out.println("전체 리스트 조회");
 		// 페이징
@@ -195,18 +196,14 @@ public class BoardController{
 		public String goArticleForm(HttpServletRequest request, HttpServletResponse response, Model model) {
 			
 			HttpSession session = request.getSession();
-			SignUpInDTO adminCheck = (SignUpInDTO) session.getAttribute("userInfo");
-			String userId = adminCheck.getId();
-			int adminUserKey = adminCheck.getUserKey();
+			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 			
-			if("admin".equals(userId)) {
-				model.addAttribute("adminUserKey", adminUserKey);
-				return "articleForm(admin)";
-				}else {
-					System.out.println("글쓰기 창으로 이동");
+				model.addAttribute("userInfo", userInfo);
+				
+				System.out.println("글쓰기 창으로 이동");
+				
 				return "articleForm";
-				}
-			}
+		}
 		
 		// 글쓰기
 		@RequestMapping(value = "/board/addArticle.do", method = RequestMethod.POST)

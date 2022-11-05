@@ -78,12 +78,13 @@
 						pw.classList.add('hidden');
 					}
 			})
-		}
-			var userkey  = ${adminUserKey};
+			
+			var userkey  = ${userInfo.userKey};
 			if(userkey==1){
 				document.querySelector("#notice").classList.remove('hidden');
 			}else{
 				document.querySelector("#notice").classList.add('hidden');
 			}
+		}
 </script>
 </html>
