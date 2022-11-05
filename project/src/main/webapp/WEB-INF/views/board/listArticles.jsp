@@ -305,7 +305,7 @@
 	    					}
 	    					
 	    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
-	    						html2 += '<input type="button" value="'+i+'" class="p_btn">'
+	    						html2 += '<input type="button" value="'+i+'" class="p_btn color_btn btn btn-outline-light">'
 	    					}
 	    					
 	    					if(data.pageDTO.prev){
@@ -544,8 +544,8 @@
 			    						html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.startPage - 1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '이전' + '</a></span>'
 			    					}
 			    					
-			    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
-			    						html2 += '<input type="button" value="'+i+'" class="p_btn">'
+			    					for(let i = data.pageDTO.startPage; i<= data.pageDTO.endPage; i++){
+			    						html2 += '<input type="button" value="'+i+'" class="p_btn color_btn btn btn-outline-light">'
 			    					}
 			    					
 			    					if(data.pageDTO.prev){

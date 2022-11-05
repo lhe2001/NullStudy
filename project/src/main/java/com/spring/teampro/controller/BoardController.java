@@ -176,7 +176,7 @@ public class BoardController{
 					boardDTO.setB_fieldName("유우머");
 					break;
 				case 50:
-					boardDTO.setB_fieldName("나도몰라");
+					boardDTO.setB_fieldName("공지");
 					break;	
 				default:
 					break;
@@ -657,6 +657,7 @@ public class BoardController{
 			amount = boardDTO.getAmount();
 			
 			int totalCount = boardService.getPage();
+			System.out.println("amount : totalcount == " + totalCount);
 			session=request.getSession();
 			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 			model.addAttribute("userInfo",userInfo);
@@ -675,6 +676,7 @@ public class BoardController{
 				boardDTO.setSearch_field(field);
 				boardDTO.setB_field2(field2);
 				searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
+				System.out.println("amount searchList.size() == " + searchList.size());
 				for (int i = 0; i < searchList.size(); i++) {
 					boardDTO = searchList.get(i);
 					switch (boardDTO.getB_field()) {
