@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기창이요~</title>
+<title>글쓰기창입니다</title>
 <link rel="stylesheet"
  href ="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
  <link rel="stylesheet"
@@ -48,11 +48,11 @@
 	</div>
 </div>
 </div>
-			<div id = "listbtn">
-		 		<input type="button" id="list_btn" class="color_btn btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' style = "float : left; margin-left : 10px;"/>
-				<input type="submit" id = "write_btn" value="글쓰기" class="color_btn btn btn-outline-light" style = "float : right; margin-right : 50px; "/>
-			</div>
-	</form>
+		<div id = "listbtn">
+	 		<input type="button" id="list_btn" class="color_btn btn btn-outline-light" value="목록으로"  onclick= 'location.href="${contextPath}/board/listArticles.do"' style = "float : left; margin-left : 10px;"/>
+			<input type="submit" id = "write_btn" value="글쓰기" class="color_btn btn btn-outline-light" style = "float : right; margin-right : 50px; "/>
+		</div>
+		</form>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
@@ -78,8 +78,7 @@
 						pw.classList.add('hidden');
 					}
 			})
-			
-			var userkey  = ${userInfo.userKey};
+			var userkey = ${userInfo.userKey};
 			if(userkey==1){
 				document.querySelector("#notice").classList.remove('hidden');
 			}else{
