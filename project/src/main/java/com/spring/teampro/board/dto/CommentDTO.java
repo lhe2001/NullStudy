@@ -11,7 +11,9 @@ public class CommentDTO {
 	private int userKey; // 회원 정보 테이블 기본키(여기선 외래키)
 	private String nickName; // 작성자에 쓸 변수
 	private int comment_cnt;  // 댓글 갯수
-	
+	private int b_c_parentno; // 부모 댓글 번호
+	private int b_c_commentno; // 댓글 번호
+	private int level; // 요녀석은 계층형으로 만들기 때문에 필요하다...ㅠ
 	public int getB_c_key() {
 		return b_c_key;
 	}
@@ -59,5 +61,23 @@ public class CommentDTO {
 	}
 	public void setComment_cnt(int comment_cnt) {
 		this.comment_cnt = comment_cnt;
+	}
+	public int getB_c_parentno() {
+		return b_c_parentno;
+	}
+	public void setB_c_parentno(int b_c_parentno) {
+		this.b_c_parentno = b_c_parentno;
+	}
+	public int getB_c_commentno() {
+		return b_c_commentno;
+	}
+	public void setB_c_commentno(int b_c_commentno) {
+		this.b_c_commentno = b_c_commentno;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
 	}
 }
