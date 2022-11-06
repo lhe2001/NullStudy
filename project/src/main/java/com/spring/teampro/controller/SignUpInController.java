@@ -294,7 +294,7 @@ public class SignUpInController {
 	@RequestMapping(value="/topArticles.do", method= {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody public List<BoardDTO> getTopArticles() {
 		System.out.println("topArticles.do 접근 ");
-		List list = signUpInService.getTopArticles();
+		List<BoardDTO> list = signUpInService.getTopArticles();
 		System.out.println(list.size());
 		return list;
 	}

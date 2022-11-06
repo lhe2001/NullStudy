@@ -97,6 +97,6 @@ body {
 	font-weight: 600;
 }
 
-#reply {
+.reply {
 	display : none;	
 }

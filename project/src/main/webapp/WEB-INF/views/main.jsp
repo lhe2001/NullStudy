@@ -72,35 +72,27 @@ function getMainTopArticles(){
 			let html="";
 			for(let i=0; i<data.length; i++){
 				let date = new Date(data[i].b_writeDate);
-				
-				html += "<tr>";
-				html += "<td>";
-				html += (i+1);
-				html += "</td>";
-				html += "<td>";
-				html += data[i].b_fieldName;
-				html += "</td>";
-				html += "<td>";
-				html += data[i].nickName;
-				html += "</td>";
-				html += "<td>";
-				html += "<a class='articleA' href='/project/board/viewArticle.do?b_articleNo=";
-				html += data[i].b_articleNo;
-				html += "'>"
-				html += data[i].b_title;
-				html += "</a>"
-				html += "</td>";
-				html += '<td>' + date.getFullYear()+'년'+ (date.getMonth()+1) + '월' + date.getDate() + '일'+'</td>';
-				html += "<td>";
-				html += data[i].b_view;
-				html += "</td>";
-				html += "</tr>";
-				
+					
+					html += "<tr>";
+					html += "<td>" + (i+1) + "</td>";
+					html += "<td>" + data[i].b_fieldName + "</td>";
+					html += "<td>" + data[i].nickName + "</td>";
+					html += "<td>";
+					html += "<a class='articleA' href='/project/board/viewArticle.do?b_articleNo=";
+					html += data[i].b_articleNo;
+					html += "'>"
+					html += data[i].b_title;
+					html += "</a>"
+					html += "</td>";
+					html += '<td>' + date.getFullYear()+'년'+ (date.getMonth()+1) + '월' + date.getDate() + '일'+'</td>';
+					html += "<td>";
+					html += data[i].b_view;
+					html += "</td>";
+					html += "</tr>";
 			}
 			$("#topBoard tbody").append(html);
 			alretTopArcticle();
 		},
-
 		error:function(){
 			alert("에러발생!!")
 		}
