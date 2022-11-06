@@ -78,28 +78,6 @@
 
 	function boardonload() {
 
-<<<<<<< HEAD
-			let select = document.querySelector("#select_list");
-			let pwd = document.querySelector("#pwd");
-			let pw = document.querySelector("#pw");
-			select.addEventListener("change",function(){
-				let value = select.value;
-					
-					if(value == 30){
-					pwd.classList.remove('hidden');
-					pw.classList.remove('hidden');
-					} else {
-						pwd.classList.add('hidden');
-						pw.classList.add('hidden');
-					}
-			})
-		}
-// 			var userkey  = ${adminUserKey};
-			if( ${adminUserKey}==1){
-				document.querySelector("#notice").classList.remove('hidden');
-			}else{
-				document.querySelector("#notice").classList.add('hidden');
-=======
 		let select = document.querySelector("#select_list");
 		let pwd = document.querySelector("#pwd");
 		let pw = document.querySelector("#pw");
@@ -112,7 +90,6 @@
 			} else {
 				pwd.classList.add('hidden');
 				pw.classList.add('hidden');
->>>>>>> origin/RealJaeHyuk
 			}
 		})
 		
