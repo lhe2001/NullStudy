@@ -657,7 +657,10 @@ public class BoardController{
 			amount = boardDTO.getAmount();
 			
 			int totalCount = boardService.getPage();
+<<<<<<< HEAD
 			System.out.println("amount : totalcount == " + totalCount);
+=======
+>>>>>>> parent of ec54b77 (Revert "마무리단계")
 			session=request.getSession();
 			SignUpInDTO userInfo = (SignUpInDTO) session.getAttribute("userInfo");
 			model.addAttribute("userInfo",userInfo);
@@ -676,7 +679,10 @@ public class BoardController{
 				boardDTO.setSearch_field(field);
 				boardDTO.setB_field2(field2);
 				searchList = boardService.getAllSearch(boardDTO,pageNum,amount);
+<<<<<<< HEAD
 				System.out.println("amount searchList.size() == " + searchList.size());
+=======
+>>>>>>> parent of ec54b77 (Revert "마무리단계")
 				for (int i = 0; i < searchList.size(); i++) {
 					boardDTO = searchList.get(i);
 					switch (boardDTO.getB_field()) {

@@ -457,6 +457,10 @@
 			    			});
 			    	}
 				
+<<<<<<< HEAD
+=======
+				
+>>>>>>> parent of ec54b77 (Revert "마무리단계")
 	    		// 셀렉트 amount Ajax
 		      	function selectAmount(index, amount){
 		    			let field = $("#field").val();
@@ -540,6 +544,7 @@
 		    					
 		    					let html2 = "";
 		    					
+<<<<<<< HEAD
 			    					if(data.pageDTO.prev){
 			    						html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.startPage - 1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '이전' + '</a></span>'
 			    					}
@@ -553,6 +558,22 @@
 			    					}
 			    					
 		    					$("#paging").append(html2);
+=======
+		    					if(data.pageDTO.prev){
+		    						html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.startPage - 1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '이전' + '</a></span>'
+		    					}
+		    					
+		    					for(let i = data.pageDTO.startPage; i< data.pageDTO.endPage; i++){
+		    						html2 += '<input type="button" value="'+i+'" class="p_btn">'
+		    					}
+		    					
+		    					if(data.pageDTO.prev){
+		    						html2 += '<span>' + '<a href="${contextPath }/board/listArticles.do?pageNum='+ (data.pageDTO.endpage+1) +'&amount=' + data.pageDTO.amount + '" class="p_btn" >' + '다음' + '</a></span>'
+		    					}
+		    					
+		    					$("#paging").append(html2);
+		    					
+>>>>>>> parent of ec54b77 (Revert "마무리단계")
 		    					setPageEvent(data.pageDTO.amount);
 		    				},
 		    				
@@ -560,5 +581,15 @@
 		    					alert("에러발생!!")
 		    				}
 		    			});
+<<<<<<< HEAD
 		    	}
 </script>
+=======
+//	 	    		})
+		    	}
+				
+				
+				
+				
+</script>
+>>>>>>> parent of ec54b77 (Revert "마무리단계")

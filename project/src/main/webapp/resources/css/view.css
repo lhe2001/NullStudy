@@ -94,7 +94,10 @@ body {
 .color_btn {
 	border : 1px solid #353866;
 	color : #353866;
+<<<<<<< HEAD
 	font-weight: 600;
+=======
+>>>>>>> parent of ec54b77 (Revert "마무리단계")
 }
 
 #reply {
