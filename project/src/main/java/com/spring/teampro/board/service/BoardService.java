@@ -38,7 +38,7 @@ public interface BoardService {
 		public List<BoardDTO> getSelectViewArticle(BoardDTO dto);
 		
 		// 비밀글을 상세보기로 볼 수 있는 메소드 호출
-		public BoardDTO getViewSecret(int b_articleNo);
+		public BoardDTO getSecretView(int b_articleNo);
 		
 		// 비밀번호를 가져오자
 		public int getPwd(int b_articleNo);

@@ -93,7 +93,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	// 비밀글을 상세보기로 볼 수 있는 메소드 호출
 	@Override
-	public BoardDTO getViewSecret(int b_articleNo) {
+	public BoardDTO getSecretView(int b_articleNo) {
 		BoardDTO dto = new BoardDTO();
 		dto= boardDAO.searchPw(b_articleNo);
 		System.out.println("service" + dto);

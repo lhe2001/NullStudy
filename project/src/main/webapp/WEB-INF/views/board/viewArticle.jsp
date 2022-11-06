@@ -25,7 +25,7 @@
 	<script type="text/javascript">
 	window.addEventListener("load", boardonload);
 
-    function boardonload(){
+    function boardonload() {
 			/*  목록으로 ~ */
 			let obj = document.querySelector("#frmForm");
 			console.log(obj);
@@ -63,31 +63,31 @@
 
 			// 답글 버튼을 눌렀을때 replyForm.do로 전달
 			let btn_4 = document.querySelector("#rePly_btn");
-<<<<<<< HEAD
 				btn_4.addEventListener("click", function() {
 					obj.action = "${contextPath}/board/replyForm.do";
 					obj.method = "GET";
 					obj.submit();
 				});
 			
+// 			// 대댓글 쓰기 버튼을 눌렀을때
+// 			$(".hide_show").off("click").on("click",function(){
+// 				 console.log("$(this) ::" , $(this));
+// 			btn_4.addEventListener("click", function() {
+// 				obj.action = "${contextPath}/board/replyForm.do";
+// 				obj.method = "GET";
+// 				obj.submit();
+// 			});
+// 			});
+   			 
 			// 대댓글 쓰기 버튼을 눌렀을때
 			$(".hide_show").off("click").on("click",function(){
 				 console.log("$(this) ::" , $(this));
-=======
-			btn_4.addEventListener("click", function() {
-				obj.action = "${contextPath}/board/replyForm.do";
-				obj.method = "GET";
-				obj.submit();
-			});
-			
-			// 대댓글 쓰기 버튼을 눌렀을때
-			$("#hide_show").off("click").on("click",function(){
-				 console.log("$(this) ::" , $(this));
+				 console.log("$(this).parent() ::" , $(this).parent().next());
 				
->>>>>>> parent of ec54b77 (Revert "마무리단계")
-				$("#reply").toggle();
+				 $(this).parent().next().toggle();
 				});
-		}
+    }
+			
     
 //     아작스
     $(function(){
@@ -155,30 +155,10 @@
  	// 대댓글 추가
   	function addReComment(){
 			 $(".re_comment").off("click").on("click", function(){
-<<<<<<< HEAD
-
     			
 	    		let b_c_key =  $(this).attr("data-r_b_c_key");
-    			
-	    		let comment = $(this).parent().find(".re_com").val();
-				console.log("comment===" , comment);
-    			let b_key =  $(this).parent().find(".b_key").val();
-				console.log("b_key===" , b_key);
-    			let userKey =  $(this).parent().find(".userKey").val();
-				console.log("userkey===" , userkey);
-    			let b_c_commentno =  $(this).parent().find(".b_c_commentno").val();
-				console.log("b_c_commentno===" , b_c_commentno);
-				 
-				let info = {
-=======
-//     			let comment = $("#comment").val();
-//     			let b_key = $("#b_key").val();
-//     			let userKey = $("#userkey").val();
-//     			let b_c_commentno = $(".b_c_commentno").val();
-    			let b_c_key =  $(this).attr("data-r_b_c_key");
 
-    			
-    			 let comment = $(this).parent().find(".re_com").val();
+	    		 let comment = $(this).parent().find(".re_com").val();
 				 console.log("comment===" , comment);
     			 let b_key =  $(this).parent().find(".b_key").val();
 				 console.log("b_key===" , b_key);
@@ -188,12 +168,10 @@
 				 console.log("b_c_commentno===" , b_c_commentno);
 				 
 			 let info = {
->>>>>>> parent of ec54b77 (Revert "마무리단계")
 					b_c_comment : comment,
 					b_key : b_key,
 					userKey : userKey,
 					b_c_commentno : b_c_commentno
-<<<<<<< HEAD
 	    		}
 			
 				 $.ajax({
@@ -220,36 +198,6 @@
 				});
 			})
 		}
-=======
-	    			}
-			
-			 $.ajax({
-				url: "/project/board/addReComment.do",
-				type: "post",
-				contentType : "application/json",
-				data: JSON.stringify(info),
-				success: function(data){
-					console.log("list :", data);
-// 					$("#reply").empty();
-					alert("대댓글이 작성되었습니다.");
-					if(data.length > 0){
-    					let html = "";
-    					for(let i = 0; i<data.length; i++){
-    						html += '<input type = "text" id = "view_com" value = "'+ data[i].b_c_comment + '" readonly>';
-							html += '작성자 : ' + data[i].nickName;
-							html += '작성일 : ' + data[i].b_c_date
-    					}
-// 						$("#reply").append(html);
-					}
-					location.reload();
-				},
-				error:function(){
-					alert("대댓글을 입력해 주세요!!")
-				}
-			});
-		})
-	}
->>>>>>> parent of ec54b77 (Revert "마무리단계")
     	
  	// 댓글 삭제
   	function deleteComment(){
@@ -285,12 +233,13 @@
 		 $(".edit_comment").off("click").on("click", function(e){
 	 			let edit = e.target.getAttribute("data-edit_b_c_key");
 	 			let button = e.target.parentNode.querySelector("#real_edit_comment");
-	 			console.log(button);
-	 			console.log(e.target);
+	 			console.log("button :: " ,button);
+	 			console.log("e.target :: ", e.target);
 	 			e.target.style.display = "none";
 	 			button.style.display = "block";
-	 			let view_com = e.target.parentNode.querySelector(".view_com");
-	 			view_com.removeAttribute("readonly");
+	 			let view_com = $(this).parents().children(".modify");
+	 			console.log("view_com :: " , view_com);
+	 			view_com.removeAttr("readonly");
 	 		})
 	 	}
  	
@@ -299,7 +248,8 @@
   		$(".real_edit_comment").off("click").on("click", function(e){
 			let b_c_key = $(this).attr("data-real_edit_b_c_key");
    			console.log("b_c_key :: ",b_c_key);
-   			let b_c_comment = $(this).parent().find(".view_com").val();
+   			let b_c_comment =  $(this).parents().children(".modify").val();
+   			console.log("b_c_comment :: " , b_c_comment);
 				
     			let info = {
 							b_c_key : b_c_key,
@@ -405,63 +355,42 @@
 									 style='padding-right: 30px'>
 									 <div id = "comment_name" style ="float : left; margin-left : 55px; color : #353866; ">
 										작성자 : ${comment.nickName }	${comment.b_c_date }
-<<<<<<< HEAD
-=======
-										<input type = "button" id = "hide_show" value = "대댓글쓰기"> 
->>>>>>> parent of ec54b77 (Revert "마무리단계")
 									</div>
-									<hr>
 								</c:when>
 								<c:otherwise>
-									<input type = "text" id = "view_com" class = "view_com" value = "&nbsp ${comment.b_c_comment }" readonly>
+									<input type = "text" id = "view_com" class = "view_com modify" value = "&nbsp ${comment.b_c_comment }" readonly>
 									 <div id = "comment_name" style ="float : left; margin-left : 20px; color : #353866;">
 										작성자 : ${comment.nickName }	${comment.b_c_date }
-<<<<<<< HEAD
-										<input type = "button" class = "hide_show" value = "대댓글쓰기"> 
-=======
-										<input type = "button" id = "hide_show" value = "대댓글쓰기"> 
->>>>>>> parent of ec54b77 (Revert "마무리단계")
+										<input type = "button" class = "hide_show color_btn btn btn-outline-light" value = "대댓글쓰기"> 
+											<c:if test="${userInfo.userKey == comment.userKey}">
+												<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+												<input type="button" id="edit_comment" value="수정" data-edit_b_c_key = "${comment.b_c_key } " class ="edit_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
+												<input type="button" id="real_edit_comment" value="댓글수정" data-real_edit_b_c_key = "${comment.b_c_key }" class ="real_edit_comment color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
+											</c:if>
+										<input type = "hidden" class = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
+										<input type = "hidden" class = "b_c_commentno" name = "b_c_commentno" value = "${comment.b_c_commentno }"/>
+										<input type = "hidden" class = "b_key" name = "b_key" value = "${comment.b_key }"/>
+										<input type = "hidden" class = "userKey" name = "b_key" value = "${comment.userKey }"/>
 									</div>
-									<hr>
-								</c:otherwise>
-							</c:choose>
-<%-- 						<input type = "text" id = "view_com" class = "view_com" value = "&nbsp ${comment.b_c_comment }" readonly> --%>
-						<div id = "reply">
+							<div class = "reply">
 								<input type = "text" id = "view_com" class = "re_com" placeholder="대댓글을 입력해주세요" >
 									<c:if test="${userInfo.userKey == comment.userKey}">
-										<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
-										<input type="button" id="edit_comment" value="수정" data-edit_b_c_key = "${comment.b_c_key } " class ="edit_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;">
-								
-									<!-- 대댓글 쓰기 창 -->
-<<<<<<< HEAD
+										<!-- 대댓글 쓰기 창 -->
 										<input type = "button"  value = "대댓글" data-re_b_c_key = "${comment.b_c_key }" class ="re_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
-=======
-										<input type = "button"  value = "대댓글쓰기" data-re_b_c_key = "${comment.b_c_key }" class ="re_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
->>>>>>> parent of ec54b77 (Revert "마무리단계")
-										<input type="button" id="real_edit_comment" value="댓글수정" data-real_edit_b_c_key = "${comment.b_c_key }" class ="real_edit_comment color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; ">
 									</c:if>
 								<input type = "hidden" class = "b_c_key" name = "b_c_key" value = "${comment.b_c_key }"/>
 								<input type = "hidden" class = "b_c_commentno" name = "b_c_commentno" value = "${comment.b_c_commentno }"/>
 								<input type = "hidden" class = "b_key" name = "b_key" value = "${comment.b_key }"/>
 								<input type = "hidden" class = "userKey" name = "b_key" value = "${comment.userKey }"/>
-						</div>
-<<<<<<< HEAD
-=======
-<!-- 							<input type = "text" id = "view_com" class = "re_com" placeholder="대댓글을 입력해주세요" > -->
-<%-- 						<c:if test="${userInfo.userKey == comment.userKey}"> --%>
-<%-- 						<input type = "button"  value = "댓글삭제" data-b_c_key = "${comment.b_c_key }" class ="delete_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; "> --%>
-<%-- 						<input type="button" id="edit_comment" value="수정" data-edit_b_c_key = "${comment.b_c_key } " class ="edit_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px;"> --%>
-						
-<!-- 							대댓글 쓰기 창 -->
-<%-- 						<input type = "button"  value = "대댓글쓰기" data-re_b_c_key = "${comment.b_c_key }" class ="re_comment color_btn btn btn-outline-light"  style = "float : right; margin-right : 5px; "> --%>
-<%-- 						<input type="button" id="real_edit_comment" value="댓글수정" data-real_edit_b_c_key = "${comment.b_c_key }" class ="real_edit_comment color_btn hidden btn btn-outline-light"  style = "float : right; margin-right : 5px; "> --%>
-<%-- 						</c:if> --%>
->>>>>>> parent of ec54b77 (Revert "마무리단계")
+							</div>
+								</c:otherwise>
+							</c:choose>
+<%-- 						<input type = "text" id = "view_com" class = "view_com" value = "&nbsp ${comment.b_c_comment }" readonly> --%>
+							
 						</c:if>
 					</div>
 			</c:forEach>
 		</div>
-		
 				<!-- 히든으로 commentcontroller에 줄 값 -->
 				<input type ="hidden" name="b_key" id ="b_key" value= "${view.b_key }"/>
 				<input type ="hidden" name="userkey" id ="userkey" value = "${userInfo.userKey }"/><br><hr>
