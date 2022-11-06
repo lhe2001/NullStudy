@@ -13,15 +13,6 @@
 <style>
 </style>
 <body>
-	<div id="wrapp">
-		<div id="container">
-			<h1 style="text-align: left; margin-left: 20px; margin-top: 20px; color: #353866">자유게시판</h1>
-			<h5 style="text-align: left; margin-left: 20px;">자유롭게 글을 작성해 주세요!!</h5>
-
-<<<<<<< HEAD
-	<%-- <th>레벨</th>--%>
-	<%-- <th>게시판 키</th>--%>
-	
 	<div id = "wrapp">
 	<div id = "container">
 	<h1 style ="text-align : left; margin-left : 20px; margin-top : 20px; color : #353866">자유게시판</h1>
@@ -135,7 +126,6 @@
 						<td>${article.b_view}</td>
 						<%-- <td>${article.userkey}</td> --%>
 					</tr>
-=======
 			<div id="page_select">
 				<select id="pageAmount" class="form-select btn-outline-info"
 					style="border-radius: 4px; margin-top: 7px; float: right; margin-right: 20px;"
@@ -171,7 +161,6 @@
 					<a
 						href="${contextPath}/board/viewArticle.do?b_articleNo=${notice.b_articleNo}">
 						${notice.nickName }님의 말씀입니다 : *${notice.b_title }*</a>
->>>>>>> origin/RealJaeHyuk
 				</c:forEach>
 			</div>
 			<table id="tb" class="table table-hover table-bordered"
@@ -316,7 +305,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
-<<<<<<< HEAD
 		$(function(){
 			
 				let btn = document.querySelector("#search_btn");

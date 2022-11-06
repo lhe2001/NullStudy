@@ -48,12 +48,9 @@
 	<insert id="addNewArticle" parameterType="java.util.HashMap">
 		insert into Board (B_key, B_ArticleNo, B_parentNo , B_title, B_content,
 		B_field, B_articlePwd, UserKey, B_imageFile)
-<<<<<<< HEAD
 		values(key_b.nextval,#{b_articleNo},#{b_parentNo},#{b_title},#{b_content},#{b_field},#{b_articlePwd},#{userKey},#{b_imageFile})
-=======
 		values(key_b.nextval,#{b_articleNo},#{b_parentNo},#{b_title},#{b_content},
 		#{b_field},#{b_articlePwd},#{userKey},#{b_imageFile})
->>>>>>> origin/RealJaeHyuk
 	</insert>
 
 	<!-- 글 상세 목록 view -->
@@ -88,11 +85,7 @@
 		connect by prior b_articleNo = b_parentNo )
 	</delete>
 
-<<<<<<< HEAD
-	<!-- Search ajax -->
-=======
 	<!-- select값들 controller로 요청시 -> ajax처리 -->
->>>>>>> origin/RealJaeHyuk
 	<select id="searchAllArticle" resultType="boardDTO"
 		parameterType="java.util.HashMap">
 		select * from(
@@ -191,11 +184,7 @@
 		select count(*) as totalCount from board
 	</select>
 
-<<<<<<< HEAD
-	<!-- SelectBox 총 게시글 수 받아오기 -->
-=======
 	<!-- Select값들의 각 전체 게시글 수 받아오기 -->
->>>>>>> origin/RealJaeHyuk
 	<select id="getSelectCount" resultType="int"
 		parameterType="boardDTO">
 		select count(*) as totalCount from(
@@ -286,11 +275,7 @@
 		from board b
 	</select>
 
-<<<<<<< HEAD
-	<!-- 댓글 갯수 가져오 다른버전 (group by) -->
-=======
 	<!-- 댓글 갯수 가져오기 2(다른버전 group by) -->
->>>>>>> origin/RealJaeHyuk
 	<!-- <select id="getCommentCount" parameterType = "commentDTO"> -->
 	<!-- select -->
 	<!-- a.b_title , -->
@@ -309,9 +294,6 @@
 		where b.userkey = a.userkey
 		and b_field = 50
 	</select>
-<<<<<<< HEAD
-=======
 
 	<!-- 대댓글 -->
->>>>>>> origin/RealJaeHyuk
 </mapper>
