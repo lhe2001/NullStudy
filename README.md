@@ -1,4 +1,5 @@
-# TeamProject - Team Name = 'NULL'
+# TeamProject
+## Team Name = 'NULL'
 - 스프링 레거시 & MVC & MyBatis & JSP 기반 웹사이트 제작
 
 #웹사이트 목적
